@@ -1,11 +1,14 @@
 import { // {{{1
   Context,
-  JobRequest, configuration, demo_onmessage, confirmingHandle, matchingHandle,
+  JobRequest, 
+  configuration, // TODO get rid of configuration
+  demo_onmessage, confirmingHandle, matchingHandle,
   promiseWithResolvers,
 } from '../local/lib/util.mjs' 
 import { put, reset, } from './lib/util.mjs'
 import { JWT, generate_keypair, verifyPayload, } from '../lib/util.mjs'
 import { connection, } from '../../lib/util.mjs'
+import { Job, } from '../../jf/lib/util.mjs'
 
 const out = m => typeof m == 'string' ? put( // {{{1
   `<h4 style='text-align: right'>${m}</h4>`
@@ -18,6 +21,16 @@ commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit<br/
 esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat<br/>
 non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br/>
 `
+
+const DemoReset = { // {{{1
+  Running: {
+    handle: null,
+  },
+  aud: 'demo/reset',
+  onclose: null,
+  onmessage: null,
+}
+
 const State = { // {{{1
   MATCHING: 1,
   Running: { // {{{2 
@@ -49,28 +62,32 @@ reset({ content: document.getElementById('content1'), }) // {{{1
 put(`Delivered ${location} on ${Date()} to YOUR_IP_ADDRESS`, '<hr/>')
   
 configuration.me = 'Ann' // {{{1
+let client, job, step = DemoReset
 //configuration.State_Running_handle = State.Running.handle
 generate_keypair.call(crypto.subtle).then(keys => {
-  const aud = 'demo/reset' // TODO demo/setup, demo, demo/sign
+  //const aud = 'demo/reset' // TODO demo/setup, demo, demo/sign
   const [sk, pk] = keys.split(' ')
   const iss = { name: configuration.me, pk, uuid: 'UUID', }
-  configuration.attachment = { iss, sk, state: State.MATCHING }
-  let params = new URLSearchParams(`aud=${aud}`)
+  //configuration.attachment = { iss, sk, state: State.MATCHING } : to Job
+  let params = new URLSearchParams(`aud=${step.aud}`)
   params.append('iss', encodeURIComponent(JSON.stringify(iss)))
-  params.append('sk', encodeURIComponent(sk))
+  //params.append('sk', encodeURIComponent(sk))
   wsURL.search = params
-  return JobRequest(JSON.stringify(iss), aud, sk);
+
+  return (job = Job(client = { iss, me: 'Ann', sk, wsURL, }, step)).promise;
+
+  //return JobRequest(JSON.stringify(iss), aud, sk);
 }).then(jr => {
   Object.assign(configuration, promiseWithResolvers())
   sendJobRequest(jr).     // part 1
-    then(_ => {
+    then(_ => { // {{{2
       Object.assign(configuration, promiseWithResolvers())
       configuration.attachment.state = State.MATCHING
       delete configuration.attachment.match
       delete configuration.attachment.matchConfirming
       sendJobRequest(jr). // part 2
         then(_ => console.log('sendJobRequest DONE'))
-    })
+    }) // }}}2
 })
 
 function sendJobRequest (jr, count = 2) { // {{{1

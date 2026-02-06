@@ -41,12 +41,6 @@ const State = { // {{{1
         }
       } catch(err) { throw Error('UNEXPECTED err', err) }
     }
-  },
-  Closing: { // {{{2 
-    handle: (context, event) => {
-      try {
-      } catch(err) { throw Error('UNEXPECTED err', err) }
-    }
   }, // }}}2
 }
 const wsURL = new URL(location.toString().replace('http', 'ws')) // {{{1
@@ -55,9 +49,9 @@ reset({ content: document.getElementById('content1'), }) // {{{1
 put(`Delivered ${location} on ${Date()} to YOUR_IP_ADDRESS`, '<hr/>')
   
 configuration.me = 'Ann' // {{{1
-configuration.State_Running_handle = State.Running.handle
+//configuration.State_Running_handle = State.Running.handle
 generate_keypair.call(crypto.subtle).then(keys => {
-  const aud = 'demo/echo'
+  const aud = 'demo/reset' // TODO demo/setup, demo, demo/sign
   const [sk, pk] = keys.split(' ')
   const iss = { name: configuration.me, pk, uuid: 'UUID', }
   configuration.attachment = { iss, sk, state: State.MATCHING }
@@ -97,6 +91,5 @@ function sendJobRequest (jr, count = 2) { // {{{1
       }
     }).send(jr)
   context = Context(ws, configuration.attachment)
-  //setInterval(ws.open, 10000)                // auto-reconnect every 10s
   return configuration.promise;
 }

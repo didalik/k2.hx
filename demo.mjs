@@ -1,7 +1,7 @@
 import { // {{{1
-  Context,
+  Context, // TODO get rid of it
   JobRequest, 
-  configuration, // TODO get rid of configuration
+  configuration, // TODO get rid of it
   demo_onmessage, confirmingHandle, matchingHandle,
   promiseWithResolvers,
 } from '../local/lib/util.mjs' 
@@ -27,8 +27,9 @@ const DemoReset = { // {{{1
     handle: null,
   },
   aud: 'demo/reset',
-  onclose: null,
-  onmessage: null,
+  onclose: console.log,
+  onerror: console.error,
+  onmessage: console.log,
 }
 
 const State = { // {{{1
@@ -61,22 +62,17 @@ const wsURL = new URL(location.toString().replace('http', 'ws')) // {{{1
 reset({ content: document.getElementById('content1'), }) // {{{1
 put(`Delivered ${location} on ${Date()} to YOUR_IP_ADDRESS`, '<hr/>')
   
-configuration.me = 'Ann' // {{{1
-let client, job, step = DemoReset
-//configuration.State_Running_handle = State.Running.handle
+let client, job, step = DemoReset // {{{1
 generate_keypair.call(crypto.subtle).then(keys => {
-  //const aud = 'demo/reset' // TODO demo/setup, demo, demo/sign
-  const [sk, pk] = keys.split(' ')
-  const iss = { name: configuration.me, pk, uuid: 'UUID', }
-  //configuration.attachment = { iss, sk, state: State.MATCHING } : to Job
+  const [sk, pk] = keys.split(' '),
+    app = 'hX', iss = { name: 'Ann', pk, uuid: 'UUID', }
   let params = new URLSearchParams(`aud=${step.aud}`)
   params.append('iss', encodeURIComponent(JSON.stringify(iss)))
   //params.append('sk', encodeURIComponent(sk))
   wsURL.search = params
 
-  return (job = Job(client = { iss, me: 'Ann', sk, wsURL, }, step)).promise;
+  return (job = Job(client = { app, iss, sk, wsURL, }, step)).promise;
 
-  //return JobRequest(JSON.stringify(iss), aud, sk);
 }).then(jr => {
   Object.assign(configuration, promiseWithResolvers())
   sendJobRequest(jr).     // part 1

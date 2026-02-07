@@ -27,8 +27,8 @@ const DemoReset = { // {{{1
     handle: null,
   },
   aud: 'demo/reset',
-  onclose: console.log,
-  onerror: console.error,
+  onclose: data => console.log('data', data, 'DemoReset.job', DemoReset.job),
+  onerror: null, // is never called
   onmessage: console.log,
 }
 

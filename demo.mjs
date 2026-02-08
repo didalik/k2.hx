@@ -55,22 +55,16 @@ const DemoReset = { // {{{1
     }
   }, // }}}2
 }*/
-const wsURL = new URL(location.toString().replace('http', 'ws')) // {{{1
+const wsURL = location.toString().replace('http', 'ws') // {{{1
 
 reset({ content: document.getElementById('content1'), }) // {{{1
 put(`Delivered ${location} on ${Date()} to YOUR_IP_ADDRESS`, '<hr/>')
   
 let client, step = DemoReset // {{{1
 generate_keypair.call(crypto.subtle).then(keys => {
-  const [sk, pk] = keys.split(' '),
-    app = 'hX', iss = { name: 'Ann', pk, uuid: 'UUID', }
-  let params = new URLSearchParams(`aud=${encodeURIComponent(step.aud)}`)
-  params.append('iss', encodeURIComponent(JSON.stringify(iss)))
-  //params.append('sk', encodeURIComponent(sk))
-  wsURL.search = params
-
+  const [sk, pk] = keys.split(' ')
+  const app = 'hX', iss = { name: 'Ann', pk, uuid: 'UUID', }
   return (step.job = Job(client = { app, iss, sk, wsURL, }, step)).promise;
-
 }).then(jr => {
   /*Object.assign(configuration, promiseWithResolvers())
   sendJobRequest(jr).     // part 1

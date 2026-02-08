@@ -1,14 +1,12 @@
-import { // {{{1
+/*import { // {{{1
   Context, // TODO get rid of it
   JobRequest, 
   configuration, // TODO get rid of it
   demo_onmessage, confirmingHandle, matchingHandle,
-  promiseWithResolvers,
-} from '../local/lib/util.mjs' 
-import { put, reset, } from './lib/util.mjs'
-import { JWT, generate_keypair, verifyPayload, } from '../lib/util.mjs'
-import { connection, } from '../../lib/util.mjs'
-import { Job, } from '../../jf/lib/util.mjs'
+} from '../local/lib/util.mjs' */
+import { put, reset, } from './lib/util.mjs' // {{{1
+import { connection, promiseWithResolvers, } from '../../lib/util.mjs'
+import { Job, generate_keypair, verifyPayload, } from '../../jf/lib/util.mjs'
 
 const out = m => typeof m == 'string' ? put( // {{{1
   `<h4 style='text-align: right'>${m}</h4>`
@@ -32,7 +30,7 @@ const DemoReset = { // {{{1
   onmessage: console.log,
 }
 
-const State = { // {{{1
+/*const State = { // {{{1
   MATCHING: 1,
   Running: { // {{{2 
     handle: (context, event) => {
@@ -56,25 +54,25 @@ const State = { // {{{1
       } catch(err) { throw Error('UNEXPECTED err', err) }
     }
   }, // }}}2
-}
+}*/
 const wsURL = new URL(location.toString().replace('http', 'ws')) // {{{1
 
 reset({ content: document.getElementById('content1'), }) // {{{1
 put(`Delivered ${location} on ${Date()} to YOUR_IP_ADDRESS`, '<hr/>')
   
-let client, job, step = DemoReset // {{{1
+let client, step = DemoReset // {{{1
 generate_keypair.call(crypto.subtle).then(keys => {
   const [sk, pk] = keys.split(' '),
     app = 'hX', iss = { name: 'Ann', pk, uuid: 'UUID', }
-  let params = new URLSearchParams(`aud=${step.aud}`)
+  let params = new URLSearchParams(`aud=${encodeURIComponent(step.aud)}`)
   params.append('iss', encodeURIComponent(JSON.stringify(iss)))
   //params.append('sk', encodeURIComponent(sk))
   wsURL.search = params
 
-  return (job = Job(client = { app, iss, sk, wsURL, }, step)).promise;
+  return (step.job = Job(client = { app, iss, sk, wsURL, }, step)).promise;
 
 }).then(jr => {
-  Object.assign(configuration, promiseWithResolvers())
+  /*Object.assign(configuration, promiseWithResolvers())
   sendJobRequest(jr).     // part 1
     then(_ => { // {{{2
       Object.assign(configuration, promiseWithResolvers())
@@ -84,9 +82,10 @@ generate_keypair.call(crypto.subtle).then(keys => {
       sendJobRequest(jr). // part 2
         then(_ => console.log('sendJobRequest DONE'))
     }) // }}}2
+    */
 })
 
-function sendJobRequest (jr, count = 2) { // {{{1
+/*function sendJobRequest (jr, count = 2) { // {{{1
   let context
   const ws = connection(new WebSocket(wsURL)).
     on('error', console.error).
@@ -105,4 +104,4 @@ function sendJobRequest (jr, count = 2) { // {{{1
     }).send(jr)
   context = Context(ws, configuration.attachment)
   return configuration.promise;
-}
+}*/

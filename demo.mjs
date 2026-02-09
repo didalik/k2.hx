@@ -55,7 +55,7 @@ const DemoReset = { // {{{1
     }
   }, // }}}2
 }*/
-const wsURL = location.toString().replace('http', 'ws') // {{{1
+const wsArgs = [location.toString().replace('http', 'ws')] // {{{1
 
 reset({ content: document.getElementById('content1'), }) // {{{1
 put(`Delivered ${location} on ${Date()} to YOUR_IP_ADDRESS`, '<hr/>')
@@ -64,7 +64,7 @@ let client, step = DemoReset // {{{1
 generate_keypair.call(crypto.subtle).then(keys => {
   const [sk, pk] = keys.split(' ')
   const app = 'hX', iss = { name: 'Ann', pk, uuid: 'UUID', }
-  return (step.job = Job(client = { app, iss, sk, wsURL, }, step)).promise;
+  return (step.job = Job(client = { app, iss, sk, wsArgs, WebSocket, }, step)).promise;
 }).then(jr => {
   /*Object.assign(configuration, promiseWithResolvers())
   sendJobRequest(jr).     // part 1

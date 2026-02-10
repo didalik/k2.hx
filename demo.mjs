@@ -30,10 +30,13 @@ const DemoReset = { // {{{1
     'aud', DemoReset.aud
   ),
   onerror: null, // is never called
-  onmessage:  data => console.log(
-    'data', data, 'name', DemoReset.job.context.attachment.iss.name,
-    'aud', DemoReset.aud
-  ),
+  onmessage:  data => {
+    let context = DemoReset.job.context
+    console.log(
+      'data', data, 'name', context.attachment.iss.name, 'aud', DemoReset.aud
+    )
+    context.state.handle(context, data)
+  },
 }
 
 /*const State = { // {{{1

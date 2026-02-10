@@ -25,9 +25,15 @@ const DemoReset = { // {{{1
     handle: null,
   },
   aud: 'demo/reset',
-  onclose: data => console.log('data', data, 'DemoReset.job', DemoReset.job),
+  onclose: data => console.log(
+    'data', data, 'name', DemoReset.job.context.attachment.iss.name,
+    'aud', DemoReset.aud
+  ),
   onerror: null, // is never called
-  onmessage: console.log,
+  onmessage:  data => console.log(
+    'data', data, 'name', DemoReset.job.context.attachment.iss.name,
+    'aud', DemoReset.aud
+  ),
 }
 
 /*const State = { // {{{1

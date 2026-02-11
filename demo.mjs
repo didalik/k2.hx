@@ -1,19 +1,13 @@
-/*import { // {{{1
-  Context, // TODO get rid of it
-  JobRequest, 
-  configuration, // TODO get rid of it
-  demo_onmessage, confirmingHandle, matchingHandle,
-} from '../local/lib/util.mjs' */
 import { put, reset, } from './lib/util.mjs' // {{{1
 import { connection, promiseWithResolvers, } from '../../lib/util.mjs'
 import { Job, generate_keypair, verifyPayload, } from '../../jf/lib/util.mjs'
 
 const out = m => typeof m == 'string' ? put( // {{{1
-  `<h4 style='text-align: right'>${m}</h4>`
-) : put(m.message)
+  `<div style='text-align: right'><b>${m}</b></div>`
+) : (console.log(m.message), put(m.message))
 
 const DemoReset = { // {{{1
-  Running: {
+  Running: { // {{{2
     handle: (context, event) => {
       /*
       console.log(
@@ -31,16 +25,18 @@ const DemoReset = { // {{{1
       })
     },
   },
-  aud: 'demo/reset',
-  onclose: data => {
+  aud: 'demo/reset', // {{{2
+
+  onclose: data => { // {{{2
     let context = DemoReset.job.context
     console.log(
       'data', data, 'name', context.attachment.iss.name, 'aud', DemoReset.aud
     )
-    DemoReset.job.resolve()
+    DemoReset.job.resolve(`- ${context.attachment.iss.name}: DemoReset DONE`)
   },
-  onerror: null, // is never called
-  onmessage:  data => {
+  onerror: null, // is never called {{{2
+  
+  onmessage:  data => { // {{{2
     let context = DemoReset.job.context
     /*
     console.log(
@@ -48,34 +44,50 @@ const DemoReset = { // {{{1
     )
     */
     context.state.handle(context, data)
-  },
+  }, // }}}2
 }
 
-/*const State = { // {{{1
-  MATCHING: 1,
-  Running: { // {{{2 
+const DemoSetup = { // {{{1
+  Running: { // {{{2
     handle: (context, event) => {
-      console.log(configuration.me, 'Running context', context)
-      try {
-        if (event) {
-          verifyPayload(event.message).then(payload => {
-            console.log('payload', payload)
-            out({ message: `- ${payload.iss.name}:` })
-            out({ message: payload.sub })
-          });
-        } else {
-          new JWT(text2echo).
-            setIssuer(context.attachment.iss, context.attachment.sk).sign().
-            then(t => {
-              context.ws.send(t)
-              out(`- ${configuration.me}:`)
-              out(text2echo)
-            })
-        }
-      } catch(err) { throw Error('UNEXPECTED err', err) }
-    }
+      /*
+      console.log(
+        'DemoSetup.Running.handle context', context,
+        'name', context.attachment.iss.name,
+        'aud', DemoSetup.aud
+      )
+      */
+      if (!event) {
+        return;
+      }
+      verifyPayload(event.message).then(payload => {
+        //out({ message: `- ${payload.iss.name}:` })
+        out({ message: payload.sub })
+      })
+    },
+  },
+  aud: 'demo/setup', // {{{2
+
+  onclose: data => { // {{{2
+    let context = DemoSetup.job.context
+    console.log(
+      'data', data, 'name', context.attachment.iss.name, 'aud', DemoSetup.aud
+    )
+    DemoSetup.job.resolve(`- ${context.attachment.iss.name}: DemoSetup DONE`)
+  },
+  onerror: null, // is never called {{{2
+  
+  onmessage:  data => { // {{{2
+    let context = DemoSetup.job.context
+    /*
+    console.log(
+      'data', data, 'name', context.attachment.iss.name, 'aud', DemoSetup.aud
+    )
+    */
+    context.state.handle(context, data)
   }, // }}}2
-}*/
+}
+
 const wsArgs = [location.toString().replace('http', 'ws')] // {{{1
 
 reset({ content: document.getElementById('content1'), }) // {{{1
@@ -86,37 +98,12 @@ generate_keypair.call(crypto.subtle).then(keys => {
   const [sk, pk] = keys.split(' ')
   const app = 'hX', iss = { name: 'Ann', pk, uuid: 'UUID', }
   return (step.job = Job(client = { app, iss, sk, wsArgs, WebSocket, }, step)).promise;
-}).then(jr => {
-  /*Object.assign(configuration, promiseWithResolvers())
-  sendJobRequest(jr).     // part 1
-    then(_ => { // {{{2
-      Object.assign(configuration, promiseWithResolvers())
-      configuration.attachment.state = State.MATCHING
-      delete configuration.attachment.match
-      delete configuration.attachment.matchConfirming
-      sendJobRequest(jr). // part 2
-        then(_ => console.log('sendJobRequest DONE'))
-    }) // }}}2
-    */
+}).then(result => {
+  out(result)
+  step = DemoSetup
+  return (step.job = Job(client, step)).promise;
+}).then(result => {
+  out(result)
+  out('- Ann: mocking Demo job')
 })
 
-/*function sendJobRequest (jr, count = 2) { // {{{1
-  let context
-  const ws = connection(new WebSocket(wsURL)).
-    on('error', console.error).
-    on('message', mobj => demo_onmessage(ws, mobj, context)).
-    on('close', data => {
-      console.log(configuration.me, 'close data', data)
-      put("<h3 style='text-align: center'>Test PASSED</h3>")
-      if (--count > 0) {
-        configuration.attachment.state = State.MATCHING
-        delete configuration.attachment.match
-        delete configuration.attachment.matchConfirming
-        sendJobRequest(jr, count)
-      } else {
-        configuration.resolve()
-      }
-    }).send(jr)
-  context = Context(ws, configuration.attachment)
-  return configuration.promise;
-}*/

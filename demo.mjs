@@ -12,29 +12,41 @@ const out = m => typeof m == 'string' ? put( // {{{1
   `<h4 style='text-align: right'>${m}</h4>`
 ) : put(m.message)
 
-const text2echo = `Lorem ipsum dolor sit amet, consectetur adipiscing elit,<br/>
-sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad<br/>
-minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea<br/>
-commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit<br/>
-esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat<br/>
-non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br/>
-`
-
 const DemoReset = { // {{{1
   Running: {
-    handle: null,
+    handle: (context, event) => {
+      /*
+      console.log(
+        'DemoReset.Running.handle context', context,
+        'name', context.attachment.iss.name,
+        'aud', DemoReset.aud
+      )
+      */
+      if (!event) {
+        return;
+      }
+      verifyPayload(event.message).then(payload => {
+        //out({ message: `- ${payload.iss.name}:` })
+        out({ message: payload.sub })
+      })
+    },
   },
   aud: 'demo/reset',
-  onclose: data => console.log(
-    'data', data, 'name', DemoReset.job.context.attachment.iss.name,
-    'aud', DemoReset.aud
-  ),
-  onerror: null, // is never called
-  onmessage:  data => {
+  onclose: data => {
     let context = DemoReset.job.context
     console.log(
       'data', data, 'name', context.attachment.iss.name, 'aud', DemoReset.aud
     )
+    DemoReset.job.resolve()
+  },
+  onerror: null, // is never called
+  onmessage:  data => {
+    let context = DemoReset.job.context
+    /*
+    console.log(
+      'data', data, 'name', context.attachment.iss.name, 'aud', DemoReset.aud
+    )
+    */
     context.state.handle(context, data)
   },
 }

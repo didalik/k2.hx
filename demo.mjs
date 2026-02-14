@@ -131,9 +131,14 @@ const DemoSign = { // {{{1
 
       if (!event) {
         return DemoSign.channel.receive().then(s =>
+          (console.log('DemoSign.Running.handle s', s),
           new JWT(s).setIssuer(DemoSign.client.iss, DemoSign.client.sk).
           setAudience(DemoSign.aud).sign()
-        ).then(jwt => DemoSign.job.context.ws.send(jwt));
+          )
+        ).then(jwt => {
+          DemoSign.job.context.ws.send(jwt)
+          DemoSign.Running.handle() // outbound data
+        })
       }
       verifyPayload(event.message).then(payload => {
         out({ message: payload.sub })
@@ -147,18 +152,12 @@ const DemoSign = { // {{{1
     console.log(
       'data', data, 'name', context.attachment.iss.name, 'aud', DemoSign.aud
     )
-    DemoSetup.job.resolve(`- ${context.attachment.iss.name}: DemoSetup DONE`)
+    DemoSign.job.resolve(`- ${context.attachment.iss.name}: DemoSign DONE`)
   },
   onerror: null, // is never called {{{2
   
   onmessage:  data => { // {{{2
-    let context = DemoSign.job.context
-    /*
-    console.log(
-      'data', data, 'name', context.attachment.iss.name, 'aud', DemoSign.aud
-    )
-    */
-    context.state.handle(context, data)
+    DemoSign.job.context.state.handle(DemoSign.job.context, data)
   }, // }}}2
 }
 
@@ -192,11 +191,11 @@ function mockDemo (client) { // {{{1
   Object.assign(DemoSign, { channel: new Channel() }, { client }, 
     { job: Job(client, DemoSign) }
   )
-  DemoSign.channel.send("Ann's sign request 1")
-  DemoSign.channel.send("Ann's sign request 2")
-  DemoSign.channel.send("Ann's sign request 3")
+  DemoSign.channel.send("Ann's sign request 1<br/>")
+  DemoSign.channel.send("Ann's sign request 2<br/>")
+  DemoSign.channel.send("Ann's sign request 3<br/>")
 
-  setTimeout(mockDemoStop, 8000, client, Demo, result)
+  setTimeout(mockDemoStop, 2000, client, Demo, result)
   return result;
 }
 

@@ -18,14 +18,6 @@ marketplace. The demo runs on <a href="https://stellar.org/">Stellar</a> testnet
 Each step has one or more jobs you request from this browser. <a href="https://www.cloudflare.com/">Cloudflare</a> Job Fair (<b>jF</b>) matches your job requests
 with Job Agents that offer the jobs you need. Without the <b>jF</b> functionality, the demo would not run, so this is actually a double demo, <b>hX</b>+<b>jF</b>.
 <p>
-This test has 2 parts. First, 2 Job Agents, each one offering echo job, connect to <b>jF</b> before your echo job request is sent from this browser. Then, one of them is
-being matched and, if your handshake with it is successful, runs the echo job for you. The second agent is still hanging, so you send another echo job request to
-<b>jF</b> and, having been matched with it, get another echo job done for you - assuming, of course, that your handshake with the agent was successful.
-</p><p>
-The second part of the test starts when you send a third job request. The request hangs there for a little while until the 2 Job Agents connect to <b>jF</b> again. Then,
-one of them is being matched and, if your handshake with it is successful, runs the echo job for you. The second agent is still hanging, so you send your final job request
-to <b>jF</b> and, having been matched with it, get another echo job done for you - assuming, of course, that your handshake with the agent was successful.
-</p><p>
 All messages are signed by the sender and verified on the edge and by the recipient. It is worth noting here that <b>jF</b> Job Agents in qa MUST use mTLS.
 </p><p>
 On the edge, each <b>jF</b> participant - a Job Agent or a Job Client like this browser - is represented by an open websocket connection and the associated attachment.

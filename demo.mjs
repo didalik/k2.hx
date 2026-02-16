@@ -131,14 +131,12 @@ const DemoSign = { // {{{1
 
       if (!event) {
         return DemoSign.channel.receive().then(s =>
-          (console.log('DemoSign.Running.handle s', s),
           new JWT(s).setIssuer(DemoSign.client.iss, DemoSign.client.sk).
           setAudience(DemoSign.aud).sign()
-          )
         ).then(jwt => {
           DemoSign.job.context.ws.send(jwt)
           DemoSign.Running.handle() // outbound data
-        })
+        });
       }
       verifyPayload(event.message).then(payload => {
         out({ message: payload.sub })

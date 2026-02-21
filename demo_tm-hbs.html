@@ -8,22 +8,13 @@
   </head>
   <body>
     <h3>The TM Test</h3>
-Stellar Testnet Monitor (<b>TM</b>) is an <i title='If the help you paid for has not been timely delivered, you get your payment back.'>equitable</i> cloud-based
-marketplace. The demo runs on <a href="https://stellar.org/">Stellar</a> testnet in 3 steps:
-<ul>
-  <li><i title='job: demo/reset'>reset</i> <b>hX</b> on testnet;</li>
-  <li><i title='job: demo/setup'>setup</i> <b>hX</b> demo data; and</li>
-  <li><i title='jobs: demo & demo/sign'>run</i> the demo.</li>
-</ul>
-Each step has one or more jobs you request from this browser. <a href="https://www.cloudflare.com/">Cloudflare</a> Job Fair (<b>jF</b>) matches your job requests
-with Job Agents that offer the jobs you need. Without the <b>jF</b> functionality the demo would not run, so this is actually a double demo, <b>hX</b>+<b>jF</b>.
+Stellar Testnet Monitor (<b>TM</b>) is used to start Job Agents whenever the demo is requested. If another demo is in progress, the request waits in the queue.
+The implementation is based on the Stellar TESTNET orderbook. The <b>TM</b> agent places a sell order of the Monitor Asset (MA). You place a buy order for the same
+amount of MA. When your order executes, the demo starts for you. When the demo completes (or when the timeout on the agent expires), another sell order for the same
+amount of MA is being placed - either by you or by the agent. Now the <b>TM</b> is either waiting for someone else to place a buy order, or executes an order already
+placed. Basically, the <b>TM</b> is a cloud-based semaphore.
 <p>
-If someone else is running the demo when you start it, your demo will run right after the previous one finishes - it takes less than a minute to complete.
-<p>
-All messages are signed by the sender and verified on the edge and by the recipient. It is worth noting here that <b>jF</b> Job Agents in qa MUST use mTLS.
-</p><p>
-On the edge, each <b>jF</b> participant - a Job Agent or a Job Client like this browser - is represented by an open websocket connection and the associated attachment.
-The attachment keeps the breakpoint of the <a href='https://en.wikipedia.org/wiki/State_pattern'>State and Context</a> objects for the connection.
+This page tests the semaphore's usage. The <b>hX</b>+<b>jF</b> demo page is based on this page.
 </p><hr/>
 <p id='content1'>
 </p>

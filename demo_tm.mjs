@@ -20,25 +20,23 @@ let vm = { // {{{1
   d: { MA: new Asset('MA', 'MA_IssuerPK'), XLM: new Asset('XLM', null), }
 }
 let ma = vm.d.MA
-out(`Presently using ${ma.getCode()}-${ma.getIssuer()}`)
 let secret = Keypair.random().secret() // TODO use localStorage
-console.log(secret)
 
 let kp = Keypair.fromSecret(secret); vm.d.kp = kp // {{{1
 let pk = kp.publicKey()
 if (!vm.c.done) {
-  out('Loading your Stellar TESTNET account... ')
+  out({ message: 'Loading your Stellar TESTNET account... ' })
   vm.e.server.loadAccount(pk).then(account => loaded.call(vm, account))
   .catch(error => {
     if (!vm.c.done) {
-      out(`${error.message}.`)
+      out(`${error.message}`)
       if (error.message == 'Not Found') {
-        out('Creating your Stellar TESTNET account... ')
+        out({ message: 'Creating your Stellar TESTNET account... ' })
         fetch(`https://friendbot.stellar.org?addr=${encodeURIComponent(pk)}`).
         then(response => response.json()).then(json => {
           console.log('new TESTNET account created: txId', json.id)
-          out('new account created.')
-          out('Loading your Stellar TESTNET account... ')
+          out(`new account created, pk ${pk}`)
+          out({ message: 'Loading your Stellar TESTNET account... ' })
         }).then(_ => vm.e.server.loadAccount(pk)).
         then(account => loaded.call(vm, account)).
         catch(error => console.error(error))
@@ -51,11 +49,12 @@ function loaded (account) { // {{{1
   let { s, e, c, d } = this
   out('loaded.')
   if (account.balances.length == 1) {
-    out('Updating your trustline... ')
+    out({ message: 'Updating your trustline... ' })
     trustAssets.call(this, account, d.kp, '10000', d.MA).then(txId => {
       e.log('trustline updated: txId', txId)
-    }).then(_ => e.server.loadAccount(d.kp.publicKey())).then(account => {
       out('updated.')
+      out({ message: 'Requesting the demo...' })
+    }).then(_ => e.server.loadAccount(d.kp.publicKey())).then(account => {
       run.call(this, account)
     })
   } else {

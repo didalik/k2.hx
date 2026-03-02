@@ -54,6 +54,8 @@ function loaded (account) { // {{{1
       e.log('trustline updated: txId', txId)
       out('updated.')
       out({ message: 'Requesting the demo...' })
+      makeBuyOffer.call(vm, vm.d.kp, account, vm.d.MA, vm.d.XLM, '1', '1').
+        then(_ => { vm.d.offerMade = true })
     }).then(_ => e.server.loadAccount(d.kp.publicKey())).then(account => {
       run.call(this, account)
     })
@@ -87,11 +89,6 @@ vm.s.push({
     onmessage: e => {
       console.dir(e, { depth: null })
       vm.e.log(vm)
-      if (vm.d.offerMade || !vm.d.account) {
-        return;
-      }
-      makeBuyOffer.call(vm, vm.d.kp, vm.d.account, vm.d.MA, vm.d.XLM, '1', '1').
-        then(_ => { vm.d.offerMade = true })
     }
   }),
   tag: 'orderbook',

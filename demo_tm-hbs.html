@@ -8,11 +8,27 @@
   </head>
   <body>
     <h3>The TM Test</h3>
-Stellar Testnet Monitor (<b>TM</b>) is used to start Job Agents whenever the demo is requested. If another demo is in progress, the request waits in a queue. The
+Stellar Testnet Monitor (<b>TM</b>) is used to start demo Job Agents whenever the demo is requested. If another demo is in progress, the request waits in a queue. The
 <b>TM</b> implementation is based on the Stellar TESTNET orderbook. The <b>TM</b> agent places a sell order for the Monitor Asset (MA). You place a buy order for the same
-amount of MA. When your order executes, the demo starts for you. When the demo completes (or when the timeout on the agent expires), another sell order for the same
-amount of MA is being placed - either by you or by the agent. Now the <b>TM</b> is either waiting for someone else to place a buy order, or executes an order already
-placed. Basically, the <b>TM</b> is a cloud-based semaphore.
+amount of MA. When your order executes, the demo starts for you. When the demo completes (or when the timeout on the <b>TM</b> agent expires), another sell order for the
+same amount of MA is being placed by the agent. Now the <b>TM</b> is either waiting for someone else to place a buy order, or executes an order already
+placed. Basically, the <b>TM</b> is a cloud-based <a href='https://en.wikipedia.org/wiki/Semaphore_(programming)'>semaphore</a>:
+<blockquote style='background-color: rgb(255 255 128 / 0.5)'><pre>
+             +-------+  +----+     o
+             | Agent |  | TM |    -|-
+             +-------+  +----+    / \...
+                 |        |        |
+                 | release|        |
+                 |------->|        |
+                 |  A     |acquire |
+                 |  |     |<-------|
+    demo starts ||| |     
+                ||| |
+                ||| |
+ demo completes  |--/
+    (or timeout  |
+       expires)                           
+</pre></blockquote>
 <p>
 This page tests the semaphore's usage. The <b>hX</b>+<b>jF</b> demo page is based on this page.
 </p><hr/>

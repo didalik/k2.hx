@@ -6,7 +6,7 @@ const out = m => typeof m == 'string' ? put( // {{{1
   `<div style='text-align: right'><b>${m}</b></div>`
 ) : (console.log(m.message), put(m.message))
 
-reset({ content: document.getElementById('content1'), handleCtrlC }) // {{{1
+reset({ content: document.getElementById('content1'), closeStreams }) // {{{1
 put(`Delivered ${location} on ${Date()} to YOUR_IP_ADDRESS`, '<hr/>')
 
 let MA = new Asset('MA', 'MA_IssuerPK')
@@ -69,7 +69,7 @@ function run (account) { // {{{1
   let trade = effect => {
     e.log('run trade effect', effect)
     out('Demo request GRANTED')
-    handleCtrlC()
+    closeStreams()
     out('DONE')
   }
   d.account = account
@@ -94,7 +94,7 @@ vm.s.push({
   tag: 'orderbook',
 })
 
-function handleCtrlC () { // {{{1
+function closeStreams () { // {{{1
   for (let stream of vm.s) {
     stream.close()
     out(`stream "${stream.tag}" closed`)

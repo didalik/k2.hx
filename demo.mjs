@@ -8,5 +8,5 @@ const out = m => typeof m == 'string' ? put( // {{{1
 reset({ content: document.getElementById('content1'), }) // {{{1
 put(`Delivered ${location} on ${Date()} to YOUR_IP_ADDRESS`, '<hr/>')
 
-startDemo(out) // {{{1
+location.search != '' && startDemo(out) // TODO check location.search value {{{1
 

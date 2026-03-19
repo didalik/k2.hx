@@ -5,7 +5,9 @@ const out = m => typeof m == 'string' ? put( // {{{1
   `<div style='text-align: right'><b>${m}</b></div>`
 ) : (console.log(m.message), put(m.message))
 
-reset({ content: document.getElementById('content1'), closeStreams }) // {{{1
+reset({ // {{{1
+  content: document.getElementById('content1'), handleCtrlC: closeStreams,
+})
 put(`Delivered ${location} on ${Date()} to YOUR_IP_ADDRESS`, '<hr/>')
 
 startTestnetMonitor(out) // {{{1

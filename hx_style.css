@@ -4,12 +4,8 @@
  * LICENSE file in the root directory of this source tree.
  * * */
 
-/* html, body, a, #map {{{1 */
-html {
-  scroll-behavior: smooth;
-}
-html,
-body {
+/* #div2, a, #map {{{1 */
+#div2 {
   height: 100%;
   margin: 0;
   padding: 0;

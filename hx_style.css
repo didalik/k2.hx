@@ -1,0 +1,214 @@
+/* Copyright (c) 2023-present, Дід Alik and the Kids {{{1
+ *
+ * This script is licensed under the Apache License, Version 2.0, found in the
+ * LICENSE file in the root directory of this source tree.
+ * * */
+
+/* html, body, a, #map {{{1 */
+html {
+  scroll-behavior: smooth;
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+pre {
+  padding: 5px;
+}
+
+a {
+  outline-color: transparent;
+}
+
+a:link {
+  color: #6900ff;
+}
+
+a:visited {
+  color: #a5c300;
+}
+
+a:focus {
+  text-decoration: none;
+  background: #bae498;
+}
+
+a:hover {
+  text-decoration: none;
+  background: #cdfeaa;
+}
+
+a:active {
+  background: #6900ff;
+  color: #cdfeaa;
+}
+
+#map {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* The popup bubble styling. {{{1 */
+.popup-bubble {
+  /* Position the bubble centred-above its parent. */
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -100%);
+  /* Style the bubble. */
+  background-color: rgba(255,255,255,0.6);
+  width: 195px;
+  padding: 5px;
+  border-radius: 5px;
+  font-family: sans-serif;
+  font-size: 15px;
+  overflow-y: auto;
+  max-height: 150px;
+  cursor: auto;
+  box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.5);
+}
+
+.popup-radios {
+  position: absolute;
+  top: 210px;
+  left: 0;
+  transform: translate(-50%, -100%);
+  background-color: rgba(255,255,255,0.6);
+  width: 360px;
+  padding: 5px;
+  border-radius: 5px;
+  font-family: sans-serif;
+  font-size: 15px;
+  overflow-y: auto;
+  cursor: auto;
+  box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.5);
+}
+
+/* The parent of the bubble. A zero-height div at the top of the tip. {{{1 */
+.popup-bubble-anchor {
+  /* Position the div a fixed distance above the tip. */
+  position: absolute;
+  width: 100%;
+  bottom: 8px;
+  left: 0;
+}
+
+/* This element draws the tip. {{{1 */
+.popup-bubble-anchor::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* Center the tip horizontally. */
+  transform: translate(-50%, 0);
+  /* The tip is a https://css-tricks.com/snippets/css/css-triangle/ */
+  width: 0;
+  height: 0;
+  /* The tip is 8px high, and 12px wide. */
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid white;
+}
+
+/* JavaScript will position this div at the bottom of the popup tip. {{{1 */
+.popup-container {
+  cursor: auto;
+  height: 0;
+  position: absolute;
+  /* The max width of the info window. */
+  width: 200px;
+}
+
+.popup-container:hover {
+  background: #ebebeb;
+}
+
+/* Tooltip container {{{1 */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+ 
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+/* Modal Background {{{1 */
+.modal-background {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 10px; /* Location of the content box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.2); /* Black w/ opacity */
+}
+
+/* Modal Content {{{1 */
+.modal-content {
+  color: grey;
+  background-color: rgba(255,255,255,0.75);
+  display: none; /* Hidden by default */
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  border: 0;
+  border-radius: 9px;
+  box-shadow: 0 1px 8px -1px rgba(0, 0, 0, 0.8);
+  font: 400 18px Roboto, Arial, sans-serif;
+  font-size: calc(0.6rem + 1vw);
+}
+
+/* Modal Detail {{{1 */
+.detail {
+  display: none;
+}
+
+/* Modal Close Button {{{1 */
+.close {
+  display: none; /* Hidden by default */
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* InfoWindow Take Button {{{1 */
+.take {
+  float: right;
+  margin: 10px;
+}
+
+/* }}}1 */

@@ -6,7 +6,7 @@ const out = m => typeof m == 'string' ? put( // {{{1
 ) : (console.log(m.message), put(m.message))
 
 reset({ content: document.getElementById('content1'), }) // {{{1
-put(`Delivered ${location} on ${Date()} to YOUR_IP_ADDRESS`, '<hr/>')
+put(`Delivered ${location.origin} on ${Date()} to YOUR_IP_ADDRESS`, '<hr/>')
 
 location.search != '' && startDemo(out) // TODO check location.search value {{{1
 

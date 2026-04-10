@@ -2,3 +2,6 @@
 .*.sw?   
 *.session 
 
+# Node {{{1 
+node_modules/
+

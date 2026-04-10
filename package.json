@@ -1,0 +1,32 @@
+{
+  "name": "k2.hx",
+  "version": "1.0.0",
+  "description": "",
+  "main": "shim.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "ava"
+  },
+  "ava": {
+    "files": [
+      "test/**/*.js"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/didalik/k2.hx.git"
+  },
+  "keywords": [],
+  "author": "Дід Alik",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/didalik/k2.hx/issues"
+  },
+  "homepage": "https://github.com/didalik/k2.hx#readme",
+  "devDependencies": {
+    "ava": "^7.0.0"
+  }
+}

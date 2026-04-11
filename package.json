@@ -28,5 +28,8 @@
   "homepage": "https://github.com/didalik/k2.hx#readme",
   "devDependencies": {
     "ava": "^7.0.0"
+  },
+  "dependencies": {
+    "@stellar/stellar-sdk": "latest"
   }
 }

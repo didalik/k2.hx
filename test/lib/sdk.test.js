@@ -24,12 +24,17 @@ t => {
 });
 
 test('add KNOWN property "server" to Networks.TESTNET SDK', t => { // {{{1
-  t.is(hXsdk().server, Networks.TESTNET)
+  t.is(hXsdk().server.networkPassphrase, Networks.TESTNET)
 })
 
 test('add KNOWN property "server" to Networks.PUBLIC SDK', t => { // {{{1
   process.env.Networks_PUBLIC = 'hX'
-  t.log('process.env.Networks_PUBLIC', process.env.Networks_PUBLIC)
-  t.is(hXsdk().server, Networks.PUBLIC)
+  //t.log('process.env.Networks_PUBLIC', process.env.Networks_PUBLIC)
+  t.is(hXsdk().server.networkPassphrase, Networks.PUBLIC)
+  delete process.env.Networks_PUBLIC
+})
+
+test('access property "server" for Networks.TESTNET SDK again', t => { // {{{1
+  t.is(hXsdk().server.networkPassphrase, Networks.TESTNET)
 })
 

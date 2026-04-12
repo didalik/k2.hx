@@ -5,3 +5,6 @@
 # Node {{{1 
 node_modules/
 
+# KOT {{{1
+demo.html
+demo_tm.html

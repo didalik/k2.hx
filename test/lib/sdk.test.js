@@ -37,6 +37,10 @@ test('access existing property "server" for Networks.TESTNET SDK', t => { // {{{
 })
 
 test('add KNOWN property "loadAccount" to Networks.TESTNET SDK server', t => { // {{{1
-  t.is(hXsdk().server.loadAccount(), 'XA')
+  const opts = {}
+  return hXsdk().server.loadAccount(opts).then(result => {
+    console.log('opts', opts)
+    t.is(result, 'XA')
+  })
 })
 

@@ -36,7 +36,7 @@ test('access existing property "server" for Networks.TESTNET SDK', t => { // {{{
   t.is(hXsdk().server.server.serverURL.toString(), 'https://horizon-testnet.stellar.org/')
 })
 
-test('add KNOWN property "loadAccount" to Networks.TESTNET SDK server', t => { // {{{1
+test('add KNOWN property "loadAccount(...)" to Networks.TESTNET SDK server', t => { // {{{1
   const opts = {}
   return hXsdk().server.loadAccount(opts).then(result => {
     console.log('opts', opts)

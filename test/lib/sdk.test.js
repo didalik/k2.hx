@@ -8,7 +8,9 @@ import {
 
 //process.env.Networks_PUBLIC = 'hX'
 
-test('default network is Networks.TESTNET', t => { // {{{1
+let accounts = {}, sdk // {{{1
+
+test.serial('default network is Networks.TESTNET', t => { // {{{1
   t.is(hXsdk().networkPassphrase, Networks.TESTNET);
 });
 
@@ -24,7 +26,7 @@ t => {
   process.env.Networks_PUBLIC = 'hX'
 });
 
-test('add KNOWN property "server" to Networks.TESTNET SDK', t => { // {{{1
+test.serial('add KNOWN property "server" to Networks.TESTNET SDK', t => { // {{{1
   t.is(hXsdk().server.server.serverURL.toString(), 'https://horizon-testnet.stellar.org/')
 })
 
@@ -32,15 +34,27 @@ test.skip('add KNOWN property "server" to Networks.PUBLIC SDK', t => { // {{{1
   t.is(hXsdk().server.server.serverURL.toString(), 'https://horizon.stellar.org/')
 })
 
-test('access existing property "server" for Networks.TESTNET SDK', t => { // {{{1
+test.serial('access cached property "server" for Networks.TESTNET SDK', t => { // {{{1
   t.is(hXsdk().server.server.serverURL.toString(), 'https://horizon-testnet.stellar.org/')
 })
 
-test('add KNOWN property "loadAccount(...)" to Networks.TESTNET SDK server', t => { // {{{1
+test.serial('add KNOWN property "loadAccount(...)" to Networks.TESTNET SDK server', t => { // {{{1
   const opts = {}
   t.timeout(20000)
-  return hXsdk().server.loadAccount(opts).then(result => {
+  return (sdk = hXsdk()).server.loadAccount(opts).then(result => {
     t.is(result, 'XA')
+    console.log('sdk', sdk, 'defaults', sdk.transaction.opts4createAccount.defaults)
+    accounts.issuer = sdk.server.opts4loadAccount.account
   })
 })
 
+test.serial('load new Agent account', t => { // {{{1
+  delete sdk.server.opts4loadAccount.account
+  sdk.transaction.opts4createAccount.defaults.opts = {}
+  t.timeout(20000)
+  return sdk.server.loadAccount(sdk.server.opts4loadAccount).then(result => {
+    t.is(result, 'XA')
+    console.log('sdk', sdk, 'defaults', sdk.transaction.opts4createAccount.defaults)
+    accounts.agent = sdk.server.opts4loadAccount.account
+  })
+})

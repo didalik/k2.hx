@@ -38,7 +38,7 @@ test.serial('access cached property "server" for Networks.TESTNET SDK', t => { /
   t.is(hXsdk().server.server.serverURL.toString(), 'https://horizon-testnet.stellar.org/')
 })
 
-test.serial('add KNOWN property "loadAccount(...)" to Networks.TESTNET SDK server', t => { // {{{1
+test.serial('load new Issuer account', t => { // {{{1
   const opts = {}
   t.timeout(20000)
   return (sdk = hXsdk()).server.loadAccount(opts).then(result => {
@@ -58,3 +58,13 @@ test.serial('load new Agent account', t => { // {{{1
     accounts.agent = sdk.server.opts4loadAccount.account
   })
 })
+
+test.serial('change trust of the new Agent using defaults', t => { // {{{1
+  const opts = { recipient: accounts.agent }
+  t.timeout(20000)
+  return sdk.transaction.changeTrust(opts).then(result => {
+    t.is(result, 'XA')
+    console.log('sdk', sdk, 'defaults', sdk.transaction.opts4changeTrust.defaults)
+  })
+})
+

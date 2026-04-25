@@ -1,5 +1,6 @@
 import test from 'ava'; // {{{1
 import { hXsdk } from '../../lib/sdk.mjs';
+import vault from '../../lib/vault.js'
 import {
   //Asset, Keypair, Horizon, MemoHash, MemoText, 
   Networks, 
@@ -38,28 +39,30 @@ test.serial('access cached property "server" for Networks.TESTNET SDK', t => { /
   t.is(hXsdk().server.server.serverURL.toString(), 'https://horizon-testnet.stellar.org/')
 })
 
-test.serial('load new Issuer account', t => { // {{{1
-  const opts = {}
+test.serial('load new/existing Issuer account', t => { // {{{1
+  const opts = { name: 'Issuer' }
   t.timeout(20000)
-  return (sdk = hXsdk()).server.loadAccount(opts).then(result => {
+  return (sdk = hXsdk({ vault })).server.loadAccount(opts).then(result => {
     t.is(result, 'XA')
-    console.log('sdk', sdk, 'defaults', sdk.transaction.opts4createAccount.defaults)
+    console.log('sdk', sdk)//, 'defaults', sdk.transaction.opts4createAccount.defaults)
     accounts.issuer = sdk.server.opts4loadAccount.account
   })
 })
 
-test.serial('load new Agent account', t => { // {{{1
+test.serial('load new/existing Agent account', t => { // {{{1
   delete sdk.server.opts4loadAccount.account
-  sdk.transaction.opts4createAccount.defaults.opts = {}
+  if (sdk.transaction?.opts4createAccount?.defaults?.opts) {
+    sdk.transaction.opts4createAccount.defaults.opts = {}
+  }
   t.timeout(20000)
   return sdk.server.loadAccount(sdk.server.opts4loadAccount).then(result => {
     t.is(result, 'XA')
-    console.log('sdk', sdk, 'defaults', sdk.transaction.opts4createAccount.defaults)
+    console.log('sdk', sdk)//, 'defaults', sdk.transaction.opts4createAccount.defaults)
     accounts.agent = sdk.server.opts4loadAccount.account
   })
 })
 
-test.serial('change trust of the new Agent using defaults', t => { // {{{1
+test.serial('change trust of the loaded Agent/Issuer using defaults', t => { // {{{1
   const opts = { recipient: accounts.agent }
   t.timeout(20000)
   return sdk.transaction.changeTrust(opts).then(result => {

@@ -51,6 +51,7 @@ test.serial('load new/existing Issuer account', t => { // {{{1
 
 test.serial('load new/existing Agent account', t => { // {{{1
   delete sdk.server.opts4loadAccount.account
+  sdk.server.opts4loadAccount.name = 'Bob'
   if (sdk.transaction?.opts4createAccount?.defaults?.opts) {
     sdk.transaction.opts4createAccount.defaults.opts = {}
   }
@@ -67,7 +68,7 @@ test.serial('change trust of the loaded Agent/Issuer using defaults', t => { // 
   t.timeout(20000)
   return sdk.transaction.changeTrust(opts).then(result => {
     t.is(result, 'XA')
-    console.log('sdk', sdk, 'defaults', sdk.transaction.opts4changeTrust.defaults)
+    console.log('sdk', sdk)//, 'defaults', sdk.transaction.opts4changeTrust.defaults)
   })
 })
 

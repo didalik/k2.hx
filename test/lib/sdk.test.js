@@ -42,10 +42,10 @@ test.serial('access cached property "server" for Networks.TESTNET SDK', t => { /
 test.serial('load new/existing Issuer account', t => { // {{{1
   const opts = { name: 'Issuer' }
   t.timeout(20000)
-  return (sdk = hXsdk({ vault })).server.loadAccount(opts).then(result => {
-    t.is(result, 'XA')
-    console.log('sdk', sdk)//, 'defaults', sdk.transaction.opts4createAccount.defaults)
-    accounts.issuer = sdk.server.opts4loadAccount.account
+  return (sdk = hXsdk({ vault })).server.loadAccount(opts).then(account => {
+    t.true(account.balances[0].asset_type == 'native')
+    //console.log('sdk', sdk)
+    accounts.issuer = account
   })
 })
 
@@ -55,20 +55,20 @@ test.serial('load new/existing Agent account', t => { // {{{1
   if (sdk.transaction?.opts4createAccount?.defaults?.opts) {
     sdk.transaction.opts4createAccount.defaults.opts = {}
   }
-  t.timeout(20000)
-  return sdk.server.loadAccount(sdk.server.opts4loadAccount).then(result => {
-    t.is(result, 'XA')
-    console.log('sdk', sdk)//, 'defaults', sdk.transaction.opts4createAccount.defaults)
-    accounts.agent = sdk.server.opts4loadAccount.account
+  t.timeout(10000)
+  return sdk.server.loadAccount(sdk.server.opts4loadAccount).then(account => {
+    t.true(account.balances[0].asset_type == 'native')
+    //console.log('sdk', sdk)
+    accounts.agent = account
   })
 })
 
 test.serial('change trust of the loaded Agent/Issuer using defaults', t => { // {{{1
-  const opts = { recipient: accounts.agent }
-  t.timeout(20000)
+  const opts = { issuer: accounts.issuer, recipient: accounts.agent }
+  t.timeout(10000)
   return sdk.transaction.changeTrust(opts).then(result => {
     t.is(result, 'XA')
-    console.log('sdk', sdk)//, 'defaults', sdk.transaction.opts4changeTrust.defaults)
+    console.log('sdk', sdk)
   })
 })
 

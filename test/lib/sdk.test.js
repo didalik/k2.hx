@@ -46,7 +46,7 @@ test.serial('load new/existing Issuer account', t => { // {{{1
     t.true(account.balances[0].asset_type == 'native')
     //console.log('sdk', sdk)
     accounts.issuer = account
-    accounts.issuerKeys = sdk.vault.get('Issuer.keys')
+    accounts.issuerKeys = vault.get('Issuer.keys')
   })
 })
 
@@ -61,7 +61,7 @@ test.serial('load new/existing Agent account', t => { // {{{1
     t.true(account.balances.length > 0)
     //console.log('sdk', sdk)
     accounts.agent = account
-    accounts.agentKeys = sdk.vault.get('Bob.keys')
+    accounts.agentKeys = vault.get('Bob.keys')
   })
 })
 
@@ -74,6 +74,22 @@ test.serial('change trust of the loaded Agent/Issuer using defaults', t => { // 
   t.timeout(10000)
   return sdk.transaction.changeTrust(opts).then(result => {
     t.is(result.source_account, opts.recipient.id)
+    //console.log('sdk', sdk)
+  })
+})
+
+test.serial("fund Agent with loaded Issuer's MA, clear clawback flag", t => { // {{{1
+  const opts = {
+    issuer: accounts.issuer,
+    issuerKeys: accounts.issuerKeys,
+    agentKeys: accounts.agentKeys,
+    asset: 'MA',
+    amount: '5.0',
+    clawback: false,
+  }
+  t.timeout(10000)
+  return sdk.transaction.fund(opts).then(result => {
+    t.is(result.source_account, opts.issuerKeys[1])
     console.log('sdk', sdk)
   })
 })

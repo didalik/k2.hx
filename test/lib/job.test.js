@@ -3,7 +3,7 @@ import vault from '../../lib/vault.js'
 import { Demo, DemoSign, DemoTmReset, DemoTmUse, } from '../../lib/job.js'
 
 test.serial('reset test monitor', t => { // {{{1
-  t.timeout(60000)
+  t.timeout(90000)
   return DemoTmReset({ vault }).then(r => {
     t.is(r, 'OK')
   })

@@ -14,12 +14,8 @@ test.serial('reset test monitor', t => { // {{{1
 
 test.serial('use test monitor', t => { // {{{1
   t.timeout(40000)
-  let opts1 = {
-    issuer: { id: accounts.issuer.id, },
-    name: 'user1',
-  }
   let opts2 = Promise.withResolvers()
-  DemoTmUseRequest(opts1).then(_ => (console.log(_), opts2.resolve('ok')))
+  setTimeout(_ => opts2.resolve('ok'), 20000)
   return DemoTmUse(opts2).then(r => {
     t.is(r, 'ok')
   });

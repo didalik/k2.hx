@@ -14,9 +14,9 @@ test.serial('reset test monitor', t => { // {{{1
 
 test.serial('use test monitor', t => { // {{{1
   t.timeout(90000)
-  let opts2 = Promise.withResolvers()
-  setTimeout(_ => opts2.resolve('ok'), 60000)
-  return DemoTmUse(opts2).then(r => {
+  let opts = Promise.withResolvers()
+  setTimeout(_ => opts.resolve('ok'), 60000)
+  return DemoTmUse(opts).then(r => {
     t.is(r, 'ok')
   });
 })

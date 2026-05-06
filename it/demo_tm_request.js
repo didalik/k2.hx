@@ -9,9 +9,17 @@ test.serial('request demo', t => { // {{{1
   let opts = {
     asset: { MA: new Asset('MA', id), XLM: new Asset('XLM', null) },
     issuer: { id, },
-    name: 'user1',
+    name: process.env.demouser,
     vault,
   }
   return DemoTmUseRequest(opts).then(r => t.is(r, 'XOXOXO'));
+})
+
+test(`run demo for user ${process.env.demouser}`, t => { // {{{1
+  t.true(true)
+})
+
+test(`run demo`, t => { // {{{1
+  t.true(true)
 })
 

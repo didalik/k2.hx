@@ -12,6 +12,6 @@ test.serial('request demo', t => { // {{{1
     name: 'user1',
     vault,
   }
-  return DemoTmUseRequest(opts).then(r => t.is(r, 'ok'));
+  return DemoTmUseRequest(opts).then(r => t.is(r, 'XOXOXO'));
 })
 

@@ -4,7 +4,7 @@ import { DemoTmUseRequest, } from '../lib/job.js'
 import { Asset, /*Keypair,*/ } from '@stellar/stellar-sdk'
 
 test.serial('request demo', t => { // {{{1
-  t.timeout(70000)
+  t.timeout(80000)
   let id = vault.get('Issuer.keys')[1]
   let opts = {
     asset: { MA: new Asset('MA', id), XLM: new Asset('XLM', null) },

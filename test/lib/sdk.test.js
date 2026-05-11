@@ -2,7 +2,9 @@ import test from 'ava'; // {{{1
 import { hXsdk } from '../../lib/sdk.mjs';
 import vault from '../../lib/vault.js'
 import {
-  //Asset, Keypair, Horizon, MemoHash, MemoText, 
+  //Asset, 
+  Keypair,
+  //Horizon, MemoHash, MemoText, 
   Networks, 
   //TransactionBuilder,
 } from '@stellar/stellar-sdk'
@@ -90,18 +92,13 @@ test.serial("fund Agent with loaded Issuer's MA, clear clawback flag", t => { //
   t.timeout(10000)
   return sdk.transaction.fund(opts).then(result => {
     t.is(result.source_account, opts.issuerKeys[1])
-    //console.log('sdk', sdk)
   })
 })
 
 test("use XDR to fund local Agent with remote Issuer's MA, supply 2 signatures", t => { // {{{1
   t.timeout(80000)
   let sign = (xdr, tag) => {
-    let opts = { 
-      remote: true, xdr, tag,
-      issuerKeys: accounts.issuerKeys,
-    }
-    return sdk.transaction.fund(opts).then(result => {
+    return sdk.sign(Keypair.fromSecret(accounts.issuerKeys[0]), xdr, tag).then(result => {
       console.log('test.sign result', result)
 
       return Promise.resolve(result);
@@ -118,7 +115,6 @@ test("use XDR to fund local Agent with remote Issuer's MA, supply 2 signatures",
   }
   return sdk.transaction.fund(opts).then(result => {
     t.is(result.source_account, accounts.agentKeys[1])
-    //console.log('sdk', sdk) //, 'accounts', accounts)
   })
 })
 

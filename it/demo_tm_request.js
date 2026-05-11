@@ -1,6 +1,6 @@
 import test from 'ava'; // {{{1
 import vault from '../lib/vault.js'
-import { Demo, DemoTmUseRequest, DemoUser, } from '../lib/job.js'
+import { Demo, DemoSign, DemoTmUseRequest, DemoUser, } from '../lib/job.js'
 import { Asset, /*Keypair,*/ } from '@stellar/stellar-sdk'
 
 test.serial('request demo', t => { // {{{1
@@ -20,11 +20,18 @@ test.serial('request demo', t => { // {{{1
 
 test(`run demo for user ${process.env.demouser}`, t => { // {{{1
   t.timeout(80000)
-  let opts = {}
+  let issuerKeys = vault.get('Issuer.keys')
+  let userKeys = vault.get(process.env.demouser + '.keys')
+  let opts = {
+    issuerPK: issuerKeys[1],
+    sign: (xdr, tag) => DemoSign({ secret: issuerKeys[0], vault, xdr, tag }),
+    userKeys,
+    vault
+  }
   return DemoUser(opts).then(r => t.is(r, 'OK'));
 })
 
-test(`run demo`, t => { // {{{1
+test(`run demo for Bob and Cyn`, t => { // {{{1
   t.timeout(80000)
   let opts = {}
   return Demo(opts).then(r => t.is(r, 'OK'));

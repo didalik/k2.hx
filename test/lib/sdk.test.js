@@ -82,7 +82,7 @@ test.serial("fund Agent with loaded Issuer's MA, clear clawback flag", t => { //
   const opts = {
     issuer: accounts.issuer,
     issuerKeys: accounts.issuerKeys,
-    agentKeys: accounts.agentKeys,
+    destKeys: accounts.agentKeys,
     asset: 'MA',
     amount: '5.0',
     clawback: false,
@@ -90,7 +90,35 @@ test.serial("fund Agent with loaded Issuer's MA, clear clawback flag", t => { //
   t.timeout(10000)
   return sdk.transaction.fund(opts).then(result => {
     t.is(result.source_account, opts.issuerKeys[1])
-    console.log('sdk', sdk)
+    //console.log('sdk', sdk)
+  })
+})
+
+test("use XDR to fund local Agent with remote Issuer's MA, supply 2 signatures", t => { // {{{1
+  t.timeout(80000)
+  let sign = (xdr, tag) => {
+    let opts = { 
+      remote: true, xdr, tag,
+      issuerKeys: accounts.issuerKeys,
+    }
+    return sdk.transaction.fund(opts).then(result => {
+      console.log('test.sign result', result)
+
+      return Promise.resolve(result);
+    });
+  }
+  let opts = {
+    account: accounts.agent,
+    accountKeys: accounts.agentKeys,
+    asset: 'MA',
+    amount: '5.0',
+    issuerKeys: accounts.issuerKeys,
+    destKeys: accounts.agentKeys,
+    sign
+  }
+  return sdk.transaction.fund(opts).then(result => {
+    t.is(result.source_account, accounts.agentKeys[1])
+    //console.log('sdk', sdk) //, 'accounts', accounts)
   })
 })
 

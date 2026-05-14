@@ -28,6 +28,7 @@ test(`run demo for user ${process.env.demouser}`, t => { // {{{1
     clawback: false,
     destKeys,
     issuerKeys: [null, issuerKeys[1]],
+    log: console.log,
     sign: (xdr, tag) => DemoSign({ secret: issuerKeys[0], vault, xdr, tag }),
     vault
   }

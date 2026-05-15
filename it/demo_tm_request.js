@@ -38,13 +38,18 @@ test(`run demo for user ${process.env.demouser}`, t => { // {{{1
 test(`run demo for Bob and Cyn`, t => { // {{{1
   t.timeout(80000)
   let issuerKeys = vault.get('Issuer.keys')
-  let destKeys = vault.get('Cyn.keys')
+  let bobKeys = vault.get('Bob.keys')
+  let cynKeys = vault.get('Cyn.keys')
+  let destKeys = cynKeys
   let opts = {
     asset: 'HEXA',
-    amount: '1000',
+    amount: '900',
+    bobKeys,
     clawback: false,
+    cynKeys,
     destKeys,
     issuerKeys: [null, issuerKeys[1]],
+    log: console.log,
     sign: (xdr, tag) => DemoSign({ secret: issuerKeys[0], vault, xdr, tag }),
     vault
   }

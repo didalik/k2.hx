@@ -1,6 +1,8 @@
 import test from 'ava'; // {{{1
 import vault from '../lib/vault.js'
-import { Demo, DemoSign, DemoTmUseRequest, DemoUser, } from '../lib/job.js'
+import {
+  Context, Demo, DemoSign, DemoTmUseRequest, DemoUser,
+} from '../lib/job.js'
 import { Asset, /*Keypair,*/ } from '@stellar/stellar-sdk'
 
 test.serial('request demo', t => { // {{{1
@@ -26,6 +28,7 @@ test(`run demo for user ${process.env.demouser}`, t => { // {{{1
     asset: 'HEXA',
     amount: '1100',
     clawback: false,
+    context: new Context(process.env.demouser),
     destKeys,
     issuerKeys: [null, issuerKeys[1]],
     log: console.log,
@@ -47,6 +50,7 @@ test(`run demo for Bob and Cyn`, t => { // {{{1
     amount: '900',
     bobKeys,
     clawback: false,
+    context: new Context(),
     cynKeys,
     destKeys,
     issuerKeys: [null, issuerKeys[1]],

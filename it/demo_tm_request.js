@@ -1,8 +1,9 @@
 import test from 'ava'; // {{{1
 import vault from '../lib/vault.js'
 import {
-  Context, Demo, DemoSign, DemoTmUseRequest, DemoUser,
+  Demo, DemoSign,
 } from '../lib/job.js'
+import user from '../lib/user.js'
 import { Asset, /*Keypair,*/ } from '@stellar/stellar-sdk'
 
 test.serial('request demo', t => { // {{{1
@@ -17,7 +18,7 @@ test.serial('request demo', t => { // {{{1
     name: process.env.demouser,
     vault,
   }
-  return DemoTmUseRequest(opts).then(r => t.is(r, 'XOXOXO'));
+  return user.DemoTmUse(opts).then(r => t.is(r, 'XOXOXO'));
 })
 
 test(`run demo for user ${process.env.demouser}`, t => { // {{{1
@@ -28,7 +29,6 @@ test(`run demo for user ${process.env.demouser}`, t => { // {{{1
     asset: 'HEXA',
     amount: '1100',
     clawback: false,
-    context: new Context(process.env.demouser),
     destKeys,
     issuerKeys: [null, issuerKeys[1]],
     log: console.log,
@@ -36,7 +36,7 @@ test(`run demo for user ${process.env.demouser}`, t => { // {{{1
     streams: [],
     vault
   }
-  return DemoUser(opts).then(r => t.is(r, 'OK'));
+  return user.Demo(opts).then(r => t.is(r, 'OK'));
 })
 
 test(`run demo for Bob and Cyn`, t => { // {{{1
@@ -50,7 +50,6 @@ test(`run demo for Bob and Cyn`, t => { // {{{1
     amount: '900',
     bobKeys,
     clawback: false,
-    context: new Context(),
     cynKeys,
     destKeys,
     issuerKeys: [null, issuerKeys[1]],

@@ -6,6 +6,7 @@
 node_modules/
 
 # KOT {{{1
+*.log
 demo.html
 demo_tm.html
 vault/

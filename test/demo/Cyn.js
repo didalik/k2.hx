@@ -23,7 +23,11 @@ test.serial('setup new/existing account for Cyn', t => { // {{{1
   return (sdk = hXsdk({ vault })).server.loadAccount(opts).then(account => {
     opts.account = opts.recipient = account
     opts.destKeys = opts.recipientKeys = vault.get('Cyn.keys')
-    return sdk.transaction.changeTrust(opts);
+    if (vault.get('Cyn.change.trust') == 'DONE') {
+      return Promise.resolve();
+    }
+    return sdk.transaction.changeTrust(opts).
+      then(_ => vault.put('Cyn.change.trust', 'DONE'));
   }).then(_ => sdk.transaction.fund(opts)).then(_ => {
     t.true(opts.destKeys.length == 2)
   });

@@ -1,7 +1,19 @@
 .ONESHELL:
 
-.PHONY: shell # {{{1
-shell:
+.PHONY: demo # {{{1
+demo:
+	@npx ava test/demo/Issuer.js &
+	echo $@ pid $$! started on $$(date) for Issuer
+	while [ ! -e vault/Issuer.keys ]; do sleep 1; done
+	for actor in Ann Bob Cyn
+	do
+	  npx ava test/demo/$$actor.js &
+	  echo $@ pid $$! started on $$(date) for $$actor
+	done
+	wait
+
+.PHONY: it # {{{1
+it:
 	@npx ava it/demo_tm.js &
 	echo $@ pid $$! started on $$(date)
 	while [ ! -e vault/Issuer.keys ]; do sleep 1; done
@@ -12,3 +24,4 @@ shell:
 	  echo $@ pid $$! started on $$(date)
 	done
 	wait
+

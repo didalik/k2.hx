@@ -67,7 +67,10 @@ test.serial('load new/existing Agent account', t => { // {{{1
   })
 })
 
-test.serial('change trust of the loaded Agent/Issuer using defaults', t => { // {{{1
+test.serial('change trust of the loaded Agent/Issuer pair using defaults', t => { // {{{1
+  if (vault.get('change.trust') === 'DONE') {
+    return t.true(true);
+  }
   const opts = {
     issuer: accounts.issuer, 
     recipient: accounts.agent,
@@ -76,11 +79,15 @@ test.serial('change trust of the loaded Agent/Issuer using defaults', t => { // 
   t.timeout(10000)
   return sdk.transaction.changeTrust(opts).then(result => {
     t.is(result.source_account, opts.recipient.id)
+    vault.put('change.trust', 'DONE')
     //console.log('sdk', sdk)
   })
 })
 
 test.serial("fund Agent with loaded Issuer's MA, clear clawback flag", t => { // {{{1
+  if (vault.get('fund.MA') === 'DONE') {
+    return t.true(true);
+  }
   const opts = {
     issuer: accounts.issuer,
     issuerKeys: accounts.issuerKeys,
@@ -92,10 +99,14 @@ test.serial("fund Agent with loaded Issuer's MA, clear clawback flag", t => { //
   t.timeout(10000)
   return sdk.transaction.fund(opts).then(result => {
     t.is(result.source_account, opts.issuerKeys[1])
+    vault.put('fund.MA', 'DONE')
   })
 })
 
 test("use XDR to fund local Agent with remote Issuer's MA, supply 2 signatures", t => { // {{{1
+  if (vault.get('fund.2sig') === 'DONE') {
+    return t.true(true);
+  }
   t.timeout(80000)
   let sign = (xdr, tag) => {
     return sdk.sign(Keypair.fromSecret(accounts.issuerKeys[0]), xdr, tag).then(result => {
@@ -115,6 +126,7 @@ test("use XDR to fund local Agent with remote Issuer's MA, supply 2 signatures",
   }
   return sdk.transaction.fund(opts).then(result => {
     t.is(result.source_account, accounts.agentKeys[1])
+    vault.put('fund.2sig', 'DONE')
   })
 })
 

@@ -2,7 +2,9 @@
 
 .PHONY: demo # {{{1
 demo:
-	@npx ava test/demo/Issuer.js &
+	@mkdir -p vault
+	echo $@ started on $$(date) | tee vault/Issuer.in
+	npx ava test/demo/Issuer.js &
 	echo $@ pid $$! started on $$(date) for Issuer
 	while [ ! -e vault/Issuer.keys ]; do sleep 1; done
 	for actor in Ann Bob Cyn
@@ -24,4 +26,8 @@ it:
 	  echo $@ pid $$! started on $$(date)
 	done
 	wait
+
+.PHONY: clear # {{{1
+clear:
+	@rm -rf vault
 

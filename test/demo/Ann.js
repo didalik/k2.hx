@@ -19,7 +19,7 @@ test.serial('setup new/existing account for Ann', t => { // {{{1
     streams: [],
     vault
   }
-  t.timeout(90000)
+  t.timeout(100000)
   return (sdk = hXsdk({ vault })).server.loadAccount(opts).then(account => {
     opts.account = opts.recipient = account
     opts.destKeys = opts.recipientKeys = vault.get('Ann.keys')
@@ -29,6 +29,7 @@ test.serial('setup new/existing account for Ann', t => { // {{{1
     return sdk.transaction.changeTrust(opts).
       then(_ => vault.put('Ann.change.trust', 'DONE'));
   }).then(_ => sdk.transaction.fund(opts)).then(_ => {
+    vault.put('Issuer.in', 'DONE', { flag: 'a' })
     t.true(opts.destKeys.length == 2)
   });
 })

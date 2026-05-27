@@ -2,6 +2,7 @@ import test from 'ava'; // {{{1
 import { hXsdk } from '../../lib/sdk.mjs';
 import vault from '../../lib/vault.js'
 import { DemoSign, } from '../../lib/job.js'
+import { setupActor, } from '../../lib/util.js'
 
 let sdk // {{{1
 
@@ -20,24 +21,7 @@ test.serial('setup new/existing account for Bob', t => { // {{{1
     vault
   }
   t.timeout(100000)
-  return (sdk = hXsdk({ vault })).server.loadAccount(opts).then(account => {
-    opts.account = opts.recipient = account
-    opts.destKeys = opts.recipientKeys = vault.get(opts.name+'.keys')
-    if (vault.get(opts.name+'.change.trust') == 'DONE') {
-      return Promise.resolve();
-    }
-    return sdk.transaction.changeTrust(opts).
-      then(_ => vault.put(opts.name+'.change.trust', 'DONE'));
-  }).then(_ => {
-    if (vault.get(opts.name+'.fund.HEXA') == 'DONE') {
-      return Promise.resolve();
-    }
-    return sdk.transaction.fund(opts).
-      then(_ => vault.put(opts.name+'.fund.HEXA', 'DONE'));
-  }).then(_ => {
-    opts.log('-', opts.name, 'has HEXA', sdk.balance(opts.account, 'HEXA'))
-    return Promise.resolve();
-  }).then(_ => {
+  return setupActor(sdk = hXsdk({ vault }), opts).then(_ => {
     vault.put('Issuer.in', 'DONE', { flag: 'a' })
     t.true(opts.destKeys.length == 2)
   });

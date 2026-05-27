@@ -22,13 +22,22 @@ test.serial('setup new/existing account for Ann', t => { // {{{1
   t.timeout(100000)
   return (sdk = hXsdk({ vault })).server.loadAccount(opts).then(account => {
     opts.account = opts.recipient = account
-    opts.destKeys = opts.recipientKeys = vault.get('Ann.keys')
-    if (vault.get('Ann.change.trust') == 'DONE') {
+    opts.destKeys = opts.recipientKeys = vault.get(opts.name+'.keys')
+    if (vault.get(opts.name+'.change.trust') == 'DONE') {
       return Promise.resolve();
     }
     return sdk.transaction.changeTrust(opts).
-      then(_ => vault.put('Ann.change.trust', 'DONE'));
-  }).then(_ => sdk.transaction.fund(opts)).then(_ => {
+      then(_ => vault.put(opts.name+'.change.trust', 'DONE'));
+  }).then(_ => {
+    if (vault.get(opts.name+'.fund.HEXA') == 'DONE') {
+      return Promise.resolve();
+    }
+    return sdk.transaction.fund(opts).
+      then(_ => vault.put(opts.name+'.fund.HEXA', 'DONE'));
+  }).then(_ => {
+    opts.log('-', opts.name, 'has HEXA', sdk.balance(opts.account, 'HEXA'))
+    return Promise.resolve();
+  }).then(_ => {
     vault.put('Issuer.in', 'DONE', { flag: 'a' })
     t.true(opts.destKeys.length == 2)
   });

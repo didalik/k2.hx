@@ -13,13 +13,13 @@ test.serial('load new/existing Issuer account', t => { // {{{1
   })
 })
 
-let watcher = fs.watch('./vault/Issuer.in', (eventType, filename) => { // {{{1
+let watcher = vault.watch('Issuer.in', (eventType, filename) => { // {{{1
   if (filename) {
     let v = vault.get('Issuer.in')
     //console.log(`${filename} file changed! Event type: ${eventType}`, v)
     if (v) {
-      prr.resolve()
       watcher.close()
+      prr.resolve()
     }
   }
 });

@@ -31,3 +31,7 @@ it:
 clear:
 	@rm -rf vault
 
+.PHONY: fund # {{{1
+fund:
+	@for actor in Ann Bob Cyn; do rm vault/$$actor.fund.HEXA; done
+

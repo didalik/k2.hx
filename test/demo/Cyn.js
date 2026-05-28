@@ -17,7 +17,6 @@ test.serial('setup new/existing account for Cyn', t => { // {{{1
     log: console.log,
     name: 'Cyn',
     sign: (xdr, tag) => DemoSign({ secret: issuerKeys[0], vault, xdr, tag }),
-    streams: [],
     vault
   }
   t.timeout(100000)

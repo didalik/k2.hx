@@ -3,6 +3,7 @@ import { hXsdk } from '../../lib/sdk.mjs';
 import vault from '../../lib/vault.js'
 import { DemoSign, } from '../../lib/job.js'
 import { setupActor, } from '../../lib/util.js'
+import { run, } from '../../demo/Cyn.js'
 
 let sdk // {{{1
 
@@ -19,8 +20,8 @@ test.serial('setup new/existing account for Cyn', t => { // {{{1
     sign: (xdr, tag) => DemoSign({ secret: issuerKeys[0], vault, xdr, tag }),
     vault
   }
-  t.timeout(100000)
-  return setupActor(sdk = hXsdk({ vault }), opts).then(_ => {
+  t.timeout(120000)
+  return setupActor(sdk = hXsdk({ vault }), opts).then(_ => run(opts)).then(_ => {
     vault.put('Issuer.in', 'DONE', { flag: 'a' })
     t.true(opts.destKeys.length == 2)
   });

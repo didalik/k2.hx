@@ -28,12 +28,14 @@ function handle_stateCynAnnDeal (e) { // {{{1
 }
 
 function handle_stateInitial (e) { // {{{1
-  console.log('Ann handle_stateInitial e', e)
-
   if (e.txMemo == 'Request 0' && !stateInitial.txId) {
+    console.log('Ann handle_stateInitial e', e)
+
     stateInitial.txId = e.txId
   }
   if (stateInitial.txId == e.txMemo) {
+    console.log('Ann handle_stateInitial e', e)
+
     watcher.close()
     context.state = stateCynAnnDeal
     stateInitial.resolve(e)

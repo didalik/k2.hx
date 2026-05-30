@@ -20,12 +20,14 @@ let watcher = vault.watch(null, (eventType, filename) => { // {{{1
 });
 
 function handle_stateInitial (e) { // {{{1
-  console.log('Cyn handle_stateInitial e', e)
-
   if (e?.txMemo?.startsWith('Offer') && !stateInitial.offer.received) {
+    console.log('Cyn handle_stateInitial e', e)
+
     stateInitial.offer.received = e
     stateInitial.offer.resolve(e)
-  } else if (!stateInitial.request.received) {
+  } else if (e?.txMemo?.startsWith('Request') && !stateInitial.request.received) {
+    console.log('Cyn handle_stateInitial e', e)
+
     stateInitial.request.received = e
     stateInitial.request.resolve(e)
   }

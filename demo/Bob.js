@@ -28,12 +28,14 @@ function handle_stateCynBobDeal (e) { // {{{1
 }
 
 function handle_stateInitial (e) { // {{{1
-  console.log('Bob handle_stateInitial e', e)
-
   if (e.txMemo == 'Offer 0' && !stateInitial.txId) {
+    console.log('Bob handle_stateInitial e', e)
+
     stateInitial.txId = e.txId
   }
   if (stateInitial.txId == e.txMemo) {
+    console.log('Bob handle_stateInitial e', e)
+
     watcher.close()
     context.state = stateCynBobDeal
     stateInitial.resolve(e)

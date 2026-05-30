@@ -14,30 +14,30 @@ let context = new Context(stateInitial, 'Bob') // {{{1
 let watcher = vault.watch(null, (eventType, filename) => { // {{{1
   if (filename.startsWith('Issuer.desc.')) {
     let v = vault.get(filename)
-    console.log(`${filename} file changed! Event type: ${eventType}`, v)
-    if (v) {
-      watcher.close()
-    }
+    //console.log(`Bob ${filename} ${eventType} v`, v)
     if (context.state === stateInitial) {
-      stateInitial.resolve(v)
+      handle_stateInitial(v)
     }
   }
 });
 
 function handle_stateCynBobDeal (e) { // {{{1
-  this.log('handle_stateCynBobDeal e', e)
+  this.log('Bob handle_stateCynBobDeal e', e)
 
   return Promise.resolve(e);
 }
 
 function handle_stateInitial (e) { // {{{1
-  this.log('handle_stateInitial e', e)
+  console.log('Bob handle_stateInitial e', e)
 
-  /*if (desc.amount == HEX_KEY && desc.txDesc == '') {
-    this.context.state = stateCynAnnDeal
-    return stateInitial.resolve(desc);
-  }*/
-  return Promise.resolve();
+  if (e.txMemo == 'Offer 0' && !stateInitial.txId) {
+    stateInitial.txId = e.txId
+  }
+  if (stateInitial.txId == e.txMemo) {
+    watcher.close()
+    context.state = stateCynBobDeal
+    stateInitial.resolve(e)
+  }
 }
 
 function fcrs (sdk, opts) { // Offer freshly caught red snapper. {{{1

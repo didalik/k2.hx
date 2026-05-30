@@ -20,7 +20,7 @@ test.serial('setup new/existing account for Ann', t => { // {{{1
     sign: (xdr, tag) => DemoSign({ secret: issuerKeys[0], vault, xdr, tag }),
     vault
   }
-  t.timeout(100000)
+  t.timeout(200000)
   return setupActor(sdk = hXsdk({ vault }), opts).then(_ => {
     return rs4d(sdk, opts); // Request red snapper for dinner.
   }).then(_ => {

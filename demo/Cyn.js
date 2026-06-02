@@ -26,12 +26,12 @@ function handle_stateDeals (e) { // {{{1
   if (e.txMemoType != 'return') {
     return;
   }
-  if (e.amount == HEX_KEY && !stateDeals.offer_deal) {
+  if (e.amount != HEX_KEY && !stateDeals.offer_deal) {
     context.opts.log('Cyn handle_stateDeals Offer e', e)
 
     stateDeals.offer_deal = true
     stateDeals.offer.resolve(e)
-  } else if (e.amount != HEX_KEY && !stateDeals.request_deal) {
+  } else if (e.amount == HEX_KEY && !stateDeals.request_deal) {
     context.opts.log('Cyn handle_stateDeals Request e', e)
 
     stateDeals.request_deal = true

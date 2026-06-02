@@ -21,7 +21,7 @@ test.serial('setup new/existing account for Cyn', t => { // {{{1
     vault
   }
   t.timeout(120000)
-  return setupActor(sdk = hXsdk({ vault }), opts).then(_ => run(opts)).then(_ => {
+  return setupActor(sdk = hXsdk({ vault }), opts).then(_ => run(sdk, opts)).then(_ => {
     vault.put('Issuer.in', 'DONE', { flag: 'a' })
     t.true(opts.destKeys.length == 2)
   });

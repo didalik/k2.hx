@@ -11,7 +11,7 @@ test.serial('load new/existing Issuer account', t => { // {{{1
   return (sdk = hXsdk({ vault })).server.loadAccount(opts).then(account => {
     sdk.addStream(opts, 
       "Issuer's claimant effects",
-      [['claimable_balance_claimant_created', issuerClaimant]], 
+      [['claimable_balance_claimant_created', issuerClaimant], ['claimable_balance_claimed', issuerClaimant]], 
       account.id,
       true // now
     )

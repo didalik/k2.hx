@@ -20,10 +20,11 @@ let watcher = vault.watch(null, (eventType, filename) => { // {{{1
 });
 
 function handle_stateCynBobDeal (e) { // {{{1
-  context.opts.log('Bob handle_stateCynBobDeal e', e)
+  let { id, memo_type, } = e
+  let tx = { id, memo_type, }
+  context.opts.log('Bob handle_stateCynBobDeal tx', tx)
 
-  watcher.close()
-  return Promise.resolve(e);
+  return Promise.resolve();
 }
 
 function handle_stateInitial (e) { // {{{1
@@ -52,7 +53,7 @@ function fcrs (sdk, opts) { // Offer freshly caught red snapper. {{{1
   opts.validity = '0'
   context.opts = opts
   return makeOffer(opts).then(_ => stateInitial.promise).
-  then(deal => context.state.handle(deal));
+  then(deal => context.state.handle(deal)).then(_ => watcher.close());
 }
 
 export { fcrs, } // {{{1

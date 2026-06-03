@@ -20,10 +20,11 @@ let watcher = vault.watch(null, (eventType, filename) => { // {{{1
 });
 
 function handle_stateCynAnnDeal (e) { // {{{1
-  context.opts.log('Ann handle_stateCynAnnDeal e', e)
+  let { id, memo_type, } = e
+  let tx = { id, memo_type, }
+  context.opts.log('Ann handle_stateCynAnnDeal tx', tx)
 
-  watcher.close()
-  return Promise.resolve(e);
+  return Promise.resolve();
 }
 
 function handle_stateInitial (e) { // {{{1
@@ -53,7 +54,7 @@ function rs4d (sdk, opts) { // Request red snapper for dinner. {{{1
   opts.validity = '0'
   context.opts = opts
   return makeRequest(opts).then(_ => stateInitial.promise).
-  then(deal => context.state.handle(deal));
+  then(deal => context.state.handle(deal)).then(_ => watcher.close());
 }
 
 export { rs4d, } // {{{1

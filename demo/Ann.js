@@ -1,4 +1,4 @@
-import { HEX_KEY, makeRequest, } from '../lib/api.js' // {{{1
+import { HEX_KEY, makeRequest, txDesc, } from '../lib/api.js' // {{{1
 import { Context, } from '../lib/util.js'
 import vault from '../lib/vault.js'
 
@@ -19,15 +19,20 @@ let watcher = vault.watch(null, (eventType, filename) => { // {{{1
   }
 });
 
-function handle_stateCynAnnDeal (e) { // {{{1
-  let { id, memo_type, } = e
-  let tx = { id, memo_type, }
-  context.opts.log('Ann handle_stateCynAnnDeal tx', tx)
-
+function handle_stateCynAnnDeal (eotx) { // {{{1
+  if (eotx.txId) {
+    context.opts.log('Ann handle_stateCynAnnDeal eotx', eotx)
+  } else {
+    let desc = txDesc(eotx)
+    context.opts.log('Ann handle_stateCynAnnDeal txDesc', desc)
+  }
   return Promise.resolve();
 }
 
 function handle_stateInitial (e) { // {{{1
+  if (!e) {
+    return;
+  }
   if (e.txMemo == 'Request 0' && !stateInitial.txId) {
     context.opts.log('Ann handle_stateInitial e', e)
 

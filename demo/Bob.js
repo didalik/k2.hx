@@ -1,6 +1,6 @@
 import vault from '../lib/vault.js' // {{{1
 import { Context, } from '../lib/util.js'
-import { makeOffer, } from '../lib/api.js'
+import { makeOffer, txDesc, } from '../lib/api.js'
 
 let stateInitial = { // {{{1
   handle: handle_stateInitial,
@@ -19,15 +19,20 @@ let watcher = vault.watch(null, (eventType, filename) => { // {{{1
   }
 });
 
-function handle_stateCynBobDeal (e) { // {{{1
-  let { id, memo_type, } = e
-  let tx = { id, memo_type, }
-  context.opts.log('Bob handle_stateCynBobDeal tx', tx)
-
+function handle_stateCynBobDeal (eotx) { // {{{1
+  if (eotx.txId) {
+    context.opts.log('Bob handle_stateCynBobDeal eotx', eotx)
+  } else {
+    let desc = txDesc(eotx)
+    context.opts.log('Bob handle_stateCynBobDeal txDesc', desc)
+  }
   return Promise.resolve();
 }
 
 function handle_stateInitial (e) { // {{{1
+  if (!e) {
+    return;
+  }
   if (e.txMemo == 'Offer 0' && !stateInitial.txId) {
     context.opts.log('Bob handle_stateInitial e', e)
 

@@ -22,9 +22,9 @@ let watcher = vault.watch(null, (eventType, filename) => { // {{{1
 function handle_stateCynBobDeal (eotx) { // {{{1
   if (eotx.txId) {
     context.opts.log('Bob handle_stateCynBobDeal eotx', eotx)
-  } else {
+  /*} else {
     let desc = txDesc(eotx)
-    context.opts.log('Bob handle_stateCynBobDeal txDesc', desc)
+    context.opts.log('Bob handle_stateCynBobDeal txDesc', desc)*/
   }
   return Promise.resolve();
 }

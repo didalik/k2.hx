@@ -8,6 +8,7 @@ let stateInitial = { // {{{1
   handle: handle_stateCynAnnDeal,
 }
 Object.assign(stateInitial, Promise.withResolvers())
+Object.assign(stateCynAnnDeal, Promise.withResolvers())
 
 let context = new Context(stateInitial, 'Ann') // {{{1
 
@@ -20,13 +21,18 @@ let watcher = vault.watch(null, (eventType, filename) => { // {{{1
 });
 
 function handle_stateCynAnnDeal (eotx) { // {{{1
-  if (eotx.txId) {
-    context.opts.log('Ann handle_stateCynAnnDeal eotx', eotx)
-  } else {
+  if (eotx.txId && eotx.txId === stateCynAnnDeal.txId) { // effect follows the tx
+    context.opts.log('Ann handle_stateCynAnnDeal eotx', eotx, 'clawback', stateCynAnnDeal.amount)
+
+    stateCynAnnDeal.resolve()
+  } else {                                               // tx
     let desc = txDesc(eotx)
-    context.opts.log('Ann handle_stateCynAnnDeal txDesc', desc)
+    stateCynAnnDeal.amount = desc.amount
+    stateCynAnnDeal.txId = desc.txId
+    //context.opts.log('Ann handle_stateCynAnnDeal stateCynAnnDeal', stateCynAnnDeal)
+
+    return stateCynAnnDeal.promise;
   }
-  return Promise.resolve();
 }
 
 function handle_stateInitial (e) { // {{{1

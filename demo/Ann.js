@@ -27,10 +27,10 @@ function handle_stateCynAnnDeal (eotx) { // {{{1
     stateCynAnnDeal.resolve()
   } else {                                               // tx
     let desc = txDesc(eotx)
+    context.opts.log('Ann handle_stateCynAnnDeal desc', desc)
+
     stateCynAnnDeal.amount = desc.amount
     stateCynAnnDeal.txId = desc.txId
-    //context.opts.log('Ann handle_stateCynAnnDeal stateCynAnnDeal', stateCynAnnDeal)
-
     return stateCynAnnDeal.promise;
   }
 }

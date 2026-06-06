@@ -22,15 +22,18 @@ let watcher = vault.watch(null, (eventType, filename) => { // {{{1
 
 function handle_stateCynAnnDeal (eotx) { // {{{1
   if (eotx.txId && eotx.txId === stateCynAnnDeal.txId) { // effect follows the tx
-    context.opts.log('Ann handle_stateCynAnnDeal eotx', eotx, 'clawback', stateCynAnnDeal.amount)
+    context.opts.log('Ann handle_stateCynAnnDeal eotx', eotx, 'clawable', stateCynAnnDeal.amount)
 
-    stateCynAnnDeal.resolve()
-  } else {                                               // tx
+    delete stateCynAnnDeal.txId
+    context.opts.sdk.transaction.breakDeal(context.opts).
+      then(_ => stateCynAnnDeal.resolve())
+  } else if (!stateCynAnnDeal.amount) {                    // tx
     let desc = txDesc(eotx)
     context.opts.log('Ann handle_stateCynAnnDeal desc', desc)
 
-    stateCynAnnDeal.amount = desc.amount
-    stateCynAnnDeal.txId = desc.txId
+    context.opts.amount = stateCynAnnDeal.amount = desc.amount
+    context.opts.dealTxId = stateCynAnnDeal.txId = desc.txId
+    context.opts.from = desc.destination
     return stateCynAnnDeal.promise;
   }
 }

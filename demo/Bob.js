@@ -24,13 +24,16 @@ function handle_stateCynBobDeal (eotx) { // {{{1
   if (eotx.txId && eotx.txId === stateCynBobDeal.txId) { // effect follows the tx
     context.opts.log('Bob handle_stateCynBobDeal eotx', eotx, 'clawable', stateCynBobDeal.amount)
 
-    stateCynBobDeal.resolve()
-  } else if (!stateCynBobDeal.txId) {                    // tx
+    delete stateCynBobDeal.txId
+    context.opts.sdk.transaction.closeDeal(context.opts).
+      then(_ => stateCynBobDeal.resolve())
+  } else if (!stateCynBobDeal.amount) {                    // tx
     let desc = txDesc(eotx)
     context.opts.log('Bob handle_stateCynBobDeal desc', desc)
 
-    stateCynBobDeal.amount = desc.amount
-    stateCynBobDeal.txId = desc.txId
+    context.opts.amount = stateCynBobDeal.amount = desc.amount
+    context.opts.dealTxId = stateCynBobDeal.txId = desc.txId
+    context.opts.from = desc.destination
     return stateCynBobDeal.promise;
   }
 }

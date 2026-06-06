@@ -44,8 +44,12 @@ function handle_stateInitial (e) { // {{{1
     stateInitial.queue.push(e)
     return;
   }
-  for (let effect of stateInitial.queue) {
-    handle_stateInitial(effect)
+  if (!stateInitial.shifting) {
+    stateInitial.shifting = true
+    context.opts.log('Cyn handle_stateInitial stateInitial.queue.length', stateInitial.queue.length)
+    while (stateInitial.queue.length > 0) {
+      handle_stateInitial(stateInitial.queue.shift())
+    }
   }
   if (e?.txMemo?.startsWith('Offer') && !stateInitial.offer.received) {
     context.opts.log('Cyn handle_stateInitial Offer e', e)

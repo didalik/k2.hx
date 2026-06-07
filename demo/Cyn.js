@@ -10,7 +10,7 @@ let stateInitial = { // {{{1
 Object.assign(stateInitial, {
   offer: Promise.withResolvers(), request: Promise.withResolvers(), queue: [],
 })
-Object.assign(stateDeals, {
+Object.assign(stateDeals, { broken: Promise.withResolvers(),
   offer: Promise.withResolvers(), request: Promise.withResolvers(),
 })
 
@@ -23,6 +23,13 @@ let watcher = vault.watch(null, (eventType, filename) => { // {{{1
 });
 
 function handle_stateDeals (e) { // {{{1
+  if (stateDeals.offer_deal && stateDeals.request_deal && !stateDeals.disputing) {
+    context.opts.log('Cyn handle_stateDeals Broken Deal Request e', e)
+
+    stateDeals.disputing = true
+    stateDeals.broken.resolve(e)
+    return;
+  }
   if (e.txMemoType != 'return') {
     return;
   }
@@ -75,6 +82,8 @@ function run (sdk, opts) { // {{{1
     return take(opts, offer).then(takingOffer => take(opts, request, takingOffer));
   }).then(_ => {
     return Promise.all([stateDeals.offer.promise, stateDeals.request.promise]);
+  }).then(_ => {
+    return stateDeals.broken.promise;
   }).then(_ => watcher.close());
 }
 

@@ -23,7 +23,8 @@ let watcher = vault.watch(null, (eventType, filename) => { // {{{1
 });
 
 function handle_stateDeals (e) { // {{{1
-  if (stateDeals.offer_deal && stateDeals.request_deal && !stateDeals.disputing) {
+  if (stateDeals.offer_deal && stateDeals.request_deal && !stateDeals.disputing &&
+      e.txMemoType == 'hash' && e.amount == '1000.0000000') {
     context.opts.log('Cyn handle_stateDeals Broken Deal Request e', e)
 
     stateDeals.disputing = true

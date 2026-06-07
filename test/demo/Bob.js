@@ -17,6 +17,7 @@ test.serial('setup new/existing account for Bob', t => { // {{{1
     issuerKeys: [null, issuerKeys[1]],
     log: console.log,
     name: 'Bob',
+    //nolog: true,
     sign: (xdr, tag) => DemoSign({ secret: issuerKeys[0], vault, xdr, tag }),
     vault
   }

@@ -24,11 +24,16 @@ let watcher = vault.watch(null, (eventType, filename) => { // {{{1
 
 function handle_stateDeals (e) { // {{{1
   if (stateDeals.offer_deal && stateDeals.request_deal && !stateDeals.disputing &&
-      e.txMemoType == 'hash' && e.amount == '1000.0000000') {
+      e.txMemoType == 'hash' && e.amount == '1000.0000000') { // FIXME
     context.opts.log('Cyn handle_stateDeals Broken Deal Request e', e)
 
     stateDeals.disputing = true
-    stateDeals.broken.resolve(e)
+    context.opts.breakDealTxId = e.txId
+    let disputeBrokenDeal = context.opts.sdk.transaction.disputeBrokenDeal
+    disputeBrokenDeal(context.opts).then(r => {
+      context.opts.log('Cyn handle_stateDeals disputeBrokenDeal r', r)
+      stateDeals.broken.resolve(e)
+    })
     return;
   }
   if (e.txMemoType != 'return') {

@@ -20,7 +20,7 @@ test.serial('setup new/existing account for Cyn', t => { // {{{1
     sign: (xdr, tag) => DemoSign({ secret: issuerKeys[0], vault, xdr, tag }),
     vault
   }
-  t.timeout(120000)
+  t.timeout(200000)
   return setupActor(sdk = hXsdk({ vault }), opts).then(_ => run(sdk, opts)).then(_ => {
     vault.put('Issuer.in', 'DONE', { flag: 'a' })
     t.true(opts.destKeys.length == 2)

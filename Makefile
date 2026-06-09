@@ -1,6 +1,12 @@
 .ONESHELL:
+DEFAULT_RULE = rule 2
+SHELL = /usr/bin/bash
 
-.PHONY: demo # {{{1
+.PHONY: demoit # rule 2 {{{1
+demoit: tmit
+	@echo "${.DEFAULT_GOAL} (${DEFAULT_RULE}) started on $$(date)"
+
+.PHONY: demo # rule 1{{{1
 demo:
 	@mkdir -p vault
 	echo $@ started on $$(date) | tee vault/Issuer.in
@@ -14,7 +20,7 @@ demo:
 	done
 	wait
 
-.PHONY: it # {{{1
+.PHONY: it # rule 0 {{{1
 it:
 	@npx ava it/demo_tm.js &
 	echo $@ pid $$! started on $$(date)
@@ -35,4 +41,12 @@ clear:
 fund:
 	@for actor in Ann Bob Cyn; do rm vault/$$actor.fund.HEXA; done
 	rm -f vault/Issuer.desc.*
+
+.PHONY: tmit # {{{1
+tmit:
+	@echo $@ started on $$(date)
+	mkdir -p ${.DEFAULT_GOAL}/vault
+	npx ava src/${.DEFAULT_GOAL}/tmit.js &
+	echo $$! > ${.DEFAULT_GOAL}/Issuer.pid
+	while [ ! -e ${.DEFAULT_GOAL}/vault/Issuer.keys ]; do sleep 1; done
 

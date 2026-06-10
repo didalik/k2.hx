@@ -1,10 +1,12 @@
 .ONESHELL:
 DEFAULT_RULE = rule 2
 SHELL = /usr/bin/bash
+VAULT = ${.DEFAULT_GOAL}/vault
 
 .PHONY: demoit # rule 2 {{{1
 demoit: tmit
 	@echo "${.DEFAULT_GOAL} (${DEFAULT_RULE}) started on $$(date)"
+	kill $$(cat ${VAULT}/Issuer.pid)
 
 .PHONY: demo # rule 1{{{1
 demo:
@@ -45,8 +47,8 @@ fund:
 .PHONY: tmit # {{{1
 tmit:
 	@echo $@ started on $$(date)
-	mkdir -p ${.DEFAULT_GOAL}/vault
+	export VAULT=${VAULT}; mkdir -p $$VAULT
 	npx ava src/${.DEFAULT_GOAL}/tmit.js &
-	echo $$! > ${.DEFAULT_GOAL}/Issuer.pid
-	while [ ! -e ${.DEFAULT_GOAL}/vault/Issuer.keys ]; do sleep 1; done
+	echo $$! > $$VAULT/Issuer.pid
+	while [ ! -e $$VAULT/Issuer.keys ]; do sleep 1; done
 

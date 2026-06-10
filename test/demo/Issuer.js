@@ -1,5 +1,4 @@
 import test from 'ava'; // {{{1
-import fs from 'fs'
 import { hXsdk } from '../../lib/sdk.mjs';
 import vault from '../../lib/vault.js'
 import { issuerEffect, stopMonitor, } from '../../lib/util.js'

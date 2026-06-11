@@ -6,7 +6,7 @@ VAULT = ${.DEFAULT_GOAL}/vault
 .PHONY: demoit # rule 2 {{{1
 demoit: tmit
 	@echo "${.DEFAULT_GOAL} (${DEFAULT_RULE}) started on $$(date)"
-	kill $$(cat ${VAULT}/Issuer.pid)
+	#kill $$(cat ${VAULT}/tm.pid)
 
 .PHONY: demo # rule 1{{{1
 demo:
@@ -49,6 +49,6 @@ tmit:
 	@echo $@ started on $$(date)
 	export VAULT=${VAULT}; mkdir -p $$VAULT
 	npx ava src/${.DEFAULT_GOAL}/tmit.js &
-	echo $$! > $$VAULT/Issuer.pid
-	while [ ! -e $$VAULT/accounts.set ]; do sleep 1; done
+	echo $$! > $$VAULT/tm.pid
+	while [ ! -e $$VAULT/tm.up ]; do sleep 1; done
 

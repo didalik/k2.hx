@@ -50,5 +50,5 @@ tmit:
 	export VAULT=${VAULT}; mkdir -p $$VAULT
 	npx ava src/${.DEFAULT_GOAL}/tmit.js &
 	echo $$! > $$VAULT/Issuer.pid
-	while [ ! -e $$VAULT/Issuer.keys ]; do sleep 1; done
+	while [ ! -e $$VAULT/accounts.set ]; do sleep 1; done
 

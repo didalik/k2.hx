@@ -18,8 +18,8 @@ test.serial('use test monitor', t => { // {{{1
     return t.true(true);
   }
   t.timeout(90000)
-  let opts = Promise.withResolvers()
-  setTimeout(_ => opts.resolve('ok'), 60000)
+  let opts = { prr: Promise.withResolvers(), streams: [] }
+  opts.timeoutId = setTimeout(_ => opts.prr.resolve('ok'), 4000)
   return DemoTmUse(opts).then(r => {
     t.is(r, 'ok')
   });

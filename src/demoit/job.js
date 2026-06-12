@@ -94,7 +94,7 @@ function runMonitor (opts) { // {{{1
   accounts.asset = opts.asset
 
   let trade = effect => { // {{{2
-    //console.log('runMonitor.trade effect', effect, 'opts', opts)
+    console.log('runMonitor.trade effect', effect, 'opts', opts)
 
     if (!opts?.cyn?.account) {
       throw Error('Cyn account NOT LOADED')
@@ -107,7 +107,7 @@ function runMonitor (opts) { // {{{1
       return sdk.transaction.makeBuyOffer.call(sdk,
         kp,
         account, opts.asset.XLM, opts.asset.MA, '2', '2'
-      ).then(r => console.log(`sdk.transaction.makeBuyOffer r ${r}`));
+      ).then(r => console.log(`runMonitor.trade sdk.transaction.makeBuyOffer r ${r}`));
 
       // 2. Setup demox promise and TM Agent timeout.
       Object.assign(d.demox, promiseWithResolvers())
@@ -130,11 +130,11 @@ function runMonitor (opts) { // {{{1
       makeSellOffer.call(this, d.kp, account, d.MA, d.XLM, '1', '1')
     }
   } // }}}2
-  sdk.addStream(opts, "Bob's trading effects", [['trade', trade]],account.id, true)
+  sdk.addStream(opts, "Bob's trading effects", [['trade', trade]], account.id, true)
   sdk.transaction.makeSellOffer.call(sdk,
     kp,
     account, opts.asset.MA, opts.asset.XLM, '1', '1'
-  ).then(r => console.log('\n\rrunMonitor sdk.transaction.makeSellOffer r', r))
+  ).then(r => console.log('\rrunMonitor sdk.transaction.makeSellOffer r', r))
 }
 
 function setupAccounts () { // {{{1
@@ -172,7 +172,7 @@ function startMonitor (opts) { // {{{1
   opts.streams.push({
     close: ob.stream({
       onerror:   e => { throw e; },
-      //onmessage: e => console.log('orderbook', e),//{ asks: e.asks, bids: e.bids, }),
+      onmessage: e => console.log('orderbook', e),//{ asks: e.asks, bids: e.bids, }),
     }), 
     tag: 'orderbook',
   })  

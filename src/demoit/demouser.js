@@ -15,9 +15,9 @@ function DemoTmUse (opts) { // {{{1
     Object.assign(opts, { streams: [], }, Promise.withResolvers())
     let account = opts.recipient
     let trade = effect => { // {{{2
-      //console.log('demouser.DemoTmUse.trade effect', effect)
+      console.log('demouser.DemoTmUse.trade effect', effect, 'process.pid', process.pid)
 
-      opts.prr.resolve('XOXOXO')
+      opts.prr.resolve('OK')
     } // }}}2
     sdk.addStream(opts, `${opts.name}'s trading effects`, [['trade', trade]], account.id, true)
     return sdk.transaction.makeBuyOffer.call(sdk,

@@ -18,6 +18,6 @@ test.serial('request demo', t => { // {{{1
     vault,
   }
   return demouser.DemoTmUse(opts).
-    then(r => t.is(r, 'XOXOXO'));
+    then(r => t.is(r, 'OK'));
 })
 

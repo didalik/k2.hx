@@ -94,7 +94,7 @@ function runMonitor (opts) { // {{{1
   accounts.asset = opts.asset
 
   let trade = effect => { // {{{2
-    console.log('runMonitor.trade effect', effect, 'opts', opts)
+    //console.log('runMonitor.trade effect', effect, 'opts', opts)
 
     if (!opts?.cyn?.account) {
       throw Error('Cyn account NOT LOADED')
@@ -172,7 +172,7 @@ function startMonitor (opts) { // {{{1
   opts.streams.push({
     close: ob.stream({
       onerror:   e => { throw e; },
-      onmessage: e => console.log('orderbook', e),//{ asks: e.asks, bids: e.bids, }),
+      //onmessage: e => console.log('orderbook', e),//{ asks: e.asks, bids: e.bids, }),
     }), 
     tag: 'orderbook',
   })  

@@ -4,6 +4,10 @@ SHELL = /usr/bin/bash
 SRC = src/${.DEFAULT_GOAL}
 VAULT = ${.DEFAULT_GOAL}/vault
 
+define testplan
+(sleep $$(( (RANDOM % 5) + 1 ));echo $$$$ $$demouser)
+endef
+
 .PHONY: demoit # rule 2 {{{1
 demoit: tmit
 	@echo "${.DEFAULT_GOAL} (${DEFAULT_RULE}) started on $$(date)"
@@ -33,6 +37,22 @@ demo:
 	  echo $@ pid $$! started on $$(date) for $$actor
 	done
 	wait
+
+.PHONY: dev # {{{1
+dev:
+	@foo() { # {{{2
+	  declare r=$$RANDOM
+		declare s=$$(( (r % 5) + 1 ))
+	  sleep $$s
+		echo "+$$s $$demouser"
+	}
+	echo $$$$ # {{{2
+	for demouser in Abe Al Ava; do
+	  foo &
+		echo $$!
+	done
+	wait
+	echo $@ DONE on $$(date) # }}}2
 
 .PHONY: it # rule 0 {{{1
 it:

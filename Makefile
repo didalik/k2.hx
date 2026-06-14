@@ -41,6 +41,7 @@ demo:
 .PHONY: mock # {{{1
 mock:
 	@run_demo() { # {{{2
+	  sleep 0.1
 		echo "$$actor started demo for $$demouser"
 	  declare r=$$RANDOM
 		declare s=$$(( (r % 5) + 1 ))
@@ -50,20 +51,21 @@ mock:
 	demo() { # {{{2
 		for actor in Ann Bob Cyn; do
 		  run_demo &
-		  echo $$!
+		  echo -n "$$! "
 	  done
 		wait
 	}
 	request_demo() { # {{{2
-		echo "$$demouser requested demo"
+	  sleep 0.01
+		echo "$$demouser requested demo..."
 		while :; do mkdir lock 2>/dev/null && break; sleep 2; done
 		demo
 		rm -rf lock
 	}
 	echo $$$$ $@ started on $$(date) # {{{2
-	for demouser in Abe Al Ava; do
+	for demouser in Abe Al Ava Aza; do
 	  request_demo &
-		echo $$!
+		echo -n "$$! "
 	done
 	wait
 	echo $$$$ $@ DONE on $$(date) # }}}2

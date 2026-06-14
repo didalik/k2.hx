@@ -38,21 +38,35 @@ demo:
 	done
 	wait
 
-.PHONY: dev # {{{1
-dev:
-	@foo() { # {{{2
+.PHONY: mock # {{{1
+mock:
+	@run_demo() { # {{{2
+		echo "$$actor started demo for $$demouser"
 	  declare r=$$RANDOM
 		declare s=$$(( (r % 5) + 1 ))
 	  sleep $$s
-		echo "+$$s $$demouser"
+		echo "+$$s $$actor demo DONE for $$demouser"
 	}
-	echo $$$$ # {{{2
+	demo() { # {{{2
+		for actor in Ann Bob Cyn; do
+		  run_demo &
+		  echo $$!
+	  done
+		wait
+	}
+	request_demo() { # {{{2
+		echo "$$demouser requested demo"
+		while :; do mkdir lock 2>/dev/null && break; sleep 2; done
+		demo
+		rm -rf lock
+	}
+	echo $$$$ $@ started on $$(date) # {{{2
 	for demouser in Abe Al Ava; do
-	  foo &
+	  request_demo &
 		echo $$!
 	done
 	wait
-	echo $@ DONE on $$(date) # }}}2
+	echo $$$$ $@ DONE on $$(date) # }}}2
 
 .PHONY: it # rule 0 {{{1
 it:

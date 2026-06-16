@@ -1,11 +1,55 @@
-.ONESHELL:
+.ONESHELL: # {{{1
 DEFAULT_RULE = rule 2
+DEMO ?= dmock
+REQUEST_DEMO := request_demo
 SHELL = /usr/bin/bash
 SRC = src/${.DEFAULT_GOAL}
+TM ?= tmock
 VAULT = ${.DEFAULT_GOAL}/vault
 
-define testplan
+define dmock # {{{1
+	@demo() { # {{{2
+		for actor in Ann Bob Cyn; do
+		  run_demo &
+		  echo -n "$$! "
+	  done
+		wait
+	}
+	run_demo() { # {{{2
+	  sleep 0.1
+		echo "$$actor started demo for $$demouser"
+	  declare r=$$RANDOM
+		declare s=$$(( (r % 5) + 1 ))
+	  sleep $$s
+		echo "+$$s $$actor demo DONE for $$demouser"
+	} # }}}2
+	demo
+endef
+
+define request_demo # {{{1
+	request_demo() { # {{{2
+	  sleep 0.01
+		echo "$$demouser requested demo..."
+		while :; do mkdir lock 2>/dev/null && break; sleep 2; done
+		$(call ${DEMO})
+		rm -rf lock
+	} # }}}2
+	request_demo &
+endef
+
+define testplan # {{{1
 (sleep $$(( (RANDOM % 5) + 1 ));echo $$$$ $$demouser)
+endef
+
+define tmock # {{{1
+	@echo $$$$ $@ started on $$(date) # {{{2
+	for demouser in Abe Al Ava Aza; do
+	  # request_demo &
+		$(call ${REQUEST_DEMO})
+		echo -n "$$! "
+	done
+	wait
+	echo $$$$ $@ DONE on $$(date) # }}}2
 endef
 
 .PHONY: demoit # rule 2 {{{1
@@ -40,15 +84,7 @@ demo:
 
 .PHONY: mock # {{{1
 mock:
-	@run_demo() { # {{{2
-	  sleep 0.1
-		echo "$$actor started demo for $$demouser"
-	  declare r=$$RANDOM
-		declare s=$$(( (r % 5) + 1 ))
-	  sleep $$s
-		echo "+$$s $$actor demo DONE for $$demouser"
-	}
-	demo() { # {{{2
+	@demo() { # {{{2
 		for actor in Ann Bob Cyn; do
 		  run_demo &
 		  echo -n "$$! "
@@ -61,6 +97,14 @@ mock:
 		while :; do mkdir lock 2>/dev/null && break; sleep 2; done
 		demo
 		rm -rf lock
+	}
+	run_demo() { # {{{2
+	  sleep 0.1
+		echo "$$actor started demo for $$demouser"
+	  declare r=$$RANDOM
+		declare s=$$(( (r % 5) + 1 ))
+	  sleep $$s
+		echo "+$$s $$actor demo DONE for $$demouser"
 	}
 	echo $$$$ $@ started on $$(date) # {{{2
 	for demouser in Abe Al Ava Aza; do
@@ -91,6 +135,10 @@ clear:
 fund:
 	@for actor in Ann Bob Cyn; do rm vault/$$actor.fund.HEXA; done
 	rm -f vault/Issuer.desc.*
+
+.PHONY: tm # {{{1
+tm:
+	$(call ${TM})
 
 .PHONY: tmit # {{{1
 tmit:

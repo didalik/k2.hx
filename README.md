@@ -11,7 +11,7 @@ globally.
 The codebase consists of [SDK](lib/sdk.mjs), [API](lib/api.js), and the entry points for:
 - the demo user;
 - the agents;
-- the demo reset process(src/demoit/job.js#L43); and
+- [the demo reset process](src/demoit/job.js#L43); and
 - the demo access control process.
 
 ### Test

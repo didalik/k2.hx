@@ -1,8 +1,8 @@
 # Public submodule k2.hx
 
-Complete SDK, API, and the demo HTML for my hobby project Stellar Help Exchange (<b>hX</b>).
-All the unit and integration tests for you to run locally. The demo runs these integration tests
-globally.
+This repo presents complete SDK, API, and the demo HTML for my hobby project Stellar Help Exchange (<b>hX</b>).
+It also contains all the unit and integration tests for you to run locally. The demo runs
+these integration tests globally.
 
 ## Dev  ➡️  Test  ➡️  Demo
 
@@ -10,9 +10,9 @@ globally.
 
 The codebase has [SDK](lib/sdk.mjs), [API](lib/api.js), and the entry points for:
 - [the demo user](src/demoit/demouser.js;
-- [the agents](src/demoit/job.js#L43);
+- [the agents](src/demoit/job.js#L8);
 - [the demo reset process](src/demoit/job.js#L43); and
-- [the demo access control process](src/demoit/job.js#L43).
+- [the demo access control process](src/demoit/job.js#L78).
 
 ### Test
 

@@ -8,15 +8,15 @@ globally.
 
 ### Dev
 
-The codebase consists of [SDK](lib/sdk.mjs), [API](lib/api.js), and the entry points for:
-- the demo user;
-- the agents;
+The codebase has [SDK](lib/sdk.mjs), [API](lib/api.js), and the entry points for:
+- [the demo user](src/demoit/demouser.js;
+- [the agents](src/demoit/job.js#L43);
 - [the demo reset process](src/demoit/job.js#L43); and
-- the demo access control process.
+- [the demo access control process](src/demoit/job.js#L43).
 
 ### Test
 
-Start with `make mock`. The output will look similar to this:
+Local testing is `make`-based. Start with `make mock` - the output will look similar to this:
 
 ```
 3339352 mock started on Sun Jun 14 08:17:25 PM UTC 2026

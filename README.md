@@ -9,7 +9,7 @@ these integration tests globally.
 ### Dev
 
 The codebase has [SDK](lib/sdk.mjs), [API](lib/api.js), and the entry points for:
-- [the demo user](src/demoit/demouser.js;
+- [the demo user](src/demoit/demouser.js);
 - [the agents](src/demoit/job.js#L8);
 - [the demo reset process](src/demoit/job.js#L43); and
 - [the demo access control process](src/demoit/job.js#L78).

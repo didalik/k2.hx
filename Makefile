@@ -1,11 +1,16 @@
 .ONESHELL: # {{{1
 DEFAULT_RULE = rule 2
 DEMO ?= dmock
+DEMO_USERS ?= Abe Al Ava Aza
 REQUEST_DEMO := request_demo
 SHELL = /usr/bin/bash
 SRC = src/${.DEFAULT_GOAL}
 TM ?= tmock
 VAULT = ${.DEFAULT_GOAL}/vault
+
+ifeq (${TM},skip)
+DEMO_USERS := Abe
+endif
 
 define dmock # {{{1
 	@demo() { # {{{2
@@ -42,14 +47,13 @@ define testplan # {{{1
 endef
 
 define tmock # {{{1
-	@echo $$$$ $@ started on $$(date) # {{{2
+	echo $$$$ $@ started on $$(date)
 	for demouser in Abe Al Ava Aza; do
-	  # request_demo &
 		$(call ${REQUEST_DEMO})
 		echo -n "$$! "
 	done
 	wait
-	echo $$$$ $@ DONE on $$(date) # }}}2
+	echo $$$$ $@ DONE on $$(date)
 endef
 
 .PHONY: demoit # rule 2 {{{1
@@ -136,10 +140,6 @@ fund:
 	@for actor in Ann Bob Cyn; do rm vault/$$actor.fund.HEXA; done
 	rm -f vault/Issuer.desc.*
 
-.PHONY: tm # {{{1
-tm:
-	$(call ${TM})
-
 .PHONY: tmit # {{{1
 tmit:
 	@echo $@ started on $$(date)
@@ -149,4 +149,15 @@ tmit:
 	npx ava ${SRC}/tmit.js &
 	echo $$! > $$VAULT/tm.pid
 	while [ ! -e $$VAULT/tm.up ]; do sleep 1; done
+
+.PHONY: dg2b # TODO default-goal-to-be: demoit {{{1
+dg2b:
+	@uname -a
+	echo -e "\n$$$$ $@ started on $$(date)"
+	for demouser in ${DEMO_USERS}; do
+	  $(call request_demo)
+		echo -n "$$! "
+	done
+	wait
+	echo $$$$ $@ DONE on $$(date)
 

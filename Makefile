@@ -1,11 +1,8 @@
 .ONESHELL: # {{{1
 DEFAULT_RULE = rule 2
-DEMO ?= dmock
 DEMO_USERS ?= Abe Al Ava Aza
-REQUEST_DEMO := request_demo
 SHELL = /usr/bin/bash
 SRC = src/${.DEFAULT_GOAL}
-TM ?= tmock
 VAULT = ${.DEFAULT_GOAL}/vault
 
 ifeq (${TM},skip)
@@ -13,7 +10,7 @@ DEMO_USERS := Abe
 endif
 
 define dmock # {{{1
-	@demo() { # {{{2
+	demo() { # {{{2
 		for actor in Ann Bob Cyn; do
 		  run_demo &
 		  echo -n "$$! "
@@ -32,28 +29,26 @@ define dmock # {{{1
 endef
 
 define request_demo # {{{1
-	request_demo() { # {{{2
+  echo "$$$$ $@ running request_demo..."
+endef
+
+define request_dmock # {{{1
+	request_dmock() { # {{{2
 	  sleep 0.01
 		echo "$$demouser requested demo..."
 		while :; do mkdir lock 2>/dev/null && break; sleep 2; done
-		$(call ${DEMO})
+		$(call dmock)
 		rm -rf lock
 	} # }}}2
-	request_demo &
+	request_dmock &
+endef
+
+define reset_tm # {{{1
+  echo "$$$$ $@ running reset_tm..."
 endef
 
 define testplan # {{{1
 (sleep $$(( (RANDOM % 5) + 1 ));echo $$$$ $$demouser)
-endef
-
-define tmock # {{{1
-	echo $$$$ $@ started on $$(date)
-	for demouser in Abe Al Ava Aza; do
-		$(call ${REQUEST_DEMO})
-		echo -n "$$! "
-	done
-	wait
-	echo $$$$ $@ DONE on $$(date)
 endef
 
 .PHONY: demoit # rule 2 {{{1
@@ -85,38 +80,6 @@ demo:
 	  echo $@ pid $$! started on $$(date) for $$actor
 	done
 	wait
-
-.PHONY: mock # {{{1
-mock:
-	@demo() { # {{{2
-		for actor in Ann Bob Cyn; do
-		  run_demo &
-		  echo -n "$$! "
-	  done
-		wait
-	}
-	request_demo() { # {{{2
-	  sleep 0.01
-		echo "$$demouser requested demo..."
-		while :; do mkdir lock 2>/dev/null && break; sleep 2; done
-		demo
-		rm -rf lock
-	}
-	run_demo() { # {{{2
-	  sleep 0.1
-		echo "$$actor started demo for $$demouser"
-	  declare r=$$RANDOM
-		declare s=$$(( (r % 5) + 1 ))
-	  sleep $$s
-		echo "+$$s $$actor demo DONE for $$demouser"
-	}
-	echo $$$$ $@ started on $$(date) # {{{2
-	for demouser in Abe Al Ava Aza; do
-	  request_demo &
-		echo -n "$$! "
-	done
-	wait
-	echo $$$$ $@ DONE on $$(date) # }}}2
 
 .PHONY: it # rule 0 {{{1
 it:
@@ -154,9 +117,22 @@ tmit:
 dg2b:
 	@uname -a
 	echo -e "\n$$$$ $@ started on $$(date)"
+ifeq (${TM},skip)
+	echo "$$$$ $@ skipping reset_tm..."
+else
+ifeq (${TM},mock)
+	echo "$$$$ $@ skipping reset_tm..."
+else
+	$(call reset_tm)
+endif
+endif
 	for demouser in ${DEMO_USERS}; do
-	  $(call request_demo)
+ifeq (${DEMO},mock)
+	  $(call request_dmock)
 		echo -n "$$! "
+else
+	  $(call request_demo)
+endif
 	done
 	wait
 	echo $$$$ $@ DONE on $$(date)

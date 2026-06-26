@@ -26,14 +26,14 @@ The following sequence diagram gives a bird's-eye view on the TM use case:
    |         |           |                        |           
    |         |           |      sell MA 1@1       |           
    |         |           |<-----------------------|<---\      
-   | trade: grant access | trade: buy MA 2@2  A   |    |      
-   |<--------------------|                    |   |    |      
-   |         |           |         |          |   |    |      
-   | run     |           |         |          |   |    |      
-   |-------->|           |         |          |   |    |      
-   |         |           |         |          |   |    |      
-   |         |                     |          |   |    |      
-   |         | sell MA 2@2         |          |   |    |      
+   | trade: grant access | trade: buy MA 2@2      |    |      
+   |<--------------------|-------------------\    |    |      
+   |         |           |<------------------/    |    |      
+   | run     |           |                        |    |      
+   |-------->|           |         |              |    |      
+   |         |           |         |              |    |      
+   |         |                     |              |    |      
+   |         | sell MA 2@2         |              |    |      
    |         |-------------------->| trade: ----->|----/      
    |         |           |         |              | on trade or timeout
    =         =           |         |              |           

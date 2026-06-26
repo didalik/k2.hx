@@ -51,6 +51,14 @@ define testplan # {{{1
 (sleep $$(( (RANDOM % 5) + 1 ));echo $$$$ $$demouser)
 endef
 
+define tm_request_demo # {{{1
+  echo "$$$$ $@ running tm_request_demo..."
+endef
+
+define tm_request_dmock # {{{1
+  echo "$$$$ $@ running tm_request_dmock for $$demouser..."
+endef
+
 .PHONY: demoit # rule 2 {{{1
 demoit: tmit
 	@echo "${.DEFAULT_GOAL} (${DEFAULT_RULE}) started on $$(date)"
@@ -127,11 +135,20 @@ else
 endif
 endif
 	for demouser in ${DEMO_USERS}; do
+ifeq (${TM},mock)
 ifeq (${DEMO},mock)
 	  $(call request_dmock)
 		echo -n "$$! "
 else
 	  $(call request_demo)
+endif
+else
+ifeq (${DEMO},mock)
+	  $(call tm_request_dmock)
+		echo -n "$$! "
+else
+	  $(call tm_request_demo)
+endif
 endif
 	done
 	wait

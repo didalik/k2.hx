@@ -45,7 +45,7 @@ It gets reset by `cron` at 3am daily and runs on Stellar TESTNET until the next 
 
 When the trade happens, Ann is granted access to run the demo, and Bob wants to buy MA 2@2. When the demo is done, it makes Cyn sell MA 2@2,
 and when the TM is notified of the trade, it makes Bob to re-sell MA 1@1 again. If more demo users want to buy MA 1@1, one of them is notified of the trade.
-If running globally and the demo user is not online at this moment, nothing happens and everything hangs until the TM timeout fires.
+If running globally and the demo user is not online at this moment, nothing happens and everything hangs until the TM timeout fires and the show goes on.
 
 ### Dev
 

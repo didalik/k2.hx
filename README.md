@@ -16,6 +16,15 @@ The codebase has [SDK](lib/sdk.mjs), [API](lib/api.js), and the entry points for
 
 ### Test
 
+All tests are `ava`-based. Run unit tests with `npm test`. Run integration tests with `make`,
+supported test cases are:
+- `DEMO=mock TM=mock make`;
+- `DEMO=mock TM=skip make`;
+- `TM=skip make`;
+- `DEMO=mock make`;
+- `make`.
+
+=== OLD STUFF ===
 Local testing is `make`-based. Start with `make mock` - the output will look similar to this:
 
 ```

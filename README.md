@@ -32,10 +32,10 @@ The following sequence diagram gives a bird's-eye view on the TM use case:
    | run     |           |                        |    |      
    |-------->|           |         |              |    |      
    |         |           |         |              |    |      
-   |         |                     |              |    |      
-   |         | sell MA 2@2         |              |    |      
+   |         | demo                |              |    |      
+   |         | done: sell MA 2@2   |              |    |      
    |         |-------------------->| trade: ----->|----/      
-   |         |           |         |              | on trade or timeout
+   |         |           |         |              | on trade or TM timeout
    =         =           |         |              |           
 ```
 

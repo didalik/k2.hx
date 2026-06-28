@@ -30,6 +30,19 @@ function Demo (opts) { // see also https://www.youtube.com/watch?v=y4TELgx28D4 {
   then(_ => stopMonitor('OK', opts));
 }
 
+function DemoDone (opts) { // {{{1
+  vault = opts.vault; sdk = hXsdk({ vault })
+  return (sdk = hXsdk({ vault })).server.loadAccount({ name: 'Cyn' }).then(account => {
+    //console.log('DemoDone account', account, 'opts', opts)
+
+    let kp = Keypair.fromSecret(vault.get('Cyn.keys')[0])
+    sdk.transaction.makeSellOffer.call(sdk,
+      kp, account, opts.asset.MA, opts.asset.XLM, '2', '2'
+    ).then(r => console.log('\rDemoDone Cyn sdk.transaction.makeSellOffer r', r))
+    return Promise.resolve('OK');
+  })
+}
+
 function DemoSign (opts) { // {{{1
   vault ??= opts.vault
   sdk ??= hXsdk({ vault })
@@ -77,7 +90,13 @@ function DemoTmReset (opts = {}) { // {{{2
 
 function DemoTmUse (opts) { // {{{1
   startMonitor(Object.assign(opts, { cyn: { account: accounts.cyn, }, }))
-  return opts.prr.promise.then(r => stopMonitor(r, opts));
+  return opts.prr.promise.then(r => {
+    if (r.startsWith('outer timeout')) {
+      console.log(r)
+      r = 'ok'
+    }
+    return stopMonitor(r, opts);
+  });
 }
 
 function addAccount (name) { // {{{1
@@ -93,48 +112,39 @@ function runMonitor (opts) { // {{{1
   let timeoutID, account = accounts.bob, kp = Keypair.fromSecret(accounts.bobKeys[0])
   accounts.asset = opts.asset
 
+  let sell = loop => { // {{{2
+    sdk.transaction.makeSellOffer.call(sdk,
+      kp, account, opts.asset.MA, opts.asset.XLM, '1', '1'
+    ).then(r => console.log('\rrunMonitor.sell Bob sdk.transaction.makeSellOffer r', r, loop))
+  }
   let trade = effect => { // {{{2
-    //console.log('runMonitor.trade effect', effect, 'opts', opts)
-
     if (!opts?.cyn?.account) {
       throw Error('Cyn account NOT LOADED')
     }
-    // if demo granted (Agent sold 1 MA for 1 XLM) steps
-    if (+effect.bought_amount == 1) {
-      vault.put('demo.granted', 'DONE')
+    //console.log('runMonitor.trade effect', effect)
 
-      // 1. Make buy offer for Agent: buy 2 MA for 4 XLM.
-      return sdk.transaction.makeBuyOffer.call(sdk,
-        kp,
-        account, opts.asset.XLM, opts.asset.MA, '2', '2'
-      ).then(r => console.log(`runMonitor.trade sdk.transaction.makeBuyOffer r ${r}`));
+    if (+effect.bought_amount == 1) { // Bob sold 1 MA for 1 XLM
+      clearTimeout(opts.timeoutId) // TODO get rid of the outer timeout
 
-      // 2. Setup demox promise and TM Agent timeout.
-      Object.assign(d.demox, promiseWithResolvers())
-      timeoutID = setTimeout(_ => d.demox.resolve(), 120000) // 2 min timeout
-      // 3. Start the demo.
-      runDemo.call(this)
-      // 4. Wait for either:
-      // - demo completion;
-      // - timeout expiration, and then:
-      d.demox.promise.then(result => {
-        e.log('run result', result)
+      // 1. Make buy offer for Bob: buy 2 MA for 4 XLM.
+      sdk.transaction.makeBuyOffer.call(sdk,
+        kp, account, opts.asset.XLM, opts.asset.MA, '2', '2'
+      ).then(r => console.log(`runMonitor.trade Bob sdk.transaction.makeBuyOffer r ${r}`));
 
-        result?.demo && clearTimeout(timeoutID)
-        // 5. Make sell offer for DemoX: sell 2 MA for 4 XLM.
-        makeSellOffer.call(this, d.demox.kp, d.demox.account, d.MA, d.XLM, '2', '2')
-      })
-    // else (Agent bought 2 MA for 4 XLM) steps
-    } else { // assert +e.bought_amount == 2
-      // 1. Make sell offer for Agent: sell 1 MA for 1 XLM.
-      makeSellOffer.call(this, d.kp, account, d.MA, d.XLM, '1', '1')
+      // 2. Setup TM timeout.
+      timeoutID = setTimeout(sell, opts.timeoutTM)
+    } else if (+effect.bought_amount == 2) { // Bob bought 2 MA for 4 XLM
+      clearTimeout(timeoutID)
+      sell(true)
+    } else {
+      console.log('runMonitor.trade ERROR effect', effect)
+      throw Error('UNEXPECTED')
     }
   } // }}}2
   sdk.addStream(opts, "Bob's trading effects", [['trade', trade]], account.id, true)
-  sdk.transaction.makeSellOffer.call(sdk,
-    kp,
-    account, opts.asset.MA, opts.asset.XLM, '1', '1'
-  ).then(r => console.log('\rrunMonitor sdk.transaction.makeSellOffer r', r))
+  //console.log('runMonitor opts.streams', opts.streams)
+
+  setTimeout(sell, opts.timeout2trade) // to activate the trade function above
 }
 
 function setupAccounts () { // {{{1
@@ -182,9 +192,10 @@ function startMonitor (opts) { // {{{1
 
   runMonitor(opts)
   vault.put('tm.up', 'DONE')
+  //console.log('startMonitor process.ppid', process.ppid)
 }
 
 export { // {{{1
-  Demo, DemoSign, DemoTmReset, DemoTmUse,
+  Demo, DemoDone, DemoSign, DemoTmReset, DemoTmUse,
 }
 

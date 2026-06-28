@@ -44,7 +44,13 @@ define request_dmock # {{{1
 endef
 
 define reset_tm # {{{1
-  echo "$$$$ $@ running reset_tm..."
+  echo "$$$$ $@ VAULT=${VAULT}; running reset_tm..."
+	export VAULT=${VAULT}
+	rm -rf $$VAULT; mkdir -p $$VAULT
+	npx ava ${SRC}/tmit.js &
+	echo $$! > $$VAULT/tm.pid
+	while [ ! -e $$VAULT/tm.up ]; do sleep 1; done
+  echo "$$$$ $@ reset_tm TM pid $$(cat $$VAULT/tm.pid)"
 endef
 
 define testplan # {{{1
@@ -56,7 +62,23 @@ define tm_request_demo # {{{1
 endef
 
 define tm_request_dmock # {{{1
-  echo "$$$$ $@ running tm_request_dmock for $$demouser..."
+	request_dmock() { # {{{2
+		echo "$$$$ $@ VAULT=${VAULT}; running tm_request_dmock for $$demouser..."
+		npx ava ${SRC}/demoit.js &
+		while [ ! -e $$VAULT/$$demouser.granted ]; do sleep 1; done
+		$(call dmock)
+		npx ava ${SRC}/demodone.js
+		echo "$$$$ $@ tm_request_dmock for $$demouser DONE"
+		for du in ${DEMO_USERS}; do
+		  if [ ! -e $$VAULT/$$du.granted ]; then
+			  echo "*** $$du.granted NOT FOUND ***"
+			  return
+			fi
+		done
+		echo '*** ALL DEMO_USERS FOUND ***'
+		echo STOP > $$VAULT/tm.down
+	} # }}}2
+	request_dmock &
 endef
 
 .PHONY: demoit # rule 2 {{{1
@@ -135,6 +157,7 @@ else
 endif
 endif
 	for demouser in ${DEMO_USERS}; do
+	  export demouser
 ifeq (${TM},mock)
 ifeq (${DEMO},mock)
 	  $(call request_dmock)

@@ -14,19 +14,19 @@ function DemoTmUse (opts) { // {{{1
   }).then(_ => {
     Object.assign(opts, { streams: [], }, Promise.withResolvers())
     let account = opts.recipient
+    let buy = _ => { // {{{2
+      sdk.transaction.makeBuyOffer.call(sdk,
+        Keypair.fromSecret(opts.recipientKeys[0]),
+        account, opts.asset.XLM, opts.asset.MA, '1', '1'
+      ).then(r => console.log(`demouser.DemoTmUse sdk.transaction.makeBuyOffer r ${r}`))
+    }
     let trade = effect => { // {{{2
-      console.log('demouser.DemoTmUse.trade effect', effect, 'process.pid', process.pid)
+      //console.log('demouser.DemoTmUse.trade effect', effect)
 
-      opts.prr.resolve('OK')
+      opts.prr.resolve('OK') // demo granted
     } // }}}2
     sdk.addStream(opts, `${opts.name}'s trading effects`, [['trade', trade]], account.id, true)
-    return sdk.transaction.makeBuyOffer.call(sdk,
-      Keypair.fromSecret(opts.recipientKeys[0]), 
-      account, opts.asset.XLM, opts.asset.MA, '1', '1'
-    );
-  }).then(r => {
-    console.log(`demouser.DemoTmUse sdk.transaction.makeBuyOffer r ${r}`)
-
+    setTimeout(buy, opts.timeout2trade) // to activate the trade function above
     return opts.prr.promise;
   }).then(r => stopMonitor(r, opts));
 }

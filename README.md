@@ -62,6 +62,6 @@ supported test cases are:
 - `DEMO=mock TM=mock make`;
 - `DEMO=mock TM=skip make`;
 - `TM=skip make`;
-- `DEMO=mock make`;
+- `DEMO=mock make`; [sample output](demoit/output/DEMOmock.out)
 - `make`.
 

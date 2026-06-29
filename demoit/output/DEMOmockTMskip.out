@@ -1,0 +1,15 @@
+Linux ko 6.8.0-124-generic #124-Ubuntu SMP PREEMPT_DYNAMIC Tue May 26 12:38:50 UTC 2026 aarch64 aarch64 aarch64 GNU/Linux
+
+186260 dg2b started on Mon Jun 29 08:22:50 PM UTC 2026
+186260 dg2b skipping reset_tm...
+186263 Abe requested demo...
+186266 186267 186268 Bob started demo for Abe
+Cyn started demo for Abe
+Ann started demo for Abe
++4 Ann demo DONE for Abe
++4 Cyn demo DONE for Abe
++4 Bob demo DONE for Abe
+186260 dg2b DONE on Mon Jun 29 08:22:54 PM UTC 2026
+
+Press ENTER or type command to continue
+

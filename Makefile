@@ -158,6 +158,14 @@ endif
 endif
 	for demouser in ${DEMO_USERS}; do
 	  export demouser
+ifeq (${TM},skip)
+ifeq (${DEMO},mock)
+		$(call request_dmock)
+		echo -n "$$! "
+else
+		$(call request_demo)
+endif
+else
 ifeq (${TM},mock)
 ifeq (${DEMO},mock)
 	  $(call request_dmock)
@@ -171,6 +179,7 @@ ifeq (${DEMO},mock)
 		echo -n "$$! "
 else
 	  $(call tm_request_demo)
+endif
 endif
 endif
 	done

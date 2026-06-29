@@ -10,7 +10,7 @@ Ann is associated with the demo user and runs in a browser when running globally
 
 Four demo users - Abe, Al, Ava, and Aza - request the demo, but only one demo at a time is allowed to run.
 To let a demo user access the demo, I use what I call Stellar TESTNET Monitor (TM). The TM use case wraps the demo use case.
-The following sequence diagram gives a bird's-eye view on the TM use case:
+The following sequence diagram outlines the core of the TM use case:
 
 ```
 +-----+   +------+    +-----+   +-----+         +----+   +------+

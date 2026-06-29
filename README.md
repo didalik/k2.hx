@@ -40,7 +40,7 @@ The following sequence diagram gives a bird's-eye view on the TM use case:
 ```
 
 The TM makes use of [Stellar Decentralized Exchange (SDEX)](https://developers.stellar.org/docs/learn/fundamentals/liquidity-on-stellar-sdex-liquidity-pools).
-It gets reset by `cron` at 3am daily and runs on Stellar TESTNET until the next reset. When in use, it makes Bob sell Monitor Asset (MA) for XLM
+When running globally, it gets reset by `cron` at 3am daily and runs on Stellar TESTNET until the next reset. When in use, it makes Bob sell Monitor Asset (MA) for XLM
 (sell MA 1@1). And each of the 4 demo users - Abe, Al, Ava, and Aza - request the demo by buying MA 1@1. A demo user is associated with Ann.
 
 When the trade happens, Ann is granted access to run the demo, and Bob wants to buy MA 2@2. When the demo is done, it makes Cyn sell MA 2@2,

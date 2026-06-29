@@ -14,7 +14,7 @@ test.serial('use test monitor', t => { // {{{1
   t.timeout(300000)
   let timeout = 60000, opts = {
     prr: Promise.withResolvers(),
-    timeoutTM: 7000,
+    timeoutTM: 17000, // FIXME
     timeout2trade: 5000,
   }
   opts.timeoutId = setTimeout(

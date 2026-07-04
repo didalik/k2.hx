@@ -1,47 +1,47 @@
 Linux ko 6.8.0-124-generic #124-Ubuntu SMP PREEMPT_DYNAMIC Tue May 26 12:38:50 UTC 2026 aarch64 aarch64 aarch64 GNU/Linux
 
-172679 dg2b started on Mon Jun 29 12:23:54 PM UTC 2026
-172679 dg2b VAULT=demoit/vault; running reset_tm...
+284322 dg2b started on Fri Jul  3 07:09:43 PM UTC 2026
+284322 dg2b VAULT=demoit/vault; running reset_tm...
 
 injectAccount - creating/getting creator...
 vault.put key Creator.keys value [
-  'SCHITLB2AI4FITLFJXY5TKMMUGCPC7PGJFJGIIVIL32JW5GP2ROD7FJ6',
-  'GDA36SVYIJIQQC37SLXXDOAHXE5OKUQXKEMP3WI2NHH65HL3OTUH3K6E'
+  'SDUJB6EFPTJBQATI352M6ZX4BIWTSSWW4QV25LR7J4WQZM7J2CTRMVJL',
+  'GCDCZ7ZZK64KYYH3EB6XPX6H7AGBAIOFKNQA4X73HQPWTLGO7JJHWWWD'
 ]
-- loading creator.account GDA36SVYIJIQQC37SLXXDOAHXE5OKUQXKEMP3WI2NHH65HL3OTUH3K6E ...
+- loading creator.account GCDCZ7ZZK64KYYH3EB6XPX6H7AGBAIOFKNQA4X73HQPWTLGO7JJHWWWD ...
 
-createAccount - creating account GDQ64L4ZWJE5L3KS2NQ6QIW7LJUVYKZV4C53GOTWG5RN7Y56LIX2LVPE...
+createAccount - creating account GBGSU2WIWVXVVYLYTAATGS37HJQ4KV5AN26HESCQWVL2NBZXXWJLY6PE...
 vault.put key Issuer.keys value [
-  'SDVR34JPZ7FYFXCONHLKLQUTVNWF6OEEMB4ZHSS4R4MK7D7CS5ALY7V6',
-  'GDQ64L4ZWJE5L3KS2NQ6QIW7LJUVYKZV4C53GOTWG5RN7Y56LIX2LVPE'
+  'SDATYTGPAVQQ4DLO2CLYKXBHE36IAVH5PMHNRTAB5Y6LVC4TP3VRAMS4',
+  'GBGSU2WIWVXVVYLYTAATGS37HJQ4KV5AN26HESCQWVL2NBZXXWJLY6PE'
 ]
-loadAccount accountId GDQ64L4ZWJE5L3KS2NQ6QIW7LJUVYKZV4C53GOTWG5RN7Y56LIX2LVPE - loading...
+loadAccount accountId GBGSU2WIWVXVVYLYTAATGS37HJQ4KV5AN26HESCQWVL2NBZXXWJLY6PE - loading...
 
-createAccount - creating account GA2MS22YBSZPK45WCITTSXAHPFCGCLC5CEND5ZBMWLPKVHMO4N4YOSBW...
+createAccount - creating account GAFBP6LPSSAJGMMDEH2CAS2XKTEYYMO3OKMSYJAJFI7T5XMNONG677UO...
 vault.put key Bob.keys value [
-  'SCH7CP5EL46S6V454ABGGTQ5VAMML655XCW4L4ZZBYTPFTMSKXBFRP2T',
-  'GA2MS22YBSZPK45WCITTSXAHPFCGCLC5CEND5ZBMWLPKVHMO4N4YOSBW'
+  'SDZRYBKPB7R6OUSVUF55FYHXHNYTRZDD47LKJRW57QKYW75XRSM6RC24',
+  'GAFBP6LPSSAJGMMDEH2CAS2XKTEYYMO3OKMSYJAJFI7T5XMNONG677UO'
 ]
-loadAccount accountId GA2MS22YBSZPK45WCITTSXAHPFCGCLC5CEND5ZBMWLPKVHMO4N4YOSBW - loading...
+loadAccount accountId GAFBP6LPSSAJGMMDEH2CAS2XKTEYYMO3OKMSYJAJFI7T5XMNONG677UO - loading...
 
-createAccount - creating account GDX3CBJ5NSD5QOCNUAPM6IGCKGVMFS3L4GISFUVDSAM4IZAQ2RMRFMID...
+createAccount - creating account GCKW5DVPX263Z6E7FGCMBVQFR6NRQUTXKJGYHTKEVV6NGJPZGQQNIHFD...
 vault.put key Cyn.keys value [
-  'SD5ORJK4CG37IGTY4TFA76NSUC5XQFPDTDFRFCDHWNB4WRC4X3QKBGCL',
-  'GDX3CBJ5NSD5QOCNUAPM6IGCKGVMFS3L4GISFUVDSAM4IZAQ2RMRFMID'
+  'SA4INCIF3YJ5WUZQEXRSDSH3YKMVKYJJGZTIS7MCHKHP7B3TAGZR4MKZ',
+  'GCKW5DVPX263Z6E7FGCMBVQFR6NRQUTXKJGYHTKEVV6NGJPZGQQNIHFD'
 ]
-loadAccount accountId GDX3CBJ5NSD5QOCNUAPM6IGCKGVMFS3L4GISFUVDSAM4IZAQ2RMRFMID - loading...
-changeTrust - recipient GA2MS22YBSZPK45WCITTSXAHPFCGCLC5CEND5ZBMWLPKVHMO4N4YOSBW ...
-changeTrust - recipient GDX3CBJ5NSD5QOCNUAPM6IGCKGVMFS3L4GISFUVDSAM4IZAQ2RMRFMID ...
-fund - destination GA2MS22YBSZPK45WCITTSXAHPFCGCLC5CEND5ZBMWLPKVHMO4N4YOSBW clawback false ...
-fund - destination GDX3CBJ5NSD5QOCNUAPM6IGCKGVMFS3L4GISFUVDSAM4IZAQ2RMRFMID clawback false ...
+loadAccount accountId GCKW5DVPX263Z6E7FGCMBVQFR6NRQUTXKJGYHTKEVV6NGJPZGQQNIHFD - loading...
+changeTrust - recipient GAFBP6LPSSAJGMMDEH2CAS2XKTEYYMO3OKMSYJAJFI7T5XMNONG677UO ...
+changeTrust - recipient GCKW5DVPX263Z6E7FGCMBVQFR6NRQUTXKJGYHTKEVV6NGJPZGQQNIHFD ...
+fund - destination GAFBP6LPSSAJGMMDEH2CAS2XKTEYYMO3OKMSYJAJFI7T5XMNONG677UO clawback false ...
+fund - destination GCKW5DVPX263Z6E7FGCMBVQFR6NRQUTXKJGYHTKEVV6NGJPZGQQNIHFD clawback false ...
 vault.put key accounts.set value DONE
-  ✔ reset test monitor (45.8s)
+  ✔ reset test monitor (40.8s)
 vault.put key tm.up value DONE
-172679 dg2b reset_tm TM pid 172684
-172885 172679 dg2b VAULT=demoit/vault; running tm_request_dmock for Abe...
-172886 172888 172679 dg2b VAULT=demoit/vault; running tm_request_dmock for Al...
-172679 dg2b VAULT=demoit/vault; running tm_request_dmock for Aza...
-172679 dg2b VAULT=demoit/vault; running tm_request_dmock for Ava...
+284322 dg2b reset_tm TM pid 284327
+284322 dg2b VAULT=demoit/vault; running tm_request_dmock for Abe...
+284505 284507 284322 dg2b VAULT=demoit/vault; running tm_request_dmock for Al...
+284509 284322 dg2b VAULT=demoit/vault; running tm_request_dmock for Ava...
+284514 284322 dg2b VAULT=demoit/vault; running tm_request_dmock for Aza...
 
 
 
@@ -49,159 +49,159 @@ vault.put key tm.up value DONE
 injectAccount - creating/getting creator...
 injectAccount - creating/getting creator...
 injectAccount - creating/getting creator...
-- loading creator.account GDA36SVYIJIQQC37SLXXDOAHXE5OKUQXKEMP3WI2NHH65HL3OTUH3K6E ...
 injectAccount - creating/getting creator...
-- loading creator.account GDA36SVYIJIQQC37SLXXDOAHXE5OKUQXKEMP3WI2NHH65HL3OTUH3K6E ...
-- loading creator.account GDA36SVYIJIQQC37SLXXDOAHXE5OKUQXKEMP3WI2NHH65HL3OTUH3K6E ...
-- loading creator.account GDA36SVYIJIQQC37SLXXDOAHXE5OKUQXKEMP3WI2NHH65HL3OTUH3K6E ...
+- loading creator.account GCDCZ7ZZK64KYYH3EB6XPX6H7AGBAIOFKNQA4X73HQPWTLGO7JJHWWWD ...
+- loading creator.account GCDCZ7ZZK64KYYH3EB6XPX6H7AGBAIOFKNQA4X73HQPWTLGO7JJHWWWD ...
+- loading creator.account GCDCZ7ZZK64KYYH3EB6XPX6H7AGBAIOFKNQA4X73HQPWTLGO7JJHWWWD ...
+- loading creator.account GCDCZ7ZZK64KYYH3EB6XPX6H7AGBAIOFKNQA4X73HQPWTLGO7JJHWWWD ...
 
-createAccount - creating account GBSTFYXC22KHMNCVH332FUFMZLEPLFLX4SJNWUHHKSMYY7AL4SAP7HIC...
+createAccount - creating account GBBEVKI4XMXY6FLNOZTK7DOS4ORFTBOP4CWDJQKWSTD4QZ3W4FGPUVMG...
 
-createAccount - creating account GAASYJHDB55S7VAUH6SRBWP6SJUYFWHG3XCNXXIDMXH6JOD3QX2J5CL6...
+createAccount - creating account GAULBRI2PNVFJZDFDTRJTOUJYFYK45G3SCK6BBNHM2MOG4CP3X4FU5KV...
 
-createAccount - creating account GAUIKRRO4NNA4LKKDXM63IUPB4OYGG5AZCA5BSV7LWHTHRP3KS5H43KL...
+createAccount - creating account GCESJLRI4JCO5RD4WXHJ2JXVPG7U5TINIWJAC7ZTVYNFBVLBIUH7AT5K...
 
-createAccount - creating account GB4U22NL5FXVDAB3ZDXAK7WPC7JSPU7T4FSLPLRDCJ7TIU7SLLZPNC6R...
+createAccount - creating account GANIPTQAJP72KXQ5MOLMP4JWZJLSFR73GJLEMK5IOMM7CFO4GNWPG7DT...
 vault.put key Ann.keys value [
-  'SDQ6WUA52IIF463GXWJFGHIS5ETCMAPFGETQDPKYANEDDVCATY2IXK6S',
-  'GBSTFYXC22KHMNCVH332FUFMZLEPLFLX4SJNWUHHKSMYY7AL4SAP7HIC'
+  'SAPE5N4EMDBGZKG2OONCHK3RAAWQKRJWNZWVI6JDMW6MCC2W4YZA7REH',
+  'GAULBRI2PNVFJZDFDTRJTOUJYFYK45G3SCK6BBNHM2MOG4CP3X4FU5KV'
 ]
-loadAccount accountId GBSTFYXC22KHMNCVH332FUFMZLEPLFLX4SJNWUHHKSMYY7AL4SAP7HIC - loading...
-changeTrust - recipient GBSTFYXC22KHMNCVH332FUFMZLEPLFLX4SJNWUHHKSMYY7AL4SAP7HIC ...
+loadAccount accountId GAULBRI2PNVFJZDFDTRJTOUJYFYK45G3SCK6BBNHM2MOG4CP3X4FU5KV - loading...
+changeTrust - recipient GAULBRI2PNVFJZDFDTRJTOUJYFYK45G3SCK6BBNHM2MOG4CP3X4FU5KV ...
 runMonitor.sell Bob sdk.transaction.makeSellOffer r tx.successful true undefined
 demouser.DemoTmUse sdk.transaction.makeBuyOffer r tx.successful true
 stopMonitor - "Ann's trading effects" closed.
   ✔ request demo (18.4s)
-vault.put key Al.granted value DONE
+vault.put key Ava.granted value DONE
   ─
 
   1 test passed
-173125 173126 173127 Ann started demo for Al
-Cyn started demo for Al
-Bob started demo for Al
-+2 Bob demo DONE for Al
-+3 Ann demo DONE for Al
-+3 Cyn demo DONE for Al
-
-loadAccount accountId GDX3CBJ5NSD5QOCNUAPM6IGCKGVMFS3L4GISFUVDSAM4IZAQ2RMRFMID - loading...
-  ✔ demo done (273ms)
+284744 284745 284746 Bob started demo for Ava
+Ann started demo for Ava
+Cyn started demo for Ava
++2 Bob demo DONE for Ava
++3 Cyn demo DONE for Ava
++4 Ann demo DONE for Ava
 runMonitor.trade Bob sdk.transaction.makeBuyOffer r tx.successful true
+
+loadAccount accountId GCKW5DVPX263Z6E7FGCMBVQFR6NRQUTXKJGYHTKEVV6NGJPZGQQNIHFD - loading...
+  ✔ demo done (301ms)
 DemoDone Cyn sdk.transaction.makeSellOffer r tx.successful true
   ─
 
   1 test passed
-172679 dg2b tm_request_dmock for Al DONE
+284322 dg2b tm_request_dmock for Ava DONE
 *** Abe.granted NOT FOUND ***
 runMonitor.sell Bob sdk.transaction.makeSellOffer r tx.successful true true
 
-createAccount - creating account GAUIKRRO4NNA4LKKDXM63IUPB4OYGG5AZCA5BSV7LWHTHRP3KS5H43KL...
+createAccount - creating account GBBEVKI4XMXY6FLNOZTK7DOS4ORFTBOP4CWDJQKWSTD4QZ3W4FGPUVMG...
 
-createAccount - creating account GAASYJHDB55S7VAUH6SRBWP6SJUYFWHG3XCNXXIDMXH6JOD3QX2J5CL6...
+createAccount - creating account GCESJLRI4JCO5RD4WXHJ2JXVPG7U5TINIWJAC7ZTVYNFBVLBIUH7AT5K...
 
-createAccount - creating account GB4U22NL5FXVDAB3ZDXAK7WPC7JSPU7T4FSLPLRDCJ7TIU7SLLZPNC6R...
+createAccount - creating account GANIPTQAJP72KXQ5MOLMP4JWZJLSFR73GJLEMK5IOMM7CFO4GNWPG7DT...
 vault.put key Ann.keys value [
-  'SDUHJX73BNMHFRRM3VNR3EEYSSP5F46SJ2XZMFZ7CQGDE6NDXVCMVBSY',
-  'GB4U22NL5FXVDAB3ZDXAK7WPC7JSPU7T4FSLPLRDCJ7TIU7SLLZPNC6R'
+  'SDZQWDTZWAWB73CTPK5CIFGDXO3T5OGNAKRUZELOUIOPRNY25MOSWCNT',
+  'GBBEVKI4XMXY6FLNOZTK7DOS4ORFTBOP4CWDJQKWSTD4QZ3W4FGPUVMG'
 ]
-loadAccount accountId GB4U22NL5FXVDAB3ZDXAK7WPC7JSPU7T4FSLPLRDCJ7TIU7SLLZPNC6R - loading...
-changeTrust - recipient GB4U22NL5FXVDAB3ZDXAK7WPC7JSPU7T4FSLPLRDCJ7TIU7SLLZPNC6R ...
+loadAccount accountId GBBEVKI4XMXY6FLNOZTK7DOS4ORFTBOP4CWDJQKWSTD4QZ3W4FGPUVMG - loading...
+changeTrust - recipient GBBEVKI4XMXY6FLNOZTK7DOS4ORFTBOP4CWDJQKWSTD4QZ3W4FGPUVMG ...
 demouser.DemoTmUse sdk.transaction.makeBuyOffer r tx.successful true
 stopMonitor - "Ann's trading effects" closed.
-  ✔ request demo (53.3s)
+  ✔ request demo (53.4s)
 vault.put key Abe.granted value DONE
   ─
 
   1 test passed
-173358 173359 173361 Bob started demo for Abe
-Ann started demo for Abe
+284972 284974 284976 Ann started demo for Abe
 Cyn started demo for Abe
+Bob started demo for Abe
 +1 Ann demo DONE for Abe
-+2 Cyn demo DONE for Abe
-+3 Bob demo DONE for Abe
-
++4 Cyn demo DONE for Abe
 runMonitor.trade Bob sdk.transaction.makeBuyOffer r tx.successful true
-loadAccount accountId GDX3CBJ5NSD5QOCNUAPM6IGCKGVMFS3L4GISFUVDSAM4IZAQ2RMRFMID - loading...
-  ✔ demo done (275ms)
++5 Bob demo DONE for Abe
+
+loadAccount accountId GCKW5DVPX263Z6E7FGCMBVQFR6NRQUTXKJGYHTKEVV6NGJPZGQQNIHFD - loading...
+  ✔ demo done (299ms)
 DemoDone Cyn sdk.transaction.makeSellOffer r tx.successful true
   ─
 
   1 test passed
-172679 dg2b tm_request_dmock for Abe DONE
-*** Ava.granted NOT FOUND ***
+284322 dg2b tm_request_dmock for Abe DONE
+*** Al.granted NOT FOUND ***
 runMonitor.sell Bob sdk.transaction.makeSellOffer r tx.successful true true
 
-createAccount - creating account GAASYJHDB55S7VAUH6SRBWP6SJUYFWHG3XCNXXIDMXH6JOD3QX2J5CL6...
+createAccount - creating account GCESJLRI4JCO5RD4WXHJ2JXVPG7U5TINIWJAC7ZTVYNFBVLBIUH7AT5K...
 
-createAccount - creating account GAUIKRRO4NNA4LKKDXM63IUPB4OYGG5AZCA5BSV7LWHTHRP3KS5H43KL...
+createAccount - creating account GANIPTQAJP72KXQ5MOLMP4JWZJLSFR73GJLEMK5IOMM7CFO4GNWPG7DT...
 vault.put key Ann.keys value [
-  'SBNUPJD65VISSORFA3LDB357BYV66R3VW2SZ2O2UWZJHYGGUNVOIQHDF',
-  'GAASYJHDB55S7VAUH6SRBWP6SJUYFWHG3XCNXXIDMXH6JOD3QX2J5CL6'
+  'SA2BJZVU3EWUE4QZCUNCT3AOSC7ZJIG3XZFO7ZVYUXAWKOI6C4NRSODE',
+  'GCESJLRI4JCO5RD4WXHJ2JXVPG7U5TINIWJAC7ZTVYNFBVLBIUH7AT5K'
 ]
-loadAccount accountId GAASYJHDB55S7VAUH6SRBWP6SJUYFWHG3XCNXXIDMXH6JOD3QX2J5CL6 - loading...
-changeTrust - recipient GAASYJHDB55S7VAUH6SRBWP6SJUYFWHG3XCNXXIDMXH6JOD3QX2J5CL6 ...
+loadAccount accountId GCESJLRI4JCO5RD4WXHJ2JXVPG7U5TINIWJAC7ZTVYNFBVLBIUH7AT5K - loading...
+changeTrust - recipient GCESJLRI4JCO5RD4WXHJ2JXVPG7U5TINIWJAC7ZTVYNFBVLBIUH7AT5K ...
 demouser.DemoTmUse sdk.transaction.makeBuyOffer r tx.successful true
 stopMonitor - "Ann's trading effects" closed.
-  ✔ request demo (1m 33.5s)
+  ✔ request demo (1m 28.5s)
+vault.put key Al.granted value DONE
+285163 285164 285165   ─
+
+  1 test passed
+Cyn started demo for Al
+Ann started demo for Al
+Bob started demo for Al
++2 Bob demo DONE for Al
++3 Cyn demo DONE for Al
+runMonitor.trade Bob sdk.transaction.makeBuyOffer r tx.successful true
++5 Ann demo DONE for Al
+
+loadAccount accountId GCKW5DVPX263Z6E7FGCMBVQFR6NRQUTXKJGYHTKEVV6NGJPZGQQNIHFD - loading...
+  ✔ demo done (309ms)
+DemoDone Cyn sdk.transaction.makeSellOffer r tx.successful true
+  ─
+
+  1 test passed
+284322 dg2b tm_request_dmock for Al DONE
+*** Aza.granted NOT FOUND ***
+
+createAccount - creating account GANIPTQAJP72KXQ5MOLMP4JWZJLSFR73GJLEMK5IOMM7CFO4GNWPG7DT...
+runMonitor.sell Bob sdk.transaction.makeSellOffer r tx.successful true true
+vault.put key Ann.keys value [
+  'SCVJ2QKTDSZQNUYBD7KHHJRTEDJFDRXSALM5LN3RQDBL73KDGNACRYSO',
+  'GANIPTQAJP72KXQ5MOLMP4JWZJLSFR73GJLEMK5IOMM7CFO4GNWPG7DT'
+]
+loadAccount accountId GANIPTQAJP72KXQ5MOLMP4JWZJLSFR73GJLEMK5IOMM7CFO4GNWPG7DT - loading...
+changeTrust - recipient GANIPTQAJP72KXQ5MOLMP4JWZJLSFR73GJLEMK5IOMM7CFO4GNWPG7DT ...
+stopMonitor - "Ann's trading effects" closed.
+  ✔ request demo (2m 8.7s)
 vault.put key Aza.granted value DONE
-  ─
-
-  1 test passed
-Cyn started demo for Aza
+285333 285334 285336 Bob started demo for Aza
 Ann started demo for Aza
-Bob started demo for Aza
-+1 Bob demo DONE for Aza
-+4 Cyn demo DONE for Aza
-runMonitor.trade Bob sdk.transaction.makeBuyOffer r tx.successful true
-+5 Ann demo DONE for Aza
-
-loadAccount accountId GDX3CBJ5NSD5QOCNUAPM6IGCKGVMFS3L4GISFUVDSAM4IZAQ2RMRFMID - loading...
-  ✔ demo done (289ms)
-DemoDone Cyn sdk.transaction.makeSellOffer r tx.successful true
-  ─
-
-  1 test passed
-172679 dg2b tm_request_dmock for Aza DONE
-*** Ava.granted NOT FOUND ***
-
-createAccount - creating account GAUIKRRO4NNA4LKKDXM63IUPB4OYGG5AZCA5BSV7LWHTHRP3KS5H43KL...
-runMonitor.sell Bob sdk.transaction.makeSellOffer r tx.successful true true
-vault.put key Ann.keys value [
-  'SDEUAMMO73CUXIAPRPMQFOJTX2UAERWM562IGIVX5CKOFZTY4G3EHM42',
-  'GAUIKRRO4NNA4LKKDXM63IUPB4OYGG5AZCA5BSV7LWHTHRP3KS5H43KL'
-]
-loadAccount accountId GAUIKRRO4NNA4LKKDXM63IUPB4OYGG5AZCA5BSV7LWHTHRP3KS5H43KL - loading...
-changeTrust - recipient GAUIKRRO4NNA4LKKDXM63IUPB4OYGG5AZCA5BSV7LWHTHRP3KS5H43KL ...
-stopMonitor - "Ann's trading effects" closed.
-  ✔ request demo (2m 8s)
-vault.put key Ava.granted value DONE
+Cyn started demo for Aza
 demouser.DemoTmUse sdk.transaction.makeBuyOffer r tx.successful true
   ─
 
   1 test passed
-173723 173724 173726 Ann started demo for Ava
-Bob started demo for Ava
-Cyn started demo for Ava
-+2 Bob demo DONE for Ava
-+3 Ann demo DONE for Ava
-runMonitor.trade Bob sdk.transaction.makeBuyOffer r tx.successful true
-+5 Cyn demo DONE for Ava
++2 Ann demo DONE for Aza
++3 Cyn demo DONE for Aza
++4 Bob demo DONE for Aza
 
-loadAccount accountId GDX3CBJ5NSD5QOCNUAPM6IGCKGVMFS3L4GISFUVDSAM4IZAQ2RMRFMID - loading...
-  ✔ demo done (274ms)
+loadAccount accountId GCKW5DVPX263Z6E7FGCMBVQFR6NRQUTXKJGYHTKEVV6NGJPZGQQNIHFD - loading...
+runMonitor.trade Bob sdk.transaction.makeBuyOffer r tx.successful true
+  ✔ demo done (324ms)
 DemoDone Cyn sdk.transaction.makeSellOffer r tx.successful true
   ─
 
   1 test passed
-172679 dg2b tm_request_dmock for Ava DONE
+284322 dg2b tm_request_dmock for Aza DONE
 *** ALL DEMO_USERS FOUND ***
 stopMonitor - "orderbook" closed.
-  ✔ use test monitor (2m 19.9s)
+  ✔ use test monitor (2m 21s)
 stopMonitor - "Bob's trading effects" closed.
-runMonitor.sell Bob sdk.transaction.makeSellOffer r tx.successful true undefined
+runMonitor.sell Bob sdk.transaction.makeSellOffer r tx.successful true true
   ─
 
   2 tests passed
-172679 dg2b DONE on Mon Jun 29 12:27:10 PM UTC 2026
+284322 dg2b DONE on Fri Jul 3 07:12:50 PM UTC 2026
 
 Press ENTER or type command to continue
 

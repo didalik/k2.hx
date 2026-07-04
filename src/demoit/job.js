@@ -1,9 +1,15 @@
 import { hXsdk, } from '../../lib/sdk.mjs' // {{{1
 import { effectDesc, makeOffer, parseHEXA, takeOffer, takeRequest, } from '../../lib/api.js'
-import { stopMonitor, } from '../../lib/util.js'
+import { Context, destFund, stopMonitor, } from '../../lib/util.js'
 import { Asset, Keypair, } from '@stellar/stellar-sdk'
 
-let accounts = {}, sdk, vault // {{{1
+let context, sdk, vault, accounts = {}, stateInitial = { // {{{1
+  handle: handle_stateInitial,
+}, stateAnnBobSettingUp = { // {{{1
+  handle: handle_stateAnnBobSettingUp
+}, stateAnnBobSetup = { // {{{1
+  handle: handle_stateAnnBobSetup
+}
 
 function Demo (opts) { // see also https://www.youtube.com/watch?v=y4TELgx28D4 {{{1
   vault ??= opts.vault
@@ -108,6 +114,69 @@ function addAccount (name) { // {{{1
   return sdk.server.loadAccount(sdk.server.opts4loadAccount);
 }
 
+function deal (takingOffer) { // {{{1
+  this.log('deal takingOffer', takingOffer)
+
+  return Promise.resolve();
+}
+
+function fcrs (opts) { // Offer freshly caught red snapper. {{{1
+  opts.sdk ??= sdk
+
+  opts.description = 'Freshly caught red snapper 4lb. HEXA 800'
+  opts.validity = '0'
+  let p1 = Promise.withResolvers(), p2 = Promise.withResolvers()
+  stateInitial.resolve = p1.resolve
+  stateAnnBobSettingUp.resolve = p2.resolve
+  return makeOffer(opts).then(_ => Promise.all([p1.promise, p2.promise])).
+  then(_ => opts.context.state.handle.call(opts));
+}
+
+function handle_stateInitial (e) { // {{{1
+  //console.trace()
+
+  return effectDesc(e).then(desc => {
+    this.effects = []; this.effects.push(desc)
+    this.log('handle_stateInitial desc', desc)//, 'this', this)
+
+    this.context.state = stateAnnBobSettingUp
+    return stateInitial.resolve();
+  });
+}
+
+function handle_stateAnnBobSettingUp (e) { // {{{1
+  return effectDesc(e).then(desc => {
+    if (this.effects.find(e => e.txId == desc.txId)) {
+      return;
+    }
+    this.effects.push(desc)
+    this.log('handle_stateAnnBobSettingUp desc', desc)
+
+    this.context.state = stateAnnBobSetup
+    stateAnnBobSettingUp.resolve();
+  });
+}
+
+function handle_stateAnnBobSetup (e) { // {{{1
+  if (!e) {
+    return Promise.resolve();
+  }
+  return effectDesc(e).then(desc => {
+    this.log('handle_stateAnnBobSetup desc', desc)
+
+    return Promise.resolve();
+  });
+}
+
+function issuerClaimant (effect) { // {{{1
+  if (context != this.context) {
+    this.log('issuerClaimant IGNORE')
+    
+    return;
+  }
+  this.context.state.handle.call(this, effect)
+}
+
 function runMonitor (opts) { // {{{1
   let timeoutID, account = accounts.bob, kp = Keypair.fromSecret(accounts.bobKeys[0])
   accounts.asset = opts.asset
@@ -193,6 +262,28 @@ function startMonitor (opts) { // {{{1
   runMonitor(opts)
   vault.put('tm.up', 'DONE')
   //console.log('startMonitor process.ppid', process.ppid)
+}
+
+function take (effect, takingOffer = null) { // {{{1
+  this.log('take effect', effect)//, 'this', this)
+
+  this.account = this.cyn
+  this.amount = parseHEXA(effect.txDesc)
+  this.destKeys = this.cynKeys
+  this.makeTxId = effect.txId
+  let taking = effect.txMemo.startsWith('Offer') ? takeOffer : takeRequest
+  return taking(this).then(r => takingOffer ?? r);
+}
+
+function taking2 (opts) { // {{{1
+  console.log('taking2 opts.effects', opts.effects)
+
+  if (opts.effects[1].message) {
+    return Promise.resolve();
+  }
+  let offer = opts.effects.find(effect => effect.txMemo.startsWith('Offer'))
+  let request = opts.effects.find(effect => effect.txMemo.startsWith('Request'))
+  return take.call(opts, offer).then(takingOffer => take.call(opts, request, takingOffer));
 }
 
 export { // {{{1

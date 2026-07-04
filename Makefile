@@ -30,6 +30,11 @@ endef
 
 define request_demo # {{{1
   echo "$$$$ $@ running request_demo..."
+	if [ ! -d $$VAULT ]; then
+	  mkdir -p $$VAULT
+    npx ava ${SRC}/tmit.js --match 'reset test monitor'
+	fi
+	npx ava ${SRC}/demoit.js --match="run demo for Ann" --match='run demo for Bob and Cyn' &
 endef
 
 define request_dmock # {{{1
@@ -45,7 +50,6 @@ endef
 
 define reset_tm # {{{1
   echo "$$$$ $@ VAULT=${VAULT}; running reset_tm..."
-	export VAULT=${VAULT}
 	rm -rf $$VAULT; mkdir -p $$VAULT
 	npx ava ${SRC}/tmit.js &
 	echo $$! > $$VAULT/tm.pid
@@ -64,7 +68,7 @@ endef
 define tm_request_dmock # {{{1
 	request_dmock() { # {{{2
 		echo "$$$$ $@ VAULT=${VAULT}; running tm_request_dmock for $$demouser..."
-		npx ava ${SRC}/demoit.js &
+		npx ava ${SRC}/demoit.js --match='request demo' &
 		while [ ! -e $$VAULT/$$demouser.granted ]; do sleep 1; done
 		$(call dmock)
 		npx ava ${SRC}/demodone.js
@@ -147,7 +151,8 @@ tmit:
 dg2b:
 	@uname -a
 	echo -e "\n$$$$ $@ started on $$(date)"
-ifeq (${TM},skip)
+	  export VAULT=${VAULT}
+ifeq (${TM},skip) # {{{2
 	echo "$$$$ $@ skipping reset_tm..."
 else
 ifeq (${TM},mock)
@@ -155,33 +160,33 @@ ifeq (${TM},mock)
 else
 	$(call reset_tm)
 endif
-endif
+endif # }}}2
 	for demouser in ${DEMO_USERS}; do
 	  export demouser
-ifeq (${TM},skip)
+ifeq (${TM},skip) # {{{2
 ifeq (${DEMO},mock)
 		$(call request_dmock)
 		echo -n "$$! "
 else
 		$(call request_demo)
 endif
-else
-ifeq (${TM},mock)
+else # {{{2
+ifeq (${TM},mock) # {{{3
 ifeq (${DEMO},mock)
 	  $(call request_dmock)
 		echo -n "$$! "
 else
 	  $(call request_demo)
 endif
-else
+else # {{{3
 ifeq (${DEMO},mock)
 	  $(call tm_request_dmock)
 		echo -n "$$! "
 else
 	  $(call tm_request_demo)
 endif
-endif
-endif
+endif # }}}3
+endif # }}}2
 	done
 	wait
 	echo $$$$ $@ DONE on $$(date)

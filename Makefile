@@ -34,7 +34,14 @@ define request_demo # {{{1
 	  mkdir -p $$VAULT
     npx ava ${SRC}/tmit.js --match 'reset test monitor'
 	fi
-	npx ava ${SRC}/demoit.js --match="run demo for Ann" --match='run demo for Bob and Cyn' &
+	#npx ava ${SRC}/demoit.js --match="run demo for Ann" --match='run demo for Bob and Cyn' &
+	npx ava test/demo/Issuer.js &
+	while [ ! -e $$VAULT/Issuer.keys ]; do sleep 1; done
+	for actor in Ann Bob Cyn
+	do
+	  npx ava test/demo/$$actor.js &
+	done
+	wait
 endef
 
 define request_dmock # {{{1
@@ -130,12 +137,12 @@ it:
 
 .PHONY: clear # {{{1
 clear:
-	@rm -rf vault
+	@rm -rf ${VAULT}
 
 .PHONY: fund # {{{1
 fund:
-	@for actor in Ann Bob Cyn; do rm vault/$$actor.fund.HEXA; done
-	rm -f vault/Issuer.desc.*
+	@for actor in Ann Bob Cyn; do rm ${VAULT}/$$actor.fund.HEXA; done
+	rm -f ${VAULT}/Issuer.desc.*
 
 .PHONY: tmit # {{{1
 tmit:
@@ -166,10 +173,10 @@ endif # }}}2
 ifeq (${TM},skip) # {{{2
 ifeq (${DEMO},mock)
 		$(call request_dmock)
-		echo -n "$$! "
 else
 		$(call request_demo)
 endif
+		echo -n "$$! "
 else # {{{2
 ifeq (${TM},mock) # {{{3
 ifeq (${DEMO},mock)

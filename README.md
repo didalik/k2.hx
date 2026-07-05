@@ -61,7 +61,7 @@ All tests are `ava`-based. Run unit tests with `npm test`. Run integration tests
 supported test cases are:
 - `DEMO=mock TM=mock make`; [sample output](demoit/output/DEMOmockTMmock.out)
 - `DEMO=mock TM=skip make`; [sample output](demoit/output/DEMOmockTMskip.out)
-- `TM=skip make`;
+- `TM=skip make`; [sample output](demoit/output/TMskip.out)
 - `DEMO=mock make`; [sample output](demoit/output/DEMOmock.out)
 - `make`.
 

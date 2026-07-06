@@ -42,6 +42,7 @@ function DemoDone (opts) { // {{{1
     //console.log('DemoDone account', account, 'opts', opts)
 
     let kp = Keypair.fromSecret(vault.get('Cyn.keys')[0])
+    console.trace('\rDemoDone opts', opts)
     sdk.transaction.makeSellOffer.call(sdk,
       kp, account, opts.asset.MA, opts.asset.XLM, '2', '2'
     ).then(r => console.log('\rDemoDone Cyn sdk.transaction.makeSellOffer r', r))
@@ -182,6 +183,7 @@ function runMonitor (opts) { // {{{1
   accounts.asset = opts.asset
 
   let sell = loop => { // {{{2
+    //console.trace('\rrunMonitor.sell opts', opts)
     sdk.transaction.makeSellOffer.call(sdk,
       kp, account, opts.asset.MA, opts.asset.XLM, '1', '1'
     ).then(r => console.log('\rrunMonitor.sell Bob sdk.transaction.makeSellOffer r', r, loop))
@@ -201,18 +203,16 @@ function runMonitor (opts) { // {{{1
       ).then(r => console.log(`runMonitor.trade Bob sdk.transaction.makeBuyOffer r ${r}`));
 
       // 2. Setup TM timeout.
-      timeoutID = setTimeout(sell, opts.timeoutTM)
+      //timeoutID = setTimeout(sell, opts.timeoutTM) // FIXME
     } else if (+effect.bought_amount == 2) { // Bob bought 2 MA for 4 XLM
       clearTimeout(timeoutID)
       sell(true)
     } else {
-      console.log('runMonitor.trade ERROR effect', effect)
+      console.log('runMonitor.trade *** ERROR *** effect', effect)
       throw Error('UNEXPECTED')
     }
   } // }}}2
   sdk.addStream(opts, "Bob's trading effects", [['trade', trade]], account.id, true)
-  //console.log('runMonitor opts.streams', opts.streams)
-
   setTimeout(sell, opts.timeout2trade) // to activate the trade function above
 }
 

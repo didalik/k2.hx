@@ -9,6 +9,22 @@ ifeq (${TM},skip)
 DEMO_USERS := Abe
 endif
 
+define demo # {{{1
+  demo() {
+		if [ ! -d $$VAULT ]; then
+			mkdir -p $$VAULT
+			npx ava ${SRC}/tmit.js --match 'reset test monitor'
+		fi
+		npx ava test/demo/Issuer.js &
+		while [ ! -e $$VAULT/Issuer.keys ]; do sleep 1; done
+		for actor in Ann Bob Cyn; do
+			npx ava test/demo/$$actor.js &
+		done
+		wait
+  }
+	demo
+endef
+
 define dmock # {{{1
 	demo() { # {{{2
 		for actor in Ann Bob Cyn; do
@@ -29,19 +45,8 @@ define dmock # {{{1
 endef
 
 define request_demo # {{{1
-  echo "$$$$ $@ running request_demo..."
-	if [ ! -d $$VAULT ]; then
-	  mkdir -p $$VAULT
-    npx ava ${SRC}/tmit.js --match 'reset test monitor'
-	fi
-	#npx ava ${SRC}/demoit.js --match="run demo for Ann" --match='run demo for Bob and Cyn' &
-	npx ava test/demo/Issuer.js &
-	while [ ! -e $$VAULT/Issuer.keys ]; do sleep 1; done
-	for actor in Ann Bob Cyn
-	do
-	  npx ava test/demo/$$actor.js &
-	done
-	wait
+  echo "$$$$ $@ VAULT=$$VAULT; running request_demo for $$demouser..."
+	$(call demo)
 endef
 
 define request_dmock # {{{1
@@ -69,12 +74,28 @@ define testplan # {{{1
 endef
 
 define tm_request_demo # {{{1
-  echo "$$$$ $@ running tm_request_demo..."
+	request_demo() { # {{{2
+		echo "$$$$ $@ VAULT=$$VAULT; running tm_request_demo for $$demouser..."
+		npx ava ${SRC}/demoit.js --match='request demo' &
+		while [ ! -e $$VAULT/$$demouser.granted ]; do sleep 1; done
+		$(call demo)
+		npx ava ${SRC}/demodone.js
+		echo "$$$$ $@ tm_request_demo for $$demouser DONE"
+		for du in ${DEMO_USERS}; do
+		  if [ ! -e $$VAULT/$$du.granted ]; then
+			  echo "*** $$du.granted NOT FOUND ***"
+			  return
+			fi
+		done
+		echo '*** ALL DEMO_USERS FOUND ***'
+		echo STOP > $$VAULT/tm.down
+	} # }}}2
+	request_demo &
 endef
 
 define tm_request_dmock # {{{1
 	request_dmock() { # {{{2
-		echo "$$$$ $@ VAULT=${VAULT}; running tm_request_dmock for $$demouser..."
+		echo "$$$$ $@ VAULT=$$VAULT; running tm_request_dmock for $$demouser..."
 		npx ava ${SRC}/demoit.js --match='request demo' &
 		while [ ! -e $$VAULT/$$demouser.granted ]; do sleep 1; done
 		$(call dmock)

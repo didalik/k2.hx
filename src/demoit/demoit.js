@@ -15,7 +15,7 @@ test.serial('request demo', t => { // {{{1
       XLM: new Asset('XLM', null) 
     },
     issuer: { id, },
-    name: 'Ann',
+    name: process.env.demouser,
     prr: Promise.withResolvers(),
     streams: [],
     timeout2trade: 5000,

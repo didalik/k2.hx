@@ -42,12 +42,13 @@ function DemoDone (opts) { // {{{1
     //console.log('DemoDone account', account, 'opts', opts)
 
     let kp = Keypair.fromSecret(vault.get('Cyn.keys')[0])
-    console.trace('\rDemoDone opts', opts)
-    sdk.transaction.makeSellOffer.call(sdk,
+    return sdk.transaction.makeSellOffer.call(sdk,
       kp, account, opts.asset.MA, opts.asset.XLM, '2', '2'
-    ).then(r => console.log('\rDemoDone Cyn sdk.transaction.makeSellOffer r', r))
-    return Promise.resolve('OK');
-  })
+    ).then(r => {
+      console.log('\rDemoDone Cyn sdk.transaction.makeSellOffer r', r)
+      return Promise.resolve('OK');
+    });
+  });
 }
 
 function DemoSign (opts) { // {{{1
@@ -182,11 +183,13 @@ function runMonitor (opts) { // {{{1
   let timeoutID, account = accounts.bob, kp = Keypair.fromSecret(accounts.bobKeys[0])
   accounts.asset = opts.asset
 
-  let sell = loop => { // {{{2
-    //console.trace('\rrunMonitor.sell opts', opts)
-    sdk.transaction.makeSellOffer.call(sdk,
-      kp, account, opts.asset.MA, opts.asset.XLM, '1', '1'
-    ).then(r => console.log('\rrunMonitor.sell Bob sdk.transaction.makeSellOffer r', r, loop))
+  let sell = (loop = false) => { // {{{2
+    //console.trace('\rrunMonitor.sell loop', loop)
+    sdk.server.loadAccount({ name: 'Bob', }).then(account => {
+      sdk.transaction.makeSellOffer.call(sdk,
+        kp, account, opts.asset.MA, opts.asset.XLM, '1', '1'
+      ).then(r => console.log('\rrunMonitor.sell Bob sdk.transaction.makeSellOffer r', r, loop))
+    })
   }
   let trade = effect => { // {{{2
     if (!opts?.cyn?.account) {
@@ -198,9 +201,11 @@ function runMonitor (opts) { // {{{1
       clearTimeout(opts.timeoutId) // TODO get rid of the outer timeout
 
       // 1. Make buy offer for Bob: buy 2 MA for 4 XLM.
-      sdk.transaction.makeBuyOffer.call(sdk,
-        kp, account, opts.asset.XLM, opts.asset.MA, '2', '2'
-      ).then(r => console.log(`runMonitor.trade Bob sdk.transaction.makeBuyOffer r ${r}`));
+      sdk.server.loadAccount({ name: 'Bob', }).then(account => {
+        sdk.transaction.makeBuyOffer.call(sdk,
+          kp, account, opts.asset.XLM, opts.asset.MA, '2', '2'
+        ).then(r => console.log(`runMonitor.trade Bob sdk.transaction.makeBuyOffer r ${r}`))
+      })
 
       // 2. Setup TM timeout.
       //timeoutID = setTimeout(sell, opts.timeoutTM) // FIXME

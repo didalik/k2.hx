@@ -14,7 +14,7 @@ The following sequence diagram outlines the core of the TM use case:
 
 ```
 +-----+   +------+    +-----+   +-----+         +----+   +------+
-| Ann |   | demo |    | Bob |   | Cyn |         | TM |   | cron |
+| A*  |   | demo |    | Bob |   | Cyn |         | TM |   | cron |
 +-----+   +------+    +-----+   +-----+         +----+   +------+
    |         |           |         |              |    reset |
    |         |           |         |              |<---------|

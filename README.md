@@ -66,9 +66,10 @@ The following sequence diagram outlines the core of the demo use case:
    |                                          |<--------------------------|
    |                                          | made HEXA 800 unclawable  |
    |                                          |-------------------------->|
-   | breakDeal                                |         |                 |
-   |----------------------------------------->| clawback HEXA 1000        |
-   |                                          |-------->|                 |
+   |                                          |         |                 |
+   | breakDeal                                |         |
+   |----------------------------------------->| clawback ClawableHEXA 1000
+   |                                          |-------->|
    |                                   repaid |         |
    |<-----------------------------------------|         |
    |                                          |         |

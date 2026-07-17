@@ -59,9 +59,9 @@ The codebase has [SDK](lib/sdk.mjs), [API](lib/api.js), and the entry points for
 
 All tests are `ava`-based. Run unit tests with `npm test`. Run integration tests with `make`,
 supported test cases are:
-- `DEMO=mock TM=mock make dg2b`; [sample output](demoit/output/DEMOmockTMmock.out)
-- `DEMO=mock TM=skip make dg2b`; [sample output](demoit/output/DEMOmockTMskip.out)
-- `DEMO=mock make dg2b`; [sample output](demoit/output/DEMOmock.out)
-- `TM=skip make dg2b`; [sample output](demoit/output/TMskip.out)
-- `make dg2b`. [sample output](demoit/output/DEMO.out)
+- `DEMO=mock TM=mock make`; [sample output](demoit/output/DEMOmockTMmock.out)
+- `DEMO=mock TM=skip make`; [sample output](demoit/output/DEMOmockTMskip.out)
+- `DEMO=mock make`; [sample output](demoit/output/DEMOmock.out)
+- `TM=skip make`; [sample output](demoit/output/TMskip.out)
+- `make`. [sample output](demoit/output/DEMO.out)
 

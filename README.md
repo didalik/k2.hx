@@ -3,7 +3,7 @@
 This repo presents complete SDK, API, and the demo HTML for my hobby project Stellar Help Exchange (<b>hX</b>).
 It also contains all the unit and integration tests for you to run locally. The demo runs these integration tests globally.
 
-## Dev  ➡️  Test  ➡️  Demo
+## Dev  ➡️   Test  ➡️   Demo
 
 The demo use case is based on [this YouTube video](https://www.youtube.com/watch?v=y4TELgx28D4). It uses 3 actors - Ann, Bob, and Cyn.
 Ann is associated with the demo user and runs in a browser when running globally. Bob and Cyn are associated with the demo agents.
@@ -46,6 +46,17 @@ When running globally, it gets reset by `cron` at 3am daily and runs on Stellar 
 When the trade happens, Ann is granted access to run the demo, and Bob wants to buy MA 2@2. When the demo is done, it makes Cyn sell MA 2@2,
 and when the TM is notified of the trade, it makes Bob to re-sell MA 1@1 again. If more demo users want to buy MA 1@1, one of them is notified of the trade.
 If running globally and the demo user is not online at this moment, nothing happens and everything hangs until the TM timeout fires and the show goes on.
+
+The following sequence diagram outlines the core of the demo use case:
+
+```
++-----+                                                +----+ +-----+ +-----+
+| Ann |                                                | hX | | Cyn | | Bob |
++-----+                                                +----+ +-----+ +-----+
+   | request                                              |
+   |----------------------------------------------------->|
+   | <i>Fresh red snapper for 4 persons GGS. HEXA 1000</i>       |
+```
 
 ### Dev
 

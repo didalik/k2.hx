@@ -51,9 +51,9 @@ If running globally and the demo user is not online at this moment, nothing happ
 
 The codebase has [SDK](lib/sdk.mjs), [API](lib/api.js), and the entry points for:
 - [the demo user](src/demoit/demouser.js);
-- [the demo agents](src/demoit/job.js#L8);
-- [TM reset](src/demoit/job.js#L43); and
-- [TM use](src/demoit/job.js#L78).
+- [the demo agents](src/demoit/job.js#L14);
+- [TM reset](src/demoit/job.js#L64); and
+- [TM use](src/demoit/job.js#L99).
 
 ### Test
 

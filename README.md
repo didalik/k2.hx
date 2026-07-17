@@ -50,12 +50,31 @@ If running globally and the demo user is not online at this moment, nothing happ
 The following sequence diagram outlines the core of the demo use case:
 
 ```
-+-----+                                          +----+    +-----+                          +-----+
-| Ann |                                          | hX |    | Cyn |                          | Bob |
-+-----+                                          +----+    +-----+                          +-----+
-   | request                                        |                                    offer |
-   |----------------------------------------------->|<-----------------------------------------|
-   | Fresh red snapper for 4 persons GGS. HEXA 1000 | Freshly caught red snapper 4lb. HEXA 800 |
++-----+                                    +----+    +-----+           +-----+
+| Ann |                                    | hX |    | Cyn |           | Bob |
++-----+                                    +----+    +-----+           +-----+
+   | makeRequest                              |         |       makeOffer |
+   |----------------------------------------->|<--------------------------|
+   | Red snapper for 4 persons GGS. HEXA 1000 | Red snapper 4lb. HEXA 800 |
+   |                                          |         |                 |
+   |                                          |    take | take            |
+   |<---------------------------------------------------|---------------->|
+   | deal                                     |         |            deal |
+   |--------------------------------------------------->|<----------------|
+   |                                          |         |                 |
+   |                                          |  convert ClawableHEXA 800 |
+   |                                          |<--------------------------|
+   |                                          | made HEXA 800 unclawable  |
+   |                                          |-------------------------->|
+   | breakDeal                                |         |                 |
+   |----------------------------------------->| clawback HEXA 1000        |
+   |                                          |-------->|                 |
+   |                                   repaid |         |
+   |<-----------------------------------------|         |
+   |                                          |         |
+   |                                  disputeBrokenDeal |
+   |                                          |<--------|
+   |                                          |         |
 ```
 
 ### Dev

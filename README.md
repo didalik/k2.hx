@@ -50,12 +50,12 @@ If running globally and the demo user is not online at this moment, nothing happ
 The following sequence diagram outlines the core of the demo use case:
 
 ```
-+-----+                                          +----+ +-----+ +-----+
-| Ann |                                          | hX | | Cyn | | Bob |
-+-----+                                          +----+ +-----+ +-----+
-   | request                                        |
-   |----------------------------------------------->|
-   | Fresh red snapper for 4 persons GGS. HEXA 1000 |
++-----+                                          +----+    +-----+                          +-----+
+| Ann |                                          | hX |    | Cyn |                          | Bob |
++-----+                                          +----+    +-----+                          +-----+
+   | request                                        |                                    offer |
+   |----------------------------------------------->|<-----------------------------------------|
+   | Fresh red snapper for 4 persons GGS. HEXA 1000 | Freshly caught red snapper 4lb. HEXA 800 |
 ```
 
 ### Dev

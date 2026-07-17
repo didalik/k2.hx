@@ -80,6 +80,7 @@ define tm_request_demo # {{{1
 		while [ ! -e $$VAULT/$$demouser.granted ]; do sleep 1; done
 		$(call demo)
 		npx ava ${SRC}/demodone.js
+		rm $$VAULT/Issuer.in
 		echo "$$$$ $@ tm_request_demo for $$demouser DONE"; sleep 6
 		for du in ${DEMO_USERS}; do
 		  if [ ! -e $$VAULT/$$du.granted ]; then

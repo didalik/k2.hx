@@ -63,5 +63,5 @@ supported test cases are:
 - `DEMO=mock TM=skip make dg2b`; [sample output](demoit/output/DEMOmockTMskip.out)
 - `DEMO=mock make dg2b`; [sample output](demoit/output/DEMOmock.out)
 - `TM=skip make dg2b`; [sample output](demoit/output/TMskip.out)
-- `make`.
+- `make dg2b`. [sample output](demoit/output/DEMO.out)
 

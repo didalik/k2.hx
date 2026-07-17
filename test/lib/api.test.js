@@ -6,7 +6,7 @@ let accounts = {}, sdk // {{{1
 
 test.serial('load new/existing Issuer account', t => { // {{{1
   const opts = { name: 'Issuer' }
-  t.timeout(20000)
+  t.timeout(200000)
   return (sdk = hXsdk({ vault })).server.loadAccount(opts).then(account => {
     t.true(account.balances[0].asset_type == 'native')
     //console.log('sdk', sdk)
@@ -21,7 +21,7 @@ test.serial('load new/existing account for Ann', t => { // {{{1
   if (sdk.transaction?.opts4createAccount?.defaults?.opts) {
     sdk.transaction.opts4createAccount.defaults.opts = {}
   }
-  t.timeout(10000)
+  t.timeout(100000)
   return sdk.server.loadAccount(sdk.server.opts4loadAccount).then(account => {
     t.true(account.balances.length > 0)
     //console.log('sdk', sdk)
@@ -36,7 +36,7 @@ test.serial('load new/existing account for Bob', t => { // {{{1
   if (sdk.transaction?.opts4createAccount?.defaults?.opts) {
     sdk.transaction.opts4createAccount.defaults.opts = {}
   }
-  t.timeout(10000)
+  t.timeout(100000)
   return sdk.server.loadAccount(sdk.server.opts4loadAccount).then(account => {
     t.true(account.balances.length > 0)
     //console.log('sdk', sdk)

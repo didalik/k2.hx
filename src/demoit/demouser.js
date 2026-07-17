@@ -37,7 +37,7 @@ function DemoTmUse (opts) { // {{{1
       sdk.transaction.makeBuyOffer.call(sdk,
         Keypair.fromSecret(opts.recipientKeys[0]),
         account, opts.asset.XLM, opts.asset.MA, '1', '1'
-      ).then(r => console.log(`demouser.DemoTmUse sdk.transaction.makeBuyOffer r ${r}`))
+      ).then(r => console.log('demouser.DemoTmUse sdk.transaction.makeBuyOffer r.successful', r.successful))
     }
     let trade = effect => { // {{{2
       //console.log('demouser.DemoTmUse.trade effect', effect)

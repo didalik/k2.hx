@@ -21,11 +21,12 @@ test.serial('request demo', t => { // {{{1
     timeout2trade: 5000,
     vault,
   }
-  return demouser.DemoTmUse(opts).
-    then(r => {
+  try {
+    return demouser.DemoTmUse(opts).catch(e => { throw e; }).then(r => {
       t.is(r, 'OK')
       vault.put(`${process.env.demouser}.granted`, 'DONE')
     });
+  } catch (e) { throw e; }
 })
 
 test('run demo for Ann', t => { // {{{1

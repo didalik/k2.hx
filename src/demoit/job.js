@@ -204,7 +204,7 @@ function runMonitor (opts) { // {{{1
       sdk.server.loadAccount({ name: 'Bob', }).then(account => {
         sdk.transaction.makeBuyOffer.call(sdk,
           kp, account, opts.asset.XLM, opts.asset.MA, '2', '2'
-        ).then(r => console.log(`runMonitor.trade Bob sdk.transaction.makeBuyOffer r ${r}`))
+        ).then(r => console.log('runMonitor.trade Bob sdk.transaction.makeBuyOffer r.successful', r.successful))
       })
 
       // 2. Setup TM timeout.

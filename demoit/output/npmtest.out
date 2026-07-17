@@ -1,0 +1,74 @@
+
+> k2.hx@1.0.0 test
+> ava
+
+
+injectAccount - creating/getting creator...
+  - [skip] sdk › to use Networks.PUBLIC, set process.env.Networks_PUBLIC to "hX"
+  - [skip] sdk › if process.env.Networks_PUBLIC is set to anything else than "hX", an error is thrown
+  - [skip] sdk › add KNOWN property "server" to Networks.PUBLIC SDK
+  ✔ sdk › default network is Networks.TESTNET
+  ✔ sdk › add KNOWN property "server" to Networks.TESTNET SDK
+  ✔ sdk › access cached property "server" for Networks.TESTNET SDK
+injectAccount - creating/getting creator...
+vault.put key Creator.keys value [
+  'SA4EWPGNXZCNTDWIWUJ7J6CA3OYOL76ZUOMW5KB5WSU4APNEGSRSWE6E',
+  'GB57V5UZ7A5GSAGZV5MK277UKIKJVAEWE52OTMELD4ZKJZNROZJMP7MQ'
+]
+- loading creator.account GB57V5UZ7A5GSAGZV5MK277UKIKJVAEWE52OTMELD4ZKJZNROZJMP7MQ ...
+
+createAccount - creating account for Issuer GD26VE7V6M6X5DJQX2TWZ574NX7NECZKZ2DUBK3W5WUIBN6XY3LGRK2A 2026-07-17T21:34:44Z ...
+vault.put key Creator.keys value [
+  'SAUZCCYWGEQNKVOX66IXMB2ASUCXLHYVAIA5SB22BG5JAO54PO7YGLOH',
+  'GBYIVXAONWQNFNTLQV2JLPRUXLBTWLWCCMJ4AJ42ZEWOQPAVQWKFVF7A'
+]
+- loading creator.account GBYIVXAONWQNFNTLQV2JLPRUXLBTWLWCCMJ4AJ42ZEWOQPAVQWKFVF7A ...
+
+createAccount - creating account for Issuer GBD7NOO6P2LNHF3CONA6J4EFD6QFG7734BPBIA6AQFJ5EFRXJSFGDONN 2026-07-17T21:34:44Z ...
+vault.put key Issuer.keys value [
+  'SCXJJDTA377QNYQLH52HN6DZ45AG3PYMUOTLKT23MGVTAXFG33EHJW4O',
+  'GD26VE7V6M6X5DJQX2TWZ574NX7NECZKZ2DUBK3W5WUIBN6XY3LGRK2A'
+]
+loadAccount accountId GD26VE7V6M6X5DJQX2TWZ574NX7NECZKZ2DUBK3W5WUIBN6XY3LGRK2A - loading...
+  ✔ sdk › load new/existing Issuer account (7.2s)
+
+createAccount - creating account for Bob GBR7HYXBHLA6SSV6L3LUDK7XHDOZX7NRENA6FLEPQBIAQMWPUB2EN6Y3 2026-07-17T21:34:49Z ...
+vault.put key Issuer.keys value [
+  'SAWPU2FKIFHEOKIKLR2WN32OPAXE5ISMHPJYHPXRRAE3AG7AB4JN5IXE',
+  'GBD7NOO6P2LNHF3CONA6J4EFD6QFG7734BPBIA6AQFJ5EFRXJSFGDONN'
+]
+loadAccount accountId GBD7NOO6P2LNHF3CONA6J4EFD6QFG7734BPBIA6AQFJ5EFRXJSFGDONN - loading...
+  ✔ api › load new/existing Issuer account (7.9s)
+
+createAccount - creating account for Ann GBZCKG7W26N2DQSWFVFBDH3JPIWFC2LKZKCDKTPMKHN36TWHIPU4X4VK 2026-07-17T21:34:49Z ...
+vault.put key Ann.keys value [
+  'SA4SZTUC5UEM6TDBTGTU2ZCDYJVDHMYOITSITWY6O6DU7PW2O2STTRLQ',
+  'GBZCKG7W26N2DQSWFVFBDH3JPIWFC2LKZKCDKTPMKHN36TWHIPU4X4VK'
+]
+vault.put key Bob.keys value [
+  'SCCTVLOFQSMPBFUI3R2TN4EV74MUYZQTY4EENGCBXACLBR74PM34YGDJ',
+  'GBR7HYXBHLA6SSV6L3LUDK7XHDOZX7NRENA6FLEPQBIAQMWPUB2EN6Y3'
+]
+loadAccount accountId GBZCKG7W26N2DQSWFVFBDH3JPIWFC2LKZKCDKTPMKHN36TWHIPU4X4VK - loading...
+loadAccount accountId GBR7HYXBHLA6SSV6L3LUDK7XHDOZX7NRENA6FLEPQBIAQMWPUB2EN6Y3 - loading...
+  ✔ api › load new/existing account for Ann (5s)
+loadAccount accountId GBR7HYXBHLA6SSV6L3LUDK7XHDOZX7NRENA6FLEPQBIAQMWPUB2EN6Y3 - loading...
+  ✔ sdk › load new/existing Agent account (5.7s)
+  ✔ api › load new/existing account for Bob
+changeTrust 3 assets for undefined GBR7HYXBHLA6SSV6L3LUDK7XHDOZX7NRENA6FLEPQBIAQMWPUB2EN6Y3 2026-07-17T21:34:54Z ...
+vault.put key change.trust value DONE
+  ✔ sdk › change trust of the loaded Agent/Issuer pair using defaults (5.2s)
+fund undefined GBR7HYXBHLA6SSV6L3LUDK7XHDOZX7NRENA6FLEPQBIAQMWPUB2EN6Y3 clawback false 2026-07-17T21:34:49Z ...
+vault.put key fund.MA value DONE
+  ✔ sdk › fund Agent with loaded Issuer's MA, clear clawback flag (5s)
+fund undefined GBR7HYXBHLA6SSV6L3LUDK7XHDOZX7NRENA6FLEPQBIAQMWPUB2EN6Y3 clawback undefined 2026-07-17T21:34:59Z ...
+test.sign result AAAAAgAAAABj8+LhOsHpSr5e10Gr9zjdm/2xI0HirI+AUAgyz6B0RgAAAMgAN95bAAAAAgAAAAEAAAAAAAAAAAAAAABqWqBFAAAAAAAAAAIAAAABAAAAAPXqk/XzPX6NML6nbPf8bf7SCyrOh0Crdu2ogLfXxtZoAAAAAQAAAABj8+LhOsHpSr5e10Gr9zjdm/2xI0HirI+AUAgyz6B0RgAAAAFNQQAAAAAAAPXqk/XzPX6NML6nbPf8bf7SCyrOh0Crdu2ogLfXxtZoAAAAAAL68IAAAAABAAAAAPXqk/XzPX6NML6nbPf8bf7SCyrOh0Crdu2ogLfXxtZoAAAAFQAAAABj8+LhOsHpSr5e10Gr9zjdm/2xI0HirI+AUAgyz6B0RgAAAAFNQQAAAAAAAPXqk/XzPX6NML6nbPf8bf7SCyrOh0Crdu2ogLfXxtZoAAAAAAAAAAEAAAAAAAAAAs+gdEYAAABAPhYAUOmxyiWsn2cTm8u69LbTK8BCT4e5Ar418P7rEJIQSm1SFeH7rfjxC6zGn0H6nb7YgDmQbbAtj+PBTARmCdfG1mgAAABAJwqyeglGob6JCrWOyK5dQvOilvyH3tBFZHZx9MMaRdEzMWKZovOE0gOfQG0Zun34NKyp7a0IiDKmpkb2ogP3Cw==
+vault.put key fund.2sig value DONE
+  ✔ sdk › use XDR to fund local Agent with remote Issuer's MA, supply 2 signatures (4.6s)
+  ─
+
+  11 tests passed
+  3 tests skipped
+
+Press ENTER or type command to continue
+

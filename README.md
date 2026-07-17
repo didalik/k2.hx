@@ -9,7 +9,7 @@ The demo use case is based on [this YouTube video](https://www.youtube.com/watch
 Ann is associated with the demo user and runs in a browser when running globally. Bob and Cyn are associated with the demo agents.
 
 Four demo users - Abe, Al, Ava, and Aza - request the demo, but only one demo at a time is allowed to run.
-To let a demo user access the demo, I use what I call Stellar TESTNET Monitor (TM). The TM use case wraps the demo use case.
+To let a demo user access the demo, I employ what I call Stellar TESTNET Monitor (TM). The TM use case wraps the demo use case.
 The following sequence diagram outlines the core of the TM use case:
 
 ```

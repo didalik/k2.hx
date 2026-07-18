@@ -1,7 +1,7 @@
 # Public submodule k2.hx
 
 This repo presents complete SDK, API, and the demo HTML for my hobby project Stellar Help Exchange (<b>hX</b>).
-It also contains all the unit and integration tests for you to run locally. The demo runs these integration tests globally.
+It also contains all the unit and integration tests for you to run locally. The demo runs the integration tests globally.
 
 ## Dev  ➡️   Test  ➡️   Demo
 

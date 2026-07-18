@@ -57,6 +57,9 @@ The following sequence diagram outlines the core of the demo use case:
    |----------------------------------------->|<--------------------------|
    | Red snapper for 4 persons GGS. HEXA 1000 | Red snapper 4lb. HEXA 800 |
    |                                          |         |                 |
+   |                                          |         |                 |
+   |                                          | effects |                 |
+   |                                          |<--------|                 |
    |                                          |    take | take            |
    |<---------------------------------------------------|---------------->|
    | deal                                     |         |            deal |

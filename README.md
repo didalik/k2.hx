@@ -5,7 +5,7 @@ It also contains all the unit and integration tests for you to run locally. The 
 
 ## Dev  ➡️   Test  ➡️   Demo
 
-The demo use case is based on [this YouTube video](https://www.youtube.com/watch?v=y4TELgx28D4). It uses 3 actors - Ann, Bob, and Cyn.
+The demo use case is based on [this YouTube video](https://www.youtube.com/watch?v=y4TELgx28D4). It has 3 actors - Ann, Bob, and Cyn.
 Ann is associated with the demo user and runs in a browser when running globally. Bob and Cyn are associated with the demo agents.
 
 Four demo users - Abe, Al, Ava, and Aza - request the demo, but only one demo at a time is allowed to run.

@@ -9,11 +9,7 @@
   "scripts": {
     "test": "ava"
   },
-  "ava": {
-    "files": [
-      "test/lib/*.js"
-    ]
-  },
+  "ava": { "files": ["test/lib/*.js"] },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/didalik/k2.hx.git"

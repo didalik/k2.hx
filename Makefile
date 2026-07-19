@@ -118,12 +118,12 @@ demoit:
 	@uname -a
 	echo -e "\n$$$$ $@ started on $$(date)"
 	  export VAULT=${VAULT}
-ifeq (${TM},skip) # {{{2
+ifeq (${TM},skip) # or, possibly, mock {{{2
 	echo "$$$$ $@ skipping reset_tm..."
 else
 ifeq (${TM},mock)
 	echo "$$$$ $@ skipping reset_tm..."
-else
+else # {{{2
 	$(call reset_tm)
 endif
 endif # }}}2
@@ -148,7 +148,7 @@ else # {{{3
 ifeq (${DEMO},mock)
 	  $(call tm_request_dmock)
 		echo -n "$$! "
-else
+else # {{{3
 	  $(call tm_request_demo)
 endif
 endif # }}}3

@@ -117,7 +117,7 @@ endef
 demoit:
 	@uname -a; echo -n 'node -v '; node -v
 	echo -e "\n$$$$ $@ started on $$(date)"
-	  export VAULT=${VAULT}
+	export VAULT=${VAULT}
 ifeq (${TM},skip) # or, possibly, mock {{{2
 	echo "$$$$ $@ skipping reset_tm..."
 else

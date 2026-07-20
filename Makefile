@@ -115,7 +115,7 @@ endef
 
 .PHONY: demoit # {{{1
 demoit:
-	@uname -a
+	@uname -a; echo -n 'node -v '; node -v
 	echo -e "\n$$$$ $@ started on $$(date)"
 	  export VAULT=${VAULT}
 ifeq (${TM},skip) # or, possibly, mock {{{2

@@ -68,10 +68,6 @@ define reset_tm # {{{1
   echo "$$$$ $@ reset_tm TM pid $$(cat $$VAULT/tm.pid)"
 endef
 
-define testplan # {{{1
-(sleep $$(( (RANDOM % 5) + 1 ));echo $$$$ $$demouser)
-endef
-
 define tm_request_demo # {{{1
 	request_demo() { # {{{2
 		echo "$$$$ $@ VAULT=$$VAULT; running tm_request_demo for $$demouser..."

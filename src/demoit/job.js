@@ -3,7 +3,19 @@ import { effectDesc, makeOffer, parseHEXA, takeOffer, takeRequest, } from '../..
 import { Context, destFund, stopMonitor, } from '../../lib/util.js'
 import { Asset, Keypair, } from '@stellar/stellar-sdk'
 
-let context, sdk, vault, accounts = {}, stateInitial = { // {{{1
+let context, sdk, vault, accounts = { // {{{1
+  load: _ => Promise.all([
+    sdk.server.loadAccount({ name: 'Issuer' }).then(account => {
+      accounts.issuer = account; accounts.issuerKeys = vault.get('Issuer.keys'); return Promise.resolve();
+    }),
+    sdk.server.loadAccount({ name: 'Bob' }).then(account => {
+      accounts.bob = account; accounts.bobKeys = vault.get('Bob.keys'); return Promise.resolve();
+    }),
+    sdk.server.loadAccount({ name: 'Cyn' }).then(account => {
+      accounts.cyn = account; accounts.cynKeys = vault.get('Cyn.keys'); return Promise.resolve();
+    }),
+  ]),
+}, stateInitial = { // {{{1
   handle: handle_stateInitial,
 }, stateAnnBobSettingUp = { // {{{1
   handle: handle_stateAnnBobSettingUp
@@ -97,13 +109,17 @@ function DemoTmReset (opts = {}) { // {{{2
 }
 
 function DemoTmUse (opts) { // {{{1
-  startMonitor(Object.assign(opts, { cyn: { account: accounts.cyn, }, }))
-  return opts.prr.promise.then(r => {
-    if (r.startsWith('outer timeout')) {
-      console.log(r)
-      r = 'ok'
-    }
-    return stopMonitor(r, opts);
+  vault ??= opts.vault
+  sdk ??= hXsdk({ vault })
+  return accounts.load().then(_ => {
+    startMonitor(Object.assign(opts, { cyn: { account: accounts.cyn, }, }))
+    return opts.prr.promise.then(r => {
+      if (r.startsWith('outer timeout')) {
+        console.log(r)
+        r = 'ok'
+      }
+      return stopMonitor(r, opts);
+    });
   });
 }
 

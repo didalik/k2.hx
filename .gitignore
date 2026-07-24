@@ -9,4 +9,5 @@ node_modules/
 *.log
 demo.html
 demo_tm.html
+tm.html
 vault/

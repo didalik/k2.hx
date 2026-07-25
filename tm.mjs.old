@@ -1,10 +1,5 @@
 import { put, reset, } from './lib/util.mjs' // {{{1
-import { closeStreams, /*startTestnetMonitor,*/ } from './lib/demo_tm.mjs'
-import { hXsdk } from './lib/sdk.mjs'
-import { issuerEffect, stopMonitor, } from './lib/util.js'
-
-let vault
-let sdk = hXsdk({ vault })
+import { closeStreams, startTestnetMonitor, } from './lib/demo_tm.mjs'
 
 const out = m => typeof m == 'string' ? put( // {{{1
   `<div style='text-align: right'><b>${m}</b></div>`
@@ -20,5 +15,5 @@ put(`Delivered ${location} on ${Date()} to YOUR_IP_ADDRESS`, '<hr/>')
 
 // TODO start JobRequest rvault
 //
-//startTestnetMonitor(out) // {{{1
+startTestnetMonitor(out) // {{{1
 

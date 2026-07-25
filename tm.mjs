@@ -5,6 +5,9 @@ const out = m => typeof m == 'string' ? put( // {{{1
   `<div style='text-align: right'><b>${m}</b></div>`
 ) : (console.log(m.message), put(m.message))
 
+const issuerPK = 'IssuerPK'
+console.log('issuerPK', issuerPK)
+
 reset({ // {{{1
   content: document.getElementById('content1'), handleCtrlC: closeStreams,
 })

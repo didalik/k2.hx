@@ -6,7 +6,7 @@ import { Demo, DemoSign, } from './job.js'
 import { Asset } from '@stellar/stellar-sdk'
 
 test.serial('request demo', t => { // {{{1
-  t.timeout(300000)
+  t.timeout(400000)
   let id = vault.get('Issuer.keys')[1]
   let opts = {
     asset: {

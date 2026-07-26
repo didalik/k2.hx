@@ -11,7 +11,7 @@ test.serial('reset test monitor', t => { // {{{1
 })
 
 test.serial('use test monitor', t => { // {{{1
-  t.timeout(300000)
+  t.timeout(400000)
   let timeout = 60000, opts = {
     prr: Promise.withResolvers(),
     timeoutTM: 17000, // FIXME

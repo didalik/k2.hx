@@ -3,6 +3,10 @@ import { closeStreams, /*startTestnetMonitor,*/ } from './lib/demo_tm.mjs'
 import { hXsdk } from './lib/sdk.mjs'
 import { issuerEffect, stopMonitor, } from './lib/util.js'
 
+window.process = { env: {
+  Networks_PUBLIC: null, // or 'hX'
+}}
+
 let vault
 let sdk = hXsdk({ vault })
 
@@ -11,7 +15,8 @@ const out = m => typeof m == 'string' ? put( // {{{1
 ) : (console.log(m.message), put(m.message))
 
 const issuerPK = 'IssuerPK'
-console.log('issuerPK', issuerPK)
+const params = new URLSearchParams(location.search)
+console.log('issuerPK', issuerPK, 'demouser', params.get('demouser'), 'sdk', sdk)
 
 reset({ // {{{1
   content: document.getElementById('content1'), handleCtrlC: closeStreams,

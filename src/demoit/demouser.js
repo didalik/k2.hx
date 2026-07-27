@@ -11,6 +11,7 @@ let context, sdk, vault, accounts = {}, stateInitial = { // {{{1
 
 function Demo (opts) { // see also https://www.youtube.com/watch?v=y4TELgx28D4 {{{1
   vault ??= opts.vault
+  user = opts.name
   sdk ??= opts.sdk ??= hXsdk({ vault })
   context = opts.context = new Context(stateInitial, 'user')
 

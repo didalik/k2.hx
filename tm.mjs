@@ -1,14 +1,14 @@
 import { put, reset, } from './lib/util.mjs' // {{{1
 import { closeStreams, /*startTestnetMonitor,*/ } from './lib/demo_tm.mjs'
+import vault from './lib/vault.js'
 import { hXsdk } from './lib/sdk.mjs'
 import { issuerEffect, stopMonitor, } from './lib/util.js'
 
 window.process = { env: {
-  Networks_PUBLIC: null, // or 'hX'
+  Networks_PUBLIC: null, // or 'hX' to use public network
 }}
 
-let vault
-let sdk = hXsdk({ vault })
+let sdk = hXsdk({ vault: vault.init() })
 
 const out = m => typeof m == 'string' ? put( // {{{1
   `<div style='text-align: right'><b>${m}</b></div>`

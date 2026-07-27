@@ -7,7 +7,7 @@ let context, sdk, vault, accounts = {}, stateInitial = { // {{{1
   handle: handle_stateInitial,
 }, stateCynAnnDeal = { // {{{1
   handle: handle_stateCynAnnDeal,
-}, user = process.env.demouser
+}, user
 
 function Demo (opts) { // see also https://www.youtube.com/watch?v=y4TELgx28D4 {{{1
   vault ??= opts.vault
@@ -26,6 +26,7 @@ function Demo (opts) { // see also https://www.youtube.com/watch?v=y4TELgx28D4 {
 function DemoTmUse (opts) { // {{{1
   if (!opts.vault) throw Error('opts.vault missing')
   vault = opts.vault
+  user = opts.name
   return (sdk = hXsdk({ vault })).server.loadAccount(opts).then(account => {
     opts.recipient = account
     opts.recipientKeys = vault.get(opts.name + '.keys')

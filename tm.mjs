@@ -41,6 +41,6 @@ let opts = { // {{{1
 }
 try {
   demouser.DemoTmUse(opts).catch(e => { throw e; }).then(r => {
-    vault.put(`${process.env.demouser}.granted`, 'DONE')
+    vault.put(`${name}.granted`, 'DONE')
   });
 } catch (e) { throw e; }

@@ -1,6 +1,6 @@
 import { HEX_KEY, makeRequest, txDesc, } from '../lib/api.js' // {{{1
 import { Context, } from '../lib/util.js'
-import vault from '../lib/vault.js'
+let vault, watcher
 
 let stateInitial = { // {{{1
   handle: handle_stateInitial,
@@ -11,14 +11,6 @@ Object.assign(stateInitial, Promise.withResolvers())
 Object.assign(stateCynAnnDeal, Promise.withResolvers())
 
 let context = new Context(stateInitial, 'Ann') // {{{1
-
-let watcher = vault.watch(null, (eventType, filename) => { // {{{1
-  if (filename.startsWith('Issuer.desc.')) {
-    let v = vault.get(filename)
-    //console.log(`${filename} file changed! Event type: ${eventType}`, v)
-    context.state.handle(v)
-  }
-});
 
 function handle_stateCynAnnDeal (eotx) { // {{{1
   if (eotx.txId && eotx.txId === stateCynAnnDeal.txId) { // effect follows the tx
@@ -63,7 +55,13 @@ function handle_stateInitial (e) { // {{{1
 
 function rs4d (sdk, opts) { // Request red snapper for dinner. {{{1
   opts.sdk ??= sdk
-
+  vault ??= sdk.vault
+  watcher = vault.watch(null, (eventType, filename) => {
+    if (filename.startsWith('Issuer.desc.')) {
+      let v = vault.get(filename)
+      context.state.handle(v)
+    }
+  });
   opts.description = 'Fresh red snapper for 4 persons GGS. HEXA 1000'
   opts.validity = '0'
   context.opts = opts

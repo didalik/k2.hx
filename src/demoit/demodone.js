@@ -1,7 +1,9 @@
 import test from 'ava'; // {{{1
-import vault from '../../lib/vault.js'
 import { DemoDone, } from './job.js'
 import { Asset } from '@stellar/stellar-sdk'
+import fs from 'fs'
+import vault from '../../lib/vault.js'
+vault.init(fs)
 
 test.serial('demo done', t => { // {{{1
   t.timeout(80000)

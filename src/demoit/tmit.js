@@ -1,6 +1,8 @@
 import test from 'ava'; // {{{1
-import vault from '../../lib/vault.js'
 import { DemoTmReset, DemoTmUse, } from './job.js'
+import fs from 'fs'
+import vault from '../../lib/vault.js'
+vault.init(fs)
 
 test.serial('reset test monitor', t => { // {{{1
   t.timeout(90000)

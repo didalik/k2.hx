@@ -1,6 +1,6 @@
-import vault from '../lib/vault.js' // {{{1
-import { HEX_KEY, parseHEXA, takeOffer, takeRequest, } from '../lib/api.js'
+import { HEX_KEY, parseHEXA, takeOffer, takeRequest, } from '../lib/api.js' // {{{1
 import { Context, } from '../lib/util.js'
+let vault, watcher
 
 let stateInitial = { // {{{1
   handle: handle_stateInitial,
@@ -15,12 +15,6 @@ Object.assign(stateDeals, { broken: Promise.withResolvers(),
 })
 
 let context = new Context(stateInitial, 'Cyn') // {{{1
-
-let watcher = vault.watch(null, (eventType, filename) => { // {{{1
-  if (filename.startsWith('Issuer.desc.')) {
-    context.state.handle(vault.get(filename))
-  }
-});
 
 function handle_stateDeals (e) { // {{{1
   if (stateDeals.offer_deal && stateDeals.request_deal && !stateDeals.disputing &&
@@ -79,7 +73,13 @@ function handle_stateInitial (e) { // {{{1
 
 function run (sdk, opts) { // {{{1
   opts.sdk ??= sdk
-
+  vault ??= sdk.vault
+  watcher = vault.watch(null, (eventType, filename) => {
+    if (filename.startsWith('Issuer.desc.')) {
+      let v = vault.get(filename)
+      context.state.handle(v)
+    }
+  });
   opts.validity = '0'
   context.opts = opts
   return Promise.all([stateInitial.offer.promise, stateInitial.request.promise]).then(_ => {

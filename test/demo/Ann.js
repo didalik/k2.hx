@@ -1,9 +1,11 @@
 import test from 'ava'; // {{{1
 import { hXsdk } from '../../lib/sdk.mjs';
-import vault from '../../lib/vault.js'
 import { DemoSign, } from '../../lib/job.js'
 import { setupActor, } from '../../lib/util.js'
 import { rs4d, } from '../../demo/Ann.js'
+import fs from 'fs'
+import vault from '../../lib/vault.js'
+vault.init(fs)
 
 let sdk // {{{1
 
@@ -19,7 +21,7 @@ test.serial('setup new/existing account for Ann', t => { // {{{1
     name: process.env.demouser,
     //nolog: true,
     sign: (xdr, tag) => DemoSign({ secret: issuerKeys[0], vault, xdr, tag }),
-    vault
+    vault: vault.init(fs),
   }
   t.timeout(200000)
   return setupActor(sdk = hXsdk({ vault }), opts).then(_ => {

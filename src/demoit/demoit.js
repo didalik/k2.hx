@@ -1,9 +1,11 @@
 import test from 'ava'; // {{{1
 import { hXsdk, } from '../../lib/sdk.mjs'
-import vault from '../../lib/vault.js'
 import demouser from './demouser.js'
 import { Demo, DemoSign, } from './job.js'
 import { Asset } from '@stellar/stellar-sdk'
+import fs from 'fs'
+import vault from '../../lib/vault.js'
+vault.init(fs)
 
 test.serial('request demo', t => { // {{{1
   t.timeout(400000)

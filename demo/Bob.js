@@ -1,6 +1,6 @@
-import vault from '../lib/vault.js' // {{{1
-import { Context, } from '../lib/util.js'
+import { Context, } from '../lib/util.js' // {{{1
 import { makeOffer, txDesc, } from '../lib/api.js'
+let vault, watcher
 
 let stateInitial = { // {{{1
   handle: handle_stateInitial,
@@ -11,14 +11,6 @@ Object.assign(stateInitial, Promise.withResolvers())
 Object.assign(stateCynBobDeal, Promise.withResolvers())
 
 let context = new Context(stateInitial, 'Bob') // {{{1
-
-let watcher = vault.watch(null, (eventType, filename) => { // {{{1
-  if (filename.startsWith('Issuer.desc.')) {
-    let v = vault.get(filename)
-    //console.log(`Bob ${filename} ${eventType} v`, v)
-    context.state.handle(v)
-  }
-});
 
 function handle_stateCynBobDeal (eotx) { // {{{1
   if (eotx.txId && eotx.txId === stateCynBobDeal.txId) { // effect follows the tx
@@ -62,7 +54,13 @@ function handle_stateInitial (e) { // {{{1
 
 function fcrs (sdk, opts) { // Offer freshly caught red snapper. {{{1
   opts.sdk ??= sdk
-
+  vault ??= sdk.vault
+  watcher = vault.watch(null, (eventType, filename) => {
+    if (filename.startsWith('Issuer.desc.')) {
+      let v = vault.get(filename)
+      context.state.handle(v)
+    }
+  });
   opts.description = 'Freshly caught red snapper 4lb. HEXA 800'
   opts.validity = '0'
   context.opts = opts

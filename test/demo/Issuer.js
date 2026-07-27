@@ -1,7 +1,9 @@
 import test from 'ava'; // {{{1
 import { hXsdk } from '../../lib/sdk.mjs';
-import vault from '../../lib/vault.js'
 import { issuerEffect, stopMonitor, } from '../../lib/util.js'
+import fs from 'fs'
+import vault from '../../lib/vault.js'
+vault.init(fs)
 
 let opts = { name: 'Issuer', streams: [], vault }, prr = Promise.withResolvers(), sdk // {{{1
 

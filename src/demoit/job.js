@@ -200,7 +200,6 @@ function runMonitor (opts) { // {{{1
   accounts.asset = opts.asset
 
   let sell = (loop = false) => { // {{{2
-    //console.trace('\rrunMonitor.sell loop', loop)
     sdk.server.loadAccount({ name: 'Bob', }).then(account => {
       sdk.transaction.makeSellOffer.call(sdk,
         kp, account, opts.asset.MA, opts.asset.XLM, '1', '1'
@@ -211,16 +210,18 @@ function runMonitor (opts) { // {{{1
     if (!opts?.cyn?.account) {
       throw Error('Cyn account NOT LOADED')
     }
-    //console.log('runMonitor.trade effect', effect)
 
     if (+effect.bought_amount == 1) { // Bob sold 1 MA for 1 XLM
       clearTimeout(opts.timeoutId) // TODO get rid of the outer timeout
 
-      // 1. Make buy offer for Bob: buy 2 MA for 4 XLM.
+      // 1. Make buy offer for Bob: buy 2 MA for 4 XLM. Then, possibly, offer jobs.
       sdk.server.loadAccount({ name: 'Bob', }).then(account => {
         sdk.transaction.makeBuyOffer.call(sdk,
           kp, account, opts.asset.XLM, opts.asset.MA, '2', '2'
-        ).then(r => console.log('runMonitor.trade Bob sdk.transaction.makeBuyOffer r.successful', r.successful))
+        ).then(r => {
+          console.log('runMonitor.trade Bob sdk.transaction.makeBuyOffer r.successful', r.successful)
+          r.successful && opts.offerJobs && opts.offerJobs()
+        })
       })
 
       // 2. Setup TM timeout.

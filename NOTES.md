@@ -1,6 +1,6 @@
 ## Steps
 
-Step 1. Follow [https://docs.github.com/en/get-started/using-git/splitting-a-subfolder-out-into-a-new-repository?platform=linux](https://docs.github.com/en/get-started/using-git/splitting-a-subfolder-out-into-a-new-repository?platform=linux), copy `git-filter-repo` to `~/.nvm/versions/node/v20.19.2/bin`.
+Step 1. Follow [https://docs.github.com/en/get-started/using-git/splitting-a-subfolder-out-into-a-new-repository?platform=linux](https://docs.github.com/en/get-started/using-git/splitting-a-subfolder-out-into-a-new-repository?platform=linux), copy `git-filter-repo` to `~/.nvm/versions/node/v22.23.1/bin`.
 
 Step 2. Run
 ```

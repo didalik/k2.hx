@@ -215,14 +215,25 @@ function runMonitor (opts) { // {{{1
       clearTimeout(opts.timeoutId) // TODO get rid of the outer timeout
 
       // 1. Make buy offer for Bob: buy 2 MA for 4 XLM. Then, possibly, offer jobs.
-      sdk.server.loadAccount({ name: 'Bob', }).then(account => {
-        sdk.transaction.makeBuyOffer.call(sdk,
+      sdk.server.loadAccount({ name: 'Bob', }).
+        then(account => sdk.transaction.makeBuyOffer.call(sdk,
           kp, account, opts.asset.XLM, opts.asset.MA, '2', '2'
-        ).then(r => {
-          console.log('runMonitor.trade Bob sdk.transaction.makeBuyOffer r.successful', r.successful)
-          r.successful && opts.offerJobs && opts.offerJobs()
-        })
-      })
+        )).then(r => {
+          console.log('runMonitor trade Bob sdk.transaction.makeBuyOffer r.successful', r.successful)
+          try {
+            return r.successful && opts.offerJobs && opts.offerJobs();
+          } catch(e) {
+            console.error(e)
+            process.exit(1);
+          } finally {
+            console.log('runMonitor trade finally')
+          }
+        }).catch(e => {
+          console.error(e)
+          process.exit(1);
+        }).finally(_ => {
+          console.log('runMonitor trade DONE')
+        });
 
       // 2. Setup TM timeout.
       //timeoutID = setTimeout(sell, opts.timeoutTM) // FIXME
@@ -230,7 +241,7 @@ function runMonitor (opts) { // {{{1
       clearTimeout(timeoutID)
       sell(true)
     } else {
-      console.log('runMonitor.trade *** ERROR *** effect', effect)
+      console.log('runMonitor trade *** ERROR *** effect', effect)
       throw Error('UNEXPECTED')
     }
   } // }}}2

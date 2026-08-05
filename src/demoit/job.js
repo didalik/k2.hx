@@ -87,7 +87,8 @@ function DemoSign (opts) { // {{{1
 function DemoTmReset (opts = {}) { // {{{2
   if (!opts.vault) throw Error('opts.vault missing')
   vault = opts.vault
-  return (sdk = hXsdk({ vault })).server.loadAccount({ name: 'Issuer' }).
+
+  return (sdk = hXsdk({ out: opts?.out, vault })).server.loadAccount({ name: 'Issuer' }).
     then(account => {
       accounts.issuer = account
       accounts.issuerKeys = vault.get('Issuer.keys')
@@ -110,7 +111,7 @@ function DemoTmReset (opts = {}) { // {{{2
 
 function DemoTmUse (opts) { // {{{1
   vault ??= opts.vault
-  sdk ??= hXsdk({ vault })
+  sdk ??= hXsdk({ out: opts?.out, vault })
   return accounts.load().then(_ => {
     startMonitor(Object.assign(opts, { cyn: { account: accounts.cyn, }, }))
     return opts.prr.promise.then(r => {

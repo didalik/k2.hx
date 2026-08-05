@@ -28,7 +28,7 @@ function DemoTmUse (opts) { // {{{1
   if (!opts.vault) throw Error('opts.vault missing')
   vault = opts.vault
   user = opts.name
-  return (sdk = hXsdk({ vault })).server.loadAccount(opts).then(account => {
+  return (sdk = hXsdk({ out: opts.out, vault })).server.loadAccount(opts).then(account => {
     opts.recipient = account
     opts.recipientKeys = vault.get(opts.name + '.keys')
     return sdk.transaction.changeTrust(opts);
@@ -39,11 +39,9 @@ function DemoTmUse (opts) { // {{{1
       sdk.transaction.makeBuyOffer.call(sdk,
         Keypair.fromSecret(opts.recipientKeys[0]),
         account, opts.asset.XLM, opts.asset.MA, '1', '1'
-      ).then(r => console.log('demouser.DemoTmUse sdk.transaction.makeBuyOffer r.successful', r.successful))
+      ).then(r => opts.out('demouser.DemoTmUse sdk.transaction.makeBuyOffer r.successful ' + r.successful))
     }
     let trade = effect => { // {{{2
-      //console.log('demouser.DemoTmUse.trade effect', effect)
-
       opts.prr.resolve('OK') // demo granted
     } // }}}2
     sdk.addStream(opts, `${opts.name}'s trading effects`, [['trade', trade]], account.id, true)

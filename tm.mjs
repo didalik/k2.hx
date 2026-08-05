@@ -1,7 +1,7 @@
 import { put, reset, } from './lib/util.mjs' // {{{1
-import { closeStreams, /*startTestnetMonitor,*/ } from './lib/demo_tm.mjs'
+//import { closeStreams, /*startTestnetMonitor,*/ } from './lib/demo_tm.mjs'
 import vault from './lib/vault.js'
-import { hXsdk } from './lib/sdk.mjs'
+//import { hXsdk } from './lib/sdk.mjs'
 import { issuerEffect, stopMonitor, } from './lib/util.js'
 import demouser from './src/demoit/demouser.js'
 import { Asset } from '@stellar/stellar-sdk'
@@ -12,19 +12,17 @@ window.process = { env: {
   Networks_PUBLIC: null, // or 'hX' to use public network
 }}
 
-let sdk = hXsdk({ vault: vault.init() })
-
 const out = m => typeof m == 'string' ? put(
   `<div style='text-align: right'><b>${m}</b></div>`
 ) : (console.log(m.message), put(m.message))
 
-const id = 'IssuerPK'
-console.log('id', id, 'demouser', name, 'sdk', sdk)
-
 reset({
-  content: document.getElementById('content1'), handleCtrlC: closeStreams,
+  content: document.getElementById('content1'), handleCtrlC: stopMonitor, // FIXME
 })
 put(`Delivered ${location} on ${Date()} to YOUR_IP_ADDRESS`, '<hr/>')
+
+const id = 'IssuerPK'
+out('demouser ' + name + ', issuerPK ' + id)
 
 let opts = { // {{{1
   asset: {
@@ -34,13 +32,20 @@ let opts = { // {{{1
   },
   issuer: { id, },
   name,
+  out,
   prr: Promise.withResolvers(),
   streams: [],
   timeout2trade: 5000,
   vault,
 }
-try {
+//let sdk = hXsdk({ out, vault: vault.init() })
+
+try { // {{{1
   demouser.DemoTmUse(opts).catch(e => { throw e; }).then(r => {
     vault.put(`${name}.granted`, 'DONE')
   });
-} catch (e) { throw e; }
+} catch (e) {
+  console.error('UNEXPECTED', e)
+  throw e; 
+}
+

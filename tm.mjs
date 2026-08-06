@@ -1,10 +1,9 @@
 import { put, reset, } from './lib/util.mjs' // {{{1
-//import { closeStreams, /*startTestnetMonitor,*/ } from './lib/demo_tm.mjs'
 import vault from './lib/vault.js'
-//import { hXsdk } from './lib/sdk.mjs'
 import { issuerEffect, stopMonitor, } from './lib/util.js'
 import demouser from './src/demoit/demouser.js'
 import { Asset } from '@stellar/stellar-sdk'
+import { generate_keypair, } from '../../jf/public/lib/sdk.js'
 
 const params = new URLSearchParams(location.search) // {{{1
 const name = params.get('demouser')
@@ -12,8 +11,8 @@ window.process = { env: {
   Networks_PUBLIC: null, // or 'hX' to use public network
 }}
 
-const out = m => typeof m == 'string' ? put(
-  `<div style='text-align: right'><b>${m}</b></div>`
+let color = 'blue'; const out = m => typeof m == 'string' ? put( // {{{1
+  `<div style='text-align: right; color: ${color}'>${m}</div>`
 ) : (console.log(m.message), put(m.message))
 
 reset({
@@ -38,11 +37,13 @@ let opts = { // {{{1
   timeout2trade: 5000,
   vault,
 }
-//let sdk = hXsdk({ out, vault: vault.init() })
 
 try { // {{{1
   demouser.DemoTmUse(opts).catch(e => { throw e; }).then(r => {
     vault.put(`${name}.granted`, 'DONE')
+    color = 'green'
+    opts.generate_keypair = generate_keypair
+    return demouser.startDemo(opts);
   });
 } catch (e) {
   console.error('UNEXPECTED', e)

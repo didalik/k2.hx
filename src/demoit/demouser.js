@@ -98,5 +98,41 @@ function setupAccount (opts) { // {{{1
   return sdk.transaction.changeTrust(opts);
 }
 
-export default { Demo, DemoTmUse, } // {{{1
+function startDemo (opts) { // {{{1
+  opts.out('startDemo started')
+  let secret = opts.account.keypair.secret()
+  //console.log('startDemo secret', secret)
+
+  const wsArgs = [location.toString().replace('http', 'ws')]
+  let client
+  return opts.generate_keypair.call(crypto.subtle).then(keys => {
+    const [sk, pk] = keys.split(' ')
+    const app = 'hX', iss = { name: opts.name, pk, secret, uuid: 'UUID', }
+    client = { app, iss, sk, wsArgs, WebSocket, }
+    //return (step.job = Job(client, step)).promise;
+    console.log('startDemo client', client)
+  });
+/*
+  let client, step = DemoReset
+  generate_keypair.call(crypto.subtle).then(keys => { // DemoReset {{{2
+    const [sk, pk] = keys.split(' ')
+    const app = 'hX', iss = { name: 'Ann', pk, secret, uuid: 'UUID', }
+    client = { app, iss, sk, wsArgs, WebSocket, }
+    return (step.job = Job(client, step)).promise;
+  }).then(result => { // DemoSetup {{{2
+    out(result)
+    step = DemoSetup
+    return (step.job = Job(client, step)).promise;
+  }).then(result => { // Demo {{{2
+    out(result)
+    out('- Ann: running Demo job')
+    return runDemo(client).promise;
+  }).then(result => { // teardown {{{2
+    out(result)
+    setTimeout(toggleDivs, 2000)
+  }) // }}}2
+*/
+}
+
+export default { Demo, DemoTmUse, startDemo, } // {{{1
 

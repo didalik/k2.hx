@@ -111,6 +111,10 @@ function startDemo (opts) { // {{{1
     client = { app, iss, sk, wsArgs, WebSocket, }
     //return (step.job = Job(client, step)).promise;
     console.log('startDemo client', client)
+
+    let audience = ['demo', 'issuer/sign']
+    let requests = opts.requests(audience)
+    return Promise.all(opts.Jobs(client, requests));
   });
 /*
   let client, step = DemoReset

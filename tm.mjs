@@ -3,7 +3,7 @@ import vault from './lib/vault.js'
 import { issuerEffect, stopMonitor, } from './lib/util.js'
 import demouser from './src/demoit/demouser.js'
 import { Asset } from '@stellar/stellar-sdk'
-import { generate_keypair, } from '../../jf/public/lib/sdk.js'
+import { Jobs, Offers, generate_keypair, } from '../../jf/public/lib/sdk.js'
 
 const params = new URLSearchParams(location.search) // {{{1
 const name = params.get('demouser')
@@ -43,6 +43,8 @@ try { // {{{1
     vault.put(`${name}.granted`, 'DONE')
     color = 'green'
     opts.generate_keypair = generate_keypair
+    opts.requests = Offers
+    opts.Jobs = Jobs
     return demouser.startDemo(opts);
   });
 } catch (e) {

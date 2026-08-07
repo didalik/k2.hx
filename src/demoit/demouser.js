@@ -112,8 +112,7 @@ function startDemo (opts) { // {{{1
     //return (step.job = Job(client, step)).promise;
     console.log('startDemo client', client)
 
-    let audience = ['demo', 'issuer/sign']
-    let requests = opts.requests(audience)
+    let requests = opts.requests()
     return Promise.all(opts.Jobs(client, requests));
   });
 /*

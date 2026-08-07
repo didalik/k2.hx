@@ -3,13 +3,70 @@ import vault from './lib/vault.js'
 import { issuerEffect, stopMonitor, } from './lib/util.js'
 import demouser from './src/demoit/demouser.js'
 import { Asset } from '@stellar/stellar-sdk'
-import { Jobs, Offers, generate_keypair, } from '../../jf/public/lib/sdk.js'
+import { Jobs, JWT, generate_keypair, verifyPayload, } from '../../jf/public/lib/sdk.js'
+import { Channel, } from '../../lib/util.mjs'
+
+const Demo = { // {{{1
+
+  Running: { // {{{2
+    handle: (context, event) => {
+      if (!event) {
+        return Demo.channel.receive().then(s =>
+          new JWT(s).setIssuer(Demo.client.iss, Demo.client.sk).
+          setAudience(Demo.aud).sign()
+        ).then(jwt => Demo.job.context.ws.send(jwt));
+      }
+      verifyPayload(event.message).then(payload => {
+        out({ message: payload.sub })
+      })
+    },
+  },
+  onclose: data => {
+    let context = Demo.job.context
+    Demo.job.resolve(`- ${context.attachment.iss.name}: Demo DONE`)
+  },
+  onerror: null, // is never called
+  onmessage:  data => {
+    let context = Demo.job.context
+    context.state.handle(context, data)
+  },
+  prefix: context => `- ${context.attachment.iss.name}: mocking Demo job<br/>`,
+}
+
+const IssuerSign = { // {{{1
+  Running: { // {{{2
+    handle: (context, event) => {
+      if (!event) {
+        return IssuerSign.channel.receive().then(s =>
+          new JWT(s).setIssuer(IssuerSign.client.iss, IssuerSign.client.sk).
+          setAudience(IssuerSign.aud).sign()
+        ).then(jwt => IssuerSign.job.context.ws.send(jwt));
+      }
+      verifyPayload(event.message).then(payload => {
+        out({ message: payload.sub })
+      })
+    },
+  },
+  indataEOD: true,
+  onclose: data => {
+    let context = IssuerSign.job.context
+    IssuerSign.job.resolve(`- ${context.attachment.iss.name}: IssuerSign DONE`)
+  },
+  onerror: null, // is never called
+  onmessage:  data => {
+    let context = IssuerSign.job.context
+    context.state.handle(context, data)
+  },
+  prefix: context => `<br/>- ${context.attachment.iss.name}: mocking IssuerSign job<br/>`,
+}
 
 const params = new URLSearchParams(location.search) // {{{1
 const name = params.get('demouser')
 window.process = { env: {
   Networks_PUBLIC: null, // or 'hX' to use public network
 }}
+
+let audience = ['demo', 'issuer/sign'] // {{{1
 
 let color = 'blue'; const out = m => typeof m == 'string' ? put( // {{{1
   `<div style='text-align: right; color: ${color}'>${m}</div>`
@@ -43,12 +100,22 @@ try { // {{{1
     vault.put(`${name}.granted`, 'DONE')
     color = 'green'
     opts.generate_keypair = generate_keypair
-    opts.requests = Offers
+    opts.requests = jobRequests
     opts.Jobs = Jobs
     return demouser.startDemo(opts);
   });
 } catch (e) {
   console.error('UNEXPECTED', e)
   throw e; 
+}
+
+function jobRequests () { // {{{1
+  return audience.map(a => {
+    switch (a) {
+      case 'issuer/sign': return Object.assign(IssuerSign, { aud: a });
+      case 'demo': return Object.assign(Demo, { aud: a });
+      default: throw Error('UNEXPECTED aud', aud);
+    }
+  });
 }
 

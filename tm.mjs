@@ -1,16 +1,16 @@
 import { put, reset, } from './lib/util.mjs' // {{{1
 import vault from './lib/vault.js'
-import { issuerEffect, stopMonitor, } from './lib/util.js'
+//import { issuerEffect, } from './lib/util.js'
 import demouser from './src/demoit/demouser.js'
 import { Asset } from '@stellar/stellar-sdk'
 import { Jobs, JWT, generate_keypair, verifyPayload, } from '../../jf/public/lib/sdk.js'
 import { Channel, } from '../../lib/util.mjs'
 
 const Demo = { // {{{1
-
   Running: { // {{{2
-    handle: (context, event) => {
+    handle: (context, event) => { // no event on first call
       if (!event) {
+        setupJC(Demo, context)
         return Demo.channel.receive().then(s =>
           new JWT(s).setIssuer(Demo.client.iss, Demo.client.sk).
           setAudience(Demo.aud).sign()
@@ -21,7 +21,7 @@ const Demo = { // {{{1
       })
     },
   },
-  onclose: data => {
+  onclose: data => { // {{{2
     let context = Demo.job.context
     Demo.job.resolve(`- ${context.attachment.iss.name}: Demo DONE`)
   },
@@ -30,13 +30,14 @@ const Demo = { // {{{1
     let context = Demo.job.context
     context.state.handle(context, data)
   },
-  prefix: context => `- ${context.attachment.iss.name}: mocking Demo job<br/>`,
+  prefix: context => `- ${context.attachment.iss.name}: mocking Demo job<br/>`, // }}}2
 }
 
 const IssuerSign = { // {{{1
   Running: { // {{{2
-    handle: (context, event) => {
+    handle: (context, event) => { // no event on first call
       if (!event) {
+        setupJC(IssuerSign, context)
         return IssuerSign.channel.receive().then(s =>
           new JWT(s).setIssuer(IssuerSign.client.iss, IssuerSign.client.sk).
           setAudience(IssuerSign.aud).sign()
@@ -47,8 +48,7 @@ const IssuerSign = { // {{{1
       })
     },
   },
-  indataEOD: true,
-  onclose: data => {
+  onclose: data => { // {{{2
     let context = IssuerSign.job.context
     IssuerSign.job.resolve(`- ${context.attachment.iss.name}: IssuerSign DONE`)
   },
@@ -57,7 +57,7 @@ const IssuerSign = { // {{{1
     let context = IssuerSign.job.context
     context.state.handle(context, data)
   },
-  prefix: context => `<br/>- ${context.attachment.iss.name}: mocking IssuerSign job<br/>`,
+  prefix: context => `<br/>- ${context.attachment.iss.name}: mocking IssuerSign job<br/>`, // }}}2
 }
 
 const params = new URLSearchParams(location.search) // {{{1
@@ -73,7 +73,7 @@ let color = 'blue'; const out = m => typeof m == 'string' ? put( // {{{1
 ) : (console.log(m.message), put(m.message))
 
 reset({
-  content: document.getElementById('content1'), handleCtrlC: stopMonitor, // FIXME
+  content: document.getElementById('content1'), handleCtrlC: stopDemo,
 })
 put(`Delivered ${location} on ${Date()} to YOUR_IP_ADDRESS`, '<hr/>')
 
@@ -98,11 +98,12 @@ let opts = { // {{{1
 try { // {{{1
   demouser.DemoTmUse(opts).catch(e => { throw e; }).then(r => {
     vault.put(`${name}.granted`, 'DONE')
+    put('<hr/>')
     color = 'green'
     opts.generate_keypair = generate_keypair
     opts.requests = jobRequests
     opts.Jobs = Jobs
-    return demouser.startDemo(opts);
+    return demouser.startJobs(opts);
   });
 } catch (e) {
   console.error('UNEXPECTED', e)
@@ -117,5 +118,22 @@ function jobRequests () { // {{{1
       default: throw Error('UNEXPECTED aud', aud);
     }
   });
+}
+
+function setupJC (job, context) { // {{{1
+  if (job.channel) {
+    return;
+  }
+  console.log('setupJC context', context, 'job', job)
+
+  job.channel = new Channel()
+  job.client = context.attachment
+  job.channel.send(`setupJC setting up ${context.opts.aud}...`)
+}
+
+function stopDemo () { // {{{1
+  put('stopDemo: stopping job IssuerSign...')
+  IssuerSign.channel.send('context.job.stdin.end()')
+  IssuerSign.Running.handle(IssuerSign.job.context)
 }
 

@@ -98,10 +98,10 @@ function setupAccount (opts) { // {{{1
   return sdk.transaction.changeTrust(opts);
 }
 
-function startDemo (opts) { // {{{1
-  opts.out('startDemo started')
+function startJobs (opts) { // {{{1
+  opts.out('startJobs started')
   let secret = opts.account.keypair.secret()
-  //console.log('startDemo secret', secret)
+  //console.log('startJobs secret', secret)
 
   const wsArgs = [location.toString().replace('http', 'ws')]
   let client
@@ -109,9 +109,6 @@ function startDemo (opts) { // {{{1
     const [sk, pk] = keys.split(' ')
     const app = 'hX', iss = { name: opts.name, pk, secret, uuid: 'UUID', }
     client = { app, iss, sk, wsArgs, WebSocket, }
-    //return (step.job = Job(client, step)).promise;
-    console.log('startDemo client', client)
-
     let requests = opts.requests()
     return Promise.all(opts.Jobs(client, requests));
   });
@@ -137,5 +134,5 @@ function startDemo (opts) { // {{{1
 */
 }
 
-export default { Demo, DemoTmUse, startDemo, } // {{{1
+export default { Demo, DemoTmUse, startJobs, } // {{{1
 

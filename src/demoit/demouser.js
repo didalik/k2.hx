@@ -31,8 +31,8 @@ function DemoTmUse (opts) { // {{{1
   return (sdk = hXsdk({ out: opts.out, vault })).server.loadAccount(opts).then(account => {
     opts.recipient = account
     opts.recipientKeys = vault.get(opts.name + '.keys')
-    return sdk.transaction.changeTrust(opts);
-  }).then(_ => {
+    return sdk.transaction.changeTrust(opts); // trust MA, HEXA, and ClawableHexa
+  }).then(_ => {                              // buy 1 MA for 1 XLM
     Object.assign(opts, { streams: [], }, Promise.withResolvers())
     let account = opts.recipient
     let buy = _ => { // {{{2
@@ -47,7 +47,7 @@ function DemoTmUse (opts) { // {{{1
     sdk.addStream(opts, `${opts.name}'s trading effects`, [['trade', trade]], account.id, true)
     setTimeout(buy, opts.timeout2trade) // to activate the trade function above
     return opts.prr.promise;
-  }).then(r => stopMonitor(r, opts));
+  }).then(r => stopMonitor(r, opts));         // bought 1 MA for 1 XLM
 }
 
 function deal (takingRequest) { // {{{1
@@ -91,16 +91,16 @@ function rs4d (opts) { // Request red snapper for dinner. {{{1
   then(takingRequest => opts.context.state.handle.call(opts, takingRequest));
 }
 
-function setupAccount (opts) { // {{{1
+/*function setupAccount (opts) { // {{{1
   let name = opts.name
   opts.recipient =  accounts[name]
   opts.recipientKeys = accounts[name + 'Keys']
   return sdk.transaction.changeTrust(opts);
 }
-
-function startJobs (opts) { // {{{1
-  opts.out('startJobs started')
-  let secret = opts.account.keypair.secret()
+*/
+function runJobs (opts) { // {{{1
+  opts.out('runJobs started')
+  let secret = opts.account.keypair.secret() // TODO get rid of secret
   //console.log('startJobs secret', secret)
 
   const wsArgs = [location.toString().replace('http', 'ws')]
@@ -112,27 +112,7 @@ function startJobs (opts) { // {{{1
     let requests = opts.requests()
     return Promise.all(opts.Jobs(client, requests));
   });
-/*
-  let client, step = DemoReset
-  generate_keypair.call(crypto.subtle).then(keys => { // DemoReset {{{2
-    const [sk, pk] = keys.split(' ')
-    const app = 'hX', iss = { name: 'Ann', pk, secret, uuid: 'UUID', }
-    client = { app, iss, sk, wsArgs, WebSocket, }
-    return (step.job = Job(client, step)).promise;
-  }).then(result => { // DemoSetup {{{2
-    out(result)
-    step = DemoSetup
-    return (step.job = Job(client, step)).promise;
-  }).then(result => { // Demo {{{2
-    out(result)
-    out('- Ann: running Demo job')
-    return runDemo(client).promise;
-  }).then(result => { // teardown {{{2
-    out(result)
-    setTimeout(toggleDivs, 2000)
-  }) // }}}2
-*/
 }
 
-export default { Demo, DemoTmUse, startJobs, } // {{{1
+export default { Demo, DemoTmUse, runJobs, } // {{{1
 

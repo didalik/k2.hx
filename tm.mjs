@@ -103,8 +103,8 @@ try { // {{{1
     opts.generate_keypair = generate_keypair
     opts.requests = jobRequests
     opts.Jobs = Jobs
-    return demouser.startJobs(opts);
-  });
+    return demouser.runJobs(opts);
+  }).then(r => console.log('jobs Demo and IssuerSign DONE, r', r));
 } catch (e) {
   console.error('UNEXPECTED', e)
   throw e; 
@@ -120,19 +120,25 @@ function jobRequests () { // {{{1
   });
 }
 
-function setupJC (job, context) { // {{{1
+function setupJC (job, context) { // setup job channel {{{1
   if (job.channel) {
     return;
   }
-  console.log('setupJC context', context, 'job', job)
+  //console.log('setupJC context', context, 'job', job)
 
   job.channel = new Channel()
   job.client = context.attachment
-  job.channel.send(`setupJC setting up ${context.opts.aud}...`)
+  job.channel.send(`setupJC ${name} setting up ${context.opts.aud}...\n`)
+  if (job === Demo) {
+    setTimeout(_ => {
+      Demo.channel.send('context.job.stdin.end()')
+      Demo.Running.handle(Demo.job.context)
+    }, 1000)
+  }
 }
 
 function stopDemo () { // {{{1
-  put('stopDemo: stopping job IssuerSign...')
+  put('stopDemo: stopping jobs Demo, IssuerSign...')
   IssuerSign.channel.send('context.job.stdin.end()')
   IssuerSign.Running.handle(IssuerSign.job.context)
 }

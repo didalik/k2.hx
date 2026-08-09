@@ -73,7 +73,7 @@ let color = 'blue'; const out = m => typeof m == 'string' ? put( // {{{1
 ) : (console.log(m.message), put(m.message))
 
 reset({
-  content: document.getElementById('content1'), handleCtrlC: stopDemo,
+  content: document.getElementById('content1'), handleCtrlC: stopIssuerSign,
 })
 put(`Delivered ${location} on ${Date()} to YOUR_IP_ADDRESS`, '<hr/>')
 
@@ -137,8 +137,8 @@ function setupJC (job, context) { // setup job channel {{{1
   }
 }
 
-function stopDemo () { // {{{1
-  put('stopDemo: stopping jobs Demo, IssuerSign...')
+function stopIssuerSign () { // {{{1
+  put('stopIssuerSign: stopping job IssuerSign...')
   IssuerSign.channel.send('context.job.stdin.end()')
   IssuerSign.Running.handle(IssuerSign.job.context)
 }

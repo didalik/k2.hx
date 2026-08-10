@@ -17,6 +17,7 @@ const Demo = { // {{{1
         ).then(jwt => Demo.job.context.ws.send(jwt));
       }
       verifyPayload(event.message).then(payload => {
+        payload.sub == 'demo EXIT CODE 0' && stopIssuerSign()
         out({ message: payload.sub })
       })
     },

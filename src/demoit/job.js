@@ -49,10 +49,8 @@ function Demo (opts) { // see also https://www.youtube.com/watch?v=y4TELgx28D4 {
 }
 
 function DemoDone (opts) { // {{{1
-  vault = opts.vault; sdk = hXsdk({ vault })
-  return (sdk = hXsdk({ vault })).server.loadAccount({ name: 'Cyn' }).then(account => {
-    //console.log('DemoDone account', account, 'opts', opts)
-
+  vault = opts.vault; sdk = hXsdk({ out: opts?.out, vault })
+  return sdk.server.loadAccount({ name: 'Cyn' }).then(account => {
     let kp = Keypair.fromSecret(vault.get('Cyn.keys')[0])
     return sdk.transaction.makeSellOffer.call(sdk,
       kp, account, opts.asset.MA, opts.asset.XLM, '2', '2'

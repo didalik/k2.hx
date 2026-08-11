@@ -14,9 +14,9 @@ test.serial('demo done', t => { // {{{1
       XLM: new Asset('XLM', null) 
     },
     issuer: { id, },
+    out: console.log,
     vault,
   }
-  return DemoDone(opts).
-    then(r => t.is(r, 'OK'));
+  return DemoDone(opts).then(r => t.is(r, 'OK'));
 })
 

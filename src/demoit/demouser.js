@@ -44,7 +44,7 @@ function DemoTmUse (opts) { // {{{1
     let trade = effect => { // {{{2
       opts.prr.resolve('OK') // demo granted
     } // }}}2
-    sdk.addStream(opts, `${opts.name}'s trading effects`, [['trade', trade]], account.id, true)
+    sdk.addStream(opts, `${opts.name}'s trading effects`, [['trade', trade]], account.id)
     setTimeout(buy, opts.timeout2trade) // to activate the trade function above
     return opts.prr.promise;
   }).then(r => stopMonitor(r, opts));         // bought 1 MA for 1 XLM

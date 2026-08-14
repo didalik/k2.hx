@@ -105,6 +105,7 @@ try { // {{{1
   demouser.DemoTmUse(opts).catch(e => { throw e; }).then(r => {
     vault.put(`${name}.granted`, 'DONE')
     put('<hr/>')
+    prrIEstart.resolve() // start streaming issuer's effects
     color = 'green'
     opts.generate_keypair = generate_keypair
     opts.requests = jobRequests
@@ -140,7 +141,6 @@ function setupJC (job, context) { // setup job channel {{{1
   job.client = context.attachment
   job.channel.send(`setupJC ${name} setting up ${context.opts.aud}...\n`)
   if (job === Demo) {
-    prrIEstart.resolve()
     out('setupJC mocking job Demo...')
     setTimeout(_ => {
       Demo.channel.send('context.job.stdin.end()')

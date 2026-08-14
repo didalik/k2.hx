@@ -244,7 +244,7 @@ function runMonitor (opts) { // {{{1
       throw Error('UNEXPECTED')
     }
   } // }}}2
-  sdk.addStream(opts, "Bob's trading effects", [['trade', trade]], account.id, true)
+  sdk.addStream(opts, "Bob's trading effects", [['trade', trade]], account.id) //, true)
   setTimeout(sell, opts.timeout2trade) // to activate the trade function above
 }
 

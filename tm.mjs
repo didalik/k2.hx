@@ -1,10 +1,15 @@
 import { put, reset, } from './lib/util.mjs' // {{{1
 import vault from './lib/vault.js'
-//import { issuerEffect, } from './lib/util.js'
+import { issuerEffect, stopMonitor, } from './lib/util.js'
 import demouser from './src/demoit/demouser.js'
 import { Asset } from '@stellar/stellar-sdk'
 import { Jobs, JWT, generate_keypair, verifyPayload, } from '../../jf/public/lib/sdk.js'
 import { Channel, } from '../../lib/util.mjs'
+import { hXsdk, } from './lib/sdk.mjs'
+
+let color = 'blue'; const out = m => typeof m == 'string' ? put( // {{{1
+  `<div style='text-align: right; color: ${color}'>${m}</div>`
+) : put(m.message)
 
 const Demo = { // {{{1
   Running: { // {{{2
@@ -69,17 +74,14 @@ window.process = { env: {
 
 let audience = ['demo', 'issuer/sign'] // {{{1
 
-let color = 'blue'; const out = m => typeof m == 'string' ? put( // {{{1
-  `<div style='text-align: right; color: ${color}'>${m}</div>`
-) : (console.log(m.message), put(m.message))
-
-reset({
+reset({ // {{{1
   content: document.getElementById('content1'), handleCtrlC: stopIssuerSign,
 })
 put(`Delivered ${location} on ${Date()} to YOUR_IP_ADDRESS`, '<hr/>')
 
 const id = 'IssuerPK'
 out('demouser ' + name + ', issuerPK ' + id)
+vault.put('Issuer.keys', [null, id])
 
 let opts = { // {{{1
   asset: {
@@ -95,8 +97,11 @@ let opts = { // {{{1
   timeout2trade: 5000,
   vault,
 }
+let optsIE = { name: 'Issuer', out, streams: [], vault }, sdk
+let prrIE = Promise.withResolvers(), prrIEstart = Promise.withResolvers()
 
 try { // {{{1
+  streamIssuerEffects()
   demouser.DemoTmUse(opts).catch(e => { throw e; }).then(r => {
     vault.put(`${name}.granted`, 'DONE')
     put('<hr/>')
@@ -131,6 +136,8 @@ function setupJC (job, context) { // setup job channel {{{1
   job.client = context.attachment
   job.channel.send(`setupJC ${name} setting up ${context.opts.aud}...\n`)
   if (job === Demo) {
+    prrIEstart.resolve()
+    out('setupJC mocking job Demo...')
     setTimeout(_ => {
       Demo.channel.send('context.job.stdin.end()')
       Demo.Running.handle(Demo.job.context)
@@ -139,8 +146,30 @@ function setupJC (job, context) { // setup job channel {{{1
 }
 
 function stopIssuerSign () { // {{{1
-  put('stopIssuerSign: stopping job IssuerSign...')
+  out('stopIssuerSign: stopping job IssuerSign...')
   IssuerSign.channel.send('context.job.stdin.end()')
   IssuerSign.Running.handle(IssuerSign.job.context)
+
+  stopMonitor(null, optsIE); prrIE.resolve()
+}
+
+function streamIssuerEffects () { // {{{1
+  prrIEstart.promise.then(_ => {
+    (sdk = hXsdk({ out, vault })).addStream(
+      optsIE,
+      "Issuer's effects",
+        [
+          ['account_credited', issuerEffect],
+          ['account_debited', issuerEffect],
+          ['claimable_balance_claimant_created', issuerEffect],
+          ['claimable_balance_claimed', issuerEffect],
+        ], 
+        id,
+        true // now
+    )
+    prrIE.promise.then(_ => out(JSON.stringify({ 
+      f: 'streamIssuerEffects', stoppedOn: new Date() 
+    })));
+  });
 }
 

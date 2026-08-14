@@ -98,7 +98,7 @@ let opts = { // {{{1
   vault,
 }
 let optsIE = { name: 'Issuer', out, streams: [], vault }, sdk
-let prrIE = Promise.withResolvers(), prrIEstart = Promise.withResolvers()
+let prrIEstop = Promise.withResolvers(), prrIEstart = Promise.withResolvers()
 
 try { // {{{1
   streamIssuerEffects()
@@ -110,7 +110,11 @@ try { // {{{1
     opts.requests = jobRequests
     opts.Jobs = Jobs
     return demouser.runJobs(opts);
-  }).then(r => console.log('jobs Demo and IssuerSign DONE, r', r));
+  }).then(r => console.log('jobs Demo and IssuerSign DONE, r', r)).then(_ => 
+    prrIEstop.promise.then(_ => out(JSON.stringify({
+      f: 'streamIssuerEffects', stoppedOn: new Date() 
+    })))
+  );
 } catch (e) {
   console.error('UNEXPECTED', e)
   throw e; 
@@ -150,7 +154,8 @@ function stopIssuerSign () { // {{{1
   IssuerSign.channel.send('context.job.stdin.end()')
   IssuerSign.Running.handle(IssuerSign.job.context)
 
-  stopMonitor(null, optsIE); prrIE.resolve()
+  //stopMonitor(null, optsIE); prrIEstop.resolve()
+  return stopMonitor(null, optsIE).then(r => prrIEstop.resolve(r));
 }
 
 function streamIssuerEffects () { // {{{1
@@ -167,9 +172,6 @@ function streamIssuerEffects () { // {{{1
         id,
         true // now
     )
-    prrIE.promise.then(_ => out(JSON.stringify({ 
-      f: 'streamIssuerEffects', stoppedOn: new Date() 
-    })));
   });
 }
 

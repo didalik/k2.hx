@@ -36,7 +36,9 @@ const Demo = { // {{{1
     let context = Demo.job.context
     context.state.handle(context, data)
   },
-  prefix: context => `- ${context.attachment.iss.name}: mocking Demo job<br/>`, // }}}2
+  prefix: context => `- ${context.attachment.iss.name}: mocking Demo job<br/>`,
+  prrStart: Promise.withResolvers(), prrStop: Promise.withResolvers(),
+  // }}}2
 }
 
 const IssuerSign = { // {{{1
@@ -101,11 +103,12 @@ let optsIE = { name: 'Issuer', out, streams: [], vault }, sdk
 let prrIEstop = Promise.withResolvers(), prrIEstart = Promise.withResolvers()
 
 try { // {{{1
-  streamIssuerEffects()
+  runDemo() // start after streamIssuerEffects is on
+  streamIssuerEffects() // start after demouser.DemoTmUse grants demo request
   demouser.DemoTmUse(opts).catch(e => { throw e; }).then(r => {
     vault.put(`${name}.granted`, 'DONE')
     put('<hr/>')
-    prrIEstart.resolve() // start streaming issuer's effects
+    prrIEstart.resolve() // start streaming issuer's demo effects
     color = 'green'
     opts.generate_keypair = generate_keypair
     opts.requests = jobRequests
@@ -131,6 +134,13 @@ function jobRequests () { // {{{1
   });
 }
 
+function runDemo () { // {{{1
+  Demo.prrStart.promise.then(_ => {
+    out('runDemo started on ' + new Date())
+    return Demo.prrStop.promise.then(_ => out('runDemo stopped on ' + new Date()));
+  });
+}
+
 function setupJC (job, context) { // setup job channel {{{1
   if (job.channel) {
     return;
@@ -141,11 +151,12 @@ function setupJC (job, context) { // setup job channel {{{1
   job.client = context.attachment
   job.channel.send(`setupJC ${name} setting up ${context.opts.aud}...\n`)
   if (job === Demo) {
-    out('setupJC mocking job Demo...')
+    out('setupJC run job Demo for 4s...')
     setTimeout(_ => {
       Demo.channel.send('context.job.stdin.end()')
       Demo.Running.handle(Demo.job.context)
-    }, 1000)
+      Demo.prrStop.resolve() // stop demo
+    }, 4000)
   }
 }
 
@@ -160,18 +171,18 @@ function stopIssuerSign () { // {{{1
 
 function streamIssuerEffects () { // {{{1
   prrIEstart.promise.then(_ => {
-    (sdk = hXsdk({ out, vault })).addStream(
-      optsIE,
-      "Issuer's effects",
-        [
-          ['account_credited', issuerEffect],
-          ['account_debited', issuerEffect],
-          ['claimable_balance_claimant_created', issuerEffect],
-          ['claimable_balance_claimed', issuerEffect],
-        ], 
-        id,
-        true // now
+    sdk = hXsdk({ out, vault })
+    sdk.addStream(optsIE, "Issuer's effects",
+      [
+        ['account_credited', issuerEffect],
+        ['account_debited', issuerEffect],
+        ['claimable_balance_claimant_created', issuerEffect],
+        ['claimable_balance_claimed', issuerEffect],
+      ], 
+      id,
+      true // now
     )
+    Demo.prrStart.resolve() // start demo
   });
 }
 

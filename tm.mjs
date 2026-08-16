@@ -1,11 +1,12 @@
 import { put, reset, } from './lib/util.mjs' // {{{1
 import vault from './lib/vault.js'
-import { issuerEffect, stopMonitor, } from './lib/util.js'
+import { issuerEffect, setupActor, stopMonitor, } from './lib/util.js'
 import demouser from './src/demoit/demouser.js'
 import { Asset } from '@stellar/stellar-sdk'
 import { Jobs, JWT, generate_keypair, verifyPayload, } from '../../jf/public/lib/sdk.js'
 import { Channel, } from '../../lib/util.mjs'
 import { hXsdk, } from './lib/sdk.mjs'
+import { rs4d, } from './demo/Ann.js'
 
 let color = 'blue'; const out = m => typeof m == 'string' ? put( // {{{1
   `<div style='text-align: right; color: ${color}'>${m}</div>`
@@ -37,6 +38,7 @@ const Demo = { // {{{1
     context.state.handle(context, data)
   },
   prefix: context => `- ${context.attachment.iss.name}: mocking Demo job<br/>`,
+  prrSetup: Promise.withResolvers(),
   prrStart: Promise.withResolvers(), prrStop: Promise.withResolvers(),
   // }}}2
 }
@@ -65,7 +67,9 @@ const IssuerSign = { // {{{1
     let context = IssuerSign.job.context
     context.state.handle(context, data)
   },
-  prefix: context => `<br/>- ${context.attachment.iss.name}: mocking IssuerSign job<br/>`, // }}}2
+  prefix: context => `<br/>- ${context.attachment.iss.name}: mocking IssuerSign job<br/>`, 
+  prrSetup: Promise.withResolvers(),
+  // }}}2
 }
 
 const params = new URLSearchParams(location.search) // {{{1
@@ -137,7 +141,28 @@ function jobRequests () { // {{{1
 function runDemo () { // {{{1
   Demo.prrStart.promise.then(_ => {
     out('runDemo started on ' + new Date())
-    return Demo.prrStop.promise.then(_ => out('runDemo stopped on ' + new Date()));
+    let opts = {
+      asset: 'HEXA',
+      amount: '1100',
+      clawback: false,
+      issuer: { id },
+      issuerKeys: [null, id],
+      log: out,
+      name,
+      //nolog: true,
+      sign: (...args) => { // (xdr, tag) => DemoSign({ secret: issuerKeys[0], vault, xdr, tag }),
+        IssuerSign.prr = Promise.withResolvers()
+        IssuerSign.channel.send(JSON.stringify(args))
+        IssuerSign.Running.handle(IssuerSign.job.context)
+        return IssuerSign.prr.promise;
+      },
+      vault
+    }
+    return setupActor(sdk = hXsdk({ out, vault }), opts).then(_ => {
+      return rs4d(sdk, opts); // Request red snapper for dinner.
+    }).then(_ => Demo.prrStop.resolve('OK')).then(r => {
+      return Demo.prrStop.promise.then(r => out('runDemo ' + r + ' stopped on ' + new Date()));
+    });
   });
 }
 
@@ -145,19 +170,20 @@ function setupJC (job, context) { // setup job channel {{{1
   if (job.channel) {
     return;
   }
-  //console.log('setupJC context', context, 'job', job)
-
   job.channel = new Channel()
   job.client = context.attachment
   job.channel.send(`setupJC ${name} setting up ${context.opts.aud}...\n`)
   if (job === Demo) {
-    out('setupJC run job Demo for 4s...')
+    out('setupJC run job Demo for 24s...')
     setTimeout(_ => {
       Demo.channel.send('context.job.stdin.end()')
       Demo.Running.handle(Demo.job.context)
       Demo.prrStop.resolve() // stop demo
-    }, 4000)
+    }, 24000)
   }
+  job.prrSetup.resolve()
+  //console.log('setupJC context', context, 'job', job)
+
 }
 
 function stopIssuerSign () { // {{{1
@@ -182,7 +208,11 @@ function streamIssuerEffects () { // {{{1
       id,
       true // now
     )
-    Demo.prrStart.resolve() // start demo
+    Promise.all([Demo.prrSetup.promise, IssuerSign.prrSetup.promise]).then(_ => {
+      //console.log('streamIssuerEffects Demo', Demo, 'IssuerSign', IssuerSign)
+
+      return Demo.prrStart.resolve(); // start demo
+    });
   });
 }
 

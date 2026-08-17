@@ -54,6 +54,10 @@ const IssuerSign = { // {{{1
         ).then(jwt => IssuerSign.job.context.ws.send(jwt));
       }
       verifyPayload(event.message).then(payload => {
+        if (payload.sub.startsWith('signed ')) {
+          IssuerSign.prr.resolve(payload.sub.slice(7))
+          return;
+        }
         out({ message: payload.sub })
       })
     },
@@ -152,7 +156,7 @@ function runDemo () { // {{{1
       //nolog: true,
       sign: (...args) => { // (xdr, tag) => DemoSign({ secret: issuerKeys[0], vault, xdr, tag }),
         IssuerSign.prr = Promise.withResolvers()
-        IssuerSign.channel.send(JSON.stringify(args))
+        IssuerSign.channel.send(JSON.stringify(args)+'\n')
         IssuerSign.Running.handle(IssuerSign.job.context)
         return IssuerSign.prr.promise;
       },

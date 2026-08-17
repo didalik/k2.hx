@@ -35,14 +35,14 @@ function handle_stateInitial (e) { // {{{1
     return;
   }
   if (e.txMemo == 'Request 0' && !stateInitial.txId) {
-    context.opts.log('Ann handle_stateInitial e', e)
+    context.opts.log('Ann handle_stateInitial e ' + JSON.stringify(e))
 
     stateInitial.txId = e.txId
     context.opts.r_amount = e.amount
     context.opts.r_balanceId = e.balance_id
   }
   if (stateInitial.txId == e.txMemo && !stateInitial.deal) {
-    context.opts.log('Ann handle_stateInitial e', e)
+    context.opts.log('Ann handle_stateInitial e ' + JSON.stringify(e))
 
     context.opts.e = e
     let dealTakeRequest = context.opts.sdk.transaction.dealTakeRequest

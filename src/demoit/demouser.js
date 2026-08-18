@@ -91,15 +91,8 @@ function rs4d (opts) { // Request red snapper for dinner. {{{1
   then(takingRequest => opts.context.state.handle.call(opts, takingRequest));
 }
 
-/*function setupAccount (opts) { // {{{1
-  let name = opts.name
-  opts.recipient =  accounts[name]
-  opts.recipientKeys = accounts[name + 'Keys']
-  return sdk.transaction.changeTrust(opts);
-}
-*/
 function runJobs (opts) { // {{{1
-  opts.out('runJobs started')
+  //opts.out('runJobs started')
   let secret = opts.account.keypair.secret() // TODO get rid of secret
   //console.log('startJobs secret', secret)
 

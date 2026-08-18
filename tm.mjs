@@ -23,8 +23,7 @@ const Demo = { // {{{1
         ).then(jwt => Demo.job.context.ws.send(jwt));
       }
       verifyPayload(event.message).then(payload => {
-        payload.sub == 'demo EXIT CODE 0' && stopIssuerSign()
-        out({ message: payload.sub })
+        handlePayload(payload) && out({ message: payload.sub })
       })
     },
   },
@@ -108,28 +107,41 @@ let opts = { // {{{1
   vault,
 }
 let optsIE = { name: 'Issuer', out, streams: [], vault }, sdk
-let prrIEstop = Promise.withResolvers(), prrIEstart = Promise.withResolvers()
+let prrIEstop = Promise.withResolvers(), prrIEstart = Promise.withResolvers(), prrRIEon = Promise.withResolvers()
 
 try { // {{{1
   runDemo() // start after streamIssuerEffects is on
-  streamIssuerEffects() // start after demouser.DemoTmUse grants demo request
+  streamIssuerEffects() // start after demouser.DemoTmUse grants demo request and remote issuer's effects are on
   demouser.DemoTmUse(opts).catch(e => { throw e; }).then(r => {
     vault.put(`${name}.granted`, 'DONE')
     put('<hr/>')
-    prrIEstart.resolve() // start streaming issuer's demo effects
+    prrIEstart.resolve()
     color = 'green'
     opts.generate_keypair = generate_keypair
     opts.requests = jobRequests
     opts.Jobs = Jobs
     return demouser.runJobs(opts);
   }).then(r => console.log('jobs Demo and IssuerSign DONE, r', r)).then(_ => 
-    prrIEstop.promise.then(_ => out(JSON.stringify({
+    prrIEstop.promise.then(_ => out('All DONE ' + JSON.stringify({
       f: 'streamIssuerEffects', stoppedOn: new Date() 
     })))
   );
 } catch (e) {
   console.error('UNEXPECTED', e)
   throw e; 
+}
+
+function handlePayload (payload) { // {{{1
+  console.log('handlePayload payload', payload)
+
+  switch (payload.sub) {
+    case 'sdk.addStream "Issuer\'s effects" DONE\n':
+      prrRIEon.resolve(); return true;
+    case 'demo EXIT CODE 0':
+      stopIssuerSign(); return true;
+    default:
+      return true;
+  }
 }
 
 function jobRequests () { // {{{1
@@ -178,12 +190,11 @@ function setupJC (job, context) { // setup job channel {{{1
   job.client = context.attachment
   job.channel.send(`setupJC ${name} setting up ${context.opts.aud}...\n`)
   if (job === Demo) {
-    out('setupJC run job Demo for 24s...')
-    setTimeout(_ => {
+    setTimeout(_ => { // close upstream to start remote job demo
       Demo.channel.send('context.job.stdin.end()')
       Demo.Running.handle(Demo.job.context)
-      Demo.prrStop.resolve() // stop demo
-    }, 24000)
+      //Demo.prrStop.resolve() // stop demo
+    }, 1000)
   }
   job.prrSetup.resolve()
   //console.log('setupJC context', context, 'job', job)
@@ -200,7 +211,9 @@ function stopIssuerSign () { // {{{1
 }
 
 function streamIssuerEffects () { // {{{1
-  prrIEstart.promise.then(_ => {
+  Promise.all([prrIEstart.promise, prrRIEon.promise]).then(_ => {
+    out('streamIssuerEffects started')
+
     sdk = hXsdk({ out, vault })
     sdk.addStream(optsIE, "Issuer's effects",
       [

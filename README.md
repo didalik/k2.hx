@@ -73,7 +73,7 @@ The following sequence diagram outlines the core of the demo use case:
    | breakDeal                                |         |
    |----------------------------------------->| clawback ClawableHEXA 1000
    |                                          |-------->|
-   |                                   repaid |         |
+   |                                    repay |         |
    |<-----------------------------------------|         |
    |                                          |         |
    |                                  disputeBrokenDeal |

@@ -132,7 +132,7 @@ try { // {{{1
 }
 
 function handlePayload (payload) { // {{{1
-  console.log('handlePayload payload', payload)
+  //console.log('handlePayload payload', payload)
 
   switch (payload.sub) {
     case 'sdk.addStream "Issuer\'s effects" DONE\n':

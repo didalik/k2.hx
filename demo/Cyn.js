@@ -71,7 +71,7 @@ function handle_stateInitial (e) { // {{{1
   }
 }
 
-function run (sdk, opts) { // {{{1
+function goCyn (sdk, opts) { // {{{1
   opts.sdk ??= sdk
   vault ??= sdk.vault
   watcher = vault.watch(null, (eventType, filename) => {
@@ -102,5 +102,5 @@ function take (opts, effect, takingOffer = null) { // {{{1
   return taking(opts).then(r => takingOffer ?? r);
 }
 
-export { run, } // {{{1
+export { goCyn, } // {{{1
 

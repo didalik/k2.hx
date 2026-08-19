@@ -2,7 +2,7 @@ import test from 'ava'; // {{{1
 import { hXsdk } from '../../lib/sdk.mjs';
 import { DemoSign, } from '../../lib/job.js'
 import { setupActor, } from '../../lib/util.js'
-import { run, } from '../../demo/Cyn.js'
+import { goCyn, } from '../../demo/Cyn.js'
 import fs from 'fs'
 import vault from '../../lib/vault.js'
 vault.init(fs)
@@ -23,7 +23,7 @@ test.serial('setup new/existing account for Cyn', t => { // {{{1
     vault: vault.init(fs),
   }
   t.timeout(200000)
-  return setupActor(sdk = hXsdk({ vault }), opts).then(_ => run(sdk, opts)).then(_ => {
+  return setupActor(sdk = hXsdk({ vault }), opts).then(_ => goCyn(sdk, opts)).then(_ => {
     vault.put('Issuer.in', 'DONE', { flag: 'a' })
     t.true(opts.destKeys.length == 2)
   });

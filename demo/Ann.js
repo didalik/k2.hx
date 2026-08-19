@@ -14,14 +14,15 @@ let context = new Context(stateInitial, 'Ann') // {{{1
 
 function handle_stateCynAnnDeal (eotx) { // {{{1
   if (eotx.txId && eotx.txId === stateCynAnnDeal.txId) { // effect follows the tx
-    context.opts.log('Ann handle_stateCynAnnDeal eotx', eotx, 'clawable', stateCynAnnDeal.amount)
+    context.opts.log('Ann handle_stateCynAnnDeal eotx ' + JSON.stringify(eotx) +
+      ' clawable ' + stateCynAnnDeal.amount)
 
     delete stateCynAnnDeal.txId
     context.opts.sdk.transaction.breakDeal(context.opts).
       then(_ => stateCynAnnDeal.resolve())
   } else if (!stateCynAnnDeal.amount) {                    // tx
     let desc = txDesc(eotx)
-    context.opts.log('Ann handle_stateCynAnnDeal desc', desc)
+    context.opts.log('Ann handle_stateCynAnnDeal desc ' + desc)
 
     context.opts.amount = stateCynAnnDeal.amount = desc.amount
     context.opts.dealTxId = stateCynAnnDeal.txId = desc.txId

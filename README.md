@@ -65,9 +65,9 @@ The following sequence diagram outlines the core of the demo use case:
    | deal                                     |         |            deal |
    |--------------------------------------------------->|<----------------|
    |                                          |         |                 |
-   |                                          |  convert ClawableHEXA 800 |
+   |                                          |  convert ClawableHexa 800 |
    |                                          |<--------------------------|
-   |                                          | made HEXA 800 unclawable  |
+   |                                          | make HEXA 800 unclawable  |
    |                                          |-------------------------->|
    |                                          |         |                 |
    | breakDeal                                |         |

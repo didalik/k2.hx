@@ -18,6 +18,7 @@ test.serial('request demo', t => { // {{{1
     },
     issuer: { id, },
     name: process.env.demouser,
+    out: console.log,
     prr: Promise.withResolvers(),
     streams: [],
     timeout2trade: 5000,
@@ -51,7 +52,7 @@ test('run demo for Ann', t => { // {{{1
     streams: [],
     vault
   }
-  return (opts.sdk = hXsdk({ vault })).server.loadAccount(opts).then(account => {
+  return (opts.sdk = hXsdk({ out: console.log, vault })).server.loadAccount(opts).then(account => {
     opts.recipient = account
     opts.recipientKeys = vault.get(opts.name + '.keys')
     return opts.sdk.transaction.changeTrust(opts);
@@ -76,6 +77,7 @@ test(`run demo for Bob and Cyn`, t => { // {{{1
     destKeys,
     issuerKeys: [null, issuerKeys[1]],
     log: console.log,
+    out: console.log,
     sign: (xdr, tag) => DemoSign({ secret: issuerKeys[0], vault, xdr, tag }),
     streams: [],
     vault

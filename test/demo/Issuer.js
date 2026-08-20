@@ -5,11 +5,11 @@ import fs from 'fs'
 import vault from '../../lib/vault.js'
 vault.init(fs)
 
-let opts = { name: 'Issuer', streams: [], vault }, prr = Promise.withResolvers(), sdk // {{{1
+let opts = { name: 'Issuer', out: console.log, streams: [], vault }, prr = Promise.withResolvers(), sdk // {{{1
 
 test.serial('load new/existing Issuer account', t => { // {{{1
   t.timeout(280000)
-  return (sdk = hXsdk({ vault })).server.loadAccount(opts).then(account => {
+  return (sdk = hXsdk({ out: console.log, vault })).server.loadAccount(opts).then(account => {
     sdk.addStream(opts, 
       "Issuer's effects",
       [

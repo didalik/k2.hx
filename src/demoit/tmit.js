@@ -6,7 +6,7 @@ vault.init(fs)
 
 test.serial('reset test monitor', t => { // {{{1
   t.timeout(90000)
-  return DemoTmReset({ vault }).then(r => {
+  return DemoTmReset({ out: console.log, vault }).then(r => {
     //accounts = r // { issuer, bob, cyn }
     t.is(vault.get('accounts.set'), 'DONE')
   })
@@ -15,6 +15,7 @@ test.serial('reset test monitor', t => { // {{{1
 test.serial('use test monitor', t => { // {{{1
   t.timeout(400000)
   let timeout = 60000, opts = {
+    out: console.log,
     prr: Promise.withResolvers(),
     timeoutTM: 17000, // FIXME
     timeout2trade: 5000,

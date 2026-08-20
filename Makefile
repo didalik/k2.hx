@@ -1,5 +1,5 @@
 .ONESHELL: # {{{1
-DEMO_USERS ?= Abe Al Ava Aza
+DEMO_USERS ?= Abe Al
 SHELL = /usr/bin/bash
 SRC = src/${.DEFAULT_GOAL}
 VAULT = ${.DEFAULT_GOAL}/vault

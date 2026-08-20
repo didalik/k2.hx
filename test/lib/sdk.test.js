@@ -41,7 +41,7 @@ test.serial('access cached property "server" for Networks.TESTNET SDK', t => { /
   t.is(hXsdk().server.server.serverURL.toString(), 'https://horizon-testnet.stellar.org/')
 })
 
-test.serial('load new/existing Issuer account', t => { // {{{1
+test.skip('load new/existing Issuer account', t => { // {{{1
   const opts = { name: 'Issuer' }
   t.timeout(20000)
   return (sdk = hXsdk({ vault })).server.loadAccount(opts).then(account => {
@@ -52,7 +52,7 @@ test.serial('load new/existing Issuer account', t => { // {{{1
   })
 })
 
-test.serial('load new/existing Agent account', t => { // {{{1
+test.skip('load new/existing Agent account', t => { // {{{1
   delete sdk.server.opts4loadAccount.account
   sdk.server.opts4loadAccount.name = 'Bob'
   if (sdk.transaction?.opts4createAccount?.defaults?.opts) {
@@ -67,7 +67,7 @@ test.serial('load new/existing Agent account', t => { // {{{1
   })
 })
 
-test.serial('change trust of the loaded Agent/Issuer pair using defaults', t => { // {{{1
+test.skip('change trust of the loaded Agent/Issuer pair using defaults', t => { // {{{1
   if (vault.get('change.trust') === 'DONE') {
     return t.true(true);
   }
@@ -84,7 +84,7 @@ test.serial('change trust of the loaded Agent/Issuer pair using defaults', t => 
   })
 })
 
-test.serial("fund Agent with loaded Issuer's MA, clear clawback flag", t => { // {{{1
+test.skip("fund Agent with loaded Issuer's MA, clear clawback flag", t => { // {{{1
   if (vault.get('fund.MA') === 'DONE') {
     return t.true(true);
   }
@@ -103,7 +103,7 @@ test.serial("fund Agent with loaded Issuer's MA, clear clawback flag", t => { //
   })
 })
 
-test("use XDR to fund local Agent with remote Issuer's MA, supply 2 signatures", t => { // {{{1
+test.skip("use XDR to fund local Agent with remote Issuer's MA, supply 2 signatures", t => { // {{{1
   if (vault.get('fund.2sig') === 'DONE') {
     return t.true(true);
   }

@@ -114,7 +114,7 @@ try { // {{{1
   streamIssuerEffects() // start after demouser.DemoTmUse grants demo request and remote issuer's effects are on
   demouser.DemoTmUse(opts).catch(e => { throw e; }).then(r => {
     vault.put(`${name}.granted`, 'DONE')
-    put('<hr/>')
+    put('<hr/>'); document.title = 'hX demo'
     prrIEstart.resolve()
     color = 'green'
     opts.generate_keypair = generate_keypair
@@ -232,4 +232,14 @@ function streamIssuerEffects () { // {{{1
     });
   });
 }
+
+/* Preventing page reload {{{1
+Thanks to Gemini:
+*/
+window.addEventListener('beforeunload', (event) => {
+    // Triggers the browser's native confirmation dialog
+    event.preventDefault();
+    // Legacy support requirement for certain browsers
+    event.returnValue = '';
+});
 

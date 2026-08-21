@@ -10,7 +10,7 @@ import { rs4d, } from './demo/Ann.js'
 
 let color = 'blue'; const out = m => typeof m == 'string' ? put( // {{{1
   `<div style='text-align: right; color: ${color}'>${m}</div>`
-) : put(m.message)
+) : put(m.message?.replaceAll('\n', '<br/>').replaceAll(' ', '&nbsp'))
 
 const Demo = { // {{{1
   Running: { // {{{2
@@ -115,6 +115,7 @@ try { // {{{1
   demouser.DemoTmUse(opts).catch(e => { throw e; }).then(r => {
     vault.put(`${name}.granted`, 'DONE')
     put('<hr/>'); document.title = 'hX demo'
+    //localStorage.clear() // FIXME
     prrIEstart.resolve()
     color = 'green'
     opts.generate_keypair = generate_keypair

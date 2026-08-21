@@ -1,1485 +1,595 @@
-Linux ko 6.8.0-134-generic #134-Ubuntu SMP PREEMPT_DYNAMIC Fri Jun 26 18:28:11 UTC 2026 aarch64 aarch64 aarch64 GNU/Linux
+Linux k2 6.8.0-137-generic #137-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 17 19:15:13 UTC 2026 aarch64 aarch64 aarch64 GNU/Linux
+node -v v22.23.2
 
-265087 demoit started on Fri Jul 17 07:18:59 PM UTC 2026
-265087 demoit VAULT=demoit/vault; running reset_tm...
+50301 demoit started on Fri Aug 21 06:14:02 PM UTC 2026
+50301 demoit VAULT=demoit/vault; running reset_tm...
 
 injectAccount - creating/getting creator...
 vault.put key Creator.keys value [
-  'SC7KB6LYW3XTOW77ODWZ7VGUQ72CSFAB4FFTAN32LWYSKGR72TNPG7UH',
-  'GDKJISIL7XFWQ4B4ND3P3RSJZZ4KUXVXGMOV76KJFRQDPPOZ4GASIVVY'
-]
-- loading creator.account GDKJISIL7XFWQ4B4ND3P3RSJZZ4KUXVXGMOV76KJFRQDPPOZ4GASIVVY ...
-
-createAccount - creating account for Issuer GDWYIGR3CNSILO2F6J3ML4CZYQNOJF7KR54NMFFBCYQ2HXO77D27E7EV 2026-07-17T19:19:02Z ...
+  'SBSGKDVEAU72YL4VK5ESYML7TMCYHAGZYY5MHPBXUBADWLLTKZHB4CW3',
+  'GAPY6YGZGWHSTBGQYEOKMRXN5TKGHBJ66AQMFNNTKBVPGDK3AD5UNZZ7'
+] options undefined
+- loading creator.account GAPY6YGZGWHSTBGQYEOKMRXN5TKGHBJ66AQMFNNTKBVPGDK3AD5UNZZ7 ...
+createAccount - creating account for Issuer GADVFKPCWLKU5SBU7EMWRAMQDLVVFZA44JHTXRDYFVXEXZ3PU5LGYTNH 2026-08-21T18:14:06Z...
 vault.put key Issuer.keys value [
-  'SBL76AXNV3ZMVX73BJFR77O4ZFQQ2RC6WCD7X3JEDHXZFA5464YCFZFA',
-  'GDWYIGR3CNSILO2F6J3ML4CZYQNOJF7KR54NMFFBCYQ2HXO77D27E7EV'
-]
-loadAccount accountId GDWYIGR3CNSILO2F6J3ML4CZYQNOJF7KR54NMFFBCYQ2HXO77D27E7EV - loading...
-
-createAccount - creating account for Bob GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733 2026-07-17T19:19:07Z ...
+  'SDAQ6PTBMRZOPCQ2KRDGHFMT22XHO5T2OO7RV5M2FQUVWS4FK6S75T5Z',
+  'GADVFKPCWLKU5SBU7EMWRAMQDLVVFZA44JHTXRDYFVXEXZ3PU5LGYTNH'
+] options undefined
+loadAccount accountId GADVFKPCWLKU5SBU7EMWRAMQDLVVFZA44JHTXRDYFVXEXZ3PU5LGYTNH - loading...
+createAccount - creating account for Bob GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY 2026-08-21T18:14:11Z...
 vault.put key Bob.keys value [
-  'SDF2JC63OJDHLADG4X4X5AGOASOG47PYP2HNFDQHF3GBXUMD2SUDXJAU',
-  'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-]
-loadAccount accountId GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733 - loading...
-
-createAccount - creating account for Cyn GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB 2026-07-17T19:19:12Z ...
+  'SDTST6TSTB27TFV2ITIXD4UWJZJ5FFFXXRJWDGQ5IJBCULPOGZN6AW5D',
+  'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY'
+] options undefined
+loadAccount accountId GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY - loading...
+createAccount - creating account for Cyn GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB 2026-08-21T18:14:16Z...
 vault.put key Cyn.keys value [
-  'SDTTKXXLNMEWJLN7ZVDXF2RLBOR2K7W5VHH6UNIO3MI6LOKSAC7FUWZ2',
-  'GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB'
-]
-loadAccount accountId GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB - loading...
-changeTrust 3 assets for undefined GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733 2026-07-17T19:19:12Z ...
-changeTrust 3 assets for undefined GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB 2026-07-17T19:19:17Z ...
-fund undefined GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733 clawback false 2026-07-17T19:19:07Z ...
-fund undefined GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB clawback false 2026-07-17T19:19:32Z ...
-vault.put key accounts.set value DONE
-  ✔ reset test monitor (37.9s)
-vault.put key tm.up value DONE
-265087 demoit reset_tm TM pid 265092
-265087 demoit VAULT=demoit/vault; running tm_request_demo for Al...
-265087 demoit VAULT=demoit/vault; running tm_request_demo for Abe...
-265087 demoit VAULT=demoit/vault; running tm_request_demo for Ava...
-265087 demoit VAULT=demoit/vault; running tm_request_demo for Aza...
-
-
+  'SDXG6M46RX52RERH4OFPLP4YGDIKC6LWLE5IIX4LJL4DMUFYJML3D362',
+  'GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB'
+] options undefined
+loadAccount accountId GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB - loading...
+changeTrust 3 assets for undefined GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY 2026-08-21T18:14:16Z...
+changeTrust 3 assets for undefined GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB 2026-08-21T18:14:21Z...
+fund undefined GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY clawback false 2026-08-21T18:14:11Z...
+fund undefined GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB clawback false 2026-08-21T18:14:36Z...
+vault.put key accounts.set value DONE options undefined
+  ✔ reset test monitor (38.9s)
+loadAccount accountId GADVFKPCWLKU5SBU7EMWRAMQDLVVFZA44JHTXRDYFVXEXZ3PU5LGYTNH - loading...
+loadAccount accountId GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY - loading...
+loadAccount accountId GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB - loading...
+vault.put key tm.up value DONE options undefined
+50301 demoit reset_tm TM pid 50307
+50301 demoit VAULT=demoit/vault; running tm_request_demo for Al...
+50301 demoit VAULT=demoit/vault; running tm_request_demo for Abe...
 
 
 injectAccount - creating/getting creator...
 injectAccount - creating/getting creator...
-injectAccount - creating/getting creator...
-injectAccount - creating/getting creator...
-- loading creator.account GDKJISIL7XFWQ4B4ND3P3RSJZZ4KUXVXGMOV76KJFRQDPPOZ4GASIVVY ...
-- loading creator.account GDKJISIL7XFWQ4B4ND3P3RSJZZ4KUXVXGMOV76KJFRQDPPOZ4GASIVVY ...
-- loading creator.account GDKJISIL7XFWQ4B4ND3P3RSJZZ4KUXVXGMOV76KJFRQDPPOZ4GASIVVY ...
-- loading creator.account GDKJISIL7XFWQ4B4ND3P3RSJZZ4KUXVXGMOV76KJFRQDPPOZ4GASIVVY ...
-
-createAccount - creating account for Al GCP7L3KQOHDQZ3NYJH7HEE2BYNTVFJOLSUIGE73PHC7PEVQDWI5DPXVE 2026-07-17T19:19:17Z ...
-
-createAccount - creating account for Abe GDCCXDNCFDJLZL2LCBRYB4WFSOPIG2ALVT3KZUC2DR7OZDJT4T57L3IG 2026-07-17T19:19:17Z ...
-
-createAccount - creating account for Ava GC7QKYC6TYHYYR4PZMOJMEGMBULMIVFIUHK5OWVEE2GQWJSQV754ATC3 2026-07-17T19:19:17Z ...
-
-createAccount - creating account for Aza GCHDUWLDHU32TAPK3H2OEUZF3CLNNEN63Q5YKHTWWPQ2YVXKUKSHE6SY 2026-07-17T19:19:17Z ...
-loadAccount accountId GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733 - loading...
-vault.put key Aza.keys value [
-  'SCHS74JOFWURHRD5B75VENZGJOCZJQHOZA4YDT5GOCZVY45YCH2RATYQ',
-  'GCHDUWLDHU32TAPK3H2OEUZF3CLNNEN63Q5YKHTWWPQ2YVXKUKSHE6SY'
-]
-loadAccount accountId GCHDUWLDHU32TAPK3H2OEUZF3CLNNEN63Q5YKHTWWPQ2YVXKUKSHE6SY - loading...
-changeTrust 3 assets for Aza GCHDUWLDHU32TAPK3H2OEUZF3CLNNEN63Q5YKHTWWPQ2YVXKUKSHE6SY 2026-07-17T19:19:42Z ...
-runMonitor.sell Bob sdk.transaction.makeSellOffer r tx.successful true false
-makeBuyOffer GCHDUWLDHU32TAPK3H2OEUZF3CLNNEN63Q5YKHTWWPQ2YVXKUKSHE6SY Asset { code: 'XLM', issuer: null } Asset {
-  code: 'MA',
-  issuer: 'GDWYIGR3CNSILO2F6J3ML4CZYQNOJF7KR54NMFFBCYQ2HXO77D27E7EV'
-} 1 1 0 ...
-demouser.DemoTmUse sdk.transaction.makeBuyOffer r.successful true
-loadAccount accountId GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733 - loading...
-stopMonitor - "Aza's trading effects" closed.
-  ✔ request demo (18.5s)
-vault.put key Aza.granted value DONE
-  ─
-
-  1 test passed
-makeBuyOffer GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733 Asset { code: 'XLM', issuer: null } Asset {
-  code: 'MA',
-  issuer: 'GDWYIGR3CNSILO2F6J3ML4CZYQNOJF7KR54NMFFBCYQ2HXO77D27E7EV'
-} 2 2 0 ...
-
-
-
-
-loadAccount accountId GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB - loading...
-loadAccount accountId GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733 - loading...
-loadAccount accountId GCHDUWLDHU32TAPK3H2OEUZF3CLNNEN63Q5YKHTWWPQ2YVXKUKSHE6SY - loading...
-loadAccount accountId GDWYIGR3CNSILO2F6J3ML4CZYQNOJF7KR54NMFFBCYQ2HXO77D27E7EV - loading...
-fund Bob GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733 clawback false 2026-07-17T19:19:57Z ...
-fund Cyn GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB clawback false 2026-07-17T19:19:27Z ...
-fund Aza GCHDUWLDHU32TAPK3H2OEUZF3CLNNEN63Q5YKHTWWPQ2YVXKUKSHE6SY clawback false 2026-07-17T19:19:57Z ...
-runMonitor.trade Bob sdk.transaction.makeBuyOffer r.successful true
-- Aza has HEXA 1100.0000000
-- Cyn has HEXA 900.0000000
-makeRequest r {
-  balanceId: '000000009a03a68801a09ec09427e77bcaac0fbd08f81e05d3e99550ac94dc7e7e804b39',
-  txId: '21af45aab434a3962d58c575f2166271bfebdeaaf8641bac029d6ec9c2b1e6d4',
-  request: 'Fresh red snapper for 4 persons GGS. HEXA 1000',
-  amount: '1000'
-}
-vault.put key Issuer.desc.1 value {
-  amount: '1000.0000000',
-  balance_id: '000000009a03a68801a09ec09427e77bcaac0fbd08f81e05d3e99550ac94dc7e7e804b39',
-  txDesc: 'Fresh red snapper for 4 persons GGS. HEXA 1000',
-  txId: '21af45aab434a3962d58c575f2166271bfebdeaaf8641bac029d6ec9c2b1e6d4',
-  txMemo: 'Request 0',
-  txMemoType: 'text',
-  txSrc: 'GCHDUWLDHU32TAPK3H2OEUZF3CLNNEN63Q5YKHTWWPQ2YVXKUKSHE6SY'
-}
-Cyn handle_stateInitial stateInitial.queue.length 0
-Ann handle_stateInitial e {
-  amount: '1000.0000000',
-  balance_id: '000000009a03a68801a09ec09427e77bcaac0fbd08f81e05d3e99550ac94dc7e7e804b39',
-  txDesc: 'Fresh red snapper for 4 persons GGS. HEXA 1000',
-  txId: '21af45aab434a3962d58c575f2166271bfebdeaaf8641bac029d6ec9c2b1e6d4',
-  txMemo: 'Request 0',
-  txMemoType: 'text',
-  txSrc: 'GCHDUWLDHU32TAPK3H2OEUZF3CLNNEN63Q5YKHTWWPQ2YVXKUKSHE6SY'
-}
-Cyn handle_stateInitial Request e {
-  amount: '1000.0000000',
-  balance_id: '000000009a03a68801a09ec09427e77bcaac0fbd08f81e05d3e99550ac94dc7e7e804b39',
-  txDesc: 'Fresh red snapper for 4 persons GGS. HEXA 1000',
-  txId: '21af45aab434a3962d58c575f2166271bfebdeaaf8641bac029d6ec9c2b1e6d4',
-  txMemo: 'Request 0',
-  txMemoType: 'text',
-  txSrc: 'GCHDUWLDHU32TAPK3H2OEUZF3CLNNEN63Q5YKHTWWPQ2YVXKUKSHE6SY'
-}
-loop GDKJISIL7XFWQ4B4ND3P3RSJZZ4KUXVXGMOV76KJFRQDPPOZ4GASIVVY *** ERROR *** { transaction: 'tx_bad_seq' } left 9
-loop GDKJISIL7XFWQ4B4ND3P3RSJZZ4KUXVXGMOV76KJFRQDPPOZ4GASIVVY *** ERROR *** { transaction: 'tx_bad_seq' } left 9
-loop GDKJISIL7XFWQ4B4ND3P3RSJZZ4KUXVXGMOV76KJFRQDPPOZ4GASIVVY *** ERROR *** { transaction: 'tx_bad_seq' } left 9
-
-createAccount - creating account for Ava GC7QKYC6TYHYYR4PZMOJMEGMBULMIVFIUHK5OWVEE2GQWJSQV754ATC3 2026-07-17T19:19:42Z ...
-
-createAccount - creating account for Al GCP7L3KQOHDQZ3NYJH7HEE2BYNTVFJOLSUIGE73PHC7PEVQDWI5DPXVE 2026-07-17T19:19:42Z ...
-
-createAccount - creating account for Abe GDCCXDNCFDJLZL2LCBRYB4WFSOPIG2ALVT3KZUC2DR7OZDJT4T57L3IG 2026-07-17T19:19:42Z ...
-vault.put key Ava.keys value [
-  'SC4UAS2NNJSWVFAYD3JT6TRALLF7E447WOAIAW6PMMKEODHNIBYQWMGF',
-  'GC7QKYC6TYHYYR4PZMOJMEGMBULMIVFIUHK5OWVEE2GQWJSQV754ATC3'
-]
-loadAccount accountId GC7QKYC6TYHYYR4PZMOJMEGMBULMIVFIUHK5OWVEE2GQWJSQV754ATC3 - loading...
-changeTrust 3 assets for Ava GC7QKYC6TYHYYR4PZMOJMEGMBULMIVFIUHK5OWVEE2GQWJSQV754ATC3 2026-07-17T19:20:13Z ...
-makeBuyOffer GC7QKYC6TYHYYR4PZMOJMEGMBULMIVFIUHK5OWVEE2GQWJSQV754ATC3 Asset { code: 'XLM', issuer: null } Asset {
-  code: 'MA',
-  issuer: 'GDWYIGR3CNSILO2F6J3ML4CZYQNOJF7KR54NMFFBCYQ2HXO77D27E7EV'
-} 1 1 0 ...
-demouser.DemoTmUse sdk.transaction.makeBuyOffer r.successful true
-loop GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733 *** ERROR *** { transaction: 'tx_bad_seq' } left 9
-fund Bob GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733 clawback false 2026-07-17T19:20:03Z ...
-- Bob has HEXA 100.0000000
-makeOffer r {
-  balanceId: '00000000999a64785a63e8e4cc0286da46bf3a1965e6812b2950789bb071b35174073c58',
-  txId: 'baf53c635e7b46fac32528a05d2a7a4cb19cd38d23caa78c7f63c58859a3ccda',
-  request: 'Freshly caught red snapper 4lb. HEXA 800',
-  amount: '0.0000100'
-}
-vault.put key Issuer.desc.2 value {
-  amount: '0.0000100',
-  balance_id: '00000000999a64785a63e8e4cc0286da46bf3a1965e6812b2950789bb071b35174073c58',
-  txDesc: 'Freshly caught red snapper 4lb. HEXA 800',
-  txId: 'baf53c635e7b46fac32528a05d2a7a4cb19cd38d23caa78c7f63c58859a3ccda',
-  txMemo: 'Offer 0',
-  txMemoType: 'text',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-Bob handle_stateInitial e {
-  amount: '0.0000100',
-  balance_id: '00000000999a64785a63e8e4cc0286da46bf3a1965e6812b2950789bb071b35174073c58',
-  txDesc: 'Freshly caught red snapper 4lb. HEXA 800',
-  txId: 'baf53c635e7b46fac32528a05d2a7a4cb19cd38d23caa78c7f63c58859a3ccda',
-  txMemo: 'Offer 0',
-  txMemoType: 'text',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-Cyn handle_stateInitial Offer e {
-  amount: '0.0000100',
-  balance_id: '00000000999a64785a63e8e4cc0286da46bf3a1965e6812b2950789bb071b35174073c58',
-  txDesc: 'Freshly caught red snapper 4lb. HEXA 800',
-  txId: 'baf53c635e7b46fac32528a05d2a7a4cb19cd38d23caa78c7f63c58859a3ccda',
-  txMemo: 'Offer 0',
-  txMemoType: 'text',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-Cyn take effect {
-  amount: '0.0000100',
-  balance_id: '00000000999a64785a63e8e4cc0286da46bf3a1965e6812b2950789bb071b35174073c58',
-  txDesc: 'Freshly caught red snapper 4lb. HEXA 800',
-  txId: 'baf53c635e7b46fac32528a05d2a7a4cb19cd38d23caa78c7f63c58859a3ccda',
-  txMemo: 'Offer 0',
-  txMemoType: 'text',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-loop GDKJISIL7XFWQ4B4ND3P3RSJZZ4KUXVXGMOV76KJFRQDPPOZ4GASIVVY *** ERROR *** { transaction: 'tx_bad_seq' } left 8
-loop GDKJISIL7XFWQ4B4ND3P3RSJZZ4KUXVXGMOV76KJFRQDPPOZ4GASIVVY *** ERROR *** { transaction: 'tx_bad_seq' } left 8
-
-createAccount - creating account for Al GCP7L3KQOHDQZ3NYJH7HEE2BYNTVFJOLSUIGE73PHC7PEVQDWI5DPXVE 2026-07-17T19:20:13Z ...
-
-createAccount - creating account for Abe GDCCXDNCFDJLZL2LCBRYB4WFSOPIG2ALVT3KZUC2DR7OZDJT4T57L3IG 2026-07-17T19:20:13Z ...
-takeOffer r {
-  balanceId: '000000008a07093838c0746e207b76731b011bb649808cfd2e0d767b7002ad025c8c8816',
-  txId: '7bd451a844ab31c3da43439f20bc918021331834ded602ca6454c8e8eb3339bc',
-  amount: '800'
-}
-Cyn take effect {
-  amount: '1000.0000000',
-  balance_id: '000000009a03a68801a09ec09427e77bcaac0fbd08f81e05d3e99550ac94dc7e7e804b39',
-  txDesc: 'Fresh red snapper for 4 persons GGS. HEXA 1000',
-  txId: '21af45aab434a3962d58c575f2166271bfebdeaaf8641bac029d6ec9c2b1e6d4',
-  txMemo: 'Request 0',
-  txMemoType: 'text',
-  txSrc: 'GCHDUWLDHU32TAPK3H2OEUZF3CLNNEN63Q5YKHTWWPQ2YVXKUKSHE6SY'
-}
+- loading creator.account GAPY6YGZGWHSTBGQYEOKMRXN5TKGHBJ66AQMFNNTKBVPGDK3AD5UNZZ7 ...
+- loading creator.account GAPY6YGZGWHSTBGQYEOKMRXN5TKGHBJ66AQMFNNTKBVPGDK3AD5UNZZ7 ...
+createAccount - creating account for Abe GAXJE7HBU46QKUU2POQKEELKRFTBIVG2CM74DLRNGVSNDXQB2CUBXJVA 2026-08-21T18:14:21Z...
+createAccount - creating account for Al GC2GJNXJ6D2DZWGFMJNMK3OGSXZ5IZH7M32X5CHLJJOIILCAQDOTPPB5 2026-08-21T18:14:21Z...
 vault.put key Abe.keys value [
-  'SAGRCWNGQGKPIIBQC3SX6IIVEWERJ2TTOOVIW33SRTRWCAFWABLWGHXC',
-  'GDCCXDNCFDJLZL2LCBRYB4WFSOPIG2ALVT3KZUC2DR7OZDJT4T57L3IG'
-]
-loadAccount accountId GDCCXDNCFDJLZL2LCBRYB4WFSOPIG2ALVT3KZUC2DR7OZDJT4T57L3IG - loading...
-changeTrust 3 assets for Abe GDCCXDNCFDJLZL2LCBRYB4WFSOPIG2ALVT3KZUC2DR7OZDJT4T57L3IG 2026-07-17T19:20:43Z ...
-vault.put key Issuer.desc.3 value {
-  amount: '800.0000000',
-  balance_id: '000000008a07093838c0746e207b76731b011bb649808cfd2e0d767b7002ad025c8c8816',
-  txDesc: '',
-  txId: '7bd451a844ab31c3da43439f20bc918021331834ded602ca6454c8e8eb3339bc',
-  txMemo: 'baf53c635e7b46fac32528a05d2a7a4cb19cd38d23caa78c7f63c58859a3ccda',
-  txMemoType: 'hash',
-  txSrc: 'GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB'
-}
-vault.get key Issuer.desc.3 v 
-vault.get key Issuer.desc.3 v 
-vault.get key Issuer.desc.3 v 
-Bob handle_stateInitial e {
-  amount: '800.0000000',
-  balance_id: '000000008a07093838c0746e207b76731b011bb649808cfd2e0d767b7002ad025c8c8816',
-  txDesc: '',
-  txId: '7bd451a844ab31c3da43439f20bc918021331834ded602ca6454c8e8eb3339bc',
-  txMemo: 'baf53c635e7b46fac32528a05d2a7a4cb19cd38d23caa78c7f63c58859a3ccda',
-  txMemoType: 'hash',
-  txSrc: 'GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB'
-}
-takeRequest r {
-  balanceId: '00000000e04e48dca3b8bb7e1db8fc54dcb8542c7dca637e57aa0b06795b72aff769acc6',
-  txId: '00bffd6ce496cb78702bc501e01c86766ce7aa5f859d74b155a8de371db69cf2',
-  amount: '0.0000100'
-}
-Bob handle_stateCynBobDeal desc {
-  amount: '800.0000000',
-  destination: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733',
-  txId: '5321959a66e2145d82734492e1a31cac3b59f881e68c9e6dbfc3fcc0412c7c6e'
-}
-vault.put key Issuer.desc.4 value {
-  amount: '0.0000100',
-  balance_id: '00000000e04e48dca3b8bb7e1db8fc54dcb8542c7dca637e57aa0b06795b72aff769acc6',
-  txDesc: '',
-  txId: '00bffd6ce496cb78702bc501e01c86766ce7aa5f859d74b155a8de371db69cf2',
-  txMemo: '21af45aab434a3962d58c575f2166271bfebdeaaf8641bac029d6ec9c2b1e6d4',
-  txMemoType: 'hash',
-  txSrc: 'GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB'
-}
-Ann handle_stateInitial e {
-  amount: '0.0000100',
-  balance_id: '00000000e04e48dca3b8bb7e1db8fc54dcb8542c7dca637e57aa0b06795b72aff769acc6',
-  txDesc: '',
-  txId: '00bffd6ce496cb78702bc501e01c86766ce7aa5f859d74b155a8de371db69cf2',
-  txMemo: '21af45aab434a3962d58c575f2166271bfebdeaaf8641bac029d6ec9c2b1e6d4',
-  txMemoType: 'hash',
-  txSrc: 'GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB'
-}
-vault.put key Issuer.desc.5 value {
-  amount: '800.0000000',
-  balance_id: '000000008a07093838c0746e207b76731b011bb649808cfd2e0d767b7002ad025c8c8816',
-  txDesc: '',
-  txId: '5321959a66e2145d82734492e1a31cac3b59f881e68c9e6dbfc3fcc0412c7c6e',
-  txMemo: '7bd451a844ab31c3da43439f20bc918021331834ded602ca6454c8e8eb3339bc',
-  txMemoType: 'return',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-Bob handle_stateCynBobDeal eotx {
-  amount: '800.0000000',
-  balance_id: '000000008a07093838c0746e207b76731b011bb649808cfd2e0d767b7002ad025c8c8816',
-  txDesc: '',
-  txId: '5321959a66e2145d82734492e1a31cac3b59f881e68c9e6dbfc3fcc0412c7c6e',
-  txMemo: '7bd451a844ab31c3da43439f20bc918021331834ded602ca6454c8e8eb3339bc',
-  txMemoType: 'return',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-} clawable 800.0000000
-Cyn handle_stateDeals Offer e {
-  amount: '800.0000000',
-  balance_id: '000000008a07093838c0746e207b76731b011bb649808cfd2e0d767b7002ad025c8c8816',
-  txDesc: '',
-  txId: '5321959a66e2145d82734492e1a31cac3b59f881e68c9e6dbfc3fcc0412c7c6e',
-  txMemo: '7bd451a844ab31c3da43439f20bc918021331834ded602ca6454c8e8eb3339bc',
-  txMemoType: 'return',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-vault.put key Issuer.desc.6 value {
-  amount: '800.0000000',
-  balance_id: undefined,
-  txDesc: '',
-  txId: '5321959a66e2145d82734492e1a31cac3b59f881e68c9e6dbfc3fcc0412c7c6e',
-  txMemo: '7bd451a844ab31c3da43439f20bc918021331834ded602ca6454c8e8eb3339bc',
-  txMemoType: 'return',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-vault.put key Issuer.desc.7 value {
-  amount: '800.0000000',
-  balance_id: undefined,
-  txDesc: '',
-  txId: '5321959a66e2145d82734492e1a31cac3b59f881e68c9e6dbfc3fcc0412c7c6e',
-  txMemo: '7bd451a844ab31c3da43439f20bc918021331834ded602ca6454c8e8eb3339bc',
-  txMemoType: 'return',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-Ann handle_stateCynAnnDeal desc {
-  amount: '1000.0000000',
-  destination: 'GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB',
-  txId: 'ad22e81ef2087a437d32431314f295a369eba030e4a5b68dcdd001aca81a425c'
-}
-{
-  memo: 'UyGVmmbiFF2Cc0SS4aMcrDtZ+IHmjJ5tv8P8wEEsfG4=',
-  _links: {
-    self: {
-      href: 'https://horizon-testnet.stellar.org/transactions/f3223076c3706ccac519434d6d9b206c1a88eb36362b236e765e30d7a26ed05a'
-    },
-    account: {
-      href: 'https://horizon-testnet.stellar.org/accounts/GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-    },
-    ledger: { href: 'https://horizon-testnet.stellar.org/ledgers/3659798' },
-    operations: {
-      href: 'https://horizon-testnet.stellar.org/transactions/f3223076c3706ccac519434d6d9b206c1a88eb36362b236e765e30d7a26ed05a/operations{?cursor,limit,order}',
-      templated: true
-    },
-    effects: {
-      href: 'https://horizon-testnet.stellar.org/transactions/f3223076c3706ccac519434d6d9b206c1a88eb36362b236e765e30d7a26ed05a/effects{?cursor,limit,order}',
-      templated: true
-    },
-    precedes: {
-      href: 'https://horizon-testnet.stellar.org/transactions?order=asc&cursor=15718712719974400'
-    },
-    succeeds: {
-      href: 'https://horizon-testnet.stellar.org/transactions?order=desc&cursor=15718712719974400'
-    },
-    transaction: {
-      href: 'https://horizon-testnet.stellar.org/transactions/f3223076c3706ccac519434d6d9b206c1a88eb36362b236e765e30d7a26ed05a'
-    }
-  },
-  id: 'f3223076c3706ccac519434d6d9b206c1a88eb36362b236e765e30d7a26ed05a',
-  paging_token: '15718712719974400',
-  successful: true,
-  hash: 'f3223076c3706ccac519434d6d9b206c1a88eb36362b236e765e30d7a26ed05a',
-  ledger: 3659798,
-  created_at: '2026-07-17T19:20:53Z',
-  source_account: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733',
-  source_account_sequence: '15718626820620295',
-  fee_account: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733',
-  fee_charged: '400',
-  max_fee: '400',
-  operation_count: 4,
-  envelope_xdr: 'AAAAAgAAAADxqTL3/rZ4sVfPtAKn22SaI28FcSXoyKMMKJMsPJ1TMQAAAZAAN9gCAAAABwAAAAEAAAAAAAAAAAAAAABqWoCwAAAAA1MhlZpm4hRdgnNEkuGjHKw7WfiB5oyebb/D/MBBLHxuAAAABAAAAAAAAAABAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAAkNsYXdhYmxlSGV4YQAAAADthBo7E2SFu0XydsXwWcQa5Jfqj3jWFKEWIaPd3/j18gAAAAHc1lAAAAAAAAAAABAAAAAA7YQaOxNkhbtF8nbF8FnEGuSX6o941hShFiGj3d/49fIAAAABAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAAQAAAADxqTL3/rZ4sVfPtAKn22SaI28FcSXoyKMMKJMsPJ1TMQAAAAFIRVhBAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAAdzWUAAAAAABAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAEQAAAAAAAAACPJ1TMQAAAEAZ6EVlJm9MwbXFB/qvyBFZm27PMjaRDOeJMxAnBRFOStSj6wOg6d6bjQjUx8az0Lr/tifId+SfEb8xsZZwUQ4L3/j18gAAAEDNbkaRfUvRMM9/i8U/O9uKq/KroayWQvwsQA0ixb0iwOsGljKeytz9ZO2f7vLmA59MwwL+95s4IpdYmXRH43kB',
-  result_xdr: 'AAAAAAAAAZAAAAAAAAAABAAAAAAAAAABAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAABAAAAAAAAAAAAAAARAAAAAAAAAAA=',
-  fee_meta_xdr: 'AAAAAgAAAAMAN9gVAAAAAAAAAADxqTL3/rZ4sVfPtAKn22SaI28FcSXoyKMMKJMsPJ1TMQAAAAJUpHSkADfYAgAAAAYAAAAEAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAACYloAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAADfYFQAAAABqWoCQAAAAAAAAAAEAN9gWAAAAAAAAAADxqTL3/rZ4sVfPtAKn22SaI28FcSXoyKMMKJMsPJ1TMQAAAAJUpHMUADfYAgAAAAYAAAAEAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAACYloAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAADfYFQAAAABqWoCQAAAAAA==',
-  memo_type: 'hash',
-  signatures: [
-    'GehFZSZvTMG1xQf6r8gRWZtuzzI2kQzniTMQJwURTkrUo+sDoOnem40I1MfGs9C6/7YnyHfknxG/MbGWcFEOCw==',
-    'zW5GkX1L0TDPf4vFPzvbiqvyq6GslkL8LEANIsW9IsDrBpYynsrc/WTtn+7y5gOfTMMC/vebOCKXWJl0R+N5AQ=='
-  ],
-  preconditions: { timebounds: { min_time: '0', max_time: '1784316080' } },
-  offerResults: undefined
-}
-  ✔ setup new/existing account for Bob (54.2s)
-vault.put key Issuer.in value DONE
-  ─
-
-  1 test passed
-makeBuyOffer GDCCXDNCFDJLZL2LCBRYB4WFSOPIG2ALVT3KZUC2DR7OZDJT4T57L3IG Asset { code: 'XLM', issuer: null } Asset {
-  code: 'MA',
-  issuer: 'GDWYIGR3CNSILO2F6J3ML4CZYQNOJF7KR54NMFFBCYQ2HXO77D27E7EV'
-} 1 1 0 ...
-vault.put key Issuer.desc.8 value {
-  amount: '800.0000000',
-  balance_id: undefined,
-  txDesc: '',
-  txId: 'f3223076c3706ccac519434d6d9b206c1a88eb36362b236e765e30d7a26ed05a',
-  txMemo: '5321959a66e2145d82734492e1a31cac3b59f881e68c9e6dbfc3fcc0412c7c6e',
-  txMemoType: 'hash',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-vault.put key Issuer.desc.9 value {
-  amount: '800.0000000',
-  balance_id: undefined,
-  txDesc: '',
-  txId: 'f3223076c3706ccac519434d6d9b206c1a88eb36362b236e765e30d7a26ed05a',
-  txMemo: '5321959a66e2145d82734492e1a31cac3b59f881e68c9e6dbfc3fcc0412c7c6e',
-  txMemoType: 'hash',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-vault.put key Issuer.desc.10 value {
-  amount: '0.0000100',
-  balance_id: '00000000e04e48dca3b8bb7e1db8fc54dcb8542c7dca637e57aa0b06795b72aff769acc6',
-  txDesc: '',
-  txId: 'ad22e81ef2087a437d32431314f295a369eba030e4a5b68dcdd001aca81a425c',
-  txMemo: '00bffd6ce496cb78702bc501e01c86766ce7aa5f859d74b155a8de371db69cf2',
-  txMemoType: 'return',
-  txSrc: 'GCHDUWLDHU32TAPK3H2OEUZF3CLNNEN63Q5YKHTWWPQ2YVXKUKSHE6SY'
-}
-Cyn handle_stateDeals Request e {
-  amount: '0.0000100',
-  balance_id: '00000000e04e48dca3b8bb7e1db8fc54dcb8542c7dca637e57aa0b06795b72aff769acc6',
-  txDesc: '',
-  txId: 'ad22e81ef2087a437d32431314f295a369eba030e4a5b68dcdd001aca81a425c',
-  txMemo: '00bffd6ce496cb78702bc501e01c86766ce7aa5f859d74b155a8de371db69cf2',
-  txMemoType: 'return',
-  txSrc: 'GCHDUWLDHU32TAPK3H2OEUZF3CLNNEN63Q5YKHTWWPQ2YVXKUKSHE6SY'
-}
-Ann handle_stateCynAnnDeal eotx {
-  amount: '0.0000100',
-  balance_id: '00000000e04e48dca3b8bb7e1db8fc54dcb8542c7dca637e57aa0b06795b72aff769acc6',
-  txDesc: '',
-  txId: 'ad22e81ef2087a437d32431314f295a369eba030e4a5b68dcdd001aca81a425c',
-  txMemo: '00bffd6ce496cb78702bc501e01c86766ce7aa5f859d74b155a8de371db69cf2',
-  txMemoType: 'return',
-  txSrc: 'GCHDUWLDHU32TAPK3H2OEUZF3CLNNEN63Q5YKHTWWPQ2YVXKUKSHE6SY'
-} clawable 1000.0000000
-vault.put key Issuer.desc.11 value {
-  amount: '0.0000100',
-  balance_id: undefined,
-  txDesc: '',
-  txId: 'ad22e81ef2087a437d32431314f295a369eba030e4a5b68dcdd001aca81a425c',
-  txMemo: '00bffd6ce496cb78702bc501e01c86766ce7aa5f859d74b155a8de371db69cf2',
-  txMemoType: 'return',
-  txSrc: 'GCHDUWLDHU32TAPK3H2OEUZF3CLNNEN63Q5YKHTWWPQ2YVXKUKSHE6SY'
-}
-vault.put key Issuer.desc.12 value {
-  amount: '1000.0000000',
-  balance_id: undefined,
-  txDesc: '',
-  txId: 'ad22e81ef2087a437d32431314f295a369eba030e4a5b68dcdd001aca81a425c',
-  txMemo: '00bffd6ce496cb78702bc501e01c86766ce7aa5f859d74b155a8de371db69cf2',
-  txMemoType: 'return',
-  txSrc: 'GCHDUWLDHU32TAPK3H2OEUZF3CLNNEN63Q5YKHTWWPQ2YVXKUKSHE6SY'
-}
-vault.put key Issuer.desc.13 value {
-  amount: '1000.0000000',
-  balance_id: undefined,
-  txDesc: '',
-  txId: 'ad22e81ef2087a437d32431314f295a369eba030e4a5b68dcdd001aca81a425c',
-  txMemo: '00bffd6ce496cb78702bc501e01c86766ce7aa5f859d74b155a8de371db69cf2',
-  txMemoType: 'return',
-  txSrc: 'GCHDUWLDHU32TAPK3H2OEUZF3CLNNEN63Q5YKHTWWPQ2YVXKUKSHE6SY'
-}
-vault.put key Issuer.desc.14 value {
-  amount: '0.0000100',
-  balance_id: undefined,
-  txDesc: '',
-  txId: 'ad22e81ef2087a437d32431314f295a369eba030e4a5b68dcdd001aca81a425c',
-  txMemo: '00bffd6ce496cb78702bc501e01c86766ce7aa5f859d74b155a8de371db69cf2',
-  txMemoType: 'return',
-  txSrc: 'GCHDUWLDHU32TAPK3H2OEUZF3CLNNEN63Q5YKHTWWPQ2YVXKUKSHE6SY'
-}
-vault.put key Issuer.desc.15 value {
-  amount: '1000.0000000',
-  balance_id: '000000009a03a68801a09ec09427e77bcaac0fbd08f81e05d3e99550ac94dc7e7e804b39',
-  txDesc: '',
-  txId: 'ad22e81ef2087a437d32431314f295a369eba030e4a5b68dcdd001aca81a425c',
-  txMemo: '00bffd6ce496cb78702bc501e01c86766ce7aa5f859d74b155a8de371db69cf2',
-  txMemoType: 'return',
-  txSrc: 'GCHDUWLDHU32TAPK3H2OEUZF3CLNNEN63Q5YKHTWWPQ2YVXKUKSHE6SY'
-}
+  'SCMO5M362EVRKHJNCQ4DTID3IADB3EYP5QMGZPR2WXKSEDY47NWNO5YU',
+  'GAXJE7HBU46QKUU2POQKEELKRFTBIVG2CM74DLRNGVSNDXQB2CUBXJVA'
+] options undefined
+loadAccount accountId GAXJE7HBU46QKUU2POQKEELKRFTBIVG2CM74DLRNGVSNDXQB2CUBXJVA - loading...
+changeTrust 3 assets for Abe GAXJE7HBU46QKUU2POQKEELKRFTBIVG2CM74DLRNGVSNDXQB2CUBXJVA 2026-08-21T18:14:46Z...
+loadAccount accountId GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY - loading...
+runMonitor.sell Bob sdk.transaction.makeSellOffer r tx.successful true false
+makeBuyOffer GAXJE7HBU46QKUU2POQKEELKRFTBIVG2CM74DLRNGVSNDXQB2CUBXJVA native MA:GADVFKPCWLKU5SBU7EMWRAMQDLVVFZA44JHTXRDYFVXEXZ3PU5LGYTNH 1 1 0...
 demouser.DemoTmUse sdk.transaction.makeBuyOffer r.successful true
-{
-  memo: 'rSLoHvIIekN9MkMTFPKVo2nroDDkpbaNzdABrKgaQlw=',
-  _links: {
-    self: {
-      href: 'https://horizon-testnet.stellar.org/transactions/7eaf77a747515b836f78ac2a86a7af97b49a060dc732f9f2610ceb2408646185'
-    },
-    account: {
-      href: 'https://horizon-testnet.stellar.org/accounts/GCHDUWLDHU32TAPK3H2OEUZF3CLNNEN63Q5YKHTWWPQ2YVXKUKSHE6SY'
-    },
-    ledger: { href: 'https://horizon-testnet.stellar.org/ledgers/3659799' },
-    operations: {
-      href: 'https://horizon-testnet.stellar.org/transactions/7eaf77a747515b836f78ac2a86a7af97b49a060dc732f9f2610ceb2408646185/operations{?cursor,limit,order}',
-      templated: true
-    },
-    effects: {
-      href: 'https://horizon-testnet.stellar.org/transactions/7eaf77a747515b836f78ac2a86a7af97b49a060dc732f9f2610ceb2408646185/effects{?cursor,limit,order}',
-      templated: true
-    },
-    precedes: {
-      href: 'https://horizon-testnet.stellar.org/transactions?order=asc&cursor=15718717014945792'
-    },
-    succeeds: {
-      href: 'https://horizon-testnet.stellar.org/transactions?order=desc&cursor=15718717014945792'
-    },
-    transaction: {
-      href: 'https://horizon-testnet.stellar.org/transactions/7eaf77a747515b836f78ac2a86a7af97b49a060dc732f9f2610ceb2408646185'
-    }
-  },
-  id: '7eaf77a747515b836f78ac2a86a7af97b49a060dc732f9f2610ceb2408646185',
-  paging_token: '15718717014945792',
-  successful: true,
-  hash: '7eaf77a747515b836f78ac2a86a7af97b49a060dc732f9f2610ceb2408646185',
-  ledger: 3659799,
-  created_at: '2026-07-17T19:20:58Z',
-  source_account: 'GCHDUWLDHU32TAPK3H2OEUZF3CLNNEN63Q5YKHTWWPQ2YVXKUKSHE6SY',
-  source_account_sequence: '15718652590424070',
-  fee_account: 'GCHDUWLDHU32TAPK3H2OEUZF3CLNNEN63Q5YKHTWWPQ2YVXKUKSHE6SY',
-  fee_charged: '400',
-  max_fee: '400',
-  operation_count: 4,
-  envelope_xdr: 'AAAAAgAAAACOOlljPTepgerZ9OJTJdiW1pG+3DuFHnaz4axW6qKkcgAAAZAAN9gIAAAABgAAAAEAAAAAAAAAAAAAAABqWoC2AAAAA60i6B7yCHpDfTJDExTylaNp66Aw5KW2jc3QAayoGkJcAAAABAAAAAAAAAAQAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAAQAAAADthBo7E2SFu0XydsXwWcQa5Jfqj3jWFKEWIaPd3/j18gAAABMAAAACQ2xhd2FibGVIZXhhAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAACHtMX4q21obOXM24wtC2XrM68IJz1+D0FJCuC2mrponAAAAAlQL5AAAAAABAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAAQAAAACOOlljPTepgerZ9OJTJdiW1pG+3DuFHnaz4axW6qKkcgAAAAFIRVhBAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAAlQL5AAAAAABAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAEQAAAAAAAAAC6qKkcgAAAEBKYRVuhndHcsmtcXfpi7mLKuP4ta7MqsmUWXTCg40MUTwHeFWFsO9IpCDFjI/2oSKVu44pSwUBVQFHUG9JpvYL3/j18gAAAECG31dzbr/gClIj8a5ryGE3C60J+mKH2LNTHTNVHIPjj/a38IVv2cLIE9diFljCI2Rnb5Oebi9MXzkdrvIZBOsC',
-  result_xdr: 'AAAAAAAAAZAAAAAAAAAABAAAAAAAAAAQAAAAAAAAAAAAAAATAAAAAAAAAAAAAAABAAAAAAAAAAAAAAARAAAAAAAAAAA=',
-  fee_meta_xdr: 'AAAAAgAAAAMAN9gWAAAAAAAAAACOOlljPTepgerZ9OJTJdiW1pG+3DuFHnaz4axW6qKkcgAAAAAFXUSkADfYCAAAAAUAAAADAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAADfYFgAAAABqWoCVAAAAAAAAAAEAN9gXAAAAAAAAAACOOlljPTepgerZ9OJTJdiW1pG+3DuFHnaz4axW6qKkcgAAAAAFXUMUADfYCAAAAAUAAAADAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAADfYFgAAAABqWoCVAAAAAA==',
-  memo_type: 'hash',
-  signatures: [
-    'SmEVboZ3R3LJrXF36Yu5iyrj+LWuzKrJlFl0woONDFE8B3hVhbDvSKQgxYyP9qEilbuOKUsFAVUBR1BvSab2Cw==',
-    'ht9Xc26/4ApSI/Gua8hhNwutCfpih9izUx0zVRyD44/2t/CFb9nCyBPXYhZYwiNkZ2+Tnm4vTF85Ha7yGQTrAg=='
-  ],
-  preconditions: { timebounds: { min_time: '0', max_time: '1784316086' } },
-  offerResults: undefined
-}
-vault.get key Issuer.in v "DONE""DONE"
-  ✔ setup new/existing account for Ann (58.5s)
-vault.put key Issuer.in value DONE
-  ─
-
-  1 test passed
-vault.put key Issuer.desc.16 value {
-  amount: '1000.0000000',
-  balance_id: undefined,
-  txDesc: '',
-  txId: '7eaf77a747515b836f78ac2a86a7af97b49a060dc732f9f2610ceb2408646185',
-  txMemo: 'ad22e81ef2087a437d32431314f295a369eba030e4a5b68dcdd001aca81a425c',
-  txMemoType: 'hash',
-  txSrc: 'GCHDUWLDHU32TAPK3H2OEUZF3CLNNEN63Q5YKHTWWPQ2YVXKUKSHE6SY'
-}
-Cyn handle_stateDeals Broken Deal Request e {
-  amount: '1000.0000000',
-  txDesc: '',
-  txId: '7eaf77a747515b836f78ac2a86a7af97b49a060dc732f9f2610ceb2408646185',
-  txMemo: 'ad22e81ef2087a437d32431314f295a369eba030e4a5b68dcdd001aca81a425c',
-  txMemoType: 'hash',
-  txSrc: 'GCHDUWLDHU32TAPK3H2OEUZF3CLNNEN63Q5YKHTWWPQ2YVXKUKSHE6SY'
-}
-vault.put key Issuer.desc.17 value {
-  amount: '1000.0000000',
-  balance_id: undefined,
-  txDesc: '',
-  txId: '7eaf77a747515b836f78ac2a86a7af97b49a060dc732f9f2610ceb2408646185',
-  txMemo: 'ad22e81ef2087a437d32431314f295a369eba030e4a5b68dcdd001aca81a425c',
-  txMemoType: 'hash',
-  txSrc: 'GCHDUWLDHU32TAPK3H2OEUZF3CLNNEN63Q5YKHTWWPQ2YVXKUKSHE6SY'
-}
-Cyn handle_stateDeals disputeBrokenDeal r {
-  balanceId: '0000000028ab836817ac690ea81cd001579b102c06b9bd980868024aa5f883f615414d3c',
-  txId: '613d12a202aed3d97cfa5751f3ac4ec12d05045d4fbc015ad5b4c1fe799d3b93'
-}
-stopMonitor - "Issuer's effects" closed.
-  ✔ setup new/existing account for Cyn (1m 3.6s)
-vault.put key Issuer.in value DONE
-  ✔ load new/existing Issuer account (1m 3.5s)
-  ─
-
-  1 test passed
-  ─
-
-  1 test passed
-
-loadAccount accountId GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB - loading...
-loadAccount accountId GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733 - loading...
-DemoDone Cyn sdk.transaction.makeSellOffer r tx.successful true
-  ✔ demo done (5s)
-  ─
-
-  1 test passed
-265087 demoit tm_request_demo for Aza DONE
-loop GDKJISIL7XFWQ4B4ND3P3RSJZZ4KUXVXGMOV76KJFRQDPPOZ4GASIVVY *** ERROR *** { transaction: 'tx_bad_seq' } left 7
-
-createAccount - creating account for Al GCP7L3KQOHDQZ3NYJH7HEE2BYNTVFJOLSUIGE73PHC7PEVQDWI5DPXVE 2026-07-17T19:20:43Z ...
-loadAccount accountId GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733 - loading...
-runMonitor.sell Bob sdk.transaction.makeSellOffer r tx.successful true true
-stopMonitor - "Ava's trading effects" closed.
-  ✔ request demo (1m 34.5s)
-vault.put key Ava.granted value DONE
-  ─
-
-  1 test passed
-makeBuyOffer GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733 Asset { code: 'XLM', issuer: null } Asset {
-  code: 'MA',
-  issuer: 'GDWYIGR3CNSILO2F6J3ML4CZYQNOJF7KR54NMFFBCYQ2HXO77D27E7EV'
-} 2 2 0 ...
-=== Abe.granted NOT FOUND ===
-
-
-
-
-loadAccount accountId GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB - loading...
-loadAccount accountId GC7QKYC6TYHYYR4PZMOJMEGMBULMIVFIUHK5OWVEE2GQWJSQV754ATC3 - loading...
-loadAccount accountId GDWYIGR3CNSILO2F6J3ML4CZYQNOJF7KR54NMFFBCYQ2HXO77D27E7EV - loading...
-loadAccount accountId GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733 - loading...
-fund Cyn GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB clawback false 2026-07-17T19:21:08Z ...
-fund Ava GC7QKYC6TYHYYR4PZMOJMEGMBULMIVFIUHK5OWVEE2GQWJSQV754ATC3 clawback false 2026-07-17T19:21:13Z ...
-fund Bob GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733 clawback false 2026-07-17T19:21:13Z ...
-- Cyn has HEXA 999.9999901
-runMonitor.trade Bob sdk.transaction.makeBuyOffer r.successful true
-vault.put key Al.keys value [
-  'SBOJMYEFUQBWBAFLHH2NQ7KB6VMGWNTJZQ7L34PLTSWFXAZQOZP5OF3G',
-  'GCP7L3KQOHDQZ3NYJH7HEE2BYNTVFJOLSUIGE73PHC7PEVQDWI5DPXVE'
-]
-loadAccount accountId GCP7L3KQOHDQZ3NYJH7HEE2BYNTVFJOLSUIGE73PHC7PEVQDWI5DPXVE - loading...
-- Ava has HEXA 1100.0000000
-changeTrust 3 assets for Al GCP7L3KQOHDQZ3NYJH7HEE2BYNTVFJOLSUIGE73PHC7PEVQDWI5DPXVE 2026-07-17T19:21:18Z ...
-makeRequest r {
-  balanceId: '00000000e720c400bfc2722b2f69cdbed1365cf253bed092630f934af7ac8d16759056b2',
-  txId: '26f9a9c5c8e318e66b70dffebcf40215ea2837d849e9172693ca9304d5f03323',
-  request: 'Fresh red snapper for 4 persons GGS. HEXA 1000',
-  amount: '1000'
-}
-vault.put key Issuer.desc.1 value {
-  amount: '1000.0000000',
-  balance_id: '00000000e720c400bfc2722b2f69cdbed1365cf253bed092630f934af7ac8d16759056b2',
-  txDesc: 'Fresh red snapper for 4 persons GGS. HEXA 1000',
-  txId: '26f9a9c5c8e318e66b70dffebcf40215ea2837d849e9172693ca9304d5f03323',
-  txMemo: 'Request 0',
-  txMemoType: 'text',
-  txSrc: 'GC7QKYC6TYHYYR4PZMOJMEGMBULMIVFIUHK5OWVEE2GQWJSQV754ATC3'
-}
-Cyn handle_stateInitial stateInitial.queue.length 0
-Cyn handle_stateInitial Request e {
-  amount: '1000.0000000',
-  balance_id: '00000000e720c400bfc2722b2f69cdbed1365cf253bed092630f934af7ac8d16759056b2',
-  txDesc: 'Fresh red snapper for 4 persons GGS. HEXA 1000',
-  txId: '26f9a9c5c8e318e66b70dffebcf40215ea2837d849e9172693ca9304d5f03323',
-  txMemo: 'Request 0',
-  txMemoType: 'text',
-  txSrc: 'GC7QKYC6TYHYYR4PZMOJMEGMBULMIVFIUHK5OWVEE2GQWJSQV754ATC3'
-}
-Ann handle_stateInitial e {
-  amount: '1000.0000000',
-  balance_id: '00000000e720c400bfc2722b2f69cdbed1365cf253bed092630f934af7ac8d16759056b2',
-  txDesc: 'Fresh red snapper for 4 persons GGS. HEXA 1000',
-  txId: '26f9a9c5c8e318e66b70dffebcf40215ea2837d849e9172693ca9304d5f03323',
-  txMemo: 'Request 0',
-  txMemoType: 'text',
-  txSrc: 'GC7QKYC6TYHYYR4PZMOJMEGMBULMIVFIUHK5OWVEE2GQWJSQV754ATC3'
-}
-makeBuyOffer GCP7L3KQOHDQZ3NYJH7HEE2BYNTVFJOLSUIGE73PHC7PEVQDWI5DPXVE Asset { code: 'XLM', issuer: null } Asset {
-  code: 'MA',
-  issuer: 'GDWYIGR3CNSILO2F6J3ML4CZYQNOJF7KR54NMFFBCYQ2HXO77D27E7EV'
-} 1 1 0 ...
-demouser.DemoTmUse sdk.transaction.makeBuyOffer r.successful true
-loop GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733 *** ERROR *** { transaction: 'tx_bad_seq' } left 9
-fund Bob GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733 clawback false 2026-07-17T19:21:18Z ...
-- Bob has HEXA 1000.0000000
-makeOffer r {
-  balanceId: '0000000064a2dcd5e2762d3a6fd8be4a150f801cceaf5e250faeacd6bf1aa13354232a79',
-  txId: '5ff3e73f4b8caf78381631dd94bd7ab9af0711eaf05c7c6c88bcf5cfb78287a8',
-  request: 'Freshly caught red snapper 4lb. HEXA 800',
-  amount: '0.0000100'
-}
-vault.put key Issuer.desc.2 value {
-  amount: '0.0000100',
-  balance_id: '0000000064a2dcd5e2762d3a6fd8be4a150f801cceaf5e250faeacd6bf1aa13354232a79',
-  txDesc: 'Freshly caught red snapper 4lb. HEXA 800',
-  txId: '5ff3e73f4b8caf78381631dd94bd7ab9af0711eaf05c7c6c88bcf5cfb78287a8',
-  txMemo: 'Offer 0',
-  txMemoType: 'text',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-vault.get key Issuer.desc.2 v 
-vault.get key Issuer.desc.2 v 
-Bob handle_stateInitial e {
-  amount: '0.0000100',
-  balance_id: '0000000064a2dcd5e2762d3a6fd8be4a150f801cceaf5e250faeacd6bf1aa13354232a79',
-  txDesc: 'Freshly caught red snapper 4lb. HEXA 800',
-  txId: '5ff3e73f4b8caf78381631dd94bd7ab9af0711eaf05c7c6c88bcf5cfb78287a8',
-  txMemo: 'Offer 0',
-  txMemoType: 'text',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-Cyn handle_stateInitial Offer e {
-  amount: '0.0000100',
-  balance_id: '0000000064a2dcd5e2762d3a6fd8be4a150f801cceaf5e250faeacd6bf1aa13354232a79',
-  txDesc: 'Freshly caught red snapper 4lb. HEXA 800',
-  txId: '5ff3e73f4b8caf78381631dd94bd7ab9af0711eaf05c7c6c88bcf5cfb78287a8',
-  txMemo: 'Offer 0',
-  txMemoType: 'text',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-Cyn take effect {
-  amount: '0.0000100',
-  balance_id: '0000000064a2dcd5e2762d3a6fd8be4a150f801cceaf5e250faeacd6bf1aa13354232a79',
-  txDesc: 'Freshly caught red snapper 4lb. HEXA 800',
-  txId: '5ff3e73f4b8caf78381631dd94bd7ab9af0711eaf05c7c6c88bcf5cfb78287a8',
-  txMemo: 'Offer 0',
-  txMemoType: 'text',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-takeOffer r {
-  balanceId: '00000000e33be90c07d7aac85ab28874c21fd5779d0a6df5e91c71459a713960e11a9822',
-  txId: 'e461b011d82ea3b91dbcd67aee55d01a9438afdb3406c5e8e018a408b04904c9',
-  amount: '800'
-}
-Cyn take effect {
-  amount: '1000.0000000',
-  balance_id: '00000000e720c400bfc2722b2f69cdbed1365cf253bed092630f934af7ac8d16759056b2',
-  txDesc: 'Fresh red snapper for 4 persons GGS. HEXA 1000',
-  txId: '26f9a9c5c8e318e66b70dffebcf40215ea2837d849e9172693ca9304d5f03323',
-  txMemo: 'Request 0',
-  txMemoType: 'text',
-  txSrc: 'GC7QKYC6TYHYYR4PZMOJMEGMBULMIVFIUHK5OWVEE2GQWJSQV754ATC3'
-}
-vault.put key Issuer.desc.3 value {
-  amount: '800.0000000',
-  balance_id: '00000000e33be90c07d7aac85ab28874c21fd5779d0a6df5e91c71459a713960e11a9822',
-  txDesc: '',
-  txId: 'e461b011d82ea3b91dbcd67aee55d01a9438afdb3406c5e8e018a408b04904c9',
-  txMemo: '5ff3e73f4b8caf78381631dd94bd7ab9af0711eaf05c7c6c88bcf5cfb78287a8',
-  txMemoType: 'hash',
-  txSrc: 'GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB'
-}
-Bob handle_stateInitial e {
-  amount: '800.0000000',
-  balance_id: '00000000e33be90c07d7aac85ab28874c21fd5779d0a6df5e91c71459a713960e11a9822',
-  txDesc: '',
-  txId: 'e461b011d82ea3b91dbcd67aee55d01a9438afdb3406c5e8e018a408b04904c9',
-  txMemo: '5ff3e73f4b8caf78381631dd94bd7ab9af0711eaf05c7c6c88bcf5cfb78287a8',
-  txMemoType: 'hash',
-  txSrc: 'GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB'
-}
-takeRequest r {
-  balanceId: '00000000d22cfcfb1889021c8951aad91f1ba10860b3b20041b1b64954aea6fc635db7d6',
-  txId: '8666370ee790571b96889574a416a8f4ba48051a285e55ebb7f86b880647ae67',
-  amount: '0.0000100'
-}
-Bob handle_stateCynBobDeal desc {
-  amount: '800.0000000',
-  destination: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733',
-  txId: 'd4161d18b992b6d95790ef65a07d895f04c24ae62693dddee53d459acfaff4e8'
-}
-vault.put key Issuer.desc.4 value {
-  amount: '0.0000100',
-  balance_id: '00000000d22cfcfb1889021c8951aad91f1ba10860b3b20041b1b64954aea6fc635db7d6',
-  txDesc: '',
-  txId: '8666370ee790571b96889574a416a8f4ba48051a285e55ebb7f86b880647ae67',
-  txMemo: '26f9a9c5c8e318e66b70dffebcf40215ea2837d849e9172693ca9304d5f03323',
-  txMemoType: 'hash',
-  txSrc: 'GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB'
-}
-Ann handle_stateInitial e {
-  amount: '0.0000100',
-  balance_id: '00000000d22cfcfb1889021c8951aad91f1ba10860b3b20041b1b64954aea6fc635db7d6',
-  txDesc: '',
-  txId: '8666370ee790571b96889574a416a8f4ba48051a285e55ebb7f86b880647ae67',
-  txMemo: '26f9a9c5c8e318e66b70dffebcf40215ea2837d849e9172693ca9304d5f03323',
-  txMemoType: 'hash',
-  txSrc: 'GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB'
-}
-vault.put key Issuer.desc.5 value {
-  amount: '800.0000000',
-  balance_id: undefined,
-  txDesc: '',
-  txId: 'd4161d18b992b6d95790ef65a07d895f04c24ae62693dddee53d459acfaff4e8',
-  txMemo: 'e461b011d82ea3b91dbcd67aee55d01a9438afdb3406c5e8e018a408b04904c9',
-  txMemoType: 'return',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-Cyn handle_stateDeals Offer e {
-  amount: '800.0000000',
-  txDesc: '',
-  txId: 'd4161d18b992b6d95790ef65a07d895f04c24ae62693dddee53d459acfaff4e8',
-  txMemo: 'e461b011d82ea3b91dbcd67aee55d01a9438afdb3406c5e8e018a408b04904c9',
-  txMemoType: 'return',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-Bob handle_stateCynBobDeal eotx {
-  amount: '800.0000000',
-  txDesc: '',
-  txId: 'd4161d18b992b6d95790ef65a07d895f04c24ae62693dddee53d459acfaff4e8',
-  txMemo: 'e461b011d82ea3b91dbcd67aee55d01a9438afdb3406c5e8e018a408b04904c9',
-  txMemoType: 'return',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-} clawable 800.0000000
-vault.put key Issuer.desc.6 value {
-  amount: '800.0000000',
-  balance_id: undefined,
-  txDesc: '',
-  txId: 'd4161d18b992b6d95790ef65a07d895f04c24ae62693dddee53d459acfaff4e8',
-  txMemo: 'e461b011d82ea3b91dbcd67aee55d01a9438afdb3406c5e8e018a408b04904c9',
-  txMemoType: 'return',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-vault.put key Issuer.desc.7 value {
-  amount: '800.0000000',
-  balance_id: '00000000e33be90c07d7aac85ab28874c21fd5779d0a6df5e91c71459a713960e11a9822',
-  txDesc: '',
-  txId: 'd4161d18b992b6d95790ef65a07d895f04c24ae62693dddee53d459acfaff4e8',
-  txMemo: 'e461b011d82ea3b91dbcd67aee55d01a9438afdb3406c5e8e018a408b04904c9',
-  txMemoType: 'return',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-{
-  memo: '1BYdGLmSttlXkO9loH2JXwTCSuYmk93e5T1Fms+v9Og=',
-  _links: {
-    self: {
-      href: 'https://horizon-testnet.stellar.org/transactions/ebdcf37bcba5e5de5cf17baf3110c8900989785113897a7001f6048fa2650355'
-    },
-    account: {
-      href: 'https://horizon-testnet.stellar.org/accounts/GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-    },
-    ledger: { href: 'https://horizon-testnet.stellar.org/ledgers/3659814' },
-    operations: {
-      href: 'https://horizon-testnet.stellar.org/transactions/ebdcf37bcba5e5de5cf17baf3110c8900989785113897a7001f6048fa2650355/operations{?cursor,limit,order}',
-      templated: true
-    },
-    effects: {
-      href: 'https://horizon-testnet.stellar.org/transactions/ebdcf37bcba5e5de5cf17baf3110c8900989785113897a7001f6048fa2650355/effects{?cursor,limit,order}',
-      templated: true
-    },
-    precedes: {
-      href: 'https://horizon-testnet.stellar.org/transactions?order=asc&cursor=15718781439467520'
-    },
-    succeeds: {
-      href: 'https://horizon-testnet.stellar.org/transactions?order=desc&cursor=15718781439467520'
-    },
-    transaction: {
-      href: 'https://horizon-testnet.stellar.org/transactions/ebdcf37bcba5e5de5cf17baf3110c8900989785113897a7001f6048fa2650355'
-    }
-  },
-  id: 'ebdcf37bcba5e5de5cf17baf3110c8900989785113897a7001f6048fa2650355',
-  paging_token: '15718781439467520',
-  successful: true,
-  hash: 'ebdcf37bcba5e5de5cf17baf3110c8900989785113897a7001f6048fa2650355',
-  ledger: 3659814,
-  created_at: '2026-07-17T19:22:13Z',
-  source_account: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733',
-  source_account_sequence: '15718626820620301',
-  fee_account: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733',
-  fee_charged: '400',
-  max_fee: '400',
-  operation_count: 4,
-  envelope_xdr: 'AAAAAgAAAADxqTL3/rZ4sVfPtAKn22SaI28FcSXoyKMMKJMsPJ1TMQAAAZAAN9gCAAAADQAAAAEAAAAAAAAAAAAAAABqWoECAAAAA9QWHRi5krbZV5DvZaB9iV8EwkrmJpPd3uU9RZrPr/ToAAAABAAAAAAAAAABAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAAkNsYXdhYmxlSGV4YQAAAADthBo7E2SFu0XydsXwWcQa5Jfqj3jWFKEWIaPd3/j18gAAAAHc1lAAAAAAAAAAABAAAAAA7YQaOxNkhbtF8nbF8FnEGuSX6o941hShFiGj3d/49fIAAAABAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAAQAAAADxqTL3/rZ4sVfPtAKn22SaI28FcSXoyKMMKJMsPJ1TMQAAAAFIRVhBAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAAdzWUAAAAAABAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAEQAAAAAAAAACPJ1TMQAAAECUySZ7/05EtqajaqsWLSKWtfjdnzmXy8Z6LsLxexBVZoazJfeK5l77gaDsr3NL1EFDBcAaF270RyYpbTRzBLoP3/j18gAAAEDowOev9OZUt23rMFlT1G88h9DKvT7qIGWShyphoxNOhvCXl/PejWRwcSsdI6p/G8nTKcn8YVXPIuaI/7vsHqUL',
-  result_xdr: 'AAAAAAAAAZAAAAAAAAAABAAAAAAAAAABAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAABAAAAAAAAAAAAAAARAAAAAAAAAAA=',
-  fee_meta_xdr: 'AAAAAgAAAAMAN9glAAAAAAAAAADxqTL3/rZ4sVfPtAKn22SaI28FcSXoyKMMKJMsPJ1TMQAAAAJS2qrkADfYAgAAAAwAAAAEAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAACYloAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAADfYJQAAAABqWoDgAAAAAAAAAAEAN9gmAAAAAAAAAADxqTL3/rZ4sVfPtAKn22SaI28FcSXoyKMMKJMsPJ1TMQAAAAJS2qlUADfYAgAAAAwAAAAEAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAACYloAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAADfYJQAAAABqWoDgAAAAAA==',
-  memo_type: 'hash',
-  signatures: [
-    'lMkme/9ORLamo2qrFi0ilrX43Z85l8vGei7C8XsQVWaGsyX3iuZe+4Gg7K9zS9RBQwXAGhdu9EcmKW00cwS6Dw==',
-    '6MDnr/TmVLdt6zBZU9RvPIfQyr0+6iBlkocqYaMTTobwl5fz3o1kcHErHSOqfxvJ0ynJ/GFVzyLmiP+77B6lCw=='
-  ],
-  preconditions: { timebounds: { min_time: '0', max_time: '1784316162' } },
-  offerResults: undefined
-}
-Ann handle_stateCynAnnDeal desc {
-  amount: '1000.0000000',
-  destination: 'GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB',
-  txId: '9006c54114405b8145a12f1f28ab640ca2450161d28ced9ee755dc8da103c01f'
-}
-  ✔ setup new/existing account for Bob (57.1s)
-vault.put key Issuer.in value DONE
-  ─
-
-  1 test passed
-vault.put key Issuer.desc.8 value {
-  amount: '0.0000100',
-  balance_id: '00000000d22cfcfb1889021c8951aad91f1ba10860b3b20041b1b64954aea6fc635db7d6',
-  txDesc: '',
-  txId: '9006c54114405b8145a12f1f28ab640ca2450161d28ced9ee755dc8da103c01f',
-  txMemo: '8666370ee790571b96889574a416a8f4ba48051a285e55ebb7f86b880647ae67',
-  txMemoType: 'return',
-  txSrc: 'GC7QKYC6TYHYYR4PZMOJMEGMBULMIVFIUHK5OWVEE2GQWJSQV754ATC3'
-}
-Ann handle_stateCynAnnDeal eotx {
-  amount: '0.0000100',
-  balance_id: '00000000d22cfcfb1889021c8951aad91f1ba10860b3b20041b1b64954aea6fc635db7d6',
-  txDesc: '',
-  txId: '9006c54114405b8145a12f1f28ab640ca2450161d28ced9ee755dc8da103c01f',
-  txMemo: '8666370ee790571b96889574a416a8f4ba48051a285e55ebb7f86b880647ae67',
-  txMemoType: 'return',
-  txSrc: 'GC7QKYC6TYHYYR4PZMOJMEGMBULMIVFIUHK5OWVEE2GQWJSQV754ATC3'
-} clawable 1000.0000000
-Cyn handle_stateDeals Request e {
-  amount: '0.0000100',
-  balance_id: '00000000d22cfcfb1889021c8951aad91f1ba10860b3b20041b1b64954aea6fc635db7d6',
-  txDesc: '',
-  txId: '9006c54114405b8145a12f1f28ab640ca2450161d28ced9ee755dc8da103c01f',
-  txMemo: '8666370ee790571b96889574a416a8f4ba48051a285e55ebb7f86b880647ae67',
-  txMemoType: 'return',
-  txSrc: 'GC7QKYC6TYHYYR4PZMOJMEGMBULMIVFIUHK5OWVEE2GQWJSQV754ATC3'
-}
-vault.put key Issuer.desc.9 value {
-  amount: '1000.0000000',
-  balance_id: undefined,
-  txDesc: '',
-  txId: '9006c54114405b8145a12f1f28ab640ca2450161d28ced9ee755dc8da103c01f',
-  txMemo: '8666370ee790571b96889574a416a8f4ba48051a285e55ebb7f86b880647ae67',
-  txMemoType: 'return',
-  txSrc: 'GC7QKYC6TYHYYR4PZMOJMEGMBULMIVFIUHK5OWVEE2GQWJSQV754ATC3'
-}
-vault.put key Issuer.desc.10 value {
-  amount: '0.0000100',
-  balance_id: undefined,
-  txDesc: '',
-  txId: '9006c54114405b8145a12f1f28ab640ca2450161d28ced9ee755dc8da103c01f',
-  txMemo: '8666370ee790571b96889574a416a8f4ba48051a285e55ebb7f86b880647ae67',
-  txMemoType: 'return',
-  txSrc: 'GC7QKYC6TYHYYR4PZMOJMEGMBULMIVFIUHK5OWVEE2GQWJSQV754ATC3'
-}
-vault.put key Issuer.desc.11 value {
-  amount: '1000.0000000',
-  balance_id: '00000000e720c400bfc2722b2f69cdbed1365cf253bed092630f934af7ac8d16759056b2',
-  txDesc: '',
-  txId: '9006c54114405b8145a12f1f28ab640ca2450161d28ced9ee755dc8da103c01f',
-  txMemo: '8666370ee790571b96889574a416a8f4ba48051a285e55ebb7f86b880647ae67',
-  txMemoType: 'return',
-  txSrc: 'GC7QKYC6TYHYYR4PZMOJMEGMBULMIVFIUHK5OWVEE2GQWJSQV754ATC3'
-}
-vault.put key Issuer.desc.12 value {
-  amount: '0.0000100',
-  balance_id: undefined,
-  txDesc: '',
-  txId: '9006c54114405b8145a12f1f28ab640ca2450161d28ced9ee755dc8da103c01f',
-  txMemo: '8666370ee790571b96889574a416a8f4ba48051a285e55ebb7f86b880647ae67',
-  txMemoType: 'return',
-  txSrc: 'GC7QKYC6TYHYYR4PZMOJMEGMBULMIVFIUHK5OWVEE2GQWJSQV754ATC3'
-}
-vault.put key Issuer.desc.13 value {
-  amount: '800.0000000',
-  balance_id: undefined,
-  txDesc: '',
-  txId: 'ebdcf37bcba5e5de5cf17baf3110c8900989785113897a7001f6048fa2650355',
-  txMemo: 'd4161d18b992b6d95790ef65a07d895f04c24ae62693dddee53d459acfaff4e8',
-  txMemoType: 'hash',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-vault.put key Issuer.desc.14 value {
-  amount: '1000.0000000',
-  balance_id: undefined,
-  txDesc: '',
-  txId: '9006c54114405b8145a12f1f28ab640ca2450161d28ced9ee755dc8da103c01f',
-  txMemo: '8666370ee790571b96889574a416a8f4ba48051a285e55ebb7f86b880647ae67',
-  txMemoType: 'return',
-  txSrc: 'GC7QKYC6TYHYYR4PZMOJMEGMBULMIVFIUHK5OWVEE2GQWJSQV754ATC3'
-}
-vault.put key Issuer.desc.15 value {
-  amount: '800.0000000',
-  balance_id: undefined,
-  txDesc: '',
-  txId: 'ebdcf37bcba5e5de5cf17baf3110c8900989785113897a7001f6048fa2650355',
-  txMemo: 'd4161d18b992b6d95790ef65a07d895f04c24ae62693dddee53d459acfaff4e8',
-  txMemoType: 'hash',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-{
-  memo: 'kAbFQRRAW4FFoS8fKKtkDKJFAWHSjO2e51XcjaEDwB8=',
-  _links: {
-    self: {
-      href: 'https://horizon-testnet.stellar.org/transactions/8ceaf2d89809d503b438240675ce558b9d1087147b2281245f02c717cb223e57'
-    },
-    account: {
-      href: 'https://horizon-testnet.stellar.org/accounts/GC7QKYC6TYHYYR4PZMOJMEGMBULMIVFIUHK5OWVEE2GQWJSQV754ATC3'
-    },
-    ledger: { href: 'https://horizon-testnet.stellar.org/ledgers/3659815' },
-    operations: {
-      href: 'https://horizon-testnet.stellar.org/transactions/8ceaf2d89809d503b438240675ce558b9d1087147b2281245f02c717cb223e57/operations{?cursor,limit,order}',
-      templated: true
-    },
-    effects: {
-      href: 'https://horizon-testnet.stellar.org/transactions/8ceaf2d89809d503b438240675ce558b9d1087147b2281245f02c717cb223e57/effects{?cursor,limit,order}',
-      templated: true
-    },
-    precedes: {
-      href: 'https://horizon-testnet.stellar.org/transactions?order=asc&cursor=15718785734422528'
-    },
-    succeeds: {
-      href: 'https://horizon-testnet.stellar.org/transactions?order=desc&cursor=15718785734422528'
-    },
-    transaction: {
-      href: 'https://horizon-testnet.stellar.org/transactions/8ceaf2d89809d503b438240675ce558b9d1087147b2281245f02c717cb223e57'
-    }
-  },
-  id: '8ceaf2d89809d503b438240675ce558b9d1087147b2281245f02c717cb223e57',
-  paging_token: '15718785734422528',
-  successful: true,
-  hash: '8ceaf2d89809d503b438240675ce558b9d1087147b2281245f02c717cb223e57',
-  ledger: 3659815,
-  created_at: '2026-07-17T19:22:18Z',
-  source_account: 'GC7QKYC6TYHYYR4PZMOJMEGMBULMIVFIUHK5OWVEE2GQWJSQV754ATC3',
-  source_account_sequence: '15718678360227846',
-  fee_account: 'GC7QKYC6TYHYYR4PZMOJMEGMBULMIVFIUHK5OWVEE2GQWJSQV754ATC3',
-  fee_charged: '400',
-  max_fee: '400',
-  operation_count: 4,
-  envelope_xdr: 'AAAAAgAAAAC/BWBeng+MR4/LHJYQzA0WxFSoodXXWqQmjQsmUK/7wAAAAZAAN9gOAAAABgAAAAEAAAAAAAAAAAAAAABqWoEHAAAAA5AGxUEUQFuBRaEvHyirZAyiRQFh0oztnudV3I2hA8AfAAAABAAAAAAAAAAQAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAAQAAAADthBo7E2SFu0XydsXwWcQa5Jfqj3jWFKEWIaPd3/j18gAAABMAAAACQ2xhd2FibGVIZXhhAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAACHtMX4q21obOXM24wtC2XrM68IJz1+D0FJCuC2mrponAAAAAlQL5AAAAAABAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAAQAAAAC/BWBeng+MR4/LHJYQzA0WxFSoodXXWqQmjQsmUK/7wAAAAAFIRVhBAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAAlQL5AAAAAABAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAEQAAAAAAAAACUK/7wAAAAEDIhbMTWCkDKPukM5pQHpov0LA0iOZyLlzkbvLFgsAFHoSV+WkBl7F+/5s5VkuiLOAV532LWiKHIjyATMWYuMwJ3/j18gAAAECB6L3DheUUINqBeKtM9GtmI9vVaNefRCtYsN7gVXv8yn1RHFWRzrJZGqjTob/oB2uCql8iQhB7icYlaGWcKw8B',
-  result_xdr: 'AAAAAAAAAZAAAAAAAAAABAAAAAAAAAAQAAAAAAAAAAAAAAATAAAAAAAAAAAAAAABAAAAAAAAAAAAAAARAAAAAAAAAAA=',
-  fee_meta_xdr: 'AAAAAgAAAAMAN9gmAAAAAAAAAAC/BWBeng+MR4/LHJYQzA0WxFSoodXXWqQmjQsmUK/7wAAAAAAFXUSkADfYDgAAAAUAAAADAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAADfYJgAAAABqWoDlAAAAAAAAAAEAN9gnAAAAAAAAAAC/BWBeng+MR4/LHJYQzA0WxFSoodXXWqQmjQsmUK/7wAAAAAAFXUMUADfYDgAAAAUAAAADAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAADfYJgAAAABqWoDlAAAAAA==',
-  memo_type: 'hash',
-  signatures: [
-    'yIWzE1gpAyj7pDOaUB6aL9CwNIjmci5c5G7yxYLABR6ElflpAZexfv+bOVZLoizgFed9i1oihyI8gEzFmLjMCQ==',
-    'gei9w4XlFCDagXirTPRrZiPb1WjXn0QrWLDe4FV7/Mp9URxVkc6yWRqo06G/6AdrgqpfIkIQe4nGJWhlnCsPAQ=='
-  ],
-  preconditions: { timebounds: { min_time: '0', max_time: '1784316167' } },
-  offerResults: undefined
-}
-vault.get key Issuer.in v "DONE""DONE"
-  ✔ setup new/existing account for Ann (1m 2.9s)
-vault.put key Issuer.in value DONE
-  ─
-
-  1 test passed
-vault.put key Issuer.desc.16 value {
-  amount: '1000.0000000',
-  balance_id: undefined,
-  txDesc: '',
-  txId: '8ceaf2d89809d503b438240675ce558b9d1087147b2281245f02c717cb223e57',
-  txMemo: '9006c54114405b8145a12f1f28ab640ca2450161d28ced9ee755dc8da103c01f',
-  txMemoType: 'hash',
-  txSrc: 'GC7QKYC6TYHYYR4PZMOJMEGMBULMIVFIUHK5OWVEE2GQWJSQV754ATC3'
-}
-Cyn handle_stateDeals Broken Deal Request e {
-  amount: '1000.0000000',
-  txDesc: '',
-  txId: '8ceaf2d89809d503b438240675ce558b9d1087147b2281245f02c717cb223e57',
-  txMemo: '9006c54114405b8145a12f1f28ab640ca2450161d28ced9ee755dc8da103c01f',
-  txMemoType: 'hash',
-  txSrc: 'GC7QKYC6TYHYYR4PZMOJMEGMBULMIVFIUHK5OWVEE2GQWJSQV754ATC3'
-}
-vault.put key Issuer.desc.17 value {
-  amount: '1000.0000000',
-  balance_id: undefined,
-  txDesc: '',
-  txId: '8ceaf2d89809d503b438240675ce558b9d1087147b2281245f02c717cb223e57',
-  txMemo: '9006c54114405b8145a12f1f28ab640ca2450161d28ced9ee755dc8da103c01f',
-  txMemoType: 'hash',
-  txSrc: 'GC7QKYC6TYHYYR4PZMOJMEGMBULMIVFIUHK5OWVEE2GQWJSQV754ATC3'
-}
-Cyn handle_stateDeals disputeBrokenDeal r {
-  balanceId: '0000000089d50a25550b8ba7fd89a0540f4ae6e83c5527e11af6a93d6d72b5ac5cc9c465',
-  txId: '719a1b9838f95289bb81b3d51d2f2231994bfd2c924b68c83e3372773d1cec55'
-}
-stopMonitor - "Issuer's effects" closed.
-  ✔ setup new/existing account for Cyn (1m 8s)
-vault.put key Issuer.in value DONE
-  ✔ load new/existing Issuer account (1m 8s)
-  ─
-
-  1 test passed
-  ─
-
-  1 test passed
-
-loadAccount accountId GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB - loading...
-DemoDone Cyn sdk.transaction.makeSellOffer r tx.successful true
-  ✔ demo done (3.5s)
-  ─
-
-  1 test passed
-265087 demoit tm_request_demo for Ava DONE
-loadAccount accountId GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733 - loading...
-runMonitor.sell Bob sdk.transaction.makeSellOffer r tx.successful true true
 stopMonitor - "Abe's trading effects" closed.
-  ✔ request demo (2m 54.5s)
-vault.put key Abe.granted value DONE
+loadAccount accountId GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY - loading...
+makeBuyOffer GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY native MA:GADVFKPCWLKU5SBU7EMWRAMQDLVVFZA44JHTXRDYFVXEXZ3PU5LGYTNH 2 2 0...
+vault.put key Abe.granted value DONE options undefined
+  ✔ request demo (20.9s)
   ─
 
   1 test passed
-=== Al.granted NOT FOUND ===
-loadAccount accountId GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733 - loading...
-makeBuyOffer GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733 Asset { code: 'XLM', issuer: null } Asset {
-  code: 'MA',
-  issuer: 'GDWYIGR3CNSILO2F6J3ML4CZYQNOJF7KR54NMFFBCYQ2HXO77D27E7EV'
-} 2 2 0 ...
 
 
 
 
-loadAccount accountId GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733 - loading...
-loadAccount accountId GDCCXDNCFDJLZL2LCBRYB4WFSOPIG2ALVT3KZUC2DR7OZDJT4T57L3IG - loading...
-loadAccount accountId GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB - loading...
-loadAccount accountId GDWYIGR3CNSILO2F6J3ML4CZYQNOJF7KR54NMFFBCYQ2HXO77D27E7EV - loading...
-fund Bob GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733 clawback false 2026-07-17T19:22:33Z ...
-fund Abe GDCCXDNCFDJLZL2LCBRYB4WFSOPIG2ALVT3KZUC2DR7OZDJT4T57L3IG clawback false 2026-07-17T19:22:33Z ...
-fund Cyn GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB clawback false 2026-07-17T19:22:28Z ...
-runMonitor.trade Bob sdk.transaction.makeBuyOffer r.successful true
-- Abe has HEXA 1100.0000000
-- Cyn has HEXA 1099.9999802
-makeRequest r {
-  balanceId: '00000000745c4dd0667b032e807d58b262be8df371e5951c4d9d98af230a0896b5ffebb1',
-  txId: 'd25b44acf62fd465c9be6cddbf1b538bb542f0bb97e8ca7a4387e51636dca2ff',
-  request: 'Fresh red snapper for 4 persons GGS. HEXA 1000',
-  amount: '1000'
-}
+loadAccount accountId GAXJE7HBU46QKUU2POQKEELKRFTBIVG2CM74DLRNGVSNDXQB2CUBXJVA - loading...
+loadAccount accountId GADVFKPCWLKU5SBU7EMWRAMQDLVVFZA44JHTXRDYFVXEXZ3PU5LGYTNH - loading...
+loadAccount accountId GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY - loading...
+loadAccount accountId GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB - loading...
+fund Abe GAXJE7HBU46QKUU2POQKEELKRFTBIVG2CM74DLRNGVSNDXQB2CUBXJVA clawback false 2026-08-21T18:15:01Z...
+fund Bob GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY clawback false 2026-08-21T18:15:01Z...
+fund Cyn GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB clawback false 2026-08-21T18:14:31Z...
+runMonitor trade Bob sdk.transaction.makeBuyOffer r.successful true
+runMonitor trade finally
+runMonitor trade DONE
+Abe has HEXA 1100.0000000
+Cyn has HEXA 900.0000000
+makeRequest r.request Fresh red snapper for 4 persons GGS. HEXA 1000
+loop GAPY6YGZGWHSTBGQYEOKMRXN5TKGHBJ66AQMFNNTKBVPGDK3AD5UNZZ7 *** ERROR *** { transaction: 'tx_bad_seq' } left 9
+createAccount - creating account for Al GC2GJNXJ6D2DZWGFMJNMK3OGSXZ5IZH7M32X5CHLJJOIILCAQDOTPPB5 2026-08-21T18:14:46Z...
 vault.put key Issuer.desc.1 value {
   amount: '1000.0000000',
-  balance_id: '00000000745c4dd0667b032e807d58b262be8df371e5951c4d9d98af230a0896b5ffebb1',
+  balance_id: '000000003d166a5885afd451b1e0d705218f4403c441dd812a9d6ff15c140dde855e3c40',
   txDesc: 'Fresh red snapper for 4 persons GGS. HEXA 1000',
-  txId: 'd25b44acf62fd465c9be6cddbf1b538bb542f0bb97e8ca7a4387e51636dca2ff',
+  txId: '140723427d985c90430f8d30f346bcce2ab938198b869d8660d5d30cba4dca5e',
   txMemo: 'Request 0',
   txMemoType: 'text',
-  txSrc: 'GDCCXDNCFDJLZL2LCBRYB4WFSOPIG2ALVT3KZUC2DR7OZDJT4T57L3IG'
-}
+  txSrc: 'GAXJE7HBU46QKUU2POQKEELKRFTBIVG2CM74DLRNGVSNDXQB2CUBXJVA'
+} options undefined
+Ann handle_stateInitial e {"amount":"1000.0000000","balance_id":"000000003d166a5885afd451b1e0d705218f4403c441dd812a9d6ff15c140dde855e3c40","txDesc":"Fresh red snapper for 4 persons GGS. HEXA 1000","txId":"140723427d985c90430f8d30f346bcce2ab938198b869d8660d5d30cba4dca5e","txMemo":"Request 0","txMemoType":"text","txSrc":"GAXJE7HBU46QKUU2POQKEELKRFTBIVG2CM74DLRNGVSNDXQB2CUBXJVA"}
 Cyn handle_stateInitial stateInitial.queue.length 0
 Cyn handle_stateInitial Request e {
   amount: '1000.0000000',
-  balance_id: '00000000745c4dd0667b032e807d58b262be8df371e5951c4d9d98af230a0896b5ffebb1',
+  balance_id: '000000003d166a5885afd451b1e0d705218f4403c441dd812a9d6ff15c140dde855e3c40',
   txDesc: 'Fresh red snapper for 4 persons GGS. HEXA 1000',
-  txId: 'd25b44acf62fd465c9be6cddbf1b538bb542f0bb97e8ca7a4387e51636dca2ff',
+  txId: '140723427d985c90430f8d30f346bcce2ab938198b869d8660d5d30cba4dca5e',
   txMemo: 'Request 0',
   txMemoType: 'text',
-  txSrc: 'GDCCXDNCFDJLZL2LCBRYB4WFSOPIG2ALVT3KZUC2DR7OZDJT4T57L3IG'
+  txSrc: 'GAXJE7HBU46QKUU2POQKEELKRFTBIVG2CM74DLRNGVSNDXQB2CUBXJVA'
 }
-Ann handle_stateInitial e {
-  amount: '1000.0000000',
-  balance_id: '00000000745c4dd0667b032e807d58b262be8df371e5951c4d9d98af230a0896b5ffebb1',
-  txDesc: 'Fresh red snapper for 4 persons GGS. HEXA 1000',
-  txId: 'd25b44acf62fd465c9be6cddbf1b538bb542f0bb97e8ca7a4387e51636dca2ff',
-  txMemo: 'Request 0',
-  txMemoType: 'text',
-  txSrc: 'GDCCXDNCFDJLZL2LCBRYB4WFSOPIG2ALVT3KZUC2DR7OZDJT4T57L3IG'
-}
-loop GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733 *** ERROR *** { transaction: 'tx_bad_seq' } left 9
-fund Bob GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733 clawback false 2026-07-17T19:22:38Z ...
-- Bob has HEXA 1900.0000000
+vault.put key Al.keys value [
+  'SDTJJHAL5HUDG4SPBTUEQMWO7PT37OA3BVM3O5HO5N65KOJY3U667NVZ',
+  'GC2GJNXJ6D2DZWGFMJNMK3OGSXZ5IZH7M32X5CHLJJOIILCAQDOTPPB5'
+] options undefined
+loadAccount accountId GC2GJNXJ6D2DZWGFMJNMK3OGSXZ5IZH7M32X5CHLJJOIILCAQDOTPPB5 - loading...
+changeTrust 3 assets for Al GC2GJNXJ6D2DZWGFMJNMK3OGSXZ5IZH7M32X5CHLJJOIILCAQDOTPPB5 2026-08-21T18:15:16Z...
+makeBuyOffer GC2GJNXJ6D2DZWGFMJNMK3OGSXZ5IZH7M32X5CHLJJOIILCAQDOTPPB5 native MA:GADVFKPCWLKU5SBU7EMWRAMQDLVVFZA44JHTXRDYFVXEXZ3PU5LGYTNH 1 1 0...
+demouser.DemoTmUse sdk.transaction.makeBuyOffer r.successful true
+loop GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY *** ERROR *** { transaction: 'tx_bad_seq' } left 9
+fund Bob GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY clawback false 2026-08-21T18:15:06Z...
+Bob has HEXA 100.0000000
 makeOffer r {
-  balanceId: '0000000024a0f5ff4920b25111d2eb7b2a68c209297a358d0909d0e82c4be3e18e16a973',
-  txId: '47b9b4e0fdee244cbab346dfe9ef255bfb3e744fd9a311d0ae147285ab5b90ef',
+  memo: 'Offer 0',
+  memo_bytes: 'T2ZmZXIgMA==',
+  _links: {
+    self: {
+      href: 'https://horizon-testnet.stellar.org/transactions/e9fac2ed14887400a93f978eb52464f21713bcd14bac37ce2c144f1581cb010e'
+    },
+    account: {
+      href: 'https://horizon-testnet.stellar.org/accounts/GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY'
+    },
+    ledger: { href: 'https://horizon-testnet.stellar.org/ledgers/4262713' },
+    operations: {
+      href: 'https://horizon-testnet.stellar.org/transactions/e9fac2ed14887400a93f978eb52464f21713bcd14bac37ce2c144f1581cb010e/operations{?cursor,limit,order}',
+      templated: true
+    },
+    effects: {
+      href: 'https://horizon-testnet.stellar.org/transactions/e9fac2ed14887400a93f978eb52464f21713bcd14bac37ce2c144f1581cb010e/effects{?cursor,limit,order}',
+      templated: true
+    },
+    precedes: {
+      href: 'https://horizon-testnet.stellar.org/transactions?order=asc&cursor=18308212927242240'
+    },
+    succeeds: {
+      href: 'https://horizon-testnet.stellar.org/transactions?order=desc&cursor=18308212927242240'
+    },
+    transaction: {
+      href: 'https://horizon-testnet.stellar.org/transactions/e9fac2ed14887400a93f978eb52464f21713bcd14bac37ce2c144f1581cb010e'
+    }
+  },
+  id: 'e9fac2ed14887400a93f978eb52464f21713bcd14bac37ce2c144f1581cb010e',
+  paging_token: '18308212927242240',
+  successful: true,
+  hash: 'e9fac2ed14887400a93f978eb52464f21713bcd14bac37ce2c144f1581cb010e',
+  ledger: 4262713,
+  created_at: '2026-08-21T18:15:46Z',
+  source_account: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY',
+  source_account_sequence: '18308135617822725',
+  fee_account: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY',
+  fee_charged: '300',
+  max_fee: '300',
+  operation_count: 3,
+  envelope_xdr: 'AAAAAgAAAADodiEzWCLSl2slMhgBTbsl1IVZEf4KM9q/f4KGEUL0bAAAASwAQQsnAAAABQAAAAEAAAAAAAAAAAAAAABqiJXsAAAAAQAAAAdPZmZlciAwAAAAAAMAAAAAAAAADgAAAAFIRVhBAAAAAAdSqeKy1U7INPkZaIGQGutS5BziTzvEeC1uS+dvp1ZsAAAAAAAAAGQAAAACAAAAAAAAAAAHUqnistVOyDT5GWiBkBrrUuQc4k87xHgtbkvnb6dWbAAAAAAAAAAAAAAAAOh2ITNYItKXayUyGAFNuyXUhVkR/goz2r9/goYRQvRsAAAAAAAAAAAAAAAKAAAABWRhdGEwAAAAAAAAAQAAAChGcmVzaGx5IGNhdWdodCByZWQgc25hcHBlciA0bGIuIEhFWEEgODAwAAAAAAAAAAoAAAAFZGF0YTAAAAAAAAAAAAAAAAAAAAERQvRsAAAAQPKqFNmU8Jo0h2cYc1+U5M+1/09BxNHgaGamDyq+YWZqQaaGYeP1mjQJMabvbMVrF3StV49/WXzOun6gjRHz+Ac=',
+  result_xdr: 'AAAAAAAAASwAAAAAAAAAAwAAAAAAAAAOAAAAAAAAAADjoWfoCxOLw3PSLVzavPF+JRsYyvQue7MkPtMvGF5BxAAAAAAAAAAKAAAAAAAAAAAAAAAKAAAAAAAAAAA=',
+  fee_meta_xdr: 'AAAAAgAAAAMAQQs4AAAAAAAAAADodiEzWCLSl2slMhgBTbsl1IVZEf4KM9q/f4KGEUL0bAAAAAJUpHfEAEELJwAAAAQAAAAEAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAACYloAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAAEELOAAAAABqiJXNAAAAAAAAAAEAQQs5AAAAAAAAAADodiEzWCLSl2slMhgBTbsl1IVZEf4KM9q/f4KGEUL0bAAAAAJUpHaYAEELJwAAAAQAAAAEAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAACYloAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAAEELOAAAAABqiJXNAAAAAA==',
+  memo_type: 'text',
+  signatures: [
+    '8qoU2ZTwmjSHZxhzX5Tkz7X/T0HE0eBoZqYPKr5hZmpBpoZh4/WaNAkxpu9sxWsXdK1Xj39ZfM66fqCNEfP4Bw=='
+  ],
+  preconditions: { timebounds: { min_time: '0', max_time: '1787336172' } },
+  offerResults: undefined,
   request: 'Freshly caught red snapper 4lb. HEXA 800',
   amount: '0.0000100'
 }
 vault.put key Issuer.desc.2 value {
   amount: '0.0000100',
-  balance_id: '0000000024a0f5ff4920b25111d2eb7b2a68c209297a358d0909d0e82c4be3e18e16a973',
+  balance_id: '00000000e3a167e80b138bc373d22d5cdabcf17e251b18caf42e7bb3243ed32f185e41c4',
   txDesc: 'Freshly caught red snapper 4lb. HEXA 800',
-  txId: '47b9b4e0fdee244cbab346dfe9ef255bfb3e744fd9a311d0ae147285ab5b90ef',
+  txId: 'e9fac2ed14887400a93f978eb52464f21713bcd14bac37ce2c144f1581cb010e',
   txMemo: 'Offer 0',
   txMemoType: 'text',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
+  txSrc: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY'
+} options undefined
+Cyn handle_stateInitial Offer e {
+  amount: '0.0000100',
+  balance_id: '00000000e3a167e80b138bc373d22d5cdabcf17e251b18caf42e7bb3243ed32f185e41c4',
+  txDesc: 'Freshly caught red snapper 4lb. HEXA 800',
+  txId: 'e9fac2ed14887400a93f978eb52464f21713bcd14bac37ce2c144f1581cb010e',
+  txMemo: 'Offer 0',
+  txMemoType: 'text',
+  txSrc: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY'
 }
 Bob handle_stateInitial e {
   amount: '0.0000100',
-  balance_id: '0000000024a0f5ff4920b25111d2eb7b2a68c209297a358d0909d0e82c4be3e18e16a973',
+  balance_id: '00000000e3a167e80b138bc373d22d5cdabcf17e251b18caf42e7bb3243ed32f185e41c4',
   txDesc: 'Freshly caught red snapper 4lb. HEXA 800',
-  txId: '47b9b4e0fdee244cbab346dfe9ef255bfb3e744fd9a311d0ae147285ab5b90ef',
+  txId: 'e9fac2ed14887400a93f978eb52464f21713bcd14bac37ce2c144f1581cb010e',
   txMemo: 'Offer 0',
   txMemoType: 'text',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-Cyn handle_stateInitial Offer e {
-  amount: '0.0000100',
-  balance_id: '0000000024a0f5ff4920b25111d2eb7b2a68c209297a358d0909d0e82c4be3e18e16a973',
-  txDesc: 'Freshly caught red snapper 4lb. HEXA 800',
-  txId: '47b9b4e0fdee244cbab346dfe9ef255bfb3e744fd9a311d0ae147285ab5b90ef',
-  txMemo: 'Offer 0',
-  txMemoType: 'text',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
+  txSrc: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY'
 }
 Cyn take effect {
   amount: '0.0000100',
-  balance_id: '0000000024a0f5ff4920b25111d2eb7b2a68c209297a358d0909d0e82c4be3e18e16a973',
+  balance_id: '00000000e3a167e80b138bc373d22d5cdabcf17e251b18caf42e7bb3243ed32f185e41c4',
   txDesc: 'Freshly caught red snapper 4lb. HEXA 800',
-  txId: '47b9b4e0fdee244cbab346dfe9ef255bfb3e744fd9a311d0ae147285ab5b90ef',
+  txId: 'e9fac2ed14887400a93f978eb52464f21713bcd14bac37ce2c144f1581cb010e',
   txMemo: 'Offer 0',
   txMemoType: 'text',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
+  txSrc: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY'
 }
 takeOffer r {
-  balanceId: '00000000850555b2f7349c32936436403ae829d9adf4285e42fc37ceb4fb4cbdb72eb5a7',
-  txId: '8edb551ecedd5fdc3d7b56c7838fc4d680a021111b8ab64899908daee2dd6970',
+  memo: '6frC7RSIdACpP5eOtSRk8hcTvNFLrDfOLBRPFYHLAQ4=',
+  _links: {
+    self: {
+      href: 'https://horizon-testnet.stellar.org/transactions/0239c8c28928b61fadce93d0494ac50a7e908c8369930763a23c2999a0c4e5ce'
+    },
+    account: {
+      href: 'https://horizon-testnet.stellar.org/accounts/GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB'
+    },
+    ledger: { href: 'https://horizon-testnet.stellar.org/ledgers/4262715' },
+    operations: {
+      href: 'https://horizon-testnet.stellar.org/transactions/0239c8c28928b61fadce93d0494ac50a7e908c8369930763a23c2999a0c4e5ce/operations{?cursor,limit,order}',
+      templated: true
+    },
+    effects: {
+      href: 'https://horizon-testnet.stellar.org/transactions/0239c8c28928b61fadce93d0494ac50a7e908c8369930763a23c2999a0c4e5ce/effects{?cursor,limit,order}',
+      templated: true
+    },
+    precedes: {
+      href: 'https://horizon-testnet.stellar.org/transactions?order=asc&cursor=18308221517176832'
+    },
+    succeeds: {
+      href: 'https://horizon-testnet.stellar.org/transactions?order=desc&cursor=18308221517176832'
+    },
+    transaction: {
+      href: 'https://horizon-testnet.stellar.org/transactions/0239c8c28928b61fadce93d0494ac50a7e908c8369930763a23c2999a0c4e5ce'
+    }
+  },
+  id: '0239c8c28928b61fadce93d0494ac50a7e908c8369930763a23c2999a0c4e5ce',
+  paging_token: '18308221517176832',
+  successful: true,
+  hash: '0239c8c28928b61fadce93d0494ac50a7e908c8369930763a23c2999a0c4e5ce',
+  ledger: 4262715,
+  created_at: '2026-08-21T18:15:56Z',
+  source_account: 'GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB',
+  source_account_sequence: '18308139912790019',
+  fee_account: 'GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB',
+  fee_charged: '100',
+  max_fee: '100',
+  operation_count: 1,
+  envelope_xdr: 'AAAAAgAAAAD61QYczJUGrcqLJS3jaRH+QdLRxUyHw5wq6KngckLyUQAAAGQAQQsoAAAAAwAAAAEAAAAAAAAAAAAAAABqiJX1AAAAA+n6wu0UiHQAqT+XjrUkZPIXE7zRS6w3ziwUTxWBywEOAAAAAQAAAAAAAAAOAAAAAUhFWEEAAAAAB1Kp4rLVTsg0+RlogZAa61LkHOJPO8R4LW5L52+nVmwAAAAB3NZQAAAAAAIAAAAAAAAAAAdSqeKy1U7INPkZaIGQGutS5BziTzvEeC1uS+dvp1ZsAAAAAAAAAAAAAAAA+tUGHMyVBq3KiyUt42kR/kHS0cVMh8OcKuip4HJC8lEAAAAAAAAAAAAAAAFyQvJRAAAAQHcNRZIYaOuFq8LFhnK7rkU8FxYnMCqJ9JJL4vtAAgsroERQ1NNW+S2Ex5mXL8F3E6N7eVcbnykSg9kvpMK8+g4=',
+  result_xdr: 'AAAAAAAAAGQAAAAAAAAAAQAAAAAAAAAOAAAAAAAAAAAwKc9nAEuWE9Je42815myGy3MODI5dEeA1fLfvMM6DdgAAAAA=',
+  fee_meta_xdr: 'AAAAAgAAAAMAQQsxAAAAAAAAAAD61QYczJUGrcqLJS3jaRH+QdLRxUyHw5wq6KngckLyUQAAAAJUC+IMAEELKAAAAAIAAAADAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAAEELMQAAAABqiJWqAAAAAAAAAAEAQQs7AAAAAAAAAAD61QYczJUGrcqLJS3jaRH+QdLRxUyHw5wq6KngckLyUQAAAAJUC+GoAEELKAAAAAIAAAADAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAAEELMQAAAABqiJWqAAAAAA==',
+  memo_type: 'hash',
+  signatures: [
+    'dw1Fkhho64WrwsWGcruuRTwXFicwKon0kkvi+0ACCyugRFDU01b5LYTHmZcvwXcTo3t5VxufKRKD2S+kwrz6Dg=='
+  ],
+  preconditions: { timebounds: { min_time: '0', max_time: '1787336181' } },
+  offerResults: undefined,
   amount: '800'
 }
 Cyn take effect {
   amount: '1000.0000000',
-  balance_id: '00000000745c4dd0667b032e807d58b262be8df371e5951c4d9d98af230a0896b5ffebb1',
+  balance_id: '000000003d166a5885afd451b1e0d705218f4403c441dd812a9d6ff15c140dde855e3c40',
   txDesc: 'Fresh red snapper for 4 persons GGS. HEXA 1000',
-  txId: 'd25b44acf62fd465c9be6cddbf1b538bb542f0bb97e8ca7a4387e51636dca2ff',
+  txId: '140723427d985c90430f8d30f346bcce2ab938198b869d8660d5d30cba4dca5e',
   txMemo: 'Request 0',
   txMemoType: 'text',
-  txSrc: 'GDCCXDNCFDJLZL2LCBRYB4WFSOPIG2ALVT3KZUC2DR7OZDJT4T57L3IG'
+  txSrc: 'GAXJE7HBU46QKUU2POQKEELKRFTBIVG2CM74DLRNGVSNDXQB2CUBXJVA'
 }
 vault.put key Issuer.desc.3 value {
   amount: '800.0000000',
-  balance_id: '00000000850555b2f7349c32936436403ae829d9adf4285e42fc37ceb4fb4cbdb72eb5a7',
+  balance_id: '000000003029cf67004b9613d25ee36f35e66c86cb730e0c8e5d11e0357cb7ef30ce8376',
   txDesc: '',
-  txId: '8edb551ecedd5fdc3d7b56c7838fc4d680a021111b8ab64899908daee2dd6970',
-  txMemo: '47b9b4e0fdee244cbab346dfe9ef255bfb3e744fd9a311d0ae147285ab5b90ef',
+  txId: '0239c8c28928b61fadce93d0494ac50a7e908c8369930763a23c2999a0c4e5ce',
+  txMemo: 'e9fac2ed14887400a93f978eb52464f21713bcd14bac37ce2c144f1581cb010e',
   txMemoType: 'hash',
-  txSrc: 'GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB'
-}
+  txSrc: 'GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB'
+} options undefined
+vault.get key Issuer.desc.3 v 
+vault.get key Issuer.desc.3 v 
+vault.get key Issuer.desc.3 v 
 Bob handle_stateInitial e {
   amount: '800.0000000',
-  balance_id: '00000000850555b2f7349c32936436403ae829d9adf4285e42fc37ceb4fb4cbdb72eb5a7',
+  balance_id: '000000003029cf67004b9613d25ee36f35e66c86cb730e0c8e5d11e0357cb7ef30ce8376',
   txDesc: '',
-  txId: '8edb551ecedd5fdc3d7b56c7838fc4d680a021111b8ab64899908daee2dd6970',
-  txMemo: '47b9b4e0fdee244cbab346dfe9ef255bfb3e744fd9a311d0ae147285ab5b90ef',
+  txId: '0239c8c28928b61fadce93d0494ac50a7e908c8369930763a23c2999a0c4e5ce',
+  txMemo: 'e9fac2ed14887400a93f978eb52464f21713bcd14bac37ce2c144f1581cb010e',
   txMemoType: 'hash',
-  txSrc: 'GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB'
+  txSrc: 'GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB'
 }
 takeRequest r {
-  balanceId: '00000000672f3f6b86a9a94fcccc86b95592a966e8f15e7d26a2b21e44eef12ccd89396b',
-  txId: '5867dd6fc918d37fdada5f10850f6db7fcf68e6dcb831bb0591f148f02859044',
+  memo: 'FAcjQn2YXJBDD40w80a8ziq5OBmLhp2GYNXTDLpNyl4=',
+  _links: {
+    self: {
+      href: 'https://horizon-testnet.stellar.org/transactions/3f290ce5b2099d750a9875ba0565bf3212cb00e588dcc42c6044377e6cb3eac8'
+    },
+    account: {
+      href: 'https://horizon-testnet.stellar.org/accounts/GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB'
+    },
+    ledger: { href: 'https://horizon-testnet.stellar.org/ledgers/4262716' },
+    operations: {
+      href: 'https://horizon-testnet.stellar.org/transactions/3f290ce5b2099d750a9875ba0565bf3212cb00e588dcc42c6044377e6cb3eac8/operations{?cursor,limit,order}',
+      templated: true
+    },
+    effects: {
+      href: 'https://horizon-testnet.stellar.org/transactions/3f290ce5b2099d750a9875ba0565bf3212cb00e588dcc42c6044377e6cb3eac8/effects{?cursor,limit,order}',
+      templated: true
+    },
+    precedes: {
+      href: 'https://horizon-testnet.stellar.org/transactions?order=asc&cursor=18308225812148224'
+    },
+    succeeds: {
+      href: 'https://horizon-testnet.stellar.org/transactions?order=desc&cursor=18308225812148224'
+    },
+    transaction: {
+      href: 'https://horizon-testnet.stellar.org/transactions/3f290ce5b2099d750a9875ba0565bf3212cb00e588dcc42c6044377e6cb3eac8'
+    }
+  },
+  id: '3f290ce5b2099d750a9875ba0565bf3212cb00e588dcc42c6044377e6cb3eac8',
+  paging_token: '18308225812148224',
+  successful: true,
+  hash: '3f290ce5b2099d750a9875ba0565bf3212cb00e588dcc42c6044377e6cb3eac8',
+  ledger: 4262716,
+  created_at: '2026-08-21T18:16:01Z',
+  source_account: 'GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB',
+  source_account_sequence: '18308139912790020',
+  fee_account: 'GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB',
+  fee_charged: '100',
+  max_fee: '100',
+  operation_count: 1,
+  envelope_xdr: 'AAAAAgAAAAD61QYczJUGrcqLJS3jaRH+QdLRxUyHw5wq6KngckLyUQAAAGQAQQsoAAAABAAAAAEAAAAAAAAAAAAAAABqiJX7AAAAAxQHI0J9mFyQQw+NMPNGvM4quTgZi4adhmDV0wy6TcpeAAAAAQAAAAAAAAAOAAAAAUhFWEEAAAAAB1Kp4rLVTsg0+RlogZAa61LkHOJPO8R4LW5L52+nVmwAAAAAAAAAZAAAAAIAAAAAAAAAAAdSqeKy1U7INPkZaIGQGutS5BziTzvEeC1uS+dvp1ZsAAAAAAAAAAAAAAAA+tUGHMyVBq3KiyUt42kR/kHS0cVMh8OcKuip4HJC8lEAAAAAAAAAAAAAAAFyQvJRAAAAQJy14e56kiAMs56FqF6AnF+XoHTkvueOTX6iqojMgGUpba5yrysA3o9xhMGTm5Uz9d9oJLnwVbMg7Q7yreaN2QI=',
+  result_xdr: 'AAAAAAAAAGQAAAAAAAAAAQAAAAAAAAAOAAAAAAAAAAAd0dUJFPseMApU2ewteFBtBlpulUPWk54hUTUUwFIHtgAAAAA=',
+  fee_meta_xdr: 'AAAAAgAAAAMAQQs7AAAAAAAAAAD61QYczJUGrcqLJS3jaRH+QdLRxUyHw5wq6KngckLyUQAAAAJUC+GoAEELKAAAAAMAAAADAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAMAAAAAAEELOwAAAABqiJXcAAAAAAAAAAEAQQs8AAAAAAAAAAD61QYczJUGrcqLJS3jaRH+QdLRxUyHw5wq6KngckLyUQAAAAJUC+FEAEELKAAAAAMAAAADAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAMAAAAAAEELOwAAAABqiJXcAAAAAA==',
+  memo_type: 'hash',
+  signatures: [
+    'nLXh7nqSIAyznoWoXoCcX5egdOS+545NfqKqiMyAZSltrnKvKwDej3GEwZOblTP132gkufBVsyDtDvKt5o3ZAg=='
+  ],
+  preconditions: { timebounds: { min_time: '0', max_time: '1787336187' } },
+  offerResults: undefined,
   amount: '0.0000100'
-}
-Bob handle_stateCynBobDeal desc {
-  amount: '800.0000000',
-  destination: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733',
-  txId: '5d630fab7e6cd215490da6ff8956483f2520d06c85371a843b8ea60660807cbb'
 }
 vault.put key Issuer.desc.4 value {
   amount: '0.0000100',
-  balance_id: '00000000672f3f6b86a9a94fcccc86b95592a966e8f15e7d26a2b21e44eef12ccd89396b',
+  balance_id: '000000001dd1d50914fb1e300a54d9ec2d78506d065a6e9543d6939e21513514c05207b6',
   txDesc: '',
-  txId: '5867dd6fc918d37fdada5f10850f6db7fcf68e6dcb831bb0591f148f02859044',
-  txMemo: 'd25b44acf62fd465c9be6cddbf1b538bb542f0bb97e8ca7a4387e51636dca2ff',
+  txId: '3f290ce5b2099d750a9875ba0565bf3212cb00e588dcc42c6044377e6cb3eac8',
+  txMemo: '140723427d985c90430f8d30f346bcce2ab938198b869d8660d5d30cba4dca5e',
   txMemoType: 'hash',
-  txSrc: 'GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB'
-}
-Ann handle_stateInitial e {
-  amount: '0.0000100',
-  balance_id: '00000000672f3f6b86a9a94fcccc86b95592a966e8f15e7d26a2b21e44eef12ccd89396b',
-  txDesc: '',
-  txId: '5867dd6fc918d37fdada5f10850f6db7fcf68e6dcb831bb0591f148f02859044',
-  txMemo: 'd25b44acf62fd465c9be6cddbf1b538bb542f0bb97e8ca7a4387e51636dca2ff',
-  txMemoType: 'hash',
-  txSrc: 'GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB'
+  txSrc: 'GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB'
+} options undefined
+Ann handle_stateInitial e {"amount":"0.0000100","balance_id":"000000001dd1d50914fb1e300a54d9ec2d78506d065a6e9543d6939e21513514c05207b6","txDesc":"","txId":"3f290ce5b2099d750a9875ba0565bf3212cb00e588dcc42c6044377e6cb3eac8","txMemo":"140723427d985c90430f8d30f346bcce2ab938198b869d8660d5d30cba4dca5e","txMemoType":"hash","txSrc":"GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB"}
+Bob handle_stateCynBobDeal desc {
+  amount: '800.0000000',
+  destination: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY',
+  txId: '2a0827803bab55fb992ea8206863e661f110c7ead1e0cebf7a9e96ef21d1bb62'
 }
 vault.put key Issuer.desc.5 value {
   amount: '800.0000000',
-  balance_id: undefined,
+  balance_id: '000000003029cf67004b9613d25ee36f35e66c86cb730e0c8e5d11e0357cb7ef30ce8376',
   txDesc: '',
-  txId: '5d630fab7e6cd215490da6ff8956483f2520d06c85371a843b8ea60660807cbb',
-  txMemo: '8edb551ecedd5fdc3d7b56c7838fc4d680a021111b8ab64899908daee2dd6970',
+  txId: '2a0827803bab55fb992ea8206863e661f110c7ead1e0cebf7a9e96ef21d1bb62',
+  txMemo: '0239c8c28928b61fadce93d0494ac50a7e908c8369930763a23c2999a0c4e5ce',
   txMemoType: 'return',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-Cyn handle_stateDeals Offer e {
-  amount: '800.0000000',
-  txDesc: '',
-  txId: '5d630fab7e6cd215490da6ff8956483f2520d06c85371a843b8ea60660807cbb',
-  txMemo: '8edb551ecedd5fdc3d7b56c7838fc4d680a021111b8ab64899908daee2dd6970',
-  txMemoType: 'return',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
+  txSrc: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY'
+} options undefined
 Bob handle_stateCynBobDeal eotx {
   amount: '800.0000000',
+  balance_id: '000000003029cf67004b9613d25ee36f35e66c86cb730e0c8e5d11e0357cb7ef30ce8376',
   txDesc: '',
-  txId: '5d630fab7e6cd215490da6ff8956483f2520d06c85371a843b8ea60660807cbb',
-  txMemo: '8edb551ecedd5fdc3d7b56c7838fc4d680a021111b8ab64899908daee2dd6970',
+  txId: '2a0827803bab55fb992ea8206863e661f110c7ead1e0cebf7a9e96ef21d1bb62',
+  txMemo: '0239c8c28928b61fadce93d0494ac50a7e908c8369930763a23c2999a0c4e5ce',
   txMemoType: 'return',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
+  txSrc: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY'
 } clawable 800.0000000
+Cyn handle_stateDeals Offer e {
+  amount: '800.0000000',
+  balance_id: '000000003029cf67004b9613d25ee36f35e66c86cb730e0c8e5d11e0357cb7ef30ce8376',
+  txDesc: '',
+  txId: '2a0827803bab55fb992ea8206863e661f110c7ead1e0cebf7a9e96ef21d1bb62',
+  txMemo: '0239c8c28928b61fadce93d0494ac50a7e908c8369930763a23c2999a0c4e5ce',
+  txMemoType: 'return',
+  txSrc: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY'
+}
 vault.put key Issuer.desc.6 value {
   amount: '800.0000000',
-  balance_id: '00000000850555b2f7349c32936436403ae829d9adf4285e42fc37ceb4fb4cbdb72eb5a7',
+  balance_id: undefined,
   txDesc: '',
-  txId: '5d630fab7e6cd215490da6ff8956483f2520d06c85371a843b8ea60660807cbb',
-  txMemo: '8edb551ecedd5fdc3d7b56c7838fc4d680a021111b8ab64899908daee2dd6970',
+  txId: '2a0827803bab55fb992ea8206863e661f110c7ead1e0cebf7a9e96ef21d1bb62',
+  txMemo: '0239c8c28928b61fadce93d0494ac50a7e908c8369930763a23c2999a0c4e5ce',
   txMemoType: 'return',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-vault.get key Issuer.desc.6 v 
-vault.get key Issuer.desc.6 v 
-vault.get key Issuer.desc.6 v 
+  txSrc: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY'
+} options undefined
 vault.put key Issuer.desc.7 value {
   amount: '800.0000000',
   balance_id: undefined,
   txDesc: '',
-  txId: '5d630fab7e6cd215490da6ff8956483f2520d06c85371a843b8ea60660807cbb',
-  txMemo: '8edb551ecedd5fdc3d7b56c7838fc4d680a021111b8ab64899908daee2dd6970',
+  txId: '2a0827803bab55fb992ea8206863e661f110c7ead1e0cebf7a9e96ef21d1bb62',
+  txMemo: '0239c8c28928b61fadce93d0494ac50a7e908c8369930763a23c2999a0c4e5ce',
   txMemoType: 'return',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-{
-  memo: 'XWMPq35s0hVJDab/iVZIPyUg0GyFNxqEO46mBmCAfLs=',
-  _links: {
-    self: {
-      href: 'https://horizon-testnet.stellar.org/transactions/b7ab3dd521b7de226140df923267c7b4ca7af38321dd0ad7aee361b17056514c'
-    },
-    account: {
-      href: 'https://horizon-testnet.stellar.org/accounts/GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-    },
-    ledger: { href: 'https://horizon-testnet.stellar.org/ledgers/3659830' },
-    operations: {
-      href: 'https://horizon-testnet.stellar.org/transactions/b7ab3dd521b7de226140df923267c7b4ca7af38321dd0ad7aee361b17056514c/operations{?cursor,limit,order}',
-      templated: true
-    },
-    effects: {
-      href: 'https://horizon-testnet.stellar.org/transactions/b7ab3dd521b7de226140df923267c7b4ca7af38321dd0ad7aee361b17056514c/effects{?cursor,limit,order}',
-      templated: true
-    },
-    precedes: {
-      href: 'https://horizon-testnet.stellar.org/transactions?order=asc&cursor=15718850158936064'
-    },
-    succeeds: {
-      href: 'https://horizon-testnet.stellar.org/transactions?order=desc&cursor=15718850158936064'
-    },
-    transaction: {
-      href: 'https://horizon-testnet.stellar.org/transactions/b7ab3dd521b7de226140df923267c7b4ca7af38321dd0ad7aee361b17056514c'
-    }
-  },
-  id: 'b7ab3dd521b7de226140df923267c7b4ca7af38321dd0ad7aee361b17056514c',
-  paging_token: '15718850158936064',
-  successful: true,
-  hash: 'b7ab3dd521b7de226140df923267c7b4ca7af38321dd0ad7aee361b17056514c',
-  ledger: 3659830,
-  created_at: '2026-07-17T19:23:33Z',
-  source_account: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733',
-  source_account_sequence: '15718626820620307',
-  fee_account: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733',
-  fee_charged: '400',
-  max_fee: '400',
-  operation_count: 4,
-  envelope_xdr: 'AAAAAgAAAADxqTL3/rZ4sVfPtAKn22SaI28FcSXoyKMMKJMsPJ1TMQAAAZAAN9gCAAAAEwAAAAEAAAAAAAAAAAAAAABqWoFRAAAAA11jD6t+bNIVSQ2m/4lWSD8lINBshTcahDuOpgZggHy7AAAABAAAAAAAAAABAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAAkNsYXdhYmxlSGV4YQAAAADthBo7E2SFu0XydsXwWcQa5Jfqj3jWFKEWIaPd3/j18gAAAAHc1lAAAAAAAAAAABAAAAAA7YQaOxNkhbtF8nbF8FnEGuSX6o941hShFiGj3d/49fIAAAABAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAAQAAAADxqTL3/rZ4sVfPtAKn22SaI28FcSXoyKMMKJMsPJ1TMQAAAAFIRVhBAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAAdzWUAAAAAABAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAEQAAAAAAAAACPJ1TMQAAAED+XC9X/svlxECBURG8j9xx+EoSoF9Ndl9QgDURUO3zAmJa7a1bZmYHwUrUQ3gaBp5hAxDaFnMNDpV02n3CfwoI3/j18gAAAED1G7LVBPYOvLtLyrgHCrKqH57awFQNUcTJuSzSD1sjkqU90lwDnS5ziseJbSaI2nrfvRB8WgI2vAkyHQ2BIvYI',
-  result_xdr: 'AAAAAAAAAZAAAAAAAAAABAAAAAAAAAABAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAABAAAAAAAAAAAAAAARAAAAAAAAAAA=',
-  fee_meta_xdr: 'AAAAAgAAAAMAN9g1AAAAAAAAAADxqTL3/rZ4sVfPtAKn22SaI28FcSXoyKMMKJMsPJ1TMQAAAAJREOEkADfYAgAAABIAAAAEAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAACYloAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAADfYNQAAAABqWoEwAAAAAAAAAAEAN9g2AAAAAAAAAADxqTL3/rZ4sVfPtAKn22SaI28FcSXoyKMMKJMsPJ1TMQAAAAJREN+UADfYAgAAABIAAAAEAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAACYloAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAADfYNQAAAABqWoEwAAAAAA==',
-  memo_type: 'hash',
-  signatures: [
-    '/lwvV/7L5cRAgVERvI/ccfhKEqBfTXZfUIA1EVDt8wJiWu2tW2ZmB8FK1EN4GgaeYQMQ2hZzDQ6VdNp9wn8KCA==',
-    '9Ruy1QT2Dry7S8q4Bwqyqh+e2sBUDVHEybks0g9bI5KlPdJcA50uc4rHiW0miNp6370QfFoCNrwJMh0NgSL2CA=='
-  ],
-  preconditions: { timebounds: { min_time: '0', max_time: '1784316241' } },
-  offerResults: undefined
-}
-  ✔ setup new/existing account for Bob (58.5s)
-vault.put key Issuer.in value DONE
-  ─
-
-  1 test passed
-Ann handle_stateCynAnnDeal desc {
-  amount: '1000.0000000',
-  destination: 'GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB',
-  txId: 'a0eaf72b61799788bb5748c14fa24b0b60b39119326b060783d604bf3beae73f'
-}
+  txSrc: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY'
+} options undefined
+Ann handle_stateCynAnnDeal desc [object Object]
 vault.put key Issuer.desc.8 value {
   amount: '0.0000100',
-  balance_id: '00000000672f3f6b86a9a94fcccc86b95592a966e8f15e7d26a2b21e44eef12ccd89396b',
+  balance_id: undefined,
   txDesc: '',
-  txId: 'a0eaf72b61799788bb5748c14fa24b0b60b39119326b060783d604bf3beae73f',
-  txMemo: '5867dd6fc918d37fdada5f10850f6db7fcf68e6dcb831bb0591f148f02859044',
+  txId: '3a3ad24bd8e9f00e16abd84adcf8d718e4b7575a7af46b0d672da6f62ee06afa',
+  txMemo: '3f290ce5b2099d750a9875ba0565bf3212cb00e588dcc42c6044377e6cb3eac8',
   txMemoType: 'return',
-  txSrc: 'GDCCXDNCFDJLZL2LCBRYB4WFSOPIG2ALVT3KZUC2DR7OZDJT4T57L3IG'
-}
+  txSrc: 'GAXJE7HBU46QKUU2POQKEELKRFTBIVG2CM74DLRNGVSNDXQB2CUBXJVA'
+} options undefined
+Ann handle_stateCynAnnDeal eotx {"amount":"0.0000100","txDesc":"","txId":"3a3ad24bd8e9f00e16abd84adcf8d718e4b7575a7af46b0d672da6f62ee06afa","txMemo":"3f290ce5b2099d750a9875ba0565bf3212cb00e588dcc42c6044377e6cb3eac8","txMemoType":"return","txSrc":"GAXJE7HBU46QKUU2POQKEELKRFTBIVG2CM74DLRNGVSNDXQB2CUBXJVA"} clawable 1000.0000000
 Cyn handle_stateDeals Request e {
   amount: '0.0000100',
-  balance_id: '00000000672f3f6b86a9a94fcccc86b95592a966e8f15e7d26a2b21e44eef12ccd89396b',
   txDesc: '',
-  txId: 'a0eaf72b61799788bb5748c14fa24b0b60b39119326b060783d604bf3beae73f',
-  txMemo: '5867dd6fc918d37fdada5f10850f6db7fcf68e6dcb831bb0591f148f02859044',
+  txId: '3a3ad24bd8e9f00e16abd84adcf8d718e4b7575a7af46b0d672da6f62ee06afa',
+  txMemo: '3f290ce5b2099d750a9875ba0565bf3212cb00e588dcc42c6044377e6cb3eac8',
   txMemoType: 'return',
-  txSrc: 'GDCCXDNCFDJLZL2LCBRYB4WFSOPIG2ALVT3KZUC2DR7OZDJT4T57L3IG'
+  txSrc: 'GAXJE7HBU46QKUU2POQKEELKRFTBIVG2CM74DLRNGVSNDXQB2CUBXJVA'
 }
-Ann handle_stateCynAnnDeal eotx {
-  amount: '0.0000100',
-  balance_id: '00000000672f3f6b86a9a94fcccc86b95592a966e8f15e7d26a2b21e44eef12ccd89396b',
-  txDesc: '',
-  txId: 'a0eaf72b61799788bb5748c14fa24b0b60b39119326b060783d604bf3beae73f',
-  txMemo: '5867dd6fc918d37fdada5f10850f6db7fcf68e6dcb831bb0591f148f02859044',
-  txMemoType: 'return',
-  txSrc: 'GDCCXDNCFDJLZL2LCBRYB4WFSOPIG2ALVT3KZUC2DR7OZDJT4T57L3IG'
-} clawable 1000.0000000
 vault.put key Issuer.desc.9 value {
   amount: '0.0000100',
-  balance_id: undefined,
+  balance_id: '000000001dd1d50914fb1e300a54d9ec2d78506d065a6e9543d6939e21513514c05207b6',
   txDesc: '',
-  txId: 'a0eaf72b61799788bb5748c14fa24b0b60b39119326b060783d604bf3beae73f',
-  txMemo: '5867dd6fc918d37fdada5f10850f6db7fcf68e6dcb831bb0591f148f02859044',
+  txId: '3a3ad24bd8e9f00e16abd84adcf8d718e4b7575a7af46b0d672da6f62ee06afa',
+  txMemo: '3f290ce5b2099d750a9875ba0565bf3212cb00e588dcc42c6044377e6cb3eac8',
   txMemoType: 'return',
-  txSrc: 'GDCCXDNCFDJLZL2LCBRYB4WFSOPIG2ALVT3KZUC2DR7OZDJT4T57L3IG'
-}
+  txSrc: 'GAXJE7HBU46QKUU2POQKEELKRFTBIVG2CM74DLRNGVSNDXQB2CUBXJVA'
+} options undefined
 vault.put key Issuer.desc.10 value {
-  amount: '1000.0000000',
-  balance_id: '00000000745c4dd0667b032e807d58b262be8df371e5951c4d9d98af230a0896b5ffebb1',
-  txDesc: '',
-  txId: 'a0eaf72b61799788bb5748c14fa24b0b60b39119326b060783d604bf3beae73f',
-  txMemo: '5867dd6fc918d37fdada5f10850f6db7fcf68e6dcb831bb0591f148f02859044',
-  txMemoType: 'return',
-  txSrc: 'GDCCXDNCFDJLZL2LCBRYB4WFSOPIG2ALVT3KZUC2DR7OZDJT4T57L3IG'
-}
-vault.put key Issuer.desc.11 value {
   amount: '0.0000100',
   balance_id: undefined,
   txDesc: '',
-  txId: 'a0eaf72b61799788bb5748c14fa24b0b60b39119326b060783d604bf3beae73f',
-  txMemo: '5867dd6fc918d37fdada5f10850f6db7fcf68e6dcb831bb0591f148f02859044',
+  txId: '3a3ad24bd8e9f00e16abd84adcf8d718e4b7575a7af46b0d672da6f62ee06afa',
+  txMemo: '3f290ce5b2099d750a9875ba0565bf3212cb00e588dcc42c6044377e6cb3eac8',
   txMemoType: 'return',
-  txSrc: 'GDCCXDNCFDJLZL2LCBRYB4WFSOPIG2ALVT3KZUC2DR7OZDJT4T57L3IG'
-}
+  txSrc: 'GAXJE7HBU46QKUU2POQKEELKRFTBIVG2CM74DLRNGVSNDXQB2CUBXJVA'
+} options undefined
+vault.put key Issuer.desc.11 value {
+  amount: '1000.0000000',
+  balance_id: undefined,
+  txDesc: '',
+  txId: '3a3ad24bd8e9f00e16abd84adcf8d718e4b7575a7af46b0d672da6f62ee06afa',
+  txMemo: '3f290ce5b2099d750a9875ba0565bf3212cb00e588dcc42c6044377e6cb3eac8',
+  txMemoType: 'return',
+  txSrc: 'GAXJE7HBU46QKUU2POQKEELKRFTBIVG2CM74DLRNGVSNDXQB2CUBXJVA'
+} options undefined
 vault.put key Issuer.desc.12 value {
   amount: '1000.0000000',
   balance_id: undefined,
   txDesc: '',
-  txId: 'a0eaf72b61799788bb5748c14fa24b0b60b39119326b060783d604bf3beae73f',
-  txMemo: '5867dd6fc918d37fdada5f10850f6db7fcf68e6dcb831bb0591f148f02859044',
+  txId: '3a3ad24bd8e9f00e16abd84adcf8d718e4b7575a7af46b0d672da6f62ee06afa',
+  txMemo: '3f290ce5b2099d750a9875ba0565bf3212cb00e588dcc42c6044377e6cb3eac8',
   txMemoType: 'return',
-  txSrc: 'GDCCXDNCFDJLZL2LCBRYB4WFSOPIG2ALVT3KZUC2DR7OZDJT4T57L3IG'
-}
+  txSrc: 'GAXJE7HBU46QKUU2POQKEELKRFTBIVG2CM74DLRNGVSNDXQB2CUBXJVA'
+} options undefined
 vault.put key Issuer.desc.13 value {
   amount: '1000.0000000',
-  balance_id: undefined,
+  balance_id: '000000003d166a5885afd451b1e0d705218f4403c441dd812a9d6ff15c140dde855e3c40',
   txDesc: '',
-  txId: 'a0eaf72b61799788bb5748c14fa24b0b60b39119326b060783d604bf3beae73f',
-  txMemo: '5867dd6fc918d37fdada5f10850f6db7fcf68e6dcb831bb0591f148f02859044',
+  txId: '3a3ad24bd8e9f00e16abd84adcf8d718e4b7575a7af46b0d672da6f62ee06afa',
+  txMemo: '3f290ce5b2099d750a9875ba0565bf3212cb00e588dcc42c6044377e6cb3eac8',
   txMemoType: 'return',
-  txSrc: 'GDCCXDNCFDJLZL2LCBRYB4WFSOPIG2ALVT3KZUC2DR7OZDJT4T57L3IG'
+  txSrc: 'GAXJE7HBU46QKUU2POQKEELKRFTBIVG2CM74DLRNGVSNDXQB2CUBXJVA'
+} options undefined
+{
+  memo: 'KggngDurVfuZLqggaGPmYfEQx+rR4M6/ep6W7yHRu2I=',
+  _links: {
+    self: {
+      href: 'https://horizon-testnet.stellar.org/transactions/904115c5f13602bb1be4f2633e4b7ca330ad12e1b406356586d9b6e8250f9d51'
+    },
+    account: {
+      href: 'https://horizon-testnet.stellar.org/accounts/GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY'
+    },
+    ledger: { href: 'https://horizon-testnet.stellar.org/ledgers/4262719' },
+    operations: {
+      href: 'https://horizon-testnet.stellar.org/transactions/904115c5f13602bb1be4f2633e4b7ca330ad12e1b406356586d9b6e8250f9d51/operations{?cursor,limit,order}',
+      templated: true
+    },
+    effects: {
+      href: 'https://horizon-testnet.stellar.org/transactions/904115c5f13602bb1be4f2633e4b7ca330ad12e1b406356586d9b6e8250f9d51/effects{?cursor,limit,order}',
+      templated: true
+    },
+    precedes: {
+      href: 'https://horizon-testnet.stellar.org/transactions?order=asc&cursor=18308238697041920'
+    },
+    succeeds: {
+      href: 'https://horizon-testnet.stellar.org/transactions?order=desc&cursor=18308238697041920'
+    },
+    transaction: {
+      href: 'https://horizon-testnet.stellar.org/transactions/904115c5f13602bb1be4f2633e4b7ca330ad12e1b406356586d9b6e8250f9d51'
+    }
+  },
+  id: '904115c5f13602bb1be4f2633e4b7ca330ad12e1b406356586d9b6e8250f9d51',
+  paging_token: '18308238697041920',
+  successful: true,
+  hash: '904115c5f13602bb1be4f2633e4b7ca330ad12e1b406356586d9b6e8250f9d51',
+  ledger: 4262719,
+  created_at: '2026-08-21T18:16:17Z',
+  source_account: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY',
+  source_account_sequence: '18308135617822727',
+  fee_account: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY',
+  fee_charged: '400',
+  max_fee: '400',
+  operation_count: 4,
+  envelope_xdr: 'AAAAAgAAAADodiEzWCLSl2slMhgBTbsl1IVZEf4KM9q/f4KGEUL0bAAAAZAAQQsnAAAABwAAAAEAAAAAAAAAAAAAAABqiJYJAAAAAyoIJ4A7q1X7mS6oIGhj5mHxEMfq0eDOv3qelu8h0btiAAAABAAAAAAAAAABAAAAAAdSqeKy1U7INPkZaIGQGutS5BziTzvEeC1uS+dvp1ZsAAAAAkNsYXdhYmxlSGV4YQAAAAAHUqnistVOyDT5GWiBkBrrUuQc4k87xHgtbkvnb6dWbAAAAAHc1lAAAAAAAAAAABAAAAAAB1Kp4rLVTsg0+RlogZAa61LkHOJPO8R4LW5L52+nVmwAAAABAAAAAAdSqeKy1U7INPkZaIGQGutS5BziTzvEeC1uS+dvp1ZsAAAAAQAAAADodiEzWCLSl2slMhgBTbsl1IVZEf4KM9q/f4KGEUL0bAAAAAFIRVhBAAAAAAdSqeKy1U7INPkZaIGQGutS5BziTzvEeC1uS+dvp1ZsAAAAAdzWUAAAAAABAAAAAAdSqeKy1U7INPkZaIGQGutS5BziTzvEeC1uS+dvp1ZsAAAAEQAAAAAAAAACEUL0bAAAAED8lJ3KXOt+0HuZ8K6scID31x49fW0qJerF3D8aFhy3yiHW5p2KHLddWPDc+kjZAxn8IO52IUrW6RMKvNa5bnYGb6dWbAAAAEDMsBAYG+WIxkKBY+kajfQcSRUAkdFRz/eQAFGwY7wA78bsVpiGOJ5PGD9l6WdsELdHrExAIg8+UJU5BtfCbNUD',
+  result_xdr: 'AAAAAAAAAZAAAAAAAAAABAAAAAAAAAABAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAABAAAAAAAAAAAAAAARAAAAAAAAAAA=',
+  fee_meta_xdr: 'AAAAAgAAAAMAQQs9AAAAAAAAAADodiEzWCLSl2slMhgBTbsl1IVZEf4KM9q/f4KGEUL0bAAAAAJUpHSkAEELJwAAAAYAAAAEAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAACYloAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAAEELPQAAAABqiJXmAAAAAAAAAAEAQQs/AAAAAAAAAADodiEzWCLSl2slMhgBTbsl1IVZEf4KM9q/f4KGEUL0bAAAAAJUpHMUAEELJwAAAAYAAAAEAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAACYloAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAAEELPQAAAABqiJXmAAAAAA==',
+  memo_type: 'hash',
+  signatures: [
+    '/JSdylzrftB7mfCurHCA99cePX1tKiXqxdw/GhYct8oh1uadihy3XVjw3PpI2QMZ/CDudiFK1ukTCrzWuW52Bg==',
+    'zLAQGBvliMZCgWPpGo30HEkVAJHRUc/3kABRsGO8AO/G7FaYhjieTxg/ZelnbBC3R6xMQCIPPlCVOQbXwmzVAw=='
+  ],
+  preconditions: { timebounds: { min_time: '0', max_time: '1787336201' } },
+  offerResults: undefined
 }
+  ✔ setup new/existing account for Bob (1m 11.3s)
+vault.put key Issuer.in value DONE options { flag: 'a' }
+  ─
+
+  1 test passed
 vault.put key Issuer.desc.14 value {
   amount: '800.0000000',
   balance_id: undefined,
   txDesc: '',
-  txId: 'b7ab3dd521b7de226140df923267c7b4ca7af38321dd0ad7aee361b17056514c',
-  txMemo: '5d630fab7e6cd215490da6ff8956483f2520d06c85371a843b8ea60660807cbb',
+  txId: '904115c5f13602bb1be4f2633e4b7ca330ad12e1b406356586d9b6e8250f9d51',
+  txMemo: '2a0827803bab55fb992ea8206863e661f110c7ead1e0cebf7a9e96ef21d1bb62',
   txMemoType: 'hash',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
+  txSrc: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY'
+} options undefined
 vault.put key Issuer.desc.15 value {
   amount: '800.0000000',
   balance_id: undefined,
   txDesc: '',
-  txId: 'b7ab3dd521b7de226140df923267c7b4ca7af38321dd0ad7aee361b17056514c',
-  txMemo: '5d630fab7e6cd215490da6ff8956483f2520d06c85371a843b8ea60660807cbb',
+  txId: '904115c5f13602bb1be4f2633e4b7ca330ad12e1b406356586d9b6e8250f9d51',
+  txMemo: '2a0827803bab55fb992ea8206863e661f110c7ead1e0cebf7a9e96ef21d1bb62',
   txMemoType: 'hash',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
+  txSrc: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY'
+} options undefined
 {
-  memo: 'oOr3K2F5l4i7V0jBT6JLC2CzkRkyawYHg9YEvzvq5z8=',
+  memo: 'OjrSS9jp8A4Wq9hK3PjXGOS3V1p69GsNZy2m9i7gavo=',
   _links: {
     self: {
-      href: 'https://horizon-testnet.stellar.org/transactions/2ed05133c8dce58cc5d69e9aac3de54274de533daeb04fdba3a3da70e8548a6e'
+      href: 'https://horizon-testnet.stellar.org/transactions/23d7178959de0c5224c7a24a1d16d8fbc85ca979d06be3b2b1370f0413e099bc'
     },
     account: {
-      href: 'https://horizon-testnet.stellar.org/accounts/GDCCXDNCFDJLZL2LCBRYB4WFSOPIG2ALVT3KZUC2DR7OZDJT4T57L3IG'
+      href: 'https://horizon-testnet.stellar.org/accounts/GAXJE7HBU46QKUU2POQKEELKRFTBIVG2CM74DLRNGVSNDXQB2CUBXJVA'
     },
-    ledger: { href: 'https://horizon-testnet.stellar.org/ledgers/3659831' },
+    ledger: { href: 'https://horizon-testnet.stellar.org/ledgers/4262720' },
     operations: {
-      href: 'https://horizon-testnet.stellar.org/transactions/2ed05133c8dce58cc5d69e9aac3de54274de533daeb04fdba3a3da70e8548a6e/operations{?cursor,limit,order}',
+      href: 'https://horizon-testnet.stellar.org/transactions/23d7178959de0c5224c7a24a1d16d8fbc85ca979d06be3b2b1370f0413e099bc/operations{?cursor,limit,order}',
       templated: true
     },
     effects: {
-      href: 'https://horizon-testnet.stellar.org/transactions/2ed05133c8dce58cc5d69e9aac3de54274de533daeb04fdba3a3da70e8548a6e/effects{?cursor,limit,order}',
+      href: 'https://horizon-testnet.stellar.org/transactions/23d7178959de0c5224c7a24a1d16d8fbc85ca979d06be3b2b1370f0413e099bc/effects{?cursor,limit,order}',
       templated: true
     },
     precedes: {
-      href: 'https://horizon-testnet.stellar.org/transactions?order=asc&cursor=15718854453895168'
+      href: 'https://horizon-testnet.stellar.org/transactions?order=asc&cursor=18308242992009216'
     },
     succeeds: {
-      href: 'https://horizon-testnet.stellar.org/transactions?order=desc&cursor=15718854453895168'
+      href: 'https://horizon-testnet.stellar.org/transactions?order=desc&cursor=18308242992009216'
     },
     transaction: {
-      href: 'https://horizon-testnet.stellar.org/transactions/2ed05133c8dce58cc5d69e9aac3de54274de533daeb04fdba3a3da70e8548a6e'
+      href: 'https://horizon-testnet.stellar.org/transactions/23d7178959de0c5224c7a24a1d16d8fbc85ca979d06be3b2b1370f0413e099bc'
     }
   },
-  id: '2ed05133c8dce58cc5d69e9aac3de54274de533daeb04fdba3a3da70e8548a6e',
-  paging_token: '15718854453895168',
+  id: '23d7178959de0c5224c7a24a1d16d8fbc85ca979d06be3b2b1370f0413e099bc',
+  paging_token: '18308242992009216',
   successful: true,
-  hash: '2ed05133c8dce58cc5d69e9aac3de54274de533daeb04fdba3a3da70e8548a6e',
-  ledger: 3659831,
-  created_at: '2026-07-17T19:23:38Z',
-  source_account: 'GDCCXDNCFDJLZL2LCBRYB4WFSOPIG2ALVT3KZUC2DR7OZDJT4T57L3IG',
-  source_account_sequence: '15718704130031622',
-  fee_account: 'GDCCXDNCFDJLZL2LCBRYB4WFSOPIG2ALVT3KZUC2DR7OZDJT4T57L3IG',
+  hash: '23d7178959de0c5224c7a24a1d16d8fbc85ca979d06be3b2b1370f0413e099bc',
+  ledger: 4262720,
+  created_at: '2026-08-21T18:16:22Z',
+  source_account: 'GAXJE7HBU46QKUU2POQKEELKRFTBIVG2CM74DLRNGVSNDXQB2CUBXJVA',
+  source_account_sequence: '18308161387626502',
+  fee_account: 'GAXJE7HBU46QKUU2POQKEELKRFTBIVG2CM74DLRNGVSNDXQB2CUBXJVA',
   fee_charged: '400',
   max_fee: '400',
   operation_count: 4,
-  envelope_xdr: 'AAAAAgAAAADEK42iKNK8r0sQY4DyxZOeg2gLrPas0FocfuyNM+T79QAAAZAAN9gUAAAABgAAAAEAAAAAAAAAAAAAAABqWoFWAAAAA6Dq9ytheZeIu1dIwU+iSwtgs5EZMmsGB4PWBL876uc/AAAABAAAAAAAAAAQAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAAQAAAADthBo7E2SFu0XydsXwWcQa5Jfqj3jWFKEWIaPd3/j18gAAABMAAAACQ2xhd2FibGVIZXhhAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAACHtMX4q21obOXM24wtC2XrM68IJz1+D0FJCuC2mrponAAAAAlQL5AAAAAABAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAAQAAAADEK42iKNK8r0sQY4DyxZOeg2gLrPas0FocfuyNM+T79QAAAAFIRVhBAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAAlQL5AAAAAABAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAEQAAAAAAAAACM+T79QAAAEDe0RKznmj+sQdH20FpE1rJKvp4njETrxG0z2Aa8qD9KNJL1aEO2Az7T8xvO7n5luGKbB2HF/EeAr31OQmhClMO3/j18gAAAECYWfk3TDgsMz8fmJ8LWSHetRMDD8F8gies1apZ2yNUiczpuABTBN7ZhaMS4UKGzJ43TAcsdNl1nsTbO6s0GjgL',
+  envelope_xdr: 'AAAAAgAAAAAuknzhpz0FUpp7oKIRaolmFFTaEz/Bri01ZNHeAdCoGwAAAZAAQQstAAAABgAAAAEAAAAAAAAAAAAAAABqiJYOAAAAAzo60kvY6fAOFqvYStz41xjkt1daevRrDWctpvYu4Gr6AAAABAAAAAAAAAAQAAAAAAdSqeKy1U7INPkZaIGQGutS5BziTzvEeC1uS+dvp1ZsAAAAAQAAAAAHUqnistVOyDT5GWiBkBrrUuQc4k87xHgtbkvnb6dWbAAAABMAAAACQ2xhd2FibGVIZXhhAAAAAAdSqeKy1U7INPkZaIGQGutS5BziTzvEeC1uS+dvp1ZsAAAAAPrVBhzMlQatyoslLeNpEf5B0tHFTIfDnCroqeByQvJRAAAAAlQL5AAAAAABAAAAAAdSqeKy1U7INPkZaIGQGutS5BziTzvEeC1uS+dvp1ZsAAAAAQAAAAAuknzhpz0FUpp7oKIRaolmFFTaEz/Bri01ZNHeAdCoGwAAAAFIRVhBAAAAAAdSqeKy1U7INPkZaIGQGutS5BziTzvEeC1uS+dvp1ZsAAAAAlQL5AAAAAABAAAAAAdSqeKy1U7INPkZaIGQGutS5BziTzvEeC1uS+dvp1ZsAAAAEQAAAAAAAAACAdCoGwAAAEB6sO3LgYZy7fIBKJHbm08rN6wz6woLH76oJe2eu06BXsa8sd+3UhTdsVBeldaqgo9JqV912zWbnJ6r1msjuFALb6dWbAAAAECNSOFXB7WChyL3U7mOcn31l/ywncUtqdUgNvasPX/6auTqeYmbFWLbYKDgKtIzh8N8BXrACOiU22TzMuAhatoA',
   result_xdr: 'AAAAAAAAAZAAAAAAAAAABAAAAAAAAAAQAAAAAAAAAAAAAAATAAAAAAAAAAAAAAABAAAAAAAAAAAAAAARAAAAAAAAAAA=',
-  fee_meta_xdr: 'AAAAAgAAAAMAN9g2AAAAAAAAAADEK42iKNK8r0sQY4DyxZOeg2gLrPas0FocfuyNM+T79QAAAAAFXUSkADfYFAAAAAUAAAADAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAADfYNgAAAABqWoE1AAAAAAAAAAEAN9g3AAAAAAAAAADEK42iKNK8r0sQY4DyxZOeg2gLrPas0FocfuyNM+T79QAAAAAFXUMUADfYFAAAAAUAAAADAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAADfYNgAAAABqWoE1AAAAAA==',
+  fee_meta_xdr: 'AAAAAgAAAAMAQQs+AAAAAAAAAAAuknzhpz0FUpp7oKIRaolmFFTaEz/Bri01ZNHeAdCoGwAAAAAFXUSkAEELLQAAAAUAAAADAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAAEELPgAAAABqiJXrAAAAAAAAAAEAQQtAAAAAAAAAAAAuknzhpz0FUpp7oKIRaolmFFTaEz/Bri01ZNHeAdCoGwAAAAAFXUMUAEELLQAAAAUAAAADAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAAEELPgAAAABqiJXrAAAAAA==',
   memo_type: 'hash',
   signatures: [
-    '3tESs55o/rEHR9tBaRNaySr6eJ4xE68RtM9gGvKg/SjSS9WhDtgM+0/Mbzu5+ZbhimwdhxfxHgK99TkJoQpTDg==',
-    'mFn5N0w4LDM/H5ifC1kh3rUTAw/BfIInrNWqWdsjVInM6bgAUwTe2YWjEuFChsyeN0wHLHTZdZ7E2zurNBo4Cw=='
+    'erDty4GGcu3yASiR25tPKzesM+sKCx++qCXtnrtOgV7GvLHft1IU3bFQXpXWqoKPSalfdds1m5yeq9ZrI7hQCw==',
+    'jUjhVwe1goci91O5jnJ99Zf8sJ3FLanVIDb2rD1/+mrk6nmJmxVi22Cg4CrSM4fDfAV6wAjolNtk8zLgIWraAA=='
   ],
-  preconditions: { timebounds: { min_time: '0', max_time: '1784316246' } },
+  preconditions: { timebounds: { min_time: '0', max_time: '1787336206' } },
   offerResults: undefined
 }
 vault.get key Issuer.in v "DONE""DONE"
-  ✔ setup new/existing account for Ann (1m 3.4s)
-vault.put key Issuer.in value DONE
+  ✔ setup new/existing account for Ann (1m 16.5s)
+vault.put key Issuer.in value DONE options { flag: 'a' }
   ─
 
   1 test passed
@@ -1487,36 +597,82 @@ vault.put key Issuer.desc.16 value {
   amount: '1000.0000000',
   balance_id: undefined,
   txDesc: '',
-  txId: '2ed05133c8dce58cc5d69e9aac3de54274de533daeb04fdba3a3da70e8548a6e',
-  txMemo: 'a0eaf72b61799788bb5748c14fa24b0b60b39119326b060783d604bf3beae73f',
+  txId: '23d7178959de0c5224c7a24a1d16d8fbc85ca979d06be3b2b1370f0413e099bc',
+  txMemo: '3a3ad24bd8e9f00e16abd84adcf8d718e4b7575a7af46b0d672da6f62ee06afa',
   txMemoType: 'hash',
-  txSrc: 'GDCCXDNCFDJLZL2LCBRYB4WFSOPIG2ALVT3KZUC2DR7OZDJT4T57L3IG'
-}
+  txSrc: 'GAXJE7HBU46QKUU2POQKEELKRFTBIVG2CM74DLRNGVSNDXQB2CUBXJVA'
+} options undefined
 Cyn handle_stateDeals Broken Deal Request e {
   amount: '1000.0000000',
   txDesc: '',
-  txId: '2ed05133c8dce58cc5d69e9aac3de54274de533daeb04fdba3a3da70e8548a6e',
-  txMemo: 'a0eaf72b61799788bb5748c14fa24b0b60b39119326b060783d604bf3beae73f',
+  txId: '23d7178959de0c5224c7a24a1d16d8fbc85ca979d06be3b2b1370f0413e099bc',
+  txMemo: '3a3ad24bd8e9f00e16abd84adcf8d718e4b7575a7af46b0d672da6f62ee06afa',
   txMemoType: 'hash',
-  txSrc: 'GDCCXDNCFDJLZL2LCBRYB4WFSOPIG2ALVT3KZUC2DR7OZDJT4T57L3IG'
+  txSrc: 'GAXJE7HBU46QKUU2POQKEELKRFTBIVG2CM74DLRNGVSNDXQB2CUBXJVA'
 }
 vault.put key Issuer.desc.17 value {
   amount: '1000.0000000',
   balance_id: undefined,
   txDesc: '',
-  txId: '2ed05133c8dce58cc5d69e9aac3de54274de533daeb04fdba3a3da70e8548a6e',
-  txMemo: 'a0eaf72b61799788bb5748c14fa24b0b60b39119326b060783d604bf3beae73f',
+  txId: '23d7178959de0c5224c7a24a1d16d8fbc85ca979d06be3b2b1370f0413e099bc',
+  txMemo: '3a3ad24bd8e9f00e16abd84adcf8d718e4b7575a7af46b0d672da6f62ee06afa',
   txMemoType: 'hash',
-  txSrc: 'GDCCXDNCFDJLZL2LCBRYB4WFSOPIG2ALVT3KZUC2DR7OZDJT4T57L3IG'
-}
+  txSrc: 'GAXJE7HBU46QKUU2POQKEELKRFTBIVG2CM74DLRNGVSNDXQB2CUBXJVA'
+} options undefined
 Cyn handle_stateDeals disputeBrokenDeal r {
-  balanceId: '0000000025e0040b7a9e4d8c6e52d246e8df07a657faa74cfec34d36117b84d7e26c8393',
-  txId: '9d7abb4c45ed908b4ebe303058d68dd14a3685c283a37a66ed3b5183173eeeb2'
+  memo: 'I9cXiVneDFIkx6JKHRbY+8hcqXnQa+OysTcPBBPgmbw=',
+  _links: {
+    self: {
+      href: 'https://horizon-testnet.stellar.org/transactions/124d14e87cb599fda790623afb1f5222f922cacdea11098052dafa776dd48348'
+    },
+    account: {
+      href: 'https://horizon-testnet.stellar.org/accounts/GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB'
+    },
+    ledger: { href: 'https://horizon-testnet.stellar.org/ledgers/4262722' },
+    operations: {
+      href: 'https://horizon-testnet.stellar.org/transactions/124d14e87cb599fda790623afb1f5222f922cacdea11098052dafa776dd48348/operations{?cursor,limit,order}',
+      templated: true
+    },
+    effects: {
+      href: 'https://horizon-testnet.stellar.org/transactions/124d14e87cb599fda790623afb1f5222f922cacdea11098052dafa776dd48348/effects{?cursor,limit,order}',
+      templated: true
+    },
+    precedes: {
+      href: 'https://horizon-testnet.stellar.org/transactions?order=asc&cursor=18308251581960192'
+    },
+    succeeds: {
+      href: 'https://horizon-testnet.stellar.org/transactions?order=desc&cursor=18308251581960192'
+    },
+    transaction: {
+      href: 'https://horizon-testnet.stellar.org/transactions/124d14e87cb599fda790623afb1f5222f922cacdea11098052dafa776dd48348'
+    }
+  },
+  id: '124d14e87cb599fda790623afb1f5222f922cacdea11098052dafa776dd48348',
+  paging_token: '18308251581960192',
+  successful: true,
+  hash: '124d14e87cb599fda790623afb1f5222f922cacdea11098052dafa776dd48348',
+  ledger: 4262722,
+  created_at: '2026-08-21T18:16:32Z',
+  source_account: 'GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB',
+  source_account_sequence: '18308139912790021',
+  fee_account: 'GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB',
+  fee_charged: '100',
+  max_fee: '100',
+  operation_count: 1,
+  envelope_xdr: 'AAAAAgAAAAD61QYczJUGrcqLJS3jaRH+QdLRxUyHw5wq6KngckLyUQAAAGQAQQsoAAAABQAAAAEAAAAAAAAAAAAAAABqiJYZAAAAAyPXF4lZ3gxSJMeiSh0W2PvIXKl50GvjsrE3DwQT4Jm8AAAAAQAAAAAAAAAOAAAAAUhFWEEAAAAAB1Kp4rLVTsg0+RlogZAa61LkHOJPO8R4LW5L52+nVmwAAAAAAAAAYwAAAAIAAAAAAAAAAAdSqeKy1U7INPkZaIGQGutS5BziTzvEeC1uS+dvp1ZsAAAAAAAAAAAAAAAA+tUGHMyVBq3KiyUt42kR/kHS0cVMh8OcKuip4HJC8lEAAAAAAAAAAAAAAAFyQvJRAAAAQLXuypRu04JkXPqPILutM0eu1xpP3qzIrXpjw1h9o48djor3Rca/+gzsjGB4kvfgWqKfQOZasy/iBvWsrU7Lbw4=',
+  result_xdr: 'AAAAAAAAAGQAAAAAAAAAAQAAAAAAAAAOAAAAAAAAAABXt7xvUk4bhm1PdFpMvxTM2ye77uX+Q3fZAKm7g5PSmgAAAAA=',
+  fee_meta_xdr: 'AAAAAgAAAAMAQQs+AAAAAAAAAAD61QYczJUGrcqLJS3jaRH+QdLRxUyHw5wq6KngckLyUQAAAAJUC+FEAEELKAAAAAQAAAADAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAAEELPAAAAABqiJXhAAAAAAAAAAEAQQtCAAAAAAAAAAD61QYczJUGrcqLJS3jaRH+QdLRxUyHw5wq6KngckLyUQAAAAJUC+DgAEELKAAAAAQAAAADAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAAEELPAAAAABqiJXhAAAAAA==',
+  memo_type: 'hash',
+  signatures: [
+    'te7KlG7TgmRc+o8gu60zR67XGk/erMitemPDWH2jjx2OivdFxr/6DOyMYHiS9+Baop9A5lqzL+IG9aytTstvDg=='
+  ],
+  preconditions: { timebounds: { min_time: '0', max_time: '1787336217' } },
+  offerResults: undefined
 }
 stopMonitor - "Issuer's effects" closed.
-  ✔ setup new/existing account for Cyn (1m 8.4s)
-vault.put key Issuer.in value DONE
-  ✔ load new/existing Issuer account (1m 8.3s)
+  ✔ setup new/existing account for Cyn (1m 26.3s)
+vault.put key Issuer.in value DONE options { flag: 'a' }
+  ✔ load new/existing Issuer account (1m 26.4s)
   ─
 
   1 test passed
@@ -1524,484 +680,643 @@ vault.put key Issuer.in value DONE
 
   1 test passed
 
-loadAccount accountId GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB - loading...
+loadAccount accountId GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB - loading...
 DemoDone Cyn sdk.transaction.makeSellOffer r tx.successful true
-  ✔ demo done (4.4s)
+  ✔ demo done (2.3s)
   ─
 
   1 test passed
-265087 demoit tm_request_demo for Abe DONE
-loadAccount accountId GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733 - loading...
-stopMonitor - "Al's trading effects" closed.
-  ✔ request demo (4m 13.9s)
-vault.put key Al.granted value DONE
-  ─
-
-  1 test passed
+50301 demoit tm_request_demo for Abe DONE
+loadAccount accountId GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY - loading...
 runMonitor.sell Bob sdk.transaction.makeSellOffer r tx.successful true true
+stopMonitor - "Al's trading effects" closed.
+=== Al.granted NOT FOUND ===
+loadAccount accountId GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY - loading...
+makeBuyOffer GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY native MA:GADVFKPCWLKU5SBU7EMWRAMQDLVVFZA44JHTXRDYFVXEXZ3PU5LGYTNH 2 2 0...
+vault.put key Al.granted value DONE options undefined
+  ✔ request demo (2m 1.1s)
+  ─
+
+  1 test passed
 
 
 
 
-loadAccount accountId GDWYIGR3CNSILO2F6J3ML4CZYQNOJF7KR54NMFFBCYQ2HXO77D27E7EV - loading...
+loadAccount accountId GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY - loading...
+loadAccount accountId GC2GJNXJ6D2DZWGFMJNMK3OGSXZ5IZH7M32X5CHLJJOIILCAQDOTPPB5 - loading...
+loadAccount accountId GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB - loading...
+loadAccount accountId GADVFKPCWLKU5SBU7EMWRAMQDLVVFZA44JHTXRDYFVXEXZ3PU5LGYTNH - loading...
+fund Bob GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY clawback false 2026-08-21T18:16:42Z...
+fund Al GC2GJNXJ6D2DZWGFMJNMK3OGSXZ5IZH7M32X5CHLJJOIILCAQDOTPPB5 clawback false 2026-08-21T18:16:42Z...
+fund Cyn GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB clawback false 2026-08-21T18:16:37Z...
+runMonitor trade Bob sdk.transaction.makeBuyOffer r.successful true
+runMonitor trade finally
+runMonitor trade DONE
+Al has HEXA 1100.0000000
+Cyn has HEXA 999.9999901
+makeRequest r.request Fresh red snapper for 4 persons GGS. HEXA 1000
+vault.put key Issuer.desc.1 value {
+  amount: '1000.0000000',
+  balance_id: '00000000b784d629042e100c2542692fb48da7d3a0c9cbcc24cfa6b1f72bc0749bfd9f0e',
+  txDesc: 'Fresh red snapper for 4 persons GGS. HEXA 1000',
+  txId: '878c47fa2af873f9c1c46e82422cd5cd3780aac73a1055d7aa1a644682a5634e',
+  txMemo: 'Request 0',
+  txMemoType: 'text',
+  txSrc: 'GC2GJNXJ6D2DZWGFMJNMK3OGSXZ5IZH7M32X5CHLJJOIILCAQDOTPPB5'
+} options undefined
+Ann handle_stateInitial e {"amount":"1000.0000000","balance_id":"00000000b784d629042e100c2542692fb48da7d3a0c9cbcc24cfa6b1f72bc0749bfd9f0e","txDesc":"Fresh red snapper for 4 persons GGS. HEXA 1000","txId":"878c47fa2af873f9c1c46e82422cd5cd3780aac73a1055d7aa1a644682a5634e","txMemo":"Request 0","txMemoType":"text","txSrc":"GC2GJNXJ6D2DZWGFMJNMK3OGSXZ5IZH7M32X5CHLJJOIILCAQDOTPPB5"}
+Cyn handle_stateInitial stateInitial.queue.length 0
+Cyn handle_stateInitial Request e {
+  amount: '1000.0000000',
+  balance_id: '00000000b784d629042e100c2542692fb48da7d3a0c9cbcc24cfa6b1f72bc0749bfd9f0e',
+  txDesc: 'Fresh red snapper for 4 persons GGS. HEXA 1000',
+  txId: '878c47fa2af873f9c1c46e82422cd5cd3780aac73a1055d7aa1a644682a5634e',
+  txMemo: 'Request 0',
+  txMemoType: 'text',
+  txSrc: 'GC2GJNXJ6D2DZWGFMJNMK3OGSXZ5IZH7M32X5CHLJJOIILCAQDOTPPB5'
+}
+loop GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY *** ERROR *** { transaction: 'tx_bad_seq' } left 9
+fund Bob GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY clawback false 2026-08-21T18:16:47Z...
+Bob has HEXA 1000.0000000
+makeOffer r {
+  memo: 'Offer 0',
+  memo_bytes: 'T2ZmZXIgMA==',
+  _links: {
+    self: {
+      href: 'https://horizon-testnet.stellar.org/transactions/19e102edff4acb911dfff4c9c497a5ad68337b65cf8324f48933c80b90dff6b9'
+    },
+    account: {
+      href: 'https://horizon-testnet.stellar.org/accounts/GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY'
+    },
+    ledger: { href: 'https://horizon-testnet.stellar.org/ledgers/4262733' },
+    operations: {
+      href: 'https://horizon-testnet.stellar.org/transactions/19e102edff4acb911dfff4c9c497a5ad68337b65cf8324f48933c80b90dff6b9/operations{?cursor,limit,order}',
+      templated: true
+    },
+    effects: {
+      href: 'https://horizon-testnet.stellar.org/transactions/19e102edff4acb911dfff4c9c497a5ad68337b65cf8324f48933c80b90dff6b9/effects{?cursor,limit,order}',
+      templated: true
+    },
+    precedes: {
+      href: 'https://horizon-testnet.stellar.org/transactions?order=asc&cursor=18308298826584064'
+    },
+    succeeds: {
+      href: 'https://horizon-testnet.stellar.org/transactions?order=desc&cursor=18308298826584064'
+    },
+    transaction: {
+      href: 'https://horizon-testnet.stellar.org/transactions/19e102edff4acb911dfff4c9c497a5ad68337b65cf8324f48933c80b90dff6b9'
+    }
+  },
+  id: '19e102edff4acb911dfff4c9c497a5ad68337b65cf8324f48933c80b90dff6b9',
+  paging_token: '18308298826584064',
+  successful: true,
+  hash: '19e102edff4acb911dfff4c9c497a5ad68337b65cf8324f48933c80b90dff6b9',
+  ledger: 4262733,
+  created_at: '2026-08-21T18:17:27Z',
+  source_account: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY',
+  source_account_sequence: '18308135617822731',
+  fee_account: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY',
+  fee_charged: '300',
+  max_fee: '300',
+  operation_count: 3,
+  envelope_xdr: 'AAAAAgAAAADodiEzWCLSl2slMhgBTbsl1IVZEf4KM9q/f4KGEUL0bAAAASwAQQsnAAAACwAAAAEAAAAAAAAAAAAAAABqiJZRAAAAAQAAAAdPZmZlciAwAAAAAAMAAAAAAAAADgAAAAFIRVhBAAAAAAdSqeKy1U7INPkZaIGQGutS5BziTzvEeC1uS+dvp1ZsAAAAAAAAAGQAAAACAAAAAAAAAAAHUqnistVOyDT5GWiBkBrrUuQc4k87xHgtbkvnb6dWbAAAAAAAAAAAAAAAAOh2ITNYItKXayUyGAFNuyXUhVkR/goz2r9/goYRQvRsAAAAAAAAAAAAAAAKAAAABWRhdGEwAAAAAAAAAQAAAChGcmVzaGx5IGNhdWdodCByZWQgc25hcHBlciA0bGIuIEhFWEEgODAwAAAAAAAAAAoAAAAFZGF0YTAAAAAAAAAAAAAAAAAAAAERQvRsAAAAQFJLnoTclHPeEYEstOqWFWWUjnNdbURhnsEaq7VYo7nyt6k1tEGju/n2NYUOP/GngWDNAApYAELZvCK5H2yutAs=',
+  result_xdr: 'AAAAAAAAASwAAAAAAAAAAwAAAAAAAAAOAAAAAAAAAABiaF31svKiP3p6U8dZvB5WnIprSU57coSpAildJJYSbAAAAAAAAAAKAAAAAAAAAAAAAAAKAAAAAAAAAAA=',
+  fee_meta_xdr: 'AAAAAgAAAAMAQQtMAAAAAAAAAADodiEzWCLSl2slMhgBTbsl1IVZEf4KM9q/f4KGEUL0bAAAAAJS2q4EAEELJwAAAAoAAAAEAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAACYloAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAAEELTAAAAABqiJYyAAAAAAAAAAEAQQtNAAAAAAAAAADodiEzWCLSl2slMhgBTbsl1IVZEf4KM9q/f4KGEUL0bAAAAAJS2qzYAEELJwAAAAoAAAAEAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAACYloAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAAEELTAAAAABqiJYyAAAAAA==',
+  memo_type: 'text',
+  signatures: [
+    'UkuehNyUc94RgSy06pYVZZSOc11tRGGewRqrtVijufK3qTW0QaO7+fY1hQ4/8aeBYM0AClgAQtm8IrkfbK60Cw=='
+  ],
+  preconditions: { timebounds: { min_time: '0', max_time: '1787336273' } },
+  offerResults: undefined,
+  request: 'Freshly caught red snapper 4lb. HEXA 800',
+  amount: '0.0000100'
+}
+vault.put key Issuer.desc.2 value {
+  amount: '0.0000100',
+  balance_id: '0000000062685df5b2f2a23f7a7a53c759bc1e569c8a6b494e7b7284a902295d2496126c',
+  txDesc: 'Freshly caught red snapper 4lb. HEXA 800',
+  txId: '19e102edff4acb911dfff4c9c497a5ad68337b65cf8324f48933c80b90dff6b9',
+  txMemo: 'Offer 0',
+  txMemoType: 'text',
+  txSrc: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY'
+} options undefined
+Bob handle_stateInitial e {
+  amount: '0.0000100',
+  balance_id: '0000000062685df5b2f2a23f7a7a53c759bc1e569c8a6b494e7b7284a902295d2496126c',
+  txDesc: 'Freshly caught red snapper 4lb. HEXA 800',
+  txId: '19e102edff4acb911dfff4c9c497a5ad68337b65cf8324f48933c80b90dff6b9',
+  txMemo: 'Offer 0',
+  txMemoType: 'text',
+  txSrc: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY'
+}
+Cyn handle_stateInitial Offer e {
+  amount: '0.0000100',
+  balance_id: '0000000062685df5b2f2a23f7a7a53c759bc1e569c8a6b494e7b7284a902295d2496126c',
+  txDesc: 'Freshly caught red snapper 4lb. HEXA 800',
+  txId: '19e102edff4acb911dfff4c9c497a5ad68337b65cf8324f48933c80b90dff6b9',
+  txMemo: 'Offer 0',
+  txMemoType: 'text',
+  txSrc: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY'
+}
+Cyn take effect {
+  amount: '0.0000100',
+  balance_id: '0000000062685df5b2f2a23f7a7a53c759bc1e569c8a6b494e7b7284a902295d2496126c',
+  txDesc: 'Freshly caught red snapper 4lb. HEXA 800',
+  txId: '19e102edff4acb911dfff4c9c497a5ad68337b65cf8324f48933c80b90dff6b9',
+  txMemo: 'Offer 0',
+  txMemoType: 'text',
+  txSrc: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY'
+}
+takeOffer r {
+  memo: 'GeEC7f9Ky5Ed//TJxJelrWgze2XPgyT0iTPIC5Df9rk=',
+  _links: {
+    self: {
+      href: 'https://horizon-testnet.stellar.org/transactions/b6027ed7ef915eab7539de1dfd31c50f95d32c1f520f4fd55e3ceaf60b7fb4ae'
+    },
+    account: {
+      href: 'https://horizon-testnet.stellar.org/accounts/GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB'
+    },
+    ledger: { href: 'https://horizon-testnet.stellar.org/ledgers/4262735' },
+    operations: {
+      href: 'https://horizon-testnet.stellar.org/transactions/b6027ed7ef915eab7539de1dfd31c50f95d32c1f520f4fd55e3ceaf60b7fb4ae/operations{?cursor,limit,order}',
+      templated: true
+    },
+    effects: {
+      href: 'https://horizon-testnet.stellar.org/transactions/b6027ed7ef915eab7539de1dfd31c50f95d32c1f520f4fd55e3ceaf60b7fb4ae/effects{?cursor,limit,order}',
+      templated: true
+    },
+    precedes: {
+      href: 'https://horizon-testnet.stellar.org/transactions?order=asc&cursor=18308307416526848'
+    },
+    succeeds: {
+      href: 'https://horizon-testnet.stellar.org/transactions?order=desc&cursor=18308307416526848'
+    },
+    transaction: {
+      href: 'https://horizon-testnet.stellar.org/transactions/b6027ed7ef915eab7539de1dfd31c50f95d32c1f520f4fd55e3ceaf60b7fb4ae'
+    }
+  },
+  id: 'b6027ed7ef915eab7539de1dfd31c50f95d32c1f520f4fd55e3ceaf60b7fb4ae',
+  paging_token: '18308307416526848',
+  successful: true,
+  hash: 'b6027ed7ef915eab7539de1dfd31c50f95d32c1f520f4fd55e3ceaf60b7fb4ae',
+  ledger: 4262735,
+  created_at: '2026-08-21T18:17:37Z',
+  source_account: 'GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB',
+  source_account_sequence: '18308139912790024',
+  fee_account: 'GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB',
+  fee_charged: '100',
+  max_fee: '100',
+  operation_count: 1,
+  envelope_xdr: 'AAAAAgAAAAD61QYczJUGrcqLJS3jaRH+QdLRxUyHw5wq6KngckLyUQAAAGQAQQsoAAAACAAAAAEAAAAAAAAAAAAAAABqiJZaAAAAAxnhAu3/SsuRHf/0ycSXpa1oM3tlz4Mk9IkzyAuQ3/a5AAAAAQAAAAAAAAAOAAAAAUhFWEEAAAAAB1Kp4rLVTsg0+RlogZAa61LkHOJPO8R4LW5L52+nVmwAAAAB3NZQAAAAAAIAAAAAAAAAAAdSqeKy1U7INPkZaIGQGutS5BziTzvEeC1uS+dvp1ZsAAAAAAAAAAAAAAAA+tUGHMyVBq3KiyUt42kR/kHS0cVMh8OcKuip4HJC8lEAAAAAAAAAAAAAAAFyQvJRAAAAQD6rQxo8aIk7A3xmofldto3txUwNZyq+EPqQOAUnnxcX+cn1q13PCOVuia2jbruaGJXk6T2lEG8+HuPwGoIGYgU=',
+  result_xdr: 'AAAAAAAAAGQAAAAAAAAAAQAAAAAAAAAOAAAAAAAAAACjohLDiN9D6XUE509IXUuGL0pgqr+dA2YIbsVvja9KiwAAAAA=',
+  fee_meta_xdr: 'AAAAAgAAAAMAQQtGAAAAAAAAAAD61QYczJUGrcqLJS3jaRH+QdLRxUyHw5wq6KngckLyUQAAAAJWbjm0AEELKAAAAAcAAAADAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAMAAAAAAEELRgAAAABqiJYUAAAAAAAAAAEAQQtPAAAAAAAAAAD61QYczJUGrcqLJS3jaRH+QdLRxUyHw5wq6KngckLyUQAAAAJWbjlQAEELKAAAAAcAAAADAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAMAAAAAAEELRgAAAABqiJYUAAAAAA==',
+  memo_type: 'hash',
+  signatures: [
+    'PqtDGjxoiTsDfGah+V22je3FTA1nKr4Q+pA4BSefFxf5yfWrXc8I5W6JraNuu5oYleTpPaUQbz4e4/AaggZiBQ=='
+  ],
+  preconditions: { timebounds: { min_time: '0', max_time: '1787336282' } },
+  offerResults: undefined,
+  amount: '800'
+}
+Cyn take effect {
+  amount: '1000.0000000',
+  balance_id: '00000000b784d629042e100c2542692fb48da7d3a0c9cbcc24cfa6b1f72bc0749bfd9f0e',
+  txDesc: 'Fresh red snapper for 4 persons GGS. HEXA 1000',
+  txId: '878c47fa2af873f9c1c46e82422cd5cd3780aac73a1055d7aa1a644682a5634e',
+  txMemo: 'Request 0',
+  txMemoType: 'text',
+  txSrc: 'GC2GJNXJ6D2DZWGFMJNMK3OGSXZ5IZH7M32X5CHLJJOIILCAQDOTPPB5'
+}
+vault.put key Issuer.desc.3 value {
+  amount: '800.0000000',
+  balance_id: '00000000a3a212c388df43e97504e74f485d4b862f4a60aabf9d0366086ec56f8daf4a8b',
+  txDesc: '',
+  txId: 'b6027ed7ef915eab7539de1dfd31c50f95d32c1f520f4fd55e3ceaf60b7fb4ae',
+  txMemo: '19e102edff4acb911dfff4c9c497a5ad68337b65cf8324f48933c80b90dff6b9',
+  txMemoType: 'hash',
+  txSrc: 'GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB'
+} options undefined
+vault.get key Issuer.desc.3 v 
+vault.get key Issuer.desc.3 v 
+vault.get key Issuer.desc.3 v 
+Bob handle_stateInitial e {
+  amount: '800.0000000',
+  balance_id: '00000000a3a212c388df43e97504e74f485d4b862f4a60aabf9d0366086ec56f8daf4a8b',
+  txDesc: '',
+  txId: 'b6027ed7ef915eab7539de1dfd31c50f95d32c1f520f4fd55e3ceaf60b7fb4ae',
+  txMemo: '19e102edff4acb911dfff4c9c497a5ad68337b65cf8324f48933c80b90dff6b9',
+  txMemoType: 'hash',
+  txSrc: 'GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB'
+}
+takeRequest r {
+  memo: 'h4xH+ir4c/nBxG6CQizVzTeAqsc6EFXXqhpkRoKlY04=',
+  _links: {
+    self: {
+      href: 'https://horizon-testnet.stellar.org/transactions/2bfbcbcb94030bbfcd8811ea1228468f53f684456fdba93b49af63d11e040ec9'
+    },
+    account: {
+      href: 'https://horizon-testnet.stellar.org/accounts/GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB'
+    },
+    ledger: { href: 'https://horizon-testnet.stellar.org/ledgers/4262736' },
+    operations: {
+      href: 'https://horizon-testnet.stellar.org/transactions/2bfbcbcb94030bbfcd8811ea1228468f53f684456fdba93b49af63d11e040ec9/operations{?cursor,limit,order}',
+      templated: true
+    },
+    effects: {
+      href: 'https://horizon-testnet.stellar.org/transactions/2bfbcbcb94030bbfcd8811ea1228468f53f684456fdba93b49af63d11e040ec9/effects{?cursor,limit,order}',
+      templated: true
+    },
+    precedes: {
+      href: 'https://horizon-testnet.stellar.org/transactions?order=asc&cursor=18308311711502336'
+    },
+    succeeds: {
+      href: 'https://horizon-testnet.stellar.org/transactions?order=desc&cursor=18308311711502336'
+    },
+    transaction: {
+      href: 'https://horizon-testnet.stellar.org/transactions/2bfbcbcb94030bbfcd8811ea1228468f53f684456fdba93b49af63d11e040ec9'
+    }
+  },
+  id: '2bfbcbcb94030bbfcd8811ea1228468f53f684456fdba93b49af63d11e040ec9',
+  paging_token: '18308311711502336',
+  successful: true,
+  hash: '2bfbcbcb94030bbfcd8811ea1228468f53f684456fdba93b49af63d11e040ec9',
+  ledger: 4262736,
+  created_at: '2026-08-21T18:17:42Z',
+  source_account: 'GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB',
+  source_account_sequence: '18308139912790025',
+  fee_account: 'GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB',
+  fee_charged: '100',
+  max_fee: '100',
+  operation_count: 1,
+  envelope_xdr: 'AAAAAgAAAAD61QYczJUGrcqLJS3jaRH+QdLRxUyHw5wq6KngckLyUQAAAGQAQQsoAAAACQAAAAEAAAAAAAAAAAAAAABqiJZfAAAAA4eMR/oq+HP5wcRugkIs1c03gKrHOhBV16oaZEaCpWNOAAAAAQAAAAAAAAAOAAAAAUhFWEEAAAAAB1Kp4rLVTsg0+RlogZAa61LkHOJPO8R4LW5L52+nVmwAAAAAAAAAZAAAAAIAAAAAAAAAAAdSqeKy1U7INPkZaIGQGutS5BziTzvEeC1uS+dvp1ZsAAAAAAAAAAAAAAAA+tUGHMyVBq3KiyUt42kR/kHS0cVMh8OcKuip4HJC8lEAAAAAAAAAAAAAAAFyQvJRAAAAQEpuMbv1elzuhh7trFjNA01FWrHveO8eNt8RvGSucv9dd32LliPs2UOQcJknRUhkeKq6GFBlWlQn1fI8S51GMwY=',
+  result_xdr: 'AAAAAAAAAGQAAAAAAAAAAQAAAAAAAAAOAAAAAAAAAAA48ZIQxJ2mlE8UIwSrBoP85BxUkQDQfrpGEDq0jWxZcQAAAAA=',
+  fee_meta_xdr: 'AAAAAgAAAAMAQQtPAAAAAAAAAAD61QYczJUGrcqLJS3jaRH+QdLRxUyHw5wq6KngckLyUQAAAAJWbjlQAEELKAAAAAgAAAADAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAEAAAAAAAAAAMAAAAAAEELTwAAAABqiJZBAAAAAAAAAAEAQQtQAAAAAAAAAAD61QYczJUGrcqLJS3jaRH+QdLRxUyHw5wq6KngckLyUQAAAAJWbjjsAEELKAAAAAgAAAADAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAEAAAAAAAAAAMAAAAAAEELTwAAAABqiJZBAAAAAA==',
+  memo_type: 'hash',
+  signatures: [
+    'Sm4xu/V6XO6GHu2sWM0DTUVase947x423xG8ZK5y/113fYuWI+zZQ5BwmSdFSGR4qroYUGVaVCfV8jxLnUYzBg=='
+  ],
+  preconditions: { timebounds: { min_time: '0', max_time: '1787336287' } },
+  offerResults: undefined,
+  amount: '0.0000100'
+}
+Bob handle_stateCynBobDeal desc {
+  amount: '800.0000000',
+  destination: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY',
+  txId: 'f460c10595ba86d252c4bd97daa2af4160eaa8a9ca15c3e894670f3e611991e8'
+}
+vault.put key Issuer.desc.4 value {
+  amount: '0.0000100',
+  balance_id: '0000000038f19210c49da6944f142304ab0683fce41c549100d07eba46103ab48d6c5971',
+  txDesc: '',
+  txId: '2bfbcbcb94030bbfcd8811ea1228468f53f684456fdba93b49af63d11e040ec9',
+  txMemo: '878c47fa2af873f9c1c46e82422cd5cd3780aac73a1055d7aa1a644682a5634e',
+  txMemoType: 'hash',
+  txSrc: 'GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB'
+} options undefined
+Ann handle_stateInitial e {"amount":"0.0000100","balance_id":"0000000038f19210c49da6944f142304ab0683fce41c549100d07eba46103ab48d6c5971","txDesc":"","txId":"2bfbcbcb94030bbfcd8811ea1228468f53f684456fdba93b49af63d11e040ec9","txMemo":"878c47fa2af873f9c1c46e82422cd5cd3780aac73a1055d7aa1a644682a5634e","txMemoType":"hash","txSrc":"GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB"}
+vault.put key Issuer.desc.5 value {
+  amount: '800.0000000',
+  balance_id: undefined,
+  txDesc: '',
+  txId: 'f460c10595ba86d252c4bd97daa2af4160eaa8a9ca15c3e894670f3e611991e8',
+  txMemo: 'b6027ed7ef915eab7539de1dfd31c50f95d32c1f520f4fd55e3ceaf60b7fb4ae',
+  txMemoType: 'return',
+  txSrc: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY'
+} options undefined
+Bob handle_stateCynBobDeal eotx {
+  amount: '800.0000000',
+  txDesc: '',
+  txId: 'f460c10595ba86d252c4bd97daa2af4160eaa8a9ca15c3e894670f3e611991e8',
+  txMemo: 'b6027ed7ef915eab7539de1dfd31c50f95d32c1f520f4fd55e3ceaf60b7fb4ae',
+  txMemoType: 'return',
+  txSrc: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY'
+} clawable 800.0000000
+Cyn handle_stateDeals Offer e {
+  amount: '800.0000000',
+  txDesc: '',
+  txId: 'f460c10595ba86d252c4bd97daa2af4160eaa8a9ca15c3e894670f3e611991e8',
+  txMemo: 'b6027ed7ef915eab7539de1dfd31c50f95d32c1f520f4fd55e3ceaf60b7fb4ae',
+  txMemoType: 'return',
+  txSrc: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY'
+}
+vault.put key Issuer.desc.6 value {
+  amount: '800.0000000',
+  balance_id: '00000000a3a212c388df43e97504e74f485d4b862f4a60aabf9d0366086ec56f8daf4a8b',
+  txDesc: '',
+  txId: 'f460c10595ba86d252c4bd97daa2af4160eaa8a9ca15c3e894670f3e611991e8',
+  txMemo: 'b6027ed7ef915eab7539de1dfd31c50f95d32c1f520f4fd55e3ceaf60b7fb4ae',
+  txMemoType: 'return',
+  txSrc: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY'
+} options undefined
+vault.put key Issuer.desc.7 value {
+  amount: '800.0000000',
+  balance_id: undefined,
+  txDesc: '',
+  txId: 'f460c10595ba86d252c4bd97daa2af4160eaa8a9ca15c3e894670f3e611991e8',
+  txMemo: 'b6027ed7ef915eab7539de1dfd31c50f95d32c1f520f4fd55e3ceaf60b7fb4ae',
+  txMemoType: 'return',
+  txSrc: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY'
+} options undefined
+Ann handle_stateCynAnnDeal desc [object Object]
+{
+  memo: '9GDBBZW6htJSxL2X2qKvQWDqqKnKFcPolGcPPmEZkeg=',
+  _links: {
+    self: {
+      href: 'https://horizon-testnet.stellar.org/transactions/a6ad41c7095e5369106e3f3ec069d8067660f6184e1c3db5797d078f19a72915'
+    },
+    account: {
+      href: 'https://horizon-testnet.stellar.org/accounts/GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY'
+    },
+    ledger: { href: 'https://horizon-testnet.stellar.org/ledgers/4262739' },
+    operations: {
+      href: 'https://horizon-testnet.stellar.org/transactions/a6ad41c7095e5369106e3f3ec069d8067660f6184e1c3db5797d078f19a72915/operations{?cursor,limit,order}',
+      templated: true
+    },
+    effects: {
+      href: 'https://horizon-testnet.stellar.org/transactions/a6ad41c7095e5369106e3f3ec069d8067660f6184e1c3db5797d078f19a72915/effects{?cursor,limit,order}',
+      templated: true
+    },
+    precedes: {
+      href: 'https://horizon-testnet.stellar.org/transactions?order=asc&cursor=18308324596396032'
+    },
+    succeeds: {
+      href: 'https://horizon-testnet.stellar.org/transactions?order=desc&cursor=18308324596396032'
+    },
+    transaction: {
+      href: 'https://horizon-testnet.stellar.org/transactions/a6ad41c7095e5369106e3f3ec069d8067660f6184e1c3db5797d078f19a72915'
+    }
+  },
+  id: 'a6ad41c7095e5369106e3f3ec069d8067660f6184e1c3db5797d078f19a72915',
+  paging_token: '18308324596396032',
+  successful: true,
+  hash: 'a6ad41c7095e5369106e3f3ec069d8067660f6184e1c3db5797d078f19a72915',
+  ledger: 4262739,
+  created_at: '2026-08-21T18:17:57Z',
+  source_account: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY',
+  source_account_sequence: '18308135617822733',
+  fee_account: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY',
+  fee_charged: '400',
+  max_fee: '400',
+  operation_count: 4,
+  envelope_xdr: 'AAAAAgAAAADodiEzWCLSl2slMhgBTbsl1IVZEf4KM9q/f4KGEUL0bAAAAZAAQQsnAAAADQAAAAEAAAAAAAAAAAAAAABqiJZuAAAAA/RgwQWVuobSUsS9l9qir0Fg6qipyhXD6JRnDz5hGZHoAAAABAAAAAAAAAABAAAAAAdSqeKy1U7INPkZaIGQGutS5BziTzvEeC1uS+dvp1ZsAAAAAkNsYXdhYmxlSGV4YQAAAAAHUqnistVOyDT5GWiBkBrrUuQc4k87xHgtbkvnb6dWbAAAAAHc1lAAAAAAAAAAABAAAAAAB1Kp4rLVTsg0+RlogZAa61LkHOJPO8R4LW5L52+nVmwAAAABAAAAAAdSqeKy1U7INPkZaIGQGutS5BziTzvEeC1uS+dvp1ZsAAAAAQAAAADodiEzWCLSl2slMhgBTbsl1IVZEf4KM9q/f4KGEUL0bAAAAAFIRVhBAAAAAAdSqeKy1U7INPkZaIGQGutS5BziTzvEeC1uS+dvp1ZsAAAAAdzWUAAAAAABAAAAAAdSqeKy1U7INPkZaIGQGutS5BziTzvEeC1uS+dvp1ZsAAAAEQAAAAAAAAACEUL0bAAAAEBUpeg0uBvRNImxdy/xD6UtAOpAMsJW+Ppu2MeRF7yvJxqIXPcxUcfNHSbrjgM88UFcA3SOnPznfQEcy+zMxu4Pb6dWbAAAAEC/pugB0Y8mYS2NS8oNpmjP3mqVSQojPwT90XzfA6xjfCG+mJC5Z5h6T+PUcJPsBGz6Bb5AI9DLP3RW0bqb3IUO',
+  result_xdr: 'AAAAAAAAAZAAAAAAAAAABAAAAAAAAAABAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAABAAAAAAAAAAAAAAARAAAAAAAAAAA=',
+  fee_meta_xdr: 'AAAAAgAAAAMAQQtRAAAAAAAAAADodiEzWCLSl2slMhgBTbsl1IVZEf4KM9q/f4KGEUL0bAAAAAJS2qrkAEELJwAAAAwAAAAEAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAACYloAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAAEELUQAAAABqiJZLAAAAAAAAAAEAQQtTAAAAAAAAAADodiEzWCLSl2slMhgBTbsl1IVZEf4KM9q/f4KGEUL0bAAAAAJS2qlUAEELJwAAAAwAAAAEAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAACYloAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAAEELUQAAAABqiJZLAAAAAA==',
+  memo_type: 'hash',
+  signatures: [
+    'VKXoNLgb0TSJsXcv8Q+lLQDqQDLCVvj6btjHkRe8rycaiFz3MVHHzR0m644DPPFBXAN0jpz8530BHMvszMbuDw==',
+    'v6boAdGPJmEtjUvKDaZoz95qlUkKIz8E/dF83wOsY3whvpiQuWeYek/j1HCT7ARs+gW+QCPQyz90VtG6m9yFDg=='
+  ],
+  preconditions: { timebounds: { min_time: '0', max_time: '1787336302' } },
+  offerResults: undefined
+}
+  ✔ setup new/existing account for Bob (1m 10.9s)
+vault.put key Issuer.in value DONE options { flag: 'a' }
+  ─
+
+  1 test passed
+vault.put key Issuer.desc.8 value {
+  amount: '0.0000100',
+  balance_id: '0000000038f19210c49da6944f142304ab0683fce41c549100d07eba46103ab48d6c5971',
+  txDesc: '',
+  txId: '5a6bc78e2c4bd616164ca83ac693478d94ba3a45ff7cc68229b575c608d57886',
+  txMemo: '2bfbcbcb94030bbfcd8811ea1228468f53f684456fdba93b49af63d11e040ec9',
+  txMemoType: 'return',
+  txSrc: 'GC2GJNXJ6D2DZWGFMJNMK3OGSXZ5IZH7M32X5CHLJJOIILCAQDOTPPB5'
+} options undefined
+Cyn handle_stateDeals Request e {
+  amount: '0.0000100',
+  balance_id: '0000000038f19210c49da6944f142304ab0683fce41c549100d07eba46103ab48d6c5971',
+  txDesc: '',
+  txId: '5a6bc78e2c4bd616164ca83ac693478d94ba3a45ff7cc68229b575c608d57886',
+  txMemo: '2bfbcbcb94030bbfcd8811ea1228468f53f684456fdba93b49af63d11e040ec9',
+  txMemoType: 'return',
+  txSrc: 'GC2GJNXJ6D2DZWGFMJNMK3OGSXZ5IZH7M32X5CHLJJOIILCAQDOTPPB5'
+}
+Ann handle_stateCynAnnDeal eotx {"amount":"0.0000100","balance_id":"0000000038f19210c49da6944f142304ab0683fce41c549100d07eba46103ab48d6c5971","txDesc":"","txId":"5a6bc78e2c4bd616164ca83ac693478d94ba3a45ff7cc68229b575c608d57886","txMemo":"2bfbcbcb94030bbfcd8811ea1228468f53f684456fdba93b49af63d11e040ec9","txMemoType":"return","txSrc":"GC2GJNXJ6D2DZWGFMJNMK3OGSXZ5IZH7M32X5CHLJJOIILCAQDOTPPB5"} clawable 1000.0000000
+vault.put key Issuer.desc.9 value {
+  amount: '0.0000100',
+  balance_id: undefined,
+  txDesc: '',
+  txId: '5a6bc78e2c4bd616164ca83ac693478d94ba3a45ff7cc68229b575c608d57886',
+  txMemo: '2bfbcbcb94030bbfcd8811ea1228468f53f684456fdba93b49af63d11e040ec9',
+  txMemoType: 'return',
+  txSrc: 'GC2GJNXJ6D2DZWGFMJNMK3OGSXZ5IZH7M32X5CHLJJOIILCAQDOTPPB5'
+} options undefined
+vault.put key Issuer.desc.10 value {
+  amount: '0.0000100',
+  balance_id: undefined,
+  txDesc: '',
+  txId: '5a6bc78e2c4bd616164ca83ac693478d94ba3a45ff7cc68229b575c608d57886',
+  txMemo: '2bfbcbcb94030bbfcd8811ea1228468f53f684456fdba93b49af63d11e040ec9',
+  txMemoType: 'return',
+  txSrc: 'GC2GJNXJ6D2DZWGFMJNMK3OGSXZ5IZH7M32X5CHLJJOIILCAQDOTPPB5'
+} options undefined
+vault.put key Issuer.desc.11 value {
+  amount: '800.0000000',
+  balance_id: undefined,
+  txDesc: '',
+  txId: 'a6ad41c7095e5369106e3f3ec069d8067660f6184e1c3db5797d078f19a72915',
+  txMemo: 'f460c10595ba86d252c4bd97daa2af4160eaa8a9ca15c3e894670f3e611991e8',
+  txMemoType: 'hash',
+  txSrc: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY'
+} options undefined
+vault.put key Issuer.desc.12 value {
+  amount: '1000.0000000',
+  balance_id: '00000000b784d629042e100c2542692fb48da7d3a0c9cbcc24cfa6b1f72bc0749bfd9f0e',
+  txDesc: '',
+  txId: '5a6bc78e2c4bd616164ca83ac693478d94ba3a45ff7cc68229b575c608d57886',
+  txMemo: '2bfbcbcb94030bbfcd8811ea1228468f53f684456fdba93b49af63d11e040ec9',
+  txMemoType: 'return',
+  txSrc: 'GC2GJNXJ6D2DZWGFMJNMK3OGSXZ5IZH7M32X5CHLJJOIILCAQDOTPPB5'
+} options undefined
+vault.put key Issuer.desc.13 value {
+  amount: '1000.0000000',
+  balance_id: undefined,
+  txDesc: '',
+  txId: '5a6bc78e2c4bd616164ca83ac693478d94ba3a45ff7cc68229b575c608d57886',
+  txMemo: '2bfbcbcb94030bbfcd8811ea1228468f53f684456fdba93b49af63d11e040ec9',
+  txMemoType: 'return',
+  txSrc: 'GC2GJNXJ6D2DZWGFMJNMK3OGSXZ5IZH7M32X5CHLJJOIILCAQDOTPPB5'
+} options undefined
+vault.put key Issuer.desc.14 value {
+  amount: '800.0000000',
+  balance_id: undefined,
+  txDesc: '',
+  txId: 'a6ad41c7095e5369106e3f3ec069d8067660f6184e1c3db5797d078f19a72915',
+  txMemo: 'f460c10595ba86d252c4bd97daa2af4160eaa8a9ca15c3e894670f3e611991e8',
+  txMemoType: 'hash',
+  txSrc: 'GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY'
+} options undefined
+vault.put key Issuer.desc.15 value {
+  amount: '1000.0000000',
+  balance_id: undefined,
+  txDesc: '',
+  txId: '5a6bc78e2c4bd616164ca83ac693478d94ba3a45ff7cc68229b575c608d57886',
+  txMemo: '2bfbcbcb94030bbfcd8811ea1228468f53f684456fdba93b49af63d11e040ec9',
+  txMemoType: 'return',
+  txSrc: 'GC2GJNXJ6D2DZWGFMJNMK3OGSXZ5IZH7M32X5CHLJJOIILCAQDOTPPB5'
+} options undefined
+{
+  memo: 'WmvHjixL1hYWTKg6xpNHjZS6OkX/fMaCKbV1xgjVeIY=',
+  _links: {
+    self: {
+      href: 'https://horizon-testnet.stellar.org/transactions/f749f8f2d950a703fb53cf3d3d7b4c38a713345350f26047c3c6b08fb9d5c010'
+    },
+    account: {
+      href: 'https://horizon-testnet.stellar.org/accounts/GC2GJNXJ6D2DZWGFMJNMK3OGSXZ5IZH7M32X5CHLJJOIILCAQDOTPPB5'
+    },
+    ledger: { href: 'https://horizon-testnet.stellar.org/ledgers/4262740' },
+    operations: {
+      href: 'https://horizon-testnet.stellar.org/transactions/f749f8f2d950a703fb53cf3d3d7b4c38a713345350f26047c3c6b08fb9d5c010/operations{?cursor,limit,order}',
+      templated: true
+    },
+    effects: {
+      href: 'https://horizon-testnet.stellar.org/transactions/f749f8f2d950a703fb53cf3d3d7b4c38a713345350f26047c3c6b08fb9d5c010/effects{?cursor,limit,order}',
+      templated: true
+    },
+    precedes: {
+      href: 'https://horizon-testnet.stellar.org/transactions?order=asc&cursor=18308328891355136'
+    },
+    succeeds: {
+      href: 'https://horizon-testnet.stellar.org/transactions?order=desc&cursor=18308328891355136'
+    },
+    transaction: {
+      href: 'https://horizon-testnet.stellar.org/transactions/f749f8f2d950a703fb53cf3d3d7b4c38a713345350f26047c3c6b08fb9d5c010'
+    }
+  },
+  id: 'f749f8f2d950a703fb53cf3d3d7b4c38a713345350f26047c3c6b08fb9d5c010',
+  paging_token: '18308328891355136',
+  successful: true,
+  hash: 'f749f8f2d950a703fb53cf3d3d7b4c38a713345350f26047c3c6b08fb9d5c010',
+  ledger: 4262740,
+  created_at: '2026-08-21T18:18:02Z',
+  source_account: 'GC2GJNXJ6D2DZWGFMJNMK3OGSXZ5IZH7M32X5CHLJJOIILCAQDOTPPB5',
+  source_account_sequence: '18308187157430278',
+  fee_account: 'GC2GJNXJ6D2DZWGFMJNMK3OGSXZ5IZH7M32X5CHLJJOIILCAQDOTPPB5',
+  fee_charged: '400',
+  max_fee: '400',
+  operation_count: 4,
+  envelope_xdr: 'AAAAAgAAAAC0ZLbp8PQ82MViWsVtxpXz1GT/ZvV+iOtKXIQsQIDdNwAAAZAAQQszAAAABgAAAAEAAAAAAAAAAAAAAABqiJZzAAAAA1prx44sS9YWFkyoOsaTR42UujpF/3zGgim1dcYI1XiGAAAABAAAAAAAAAAQAAAAAAdSqeKy1U7INPkZaIGQGutS5BziTzvEeC1uS+dvp1ZsAAAAAQAAAAAHUqnistVOyDT5GWiBkBrrUuQc4k87xHgtbkvnb6dWbAAAABMAAAACQ2xhd2FibGVIZXhhAAAAAAdSqeKy1U7INPkZaIGQGutS5BziTzvEeC1uS+dvp1ZsAAAAAPrVBhzMlQatyoslLeNpEf5B0tHFTIfDnCroqeByQvJRAAAAAlQL5AAAAAABAAAAAAdSqeKy1U7INPkZaIGQGutS5BziTzvEeC1uS+dvp1ZsAAAAAQAAAAC0ZLbp8PQ82MViWsVtxpXz1GT/ZvV+iOtKXIQsQIDdNwAAAAFIRVhBAAAAAAdSqeKy1U7INPkZaIGQGutS5BziTzvEeC1uS+dvp1ZsAAAAAlQL5AAAAAABAAAAAAdSqeKy1U7INPkZaIGQGutS5BziTzvEeC1uS+dvp1ZsAAAAEQAAAAAAAAACQIDdNwAAAECFiyUxdQ5jJ4pH2hCRVcMrPCctsRZudXa3grbu/S6dVIq4rZ2XFufv8sQlL9L7inUN+uYzCE2mNKrzADyzCykDb6dWbAAAAEB3QoPWTyWl09RF2HbVwiPti/1EJcw4CKqnWSgJ1psJd7YF89YIMtdmlT6pz5JNah+pNCRTuu/7f5bWrp0H3J0K',
+  result_xdr: 'AAAAAAAAAZAAAAAAAAAABAAAAAAAAAAQAAAAAAAAAAAAAAATAAAAAAAAAAAAAAABAAAAAAAAAAAAAAARAAAAAAAAAAA=',
+  fee_meta_xdr: 'AAAAAgAAAAMAQQtSAAAAAAAAAAC0ZLbp8PQ82MViWsVtxpXz1GT/ZvV+iOtKXIQsQIDdNwAAAAAFXUSkAEELMwAAAAUAAAADAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAAEELUgAAAABqiJZQAAAAAAAAAAEAQQtUAAAAAAAAAAC0ZLbp8PQ82MViWsVtxpXz1GT/ZvV+iOtKXIQsQIDdNwAAAAAFXUMUAEELMwAAAAUAAAADAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAAEELUgAAAABqiJZQAAAAAA==',
+  memo_type: 'hash',
+  signatures: [
+    'hYslMXUOYyeKR9oQkVXDKzwnLbEWbnV2t4K27v0unVSKuK2dlxbn7/LEJS/S+4p1DfrmMwhNpjSq8wA8swspAw==',
+    'd0KD1k8lpdPURdh21cIj7Yv9RCXMOAiqp1koCdabCXe2BfPWCDLXZpU+qc+STWofqTQkU7rv+3+W1q6dB9ydCg=='
+  ],
+  preconditions: { timebounds: { min_time: '0', max_time: '1787336307' } },
+  offerResults: undefined
+}
+vault.get key Issuer.in v "DONE""DONE"
+  ✔ setup new/existing account for Ann (1m 17.1s)
+vault.put key Issuer.in value DONE options { flag: 'a' }
+  ─
+
+  1 test passed
+vault.put key Issuer.desc.16 value {
+  amount: '1000.0000000',
+  balance_id: undefined,
+  txDesc: '',
+  txId: 'f749f8f2d950a703fb53cf3d3d7b4c38a713345350f26047c3c6b08fb9d5c010',
+  txMemo: '5a6bc78e2c4bd616164ca83ac693478d94ba3a45ff7cc68229b575c608d57886',
+  txMemoType: 'hash',
+  txSrc: 'GC2GJNXJ6D2DZWGFMJNMK3OGSXZ5IZH7M32X5CHLJJOIILCAQDOTPPB5'
+} options undefined
+Cyn handle_stateDeals Broken Deal Request e {
+  amount: '1000.0000000',
+  txDesc: '',
+  txId: 'f749f8f2d950a703fb53cf3d3d7b4c38a713345350f26047c3c6b08fb9d5c010',
+  txMemo: '5a6bc78e2c4bd616164ca83ac693478d94ba3a45ff7cc68229b575c608d57886',
+  txMemoType: 'hash',
+  txSrc: 'GC2GJNXJ6D2DZWGFMJNMK3OGSXZ5IZH7M32X5CHLJJOIILCAQDOTPPB5'
+}
+vault.put key Issuer.desc.17 value {
+  amount: '1000.0000000',
+  balance_id: undefined,
+  txDesc: '',
+  txId: 'f749f8f2d950a703fb53cf3d3d7b4c38a713345350f26047c3c6b08fb9d5c010',
+  txMemo: '5a6bc78e2c4bd616164ca83ac693478d94ba3a45ff7cc68229b575c608d57886',
+  txMemoType: 'hash',
+  txSrc: 'GC2GJNXJ6D2DZWGFMJNMK3OGSXZ5IZH7M32X5CHLJJOIILCAQDOTPPB5'
+} options undefined
+Cyn handle_stateDeals disputeBrokenDeal r {
+  memo: '90n48tlQpwP7U889PXtMOKcTNFNQ8mBHw8awj7nVwBA=',
+  _links: {
+    self: {
+      href: 'https://horizon-testnet.stellar.org/transactions/6d6f07725741b683ce2d206b81fe03fdb175b717439942283ff0d1a2ee2d6474'
+    },
+    account: {
+      href: 'https://horizon-testnet.stellar.org/accounts/GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB'
+    },
+    ledger: { href: 'https://horizon-testnet.stellar.org/ledgers/4262742' },
+    operations: {
+      href: 'https://horizon-testnet.stellar.org/transactions/6d6f07725741b683ce2d206b81fe03fdb175b717439942283ff0d1a2ee2d6474/operations{?cursor,limit,order}',
+      templated: true
+    },
+    effects: {
+      href: 'https://horizon-testnet.stellar.org/transactions/6d6f07725741b683ce2d206b81fe03fdb175b717439942283ff0d1a2ee2d6474/effects{?cursor,limit,order}',
+      templated: true
+    },
+    precedes: {
+      href: 'https://horizon-testnet.stellar.org/transactions?order=asc&cursor=18308337481297920'
+    },
+    succeeds: {
+      href: 'https://horizon-testnet.stellar.org/transactions?order=desc&cursor=18308337481297920'
+    },
+    transaction: {
+      href: 'https://horizon-testnet.stellar.org/transactions/6d6f07725741b683ce2d206b81fe03fdb175b717439942283ff0d1a2ee2d6474'
+    }
+  },
+  id: '6d6f07725741b683ce2d206b81fe03fdb175b717439942283ff0d1a2ee2d6474',
+  paging_token: '18308337481297920',
+  successful: true,
+  hash: '6d6f07725741b683ce2d206b81fe03fdb175b717439942283ff0d1a2ee2d6474',
+  ledger: 4262742,
+  created_at: '2026-08-21T18:18:12Z',
+  source_account: 'GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB',
+  source_account_sequence: '18308139912790026',
+  fee_account: 'GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB',
+  fee_charged: '100',
+  max_fee: '100',
+  operation_count: 1,
+  envelope_xdr: 'AAAAAgAAAAD61QYczJUGrcqLJS3jaRH+QdLRxUyHw5wq6KngckLyUQAAAGQAQQsoAAAACgAAAAEAAAAAAAAAAAAAAABqiJZ9AAAAA/dJ+PLZUKcD+1PPPT17TDinEzRTUPJgR8PGsI+51cAQAAAAAQAAAAAAAAAOAAAAAUhFWEEAAAAAB1Kp4rLVTsg0+RlogZAa61LkHOJPO8R4LW5L52+nVmwAAAAAAAAAYwAAAAIAAAAAAAAAAAdSqeKy1U7INPkZaIGQGutS5BziTzvEeC1uS+dvp1ZsAAAAAAAAAAAAAAAA+tUGHMyVBq3KiyUt42kR/kHS0cVMh8OcKuip4HJC8lEAAAAAAAAAAAAAAAFyQvJRAAAAQEpvANt9byS3VYDSy2B7zAtmdVrRZ+W4GNbE2YZ0Yc0g3mnxs/0XoaymkjdrdLziQSfdlRlFG1pSqkCQTe7NGwk=',
+  result_xdr: 'AAAAAAAAAGQAAAAAAAAAAQAAAAAAAAAOAAAAAAAAAACwMh46Phy0AVJXISJaoWrEhpK8uo0pZl0GrlKPWQQkBQAAAAA=',
+  fee_meta_xdr: 'AAAAAgAAAAMAQQtSAAAAAAAAAAD61QYczJUGrcqLJS3jaRH+QdLRxUyHw5wq6KngckLyUQAAAAJWbjjsAEELKAAAAAkAAAADAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAMAAAAAAEELUAAAAABqiJZGAAAAAAAAAAEAQQtWAAAAAAAAAAD61QYczJUGrcqLJS3jaRH+QdLRxUyHw5wq6KngckLyUQAAAAJWbjiIAEELKAAAAAkAAAADAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAMAAAAAAEELUAAAAABqiJZGAAAAAA==',
+  memo_type: 'hash',
+  signatures: [
+    'Sm8A231vJLdVgNLLYHvMC2Z1WtFn5bgY1sTZhnRhzSDeafGz/RehrKaSN2t0vOJBJ92VGUUbWlKqQJBN7s0bCQ=='
+  ],
+  preconditions: { timebounds: { min_time: '0', max_time: '1787336317' } },
+  offerResults: undefined
+}
+stopMonitor - "Issuer's effects" closed.
+  ✔ setup new/existing account for Cyn (1m 25.9s)
+vault.put key Issuer.in value DONE options { flag: 'a' }
+  ✔ load new/existing Issuer account (1m 25.9s)
+  ─
+
+  1 test passed
+  ─
+
+  1 test passed
+
+loadAccount accountId GD5NKBQ4ZSKQNLOKRMSS3Y3JCH7EDUWRYVGIPQ44FLUKTYDSILZFCTOB - loading...
+DemoDone Cyn sdk.transaction.makeSellOffer r tx.successful true
+  ✔ demo done (2.3s)
+  ─
+
+  1 test passed
+50301 demoit tm_request_demo for Al DONE
+loadAccount accountId GDUHMIJTLARNFF3LEUZBQAKNXMS5JBKZCH7AUM62X57YFBQRIL2GYWMY - loading...
+runMonitor.sell Bob sdk.transaction.makeSellOffer r tx.successful true true
 === ALL DEMO_USERS FOUND ===
 stopMonitor - "orderbook" closed.
-  ✔ use test monitor (4m 17s)
 stopMonitor - "Bob's trading effects" closed.
+  ✔ use test monitor (3m 43.3s)
   ─
 
   2 tests passed
-loadAccount accountId GCP7L3KQOHDQZ3NYJH7HEE2BYNTVFJOLSUIGE73PHC7PEVQDWI5DPXVE - loading...
-loadAccount accountId GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733 - loading...
-loadAccount accountId GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB - loading...
-fund Al GCP7L3KQOHDQZ3NYJH7HEE2BYNTVFJOLSUIGE73PHC7PEVQDWI5DPXVE clawback false 2026-07-17T19:23:53Z ...
-fund Bob GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733 clawback false 2026-07-17T19:23:53Z ...
-fund Cyn GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB clawback false 2026-07-17T19:23:48Z ...
-- Al has HEXA 1100.0000000
-- Bob has HEXA 2800.0000000
-- Cyn has HEXA 1199.9999703
-makeRequest r {
-  balanceId: '000000007136d8e9a8e1df34945afd9fa69d4bfbf28a48ca11fb22ee8cba5e78891710b5',
-  txId: '94a3c5db9321463998198ccc435daa3c4d389f2db735a8789c9a3246bb1b7252',
-  request: 'Fresh red snapper for 4 persons GGS. HEXA 1000',
-  amount: '1000'
-}
-makeOffer r {
-  balanceId: '000000009e1034ba3d5e06dfad1873b6e39b076cd0a17b78a071da89796102f8348e50bd',
-  txId: '1efde7468950499a469933fa9a1d0fca810f4ca082ab47f8b74799577995b1e6',
-  request: 'Freshly caught red snapper 4lb. HEXA 800',
-  amount: '0.0000100'
-}
-vault.put key Issuer.desc.1 value {
-  amount: '1000.0000000',
-  balance_id: '000000007136d8e9a8e1df34945afd9fa69d4bfbf28a48ca11fb22ee8cba5e78891710b5',
-  txDesc: 'Fresh red snapper for 4 persons GGS. HEXA 1000',
-  txId: '94a3c5db9321463998198ccc435daa3c4d389f2db735a8789c9a3246bb1b7252',
-  txMemo: 'Request 0',
-  txMemoType: 'text',
-  txSrc: 'GCP7L3KQOHDQZ3NYJH7HEE2BYNTVFJOLSUIGE73PHC7PEVQDWI5DPXVE'
-}
-Ann handle_stateInitial e {
-  amount: '1000.0000000',
-  balance_id: '000000007136d8e9a8e1df34945afd9fa69d4bfbf28a48ca11fb22ee8cba5e78891710b5',
-  txDesc: 'Fresh red snapper for 4 persons GGS. HEXA 1000',
-  txId: '94a3c5db9321463998198ccc435daa3c4d389f2db735a8789c9a3246bb1b7252',
-  txMemo: 'Request 0',
-  txMemoType: 'text',
-  txSrc: 'GCP7L3KQOHDQZ3NYJH7HEE2BYNTVFJOLSUIGE73PHC7PEVQDWI5DPXVE'
-}
-Cyn handle_stateInitial stateInitial.queue.length 0
-Cyn handle_stateInitial Request e {
-  amount: '1000.0000000',
-  balance_id: '000000007136d8e9a8e1df34945afd9fa69d4bfbf28a48ca11fb22ee8cba5e78891710b5',
-  txDesc: 'Fresh red snapper for 4 persons GGS. HEXA 1000',
-  txId: '94a3c5db9321463998198ccc435daa3c4d389f2db735a8789c9a3246bb1b7252',
-  txMemo: 'Request 0',
-  txMemoType: 'text',
-  txSrc: 'GCP7L3KQOHDQZ3NYJH7HEE2BYNTVFJOLSUIGE73PHC7PEVQDWI5DPXVE'
-}
-vault.put key Issuer.desc.2 value {
-  amount: '0.0000100',
-  balance_id: '000000009e1034ba3d5e06dfad1873b6e39b076cd0a17b78a071da89796102f8348e50bd',
-  txDesc: 'Freshly caught red snapper 4lb. HEXA 800',
-  txId: '1efde7468950499a469933fa9a1d0fca810f4ca082ab47f8b74799577995b1e6',
-  txMemo: 'Offer 0',
-  txMemoType: 'text',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-Cyn handle_stateInitial Offer e {
-  amount: '0.0000100',
-  balance_id: '000000009e1034ba3d5e06dfad1873b6e39b076cd0a17b78a071da89796102f8348e50bd',
-  txDesc: 'Freshly caught red snapper 4lb. HEXA 800',
-  txId: '1efde7468950499a469933fa9a1d0fca810f4ca082ab47f8b74799577995b1e6',
-  txMemo: 'Offer 0',
-  txMemoType: 'text',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-Bob handle_stateInitial e {
-  amount: '0.0000100',
-  balance_id: '000000009e1034ba3d5e06dfad1873b6e39b076cd0a17b78a071da89796102f8348e50bd',
-  txDesc: 'Freshly caught red snapper 4lb. HEXA 800',
-  txId: '1efde7468950499a469933fa9a1d0fca810f4ca082ab47f8b74799577995b1e6',
-  txMemo: 'Offer 0',
-  txMemoType: 'text',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-Cyn take effect {
-  amount: '0.0000100',
-  balance_id: '000000009e1034ba3d5e06dfad1873b6e39b076cd0a17b78a071da89796102f8348e50bd',
-  txDesc: 'Freshly caught red snapper 4lb. HEXA 800',
-  txId: '1efde7468950499a469933fa9a1d0fca810f4ca082ab47f8b74799577995b1e6',
-  txMemo: 'Offer 0',
-  txMemoType: 'text',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-takeOffer r {
-  balanceId: '0000000084a3c3e4ce193ee46e30b92b6fe4f03d7b8947aeb6d7049e2a77452ed2604e4a',
-  txId: '466782db803d4f9f5212b524e40af5708c915d91b280eecdba3bc1d60f29feb6',
-  amount: '800'
-}
-Cyn take effect {
-  amount: '1000.0000000',
-  balance_id: '000000007136d8e9a8e1df34945afd9fa69d4bfbf28a48ca11fb22ee8cba5e78891710b5',
-  txDesc: 'Fresh red snapper for 4 persons GGS. HEXA 1000',
-  txId: '94a3c5db9321463998198ccc435daa3c4d389f2db735a8789c9a3246bb1b7252',
-  txMemo: 'Request 0',
-  txMemoType: 'text',
-  txSrc: 'GCP7L3KQOHDQZ3NYJH7HEE2BYNTVFJOLSUIGE73PHC7PEVQDWI5DPXVE'
-}
-vault.put key Issuer.desc.3 value {
-  amount: '800.0000000',
-  balance_id: '0000000084a3c3e4ce193ee46e30b92b6fe4f03d7b8947aeb6d7049e2a77452ed2604e4a',
-  txDesc: '',
-  txId: '466782db803d4f9f5212b524e40af5708c915d91b280eecdba3bc1d60f29feb6',
-  txMemo: '1efde7468950499a469933fa9a1d0fca810f4ca082ab47f8b74799577995b1e6',
-  txMemoType: 'hash',
-  txSrc: 'GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB'
-}
-vault.get key Issuer.desc.3 v 
-vault.get key Issuer.desc.3 v 
-vault.get key Issuer.desc.3 v 
-Bob handle_stateInitial e {
-  amount: '800.0000000',
-  balance_id: '0000000084a3c3e4ce193ee46e30b92b6fe4f03d7b8947aeb6d7049e2a77452ed2604e4a',
-  txDesc: '',
-  txId: '466782db803d4f9f5212b524e40af5708c915d91b280eecdba3bc1d60f29feb6',
-  txMemo: '1efde7468950499a469933fa9a1d0fca810f4ca082ab47f8b74799577995b1e6',
-  txMemoType: 'hash',
-  txSrc: 'GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB'
-}
-takeRequest r {
-  balanceId: '000000009624ef25072b2024fe914f81bbd88ddf91dbc49fad046fd544ba917d6a0ec96e',
-  txId: 'c9e039c1a3472ef566bdcf5d8a01aea08cdfb4edf7dbe22c2d4413513e4d824a',
-  amount: '0.0000100'
-}
-Bob handle_stateCynBobDeal desc {
-  amount: '800.0000000',
-  destination: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733',
-  txId: '4fefab00bf3251d0744191f365ea66fbb7df9fe5629091796c9401d4835ebf7f'
-}
-vault.put key Issuer.desc.4 value {
-  amount: '0.0000100',
-  balance_id: '000000009624ef25072b2024fe914f81bbd88ddf91dbc49fad046fd544ba917d6a0ec96e',
-  txDesc: '',
-  txId: 'c9e039c1a3472ef566bdcf5d8a01aea08cdfb4edf7dbe22c2d4413513e4d824a',
-  txMemo: '94a3c5db9321463998198ccc435daa3c4d389f2db735a8789c9a3246bb1b7252',
-  txMemoType: 'hash',
-  txSrc: 'GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB'
-}
-Ann handle_stateInitial e {
-  amount: '0.0000100',
-  balance_id: '000000009624ef25072b2024fe914f81bbd88ddf91dbc49fad046fd544ba917d6a0ec96e',
-  txDesc: '',
-  txId: 'c9e039c1a3472ef566bdcf5d8a01aea08cdfb4edf7dbe22c2d4413513e4d824a',
-  txMemo: '94a3c5db9321463998198ccc435daa3c4d389f2db735a8789c9a3246bb1b7252',
-  txMemoType: 'hash',
-  txSrc: 'GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB'
-}
-vault.put key Issuer.desc.5 value {
-  amount: '800.0000000',
-  balance_id: '0000000084a3c3e4ce193ee46e30b92b6fe4f03d7b8947aeb6d7049e2a77452ed2604e4a',
-  txDesc: '',
-  txId: '4fefab00bf3251d0744191f365ea66fbb7df9fe5629091796c9401d4835ebf7f',
-  txMemo: '466782db803d4f9f5212b524e40af5708c915d91b280eecdba3bc1d60f29feb6',
-  txMemoType: 'return',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-Cyn handle_stateDeals Offer e {
-  amount: '800.0000000',
-  balance_id: '0000000084a3c3e4ce193ee46e30b92b6fe4f03d7b8947aeb6d7049e2a77452ed2604e4a',
-  txDesc: '',
-  txId: '4fefab00bf3251d0744191f365ea66fbb7df9fe5629091796c9401d4835ebf7f',
-  txMemo: '466782db803d4f9f5212b524e40af5708c915d91b280eecdba3bc1d60f29feb6',
-  txMemoType: 'return',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-Bob handle_stateCynBobDeal eotx {
-  amount: '800.0000000',
-  balance_id: '0000000084a3c3e4ce193ee46e30b92b6fe4f03d7b8947aeb6d7049e2a77452ed2604e4a',
-  txDesc: '',
-  txId: '4fefab00bf3251d0744191f365ea66fbb7df9fe5629091796c9401d4835ebf7f',
-  txMemo: '466782db803d4f9f5212b524e40af5708c915d91b280eecdba3bc1d60f29feb6',
-  txMemoType: 'return',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-} clawable 800.0000000
-vault.put key Issuer.desc.6 value {
-  amount: '800.0000000',
-  balance_id: undefined,
-  txDesc: '',
-  txId: '4fefab00bf3251d0744191f365ea66fbb7df9fe5629091796c9401d4835ebf7f',
-  txMemo: '466782db803d4f9f5212b524e40af5708c915d91b280eecdba3bc1d60f29feb6',
-  txMemoType: 'return',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-vault.put key Issuer.desc.7 value {
-  amount: '800.0000000',
-  balance_id: undefined,
-  txDesc: '',
-  txId: '4fefab00bf3251d0744191f365ea66fbb7df9fe5629091796c9401d4835ebf7f',
-  txMemo: '466782db803d4f9f5212b524e40af5708c915d91b280eecdba3bc1d60f29feb6',
-  txMemoType: 'return',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-Ann handle_stateCynAnnDeal desc {
-  amount: '1000.0000000',
-  destination: 'GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB',
-  txId: '0817293866baa2c2c726397b562483f058f741e4c94b9ca9967c480daae4e6a3'
-}
-{
-  memo: 'T++rAL8yUdB0QZHzZepm+7ffn+VikJF5bJQB1INev38=',
-  _links: {
-    self: {
-      href: 'https://horizon-testnet.stellar.org/transactions/1536af862825d6f103b8bd032cd97e923b54bd6f2f430c0cbd493442fa8d8763'
-    },
-    account: {
-      href: 'https://horizon-testnet.stellar.org/accounts/GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-    },
-    ledger: { href: 'https://horizon-testnet.stellar.org/ledgers/3659839' },
-    operations: {
-      href: 'https://horizon-testnet.stellar.org/transactions/1536af862825d6f103b8bd032cd97e923b54bd6f2f430c0cbd493442fa8d8763/operations{?cursor,limit,order}',
-      templated: true
-    },
-    effects: {
-      href: 'https://horizon-testnet.stellar.org/transactions/1536af862825d6f103b8bd032cd97e923b54bd6f2f430c0cbd493442fa8d8763/effects{?cursor,limit,order}',
-      templated: true
-    },
-    precedes: {
-      href: 'https://horizon-testnet.stellar.org/transactions?order=asc&cursor=15718888813629440'
-    },
-    succeeds: {
-      href: 'https://horizon-testnet.stellar.org/transactions?order=desc&cursor=15718888813629440'
-    },
-    transaction: {
-      href: 'https://horizon-testnet.stellar.org/transactions/1536af862825d6f103b8bd032cd97e923b54bd6f2f430c0cbd493442fa8d8763'
-    }
-  },
-  id: '1536af862825d6f103b8bd032cd97e923b54bd6f2f430c0cbd493442fa8d8763',
-  paging_token: '15718888813629440',
-  successful: true,
-  hash: '1536af862825d6f103b8bd032cd97e923b54bd6f2f430c0cbd493442fa8d8763',
-  ledger: 3659839,
-  created_at: '2026-07-17T19:24:18Z',
-  source_account: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733',
-  source_account_sequence: '15718626820620312',
-  fee_account: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733',
-  fee_charged: '400',
-  max_fee: '400',
-  operation_count: 4,
-  envelope_xdr: 'AAAAAgAAAADxqTL3/rZ4sVfPtAKn22SaI28FcSXoyKMMKJMsPJ1TMQAAAZAAN9gCAAAAGAAAAAEAAAAAAAAAAAAAAABqWoF+AAAAA0/vqwC/MlHQdEGR82XqZvu335/lYpCReWyUAdSDXr9/AAAABAAAAAAAAAABAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAAkNsYXdhYmxlSGV4YQAAAADthBo7E2SFu0XydsXwWcQa5Jfqj3jWFKEWIaPd3/j18gAAAAHc1lAAAAAAAAAAABAAAAAA7YQaOxNkhbtF8nbF8FnEGuSX6o941hShFiGj3d/49fIAAAABAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAAQAAAADxqTL3/rZ4sVfPtAKn22SaI28FcSXoyKMMKJMsPJ1TMQAAAAFIRVhBAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAAdzWUAAAAAABAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAEQAAAAAAAAACPJ1TMQAAAEBqM5Os42jAg4flXJrraIHtB/o8LRZWoWfDMnErm6xk5Ohc6WodagFao7K021wjuYRSN8x8BC7a80qYB6ZXM00P3/j18gAAAED2TXtY/Ktl1dlsAa2quR6FkHLpa0d9Zhm0Fvv4c6yDWmt5j5t/yeVou0N1jAS50QwZXIr29JwgTf9bD1UJ24UG',
-  result_xdr: 'AAAAAAAAAZAAAAAAAAAABAAAAAAAAAABAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAABAAAAAAAAAAAAAAARAAAAAAAAAAA=',
-  fee_meta_xdr: 'AAAAAgAAAAMAN9g+AAAAAAAAAADxqTL3/rZ4sVfPtAKn22SaI28FcSXoyKMMKJMsPJ1TMQAAAAJPRxfIADfYAgAAABcAAAADAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAADfYPgAAAABqWoFdAAAAAAAAAAEAN9g/AAAAAAAAAADxqTL3/rZ4sVfPtAKn22SaI28FcSXoyKMMKJMsPJ1TMQAAAAJPRxY4ADfYAgAAABcAAAADAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAADfYPgAAAABqWoFdAAAAAA==',
-  memo_type: 'hash',
-  signatures: [
-    'ajOTrONowIOH5Vya62iB7Qf6PC0WVqFnwzJxK5usZOToXOlqHWoBWqOytNtcI7mEUjfMfAQu2vNKmAemVzNNDw==',
-    '9k17WPyrZdXZbAGtqrkehZBy6WtHfWYZtBb7+HOsg1preY+bf8nlaLtDdYwEudEMGVyK9vScIE3/Ww9VCduFBg=='
-  ],
-  preconditions: { timebounds: { min_time: '0', max_time: '1784316286' } },
-  offerResults: undefined
-}
-  ✔ setup new/existing account for Bob (24.2s)
-vault.put key Issuer.in value DONE
-  ─
-
-  1 test passed
-vault.put key Issuer.desc.8 value {
-  amount: '800.0000000',
-  balance_id: undefined,
-  txDesc: '',
-  txId: '1536af862825d6f103b8bd032cd97e923b54bd6f2f430c0cbd493442fa8d8763',
-  txMemo: '4fefab00bf3251d0744191f365ea66fbb7df9fe5629091796c9401d4835ebf7f',
-  txMemoType: 'hash',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-vault.put key Issuer.desc.9 value {
-  amount: '800.0000000',
-  balance_id: undefined,
-  txDesc: '',
-  txId: '1536af862825d6f103b8bd032cd97e923b54bd6f2f430c0cbd493442fa8d8763',
-  txMemo: '4fefab00bf3251d0744191f365ea66fbb7df9fe5629091796c9401d4835ebf7f',
-  txMemoType: 'hash',
-  txSrc: 'GDY2SMXX723HRMKXZ62AFJ63MSNCG3YFOES6RSFDBQUJGLB4TVJTC733'
-}
-vault.put key Issuer.desc.10 value {
-  amount: '0.0000100',
-  balance_id: '000000009624ef25072b2024fe914f81bbd88ddf91dbc49fad046fd544ba917d6a0ec96e',
-  txDesc: '',
-  txId: '0817293866baa2c2c726397b562483f058f741e4c94b9ca9967c480daae4e6a3',
-  txMemo: 'c9e039c1a3472ef566bdcf5d8a01aea08cdfb4edf7dbe22c2d4413513e4d824a',
-  txMemoType: 'return',
-  txSrc: 'GCP7L3KQOHDQZ3NYJH7HEE2BYNTVFJOLSUIGE73PHC7PEVQDWI5DPXVE'
-}
-Ann handle_stateCynAnnDeal eotx {
-  amount: '0.0000100',
-  balance_id: '000000009624ef25072b2024fe914f81bbd88ddf91dbc49fad046fd544ba917d6a0ec96e',
-  txDesc: '',
-  txId: '0817293866baa2c2c726397b562483f058f741e4c94b9ca9967c480daae4e6a3',
-  txMemo: 'c9e039c1a3472ef566bdcf5d8a01aea08cdfb4edf7dbe22c2d4413513e4d824a',
-  txMemoType: 'return',
-  txSrc: 'GCP7L3KQOHDQZ3NYJH7HEE2BYNTVFJOLSUIGE73PHC7PEVQDWI5DPXVE'
-} clawable 1000.0000000
-Cyn handle_stateDeals Request e {
-  amount: '0.0000100',
-  balance_id: '000000009624ef25072b2024fe914f81bbd88ddf91dbc49fad046fd544ba917d6a0ec96e',
-  txDesc: '',
-  txId: '0817293866baa2c2c726397b562483f058f741e4c94b9ca9967c480daae4e6a3',
-  txMemo: 'c9e039c1a3472ef566bdcf5d8a01aea08cdfb4edf7dbe22c2d4413513e4d824a',
-  txMemoType: 'return',
-  txSrc: 'GCP7L3KQOHDQZ3NYJH7HEE2BYNTVFJOLSUIGE73PHC7PEVQDWI5DPXVE'
-}
-vault.put key Issuer.desc.11 value {
-  amount: '0.0000100',
-  balance_id: undefined,
-  txDesc: '',
-  txId: '0817293866baa2c2c726397b562483f058f741e4c94b9ca9967c480daae4e6a3',
-  txMemo: 'c9e039c1a3472ef566bdcf5d8a01aea08cdfb4edf7dbe22c2d4413513e4d824a',
-  txMemoType: 'return',
-  txSrc: 'GCP7L3KQOHDQZ3NYJH7HEE2BYNTVFJOLSUIGE73PHC7PEVQDWI5DPXVE'
-}
-vault.put key Issuer.desc.12 value {
-  amount: '1000.0000000',
-  balance_id: '000000007136d8e9a8e1df34945afd9fa69d4bfbf28a48ca11fb22ee8cba5e78891710b5',
-  txDesc: '',
-  txId: '0817293866baa2c2c726397b562483f058f741e4c94b9ca9967c480daae4e6a3',
-  txMemo: 'c9e039c1a3472ef566bdcf5d8a01aea08cdfb4edf7dbe22c2d4413513e4d824a',
-  txMemoType: 'return',
-  txSrc: 'GCP7L3KQOHDQZ3NYJH7HEE2BYNTVFJOLSUIGE73PHC7PEVQDWI5DPXVE'
-}
-vault.put key Issuer.desc.13 value {
-  amount: '0.0000100',
-  balance_id: undefined,
-  txDesc: '',
-  txId: '0817293866baa2c2c726397b562483f058f741e4c94b9ca9967c480daae4e6a3',
-  txMemo: 'c9e039c1a3472ef566bdcf5d8a01aea08cdfb4edf7dbe22c2d4413513e4d824a',
-  txMemoType: 'return',
-  txSrc: 'GCP7L3KQOHDQZ3NYJH7HEE2BYNTVFJOLSUIGE73PHC7PEVQDWI5DPXVE'
-}
-vault.put key Issuer.desc.14 value {
-  amount: '1000.0000000',
-  balance_id: undefined,
-  txDesc: '',
-  txId: '0817293866baa2c2c726397b562483f058f741e4c94b9ca9967c480daae4e6a3',
-  txMemo: 'c9e039c1a3472ef566bdcf5d8a01aea08cdfb4edf7dbe22c2d4413513e4d824a',
-  txMemoType: 'return',
-  txSrc: 'GCP7L3KQOHDQZ3NYJH7HEE2BYNTVFJOLSUIGE73PHC7PEVQDWI5DPXVE'
-}
-vault.put key Issuer.desc.15 value {
-  amount: '1000.0000000',
-  balance_id: undefined,
-  txDesc: '',
-  txId: '0817293866baa2c2c726397b562483f058f741e4c94b9ca9967c480daae4e6a3',
-  txMemo: 'c9e039c1a3472ef566bdcf5d8a01aea08cdfb4edf7dbe22c2d4413513e4d824a',
-  txMemoType: 'return',
-  txSrc: 'GCP7L3KQOHDQZ3NYJH7HEE2BYNTVFJOLSUIGE73PHC7PEVQDWI5DPXVE'
-}
-{
-  memo: 'CBcpOGa6osLHJjl7ViSD8Fj3QeTJS5yplnxIDark5qM=',
-  _links: {
-    self: {
-      href: 'https://horizon-testnet.stellar.org/transactions/7c20311ad4b18ede1644c61bc70e5fa4e3ebecd54d9922cd5258c8a67bf3f96f'
-    },
-    account: {
-      href: 'https://horizon-testnet.stellar.org/accounts/GCP7L3KQOHDQZ3NYJH7HEE2BYNTVFJOLSUIGE73PHC7PEVQDWI5DPXVE'
-    },
-    ledger: { href: 'https://horizon-testnet.stellar.org/ledgers/3659840' },
-    operations: {
-      href: 'https://horizon-testnet.stellar.org/transactions/7c20311ad4b18ede1644c61bc70e5fa4e3ebecd54d9922cd5258c8a67bf3f96f/operations{?cursor,limit,order}',
-      templated: true
-    },
-    effects: {
-      href: 'https://horizon-testnet.stellar.org/transactions/7c20311ad4b18ede1644c61bc70e5fa4e3ebecd54d9922cd5258c8a67bf3f96f/effects{?cursor,limit,order}',
-      templated: true
-    },
-    precedes: {
-      href: 'https://horizon-testnet.stellar.org/transactions?order=asc&cursor=15718893108609024'
-    },
-    succeeds: {
-      href: 'https://horizon-testnet.stellar.org/transactions?order=desc&cursor=15718893108609024'
-    },
-    transaction: {
-      href: 'https://horizon-testnet.stellar.org/transactions/7c20311ad4b18ede1644c61bc70e5fa4e3ebecd54d9922cd5258c8a67bf3f96f'
-    }
-  },
-  id: '7c20311ad4b18ede1644c61bc70e5fa4e3ebecd54d9922cd5258c8a67bf3f96f',
-  paging_token: '15718893108609024',
-  successful: true,
-  hash: '7c20311ad4b18ede1644c61bc70e5fa4e3ebecd54d9922cd5258c8a67bf3f96f',
-  ledger: 3659840,
-  created_at: '2026-07-17T19:24:23Z',
-  source_account: 'GCP7L3KQOHDQZ3NYJH7HEE2BYNTVFJOLSUIGE73PHC7PEVQDWI5DPXVE',
-  source_account_sequence: '15718734194802694',
-  fee_account: 'GCP7L3KQOHDQZ3NYJH7HEE2BYNTVFJOLSUIGE73PHC7PEVQDWI5DPXVE',
-  fee_charged: '400',
-  max_fee: '400',
-  operation_count: 4,
-  envelope_xdr: 'AAAAAgAAAACf9e1QcccM7bhJ/nITQcNnUqXLlRBif284vvJWA7I6NwAAAZAAN9gbAAAABgAAAAEAAAAAAAAAAAAAAABqWoGDAAAAAwgXKThmuqLCxyY5e1Ykg/BY90HkyUucqZZ8SA2q5OajAAAABAAAAAAAAAAQAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAAQAAAADthBo7E2SFu0XydsXwWcQa5Jfqj3jWFKEWIaPd3/j18gAAABMAAAACQ2xhd2FibGVIZXhhAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAACHtMX4q21obOXM24wtC2XrM68IJz1+D0FJCuC2mrponAAAAAlQL5AAAAAABAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAAQAAAACf9e1QcccM7bhJ/nITQcNnUqXLlRBif284vvJWA7I6NwAAAAFIRVhBAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAAlQL5AAAAAABAAAAAO2EGjsTZIW7RfJ2xfBZxBrkl+qPeNYUoRYho93f+PXyAAAAEQAAAAAAAAACA7I6NwAAAEDCBv4Mcb9ANKiWiI/tk+oIBeF6zxdRlYPlx2IyKCqxQu++/vN3IZvFTqLtVChXQ7JAdryKQUO9An5Mvhy5lkwD3/j18gAAAEC9OoWPqAu2t1N/GiEQrwhPvS+zEsE74RSDoIeHyXKlKvlCb8/HLF+35Cx0suEEPFG1zDQ6/TtYOIiaCBTcQiMJ',
-  result_xdr: 'AAAAAAAAAZAAAAAAAAAABAAAAAAAAAAQAAAAAAAAAAAAAAATAAAAAAAAAAAAAAABAAAAAAAAAAAAAAARAAAAAAAAAAA=',
-  fee_meta_xdr: 'AAAAAgAAAAMAN9g/AAAAAAAAAACf9e1QcccM7bhJ/nITQcNnUqXLlRBif284vvJWA7I6NwAAAAAFXUSkADfYGwAAAAUAAAADAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAADfYPwAAAABqWoFiAAAAAAAAAAEAN9hAAAAAAAAAAACf9e1QcccM7bhJ/nITQcNnUqXLlRBif284vvJWA7I6NwAAAAAFXUMUADfYGwAAAAUAAAADAAAAAAAAAAoAAAATaHgua2xvdWRvZnRydXN0Lm9yZwABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAADfYPwAAAABqWoFiAAAAAA==',
-  memo_type: 'hash',
-  signatures: [
-    'wgb+DHG/QDSoloiP7ZPqCAXhes8XUZWD5cdiMigqsULvvv7zdyGbxU6i7VQoV0OyQHa8ikFDvQJ+TL4cuZZMAw==',
-    'vTqFj6gLtrdTfxohEK8IT70vsxLBO+EUg6CHh8lypSr5Qm/Pxyxft+QsdLLhBDxRtcw0Ov07WDiImggU3EIjCQ=='
-  ],
-  preconditions: { timebounds: { min_time: '0', max_time: '1784316291' } },
-  offerResults: undefined
-}
-vault.get key Issuer.in v "DONE""DONE"
-  ✔ setup new/existing account for Ann (28.9s)
-vault.put key Issuer.in value DONE
-  ─
-
-  1 test passed
-vault.put key Issuer.desc.16 value {
-  amount: '1000.0000000',
-  balance_id: undefined,
-  txDesc: '',
-  txId: '7c20311ad4b18ede1644c61bc70e5fa4e3ebecd54d9922cd5258c8a67bf3f96f',
-  txMemo: '0817293866baa2c2c726397b562483f058f741e4c94b9ca9967c480daae4e6a3',
-  txMemoType: 'hash',
-  txSrc: 'GCP7L3KQOHDQZ3NYJH7HEE2BYNTVFJOLSUIGE73PHC7PEVQDWI5DPXVE'
-}
-Cyn handle_stateDeals Broken Deal Request e {
-  amount: '1000.0000000',
-  txDesc: '',
-  txId: '7c20311ad4b18ede1644c61bc70e5fa4e3ebecd54d9922cd5258c8a67bf3f96f',
-  txMemo: '0817293866baa2c2c726397b562483f058f741e4c94b9ca9967c480daae4e6a3',
-  txMemoType: 'hash',
-  txSrc: 'GCP7L3KQOHDQZ3NYJH7HEE2BYNTVFJOLSUIGE73PHC7PEVQDWI5DPXVE'
-}
-vault.put key Issuer.desc.17 value {
-  amount: '1000.0000000',
-  balance_id: undefined,
-  txDesc: '',
-  txId: '7c20311ad4b18ede1644c61bc70e5fa4e3ebecd54d9922cd5258c8a67bf3f96f',
-  txMemo: '0817293866baa2c2c726397b562483f058f741e4c94b9ca9967c480daae4e6a3',
-  txMemoType: 'hash',
-  txSrc: 'GCP7L3KQOHDQZ3NYJH7HEE2BYNTVFJOLSUIGE73PHC7PEVQDWI5DPXVE'
-}
-Cyn handle_stateDeals disputeBrokenDeal r {
-  balanceId: '00000000d8deba6700d5c70efc0bfe265a4f357beb34d3eddb7fbc55f68549de42e19fa0',
-  txId: '9f5e0d71bd558f01adaa7ec87ebfc34caf3e4829c7ca5d611bbba7bf62d3cdde'
-}
-stopMonitor - "Issuer's effects" closed.
-  ✔ setup new/existing account for Cyn (34.1s)
-vault.put key Issuer.in value DONE
-  ✔ load new/existing Issuer account (34.3s)
-  ─
-
-  1 test passed
-  ─
-
-  1 test passed
-
-loadAccount accountId GAQ62ML6FLNVUGZZOM3OGC2C3F5MZ26CBHHV7A6QKJBLQLNGV2NCO2KB - loading...
-DemoDone Cyn sdk.transaction.makeSellOffer r tx.successful true
-  ✔ demo done (4.1s)
-  ─
-
-  1 test passed
-265087 demoit tm_request_demo for Al DONE
-=== ALL DEMO_USERS FOUND ===
-265087 demoit DONE on Fri Jul 17 07:24:40 PM UTC 2026
+50301 demoit DONE on Fri Aug 21 06:18:25 PM UTC 2026
 
 Press ENTER or type command to continue
 

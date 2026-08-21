@@ -22,7 +22,7 @@ function handle_stateCynAnnDeal (eotx) { // {{{1
       then(_ => stateCynAnnDeal.resolve())
   } else if (!stateCynAnnDeal.amount) {                    // tx
     let desc = txDesc(eotx)
-    context.opts.log('Ann handle_stateCynAnnDeal desc ' + desc)
+    context.opts.log('Ann handle_stateCynAnnDeal desc ' + JSON.stringify(desc))
 
     context.opts.amount = stateCynAnnDeal.amount = desc.amount
     context.opts.dealTxId = stateCynAnnDeal.txId = desc.txId

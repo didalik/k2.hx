@@ -123,9 +123,11 @@ try { // {{{1
     opts.Jobs = Jobs
     return demouser.runJobs(opts);
   }).then(r => console.log('jobs Demo and IssuerSign DONE, r', r)).then(_ => 
-    prrIEstop.promise.then(_ => out('All DONE ' + JSON.stringify({
-      f: 'streamIssuerEffects', stoppedOn: new Date() 
-    })))
+    prrIEstop.promise.then(_ => {
+      out('All DONE ' + JSON.stringify({ f: 'streamIssuerEffects', stoppedOn: new Date() }))
+      put('<hr/>'); document.title = 'DONE'
+      put('<div style="text-align:center">When DONE, please run<br/>localStorage.clear()<br/>Thanks!</div>')
+    })
   );
 } catch (e) {
   console.error('UNEXPECTED', e)

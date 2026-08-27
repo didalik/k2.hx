@@ -211,7 +211,7 @@ function runMonitor (opts) { // {{{1
     }
 
     if (+effect.bought_amount == 1) { // Bob sold 1 MA for 1 XLM
-      clearTimeout(opts.timeoutId) // TODO get rid of the outer timeout
+      opts.timeoutId && clearTimeout(opts.timeoutId)
 
       // 1. Make buy offer for Bob: buy 2 MA for 4 XLM. Then, possibly, offer jobs.
       sdk.server.loadAccount({ name: 'Bob', }).

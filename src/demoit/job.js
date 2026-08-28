@@ -231,12 +231,13 @@ function runMonitor (opts) { // {{{1
           console.error(e)
           process.exit(1);
         }).finally(_ => {
-          console.log('runMonitor trade DONE')
+          console.log('runMonitor trade DONE RESET', process.env.RESET)
         });
 
       // 2. Setup TM timeout.
       //timeoutID = setTimeout(sell, opts.timeoutTM) // FIXME
     } else if (+effect.bought_amount == 2) { // Bob bought 2 MA for 4 XLM
+      console.log('runMonitor trade Bob bought 2 MA for 4 XLM')
       clearTimeout(timeoutID)
       sell(true)
     } else {

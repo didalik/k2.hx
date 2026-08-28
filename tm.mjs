@@ -86,6 +86,7 @@ let audience = ['demo', 'issuer/sign'] // {{{1
 reset({ // {{{1
   content: document.getElementById('content1'), handleCtrlC: stopIssuerSign,
 })
+document.getElementById('more-tabs').innerHTML = "<a href='"+location+'>'+"' target='_blank'>here</a>"
 put(`Delivered ${location} on ${Date()} to YOUR_IP_ADDRESS`, '<hr/>')
 
 const id = 'IssuerPK'

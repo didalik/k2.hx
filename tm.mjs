@@ -118,7 +118,7 @@ try { // {{{1
     put('<hr/>'); document.title = 'hX demo'
     //localStorage.clear() // FIXME
     prrIEstart.resolve()
-    color = 'green'
+    color = 'green'; out('demo request granted')
     opts.generate_keypair = generate_keypair
     opts.requests = jobRequests
     opts.Jobs = Jobs

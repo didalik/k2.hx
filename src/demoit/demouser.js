@@ -92,15 +92,11 @@ function rs4d (opts) { // Request red snapper for dinner. {{{1
 }
 
 function runJobs (opts) { // {{{1
-  //opts.out('runJobs started')
-  let secret = opts.account.keypair.secret() // TODO get rid of secret
-  //console.log('startJobs secret', secret)
-
   const wsArgs = [location.toString().replace('http', 'ws')]
   let client
   return opts.generate_keypair.call(crypto.subtle).then(keys => {
     const [sk, pk] = keys.split(' ')
-    const app = 'hX', iss = { name: opts.name, pk, secret, uuid: 'UUID', }
+    const app = 'hX', iss = { name: opts.name, pk, uuid: 'crUUID', }
     client = { app, iss, sk, wsArgs, WebSocket, }
     let requests = opts.requests()
     return Promise.all(opts.Jobs(client, requests));

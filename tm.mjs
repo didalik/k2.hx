@@ -76,7 +76,7 @@ const IssuerSign = { // {{{1
 }
 
 const params = new URLSearchParams(location.search) // {{{1
-const name = params.get('demouser')
+const name = params.get('demouser') ?? crypto.randomUUID()
 window.process = { env: {
   Networks_PUBLIC: null, // or 'hX' to use public network
 }}
@@ -86,7 +86,7 @@ let audience = ['demo', 'issuer/sign'] // {{{1
 reset({ // {{{1
   content: document.getElementById('content1'), handleCtrlC: stopIssuerSign,
 })
-document.getElementById('more-tabs').innerHTML = "<a href='"+location+'>'+"' target='_blank'>here</a>"
+document.getElementById('more-tabs').innerHTML = "<a href='"+location+"' target='_blank'>here</a>"
 put(`Delivered ${location} on ${Date()} to YOUR_IP_ADDRESS`, '<hr/>')
 
 const id = 'IssuerPK'
@@ -127,7 +127,7 @@ try { // {{{1
     prrIEstop.promise.then(_ => {
       out('All DONE ' + JSON.stringify({ f: 'streamIssuerEffects', stoppedOn: new Date() }))
       put('<hr/>'); document.title = 'DONE'
-      put('<div style="text-align:center">When DONE, please run<br/>localStorage.clear()<br/>Thanks!</div>')
+      put('<div style="text-align:center">When all tabs are DONE, please run<br/>localStorage.clear()<br/>Thanks!</div>')
     })
   );
 } catch (e) {
@@ -170,7 +170,7 @@ function runDemo () { // {{{1
       log: out,
       name,
       //nolog: true,
-      sign: (...args) => { // (xdr, tag) => DemoSign({ secret: issuerKeys[0], vault, xdr, tag }),
+      sign: (...args) => {
         IssuerSign.prr = Promise.withResolvers()
         IssuerSign.channel.send(JSON.stringify(args)+'\n')
         IssuerSign.Running.handle(IssuerSign.job.context)

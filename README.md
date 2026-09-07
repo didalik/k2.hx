@@ -1,7 +1,15 @@
 # Public submodule k2.hx
 
 This repo presents complete SDK, API, and the demo HTML for my hobby project Stellar Help Exchange (<b>hX</b>).
-It also contains all the unit and integration tests for you to run locally. The demo runs the integration tests globally.
+It also contains all the unit and integration tests for you to run locally. The 
+[demo in QA](https://qa.hx.kloudoftrust.org/tm) runs the integration test globally - and you can get paid for running it!
+
+## How to get paid for running the demo
+
+To get paid, your Stellar account needs to trust HEXA, which is the asset I use in <b>hX</b>. 
+[Create it](https://developers.stellar.org/docs/build/guides/transactions/create-account) and run
+[https://qa.hx.kloudoftrust.org/hexa](https://qa.hx.kloudoftrust.org/hexa) to change trust on your account - 
+make sure you review the source code first to confirm it is safe to do so. The next time you run the demo, you'll get paid.
 
 ## Dev  ➡️   Test  ➡️   Demo
 

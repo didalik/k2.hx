@@ -11,18 +11,18 @@
     <h3>How do I get paid?</h3>
 <p>
 To get paid for running integration tests, you need to trust the <b>hX</b> asset <b>HEXA</b>.
-This page prepares and runs the corresponding Stellar transaction for you. You do not pay for
-this transaction to run (we do), all you need to do is to sign it with your account's
-secret key - a 56 character string that starts with 'S'. Copy and paste it into the input field
-below.
+This page prepares and runs the corresponding <b>hX</b> transaction for you, which you need to
+sign with your account's secret key - a 56 character string that starts with 'S'.
+Copy and paste it into the input field below.
 </p>
     <h3>How do I make sure my account will not be compromized?</h3>
 <p>
-Your secret key value never appears on this page. It is only used inside your javascript
-function called <i>prepareAndSignStellarTx</i>. View the page source and see for yourself.
+Your secret key value never appears on this page and isn't stored anywhere. It is passed to
+<b>hX</b> <a href='https://github.com/didalik/k2.hx/blob/main/lib/transaction.js#93' target='_blank'><i>changeTrust</i> transaction</a>
+- view the page source and see for yourself.
 </p>
 <label for="userSK">Your account's secret key:</label>
-<input id="userSK" type="password" placeholder="Enter your account's secret key..."/>
+<input id="userSK" type="password" placeholder="Paste your account's secret key..."/>
 <hr/>
 <p id='content1'>
 </p>
@@ -49,6 +49,10 @@ var __commonJS = (cb, mod) => function __require() {
   } catch (e) {
     throw mod = 0, e;
   }
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
@@ -1634,9 +1638,9 @@ var require_buffer = __commonJS({
     }
     E(
       "ERR_BUFFER_OUT_OF_BOUNDS",
-      function(name2) {
-        if (name2) {
-          return `${name2} is outside of buffer bounds`;
+      function(name) {
+        if (name) {
+          return `${name} is outside of buffer bounds`;
         }
         return "Attempt to access memory outside buffer bounds";
       },
@@ -1644,8 +1648,8 @@ var require_buffer = __commonJS({
     );
     E(
       "ERR_INVALID_ARG_TYPE",
-      function(name2, actual) {
-        return `The "${name2}" argument must be of type number. Received type ${typeof actual}`;
+      function(name, actual) {
+        return `The "${name}" argument must be of type number. Received type ${typeof actual}`;
       },
       TypeError
     );
@@ -1700,9 +1704,9 @@ var require_buffer = __commonJS({
       }
       checkBounds(buf, offset, byteLength2);
     }
-    function validateNumber(value, name2) {
+    function validateNumber(value, name) {
       if (typeof value !== "number") {
-        throw new errors.ERR_INVALID_ARG_TYPE(name2, "number", value);
+        throw new errors.ERR_INVALID_ARG_TYPE(name, "number", value);
       }
     }
     function boundsError(value, length, type) {
@@ -1847,11 +1851,10 @@ var require_buffer = __commonJS({
 });
 
 // public/shim.js
-var namespace, Buffer3;
+var namespace;
 var init_shim = __esm({
   "public/shim.js"() {
     namespace = __toESM(require_buffer(), 1);
-    Buffer3 = namespace.Buffer;
   }
 });
 
@@ -3271,9 +3274,9 @@ var init_enum = __esm({
     init_xdr_type();
     init_errors();
     Enum = class _Enum extends XdrPrimitiveType {
-      constructor(name2, value) {
+      constructor(name, value) {
         super();
-        this.name = name2;
+        this.name = name;
         this.value = value;
       }
       /**
@@ -3311,10 +3314,10 @@ var init_enum = __esm({
       static values() {
         return Object.values(this._members);
       }
-      static fromName(name2) {
-        const result = this._members[name2];
+      static fromName(name) {
+        const result = this._members[name];
         if (!result)
-          throw new TypeError(`${name2} is not a member of ${this.enumName}`);
+          throw new TypeError(`${name} is not a member of ${this.enumName}`);
         return result;
       }
       static fromValue(value) {
@@ -3325,11 +3328,11 @@ var init_enum = __esm({
           );
         return result;
       }
-      static create(context2, name2, members) {
+      static create(context, name, members) {
         const ChildEnum = class extends _Enum {
         };
-        ChildEnum.enumName = name2;
-        context2.results[name2] = ChildEnum;
+        ChildEnum.enumName = name;
+        context.results[name] = ChildEnum;
         ChildEnum._members = {};
         ChildEnum._byValue = {};
         for (const [key, value] of Object.entries(members)) {
@@ -3363,12 +3366,12 @@ var init_reference = __esm({
 });
 
 // ../node_modules/@stellar/stellar-sdk/lib/esm/node_modules/.pnpm/@stellar_js-xdr@4.0.0/node_modules/@stellar/js-xdr/src/struct.js
-function createAccessorMethod(name2) {
+function createAccessorMethod(name) {
   return function readOrWriteAttribute(value) {
     if (value !== void 0) {
-      this._attributes[name2] = value;
+      this._attributes[name] = value;
     }
-    return this._attributes[name2];
+    return this._attributes[name];
   };
 }
 var Struct;
@@ -3415,19 +3418,19 @@ var init_struct = __esm({
       static isValid(value) {
         return value?.constructor?.structName === this.structName || isSerializableIsh(value, this);
       }
-      static create(context2, name2, fields, maxDepth = NestedXdrType.DEFAULT_MAX_DEPTH) {
+      static create(context, name, fields, maxDepth = NestedXdrType.DEFAULT_MAX_DEPTH) {
         const ChildStruct = class extends _Struct {
         };
-        ChildStruct.structName = name2;
+        ChildStruct.structName = name;
         ChildStruct._maxDepth = maxDepth;
-        context2.results[name2] = ChildStruct;
+        context.results[name] = ChildStruct;
         const mappedFields = new Array(fields.length);
         for (let i = 0; i < fields.length; i++) {
           const fieldDescriptor = fields[i];
           const fieldName = fieldDescriptor[0];
           let field = fieldDescriptor[1];
           if (field instanceof Reference) {
-            field = field.resolve(context2);
+            field = field.resolve(context);
           }
           mappedFields[i] = [fieldName, field];
           ChildStruct.prototype[fieldName] = createAccessorMethod(fieldName);
@@ -3531,25 +3534,25 @@ var init_union = __esm({
       static isValid(value) {
         return value?.constructor?.unionName === this.unionName || isSerializableIsh(value, this);
       }
-      static create(context2, name2, config3, maxDepth = NestedXdrType.DEFAULT_MAX_DEPTH) {
+      static create(context, name, config4, maxDepth = NestedXdrType.DEFAULT_MAX_DEPTH) {
         const ChildUnion = class extends _Union {
         };
-        ChildUnion.unionName = name2;
+        ChildUnion.unionName = name;
         ChildUnion._maxDepth = maxDepth;
-        context2.results[name2] = ChildUnion;
-        if (config3.switchOn instanceof Reference) {
-          ChildUnion._switchOn = config3.switchOn.resolve(context2);
+        context.results[name] = ChildUnion;
+        if (config4.switchOn instanceof Reference) {
+          ChildUnion._switchOn = config4.switchOn.resolve(context);
         } else {
-          ChildUnion._switchOn = config3.switchOn;
+          ChildUnion._switchOn = config4.switchOn;
         }
         ChildUnion._switches = /* @__PURE__ */ new Map();
         ChildUnion._arms = {};
-        let defaultArm = config3.defaultArm;
+        let defaultArm = config4.defaultArm;
         if (defaultArm instanceof Reference) {
-          defaultArm = defaultArm.resolve(context2);
+          defaultArm = defaultArm.resolve(context);
         }
         ChildUnion._defaultArm = defaultArm;
-        for (const [aSwitch, armName] of config3.switches) {
+        for (const [aSwitch, armName] of config4.switches) {
           const key = typeof aSwitch === "string" ? ChildUnion._switchOn.fromName(aSwitch) : aSwitch;
           ChildUnion._switches.set(key, armName);
         }
@@ -3563,9 +3566,9 @@ var init_union = __esm({
             };
           }
         }
-        if (config3.arms) {
-          for (const [armsName, value] of Object.entries(config3.arms)) {
-            ChildUnion._arms[armsName] = value instanceof Reference ? value.resolve(context2) : value;
+        if (config4.arms) {
+          for (const [armsName, value] of Object.entries(config4.arms)) {
+            ChildUnion._arms[armsName] = value instanceof Reference ? value.resolve(context) : value;
             if (value !== Void) {
               ChildUnion.prototype[armsName] = function get() {
                 return this.get(armsName);
@@ -3580,15 +3583,15 @@ var init_union = __esm({
 });
 
 // ../node_modules/@stellar/stellar-sdk/lib/esm/node_modules/.pnpm/@stellar_js-xdr@4.0.0/node_modules/@stellar/js-xdr/src/config.js
-function createTypedef(context2, typeName, value) {
+function createTypedef(context, typeName, value) {
   if (value instanceof Reference) {
-    value = value.resolve(context2);
+    value = value.resolve(context);
   }
-  context2.results[typeName] = value;
+  context.results[typeName] = value;
   return value;
 }
-function createConst(context2, name2, value) {
-  context2.results[name2] = value;
+function createConst(context, name, value) {
+  context.results[name] = value;
   return value;
 }
 function config2(fn, types2 = {}) {
@@ -3625,13 +3628,13 @@ var init_config = __esm({
     init_union();
     init_reference();
     SimpleReference = class extends Reference {
-      constructor(name2) {
+      constructor(name) {
         super();
-        this.name = name2;
+        this.name = name;
       }
-      resolve(context2) {
-        const defn = context2.definitions[this.name];
-        return defn.resolve(context2);
+      resolve(context) {
+        const defn = context.definitions[this.name];
+        return defn.resolve(context);
       }
     };
     ArrayReference = class extends Reference {
@@ -3641,14 +3644,14 @@ var init_config = __esm({
         this.length = length;
         this.variable = variable;
       }
-      resolve(context2) {
+      resolve(context) {
         let resolvedChild = this.childReference;
         let length = this.length;
         if (resolvedChild instanceof Reference) {
-          resolvedChild = resolvedChild.resolve(context2);
+          resolvedChild = resolvedChild.resolve(context);
         }
         if (length instanceof Reference) {
-          length = length.resolve(context2);
+          length = length.resolve(context);
         }
         if (this.variable) {
           return new VarArray(resolvedChild, length);
@@ -3662,10 +3665,10 @@ var init_config = __esm({
         this.childReference = childReference;
         this.name = childReference.name;
       }
-      resolve(context2) {
+      resolve(context) {
         let resolvedChild = this.childReference;
         if (resolvedChild instanceof Reference) {
-          resolvedChild = resolvedChild.resolve(context2);
+          resolvedChild = resolvedChild.resolve(context);
         }
         return new Option(resolvedChild);
       }
@@ -3676,29 +3679,29 @@ var init_config = __esm({
         this.sizedType = sizedType;
         this.length = length;
       }
-      resolve(context2) {
+      resolve(context) {
         let length = this.length;
         if (length instanceof Reference) {
-          length = length.resolve(context2);
+          length = length.resolve(context);
         }
         return new this.sizedType(length);
       }
     };
     Definition = class {
-      constructor(constructor, name2, cfg) {
+      constructor(constructor, name, cfg) {
         this.constructor = constructor;
-        this.name = name2;
+        this.name = name;
         this.config = cfg;
       }
       // resolve calls the constructor of this definition with the provided context
       // and this definitions config values.  The definitions constructor should
       // populate the final type on `context.results`, and may refer to other
       // definitions through `context.definitions`
-      resolve(context2) {
-        if (this.name in context2.results) {
-          return context2.results[this.name];
+      resolve(context) {
+        if (this.name in context.results) {
+          return context.results[this.name];
         }
-        return this.constructor(context2, this.name, this.config);
+        return this.constructor(context, this.name, this.config);
       }
     };
     TypeBuilder = class {
@@ -3706,25 +3709,25 @@ var init_config = __esm({
         this._destination = destination;
         this._definitions = {};
       }
-      enum(name2, members) {
-        const result = new Definition(Enum.create, name2, members);
-        this.define(name2, result);
+      enum(name, members) {
+        const result = new Definition(Enum.create, name, members);
+        this.define(name, result);
       }
-      struct(name2, members) {
-        const result = new Definition(Struct.create, name2, members);
-        this.define(name2, result);
+      struct(name, members) {
+        const result = new Definition(Struct.create, name, members);
+        this.define(name, result);
       }
-      union(name2, cfg) {
-        const result = new Definition(Union.create, name2, cfg);
-        this.define(name2, result);
+      union(name, cfg) {
+        const result = new Definition(Union.create, name, cfg);
+        this.define(name, result);
       }
-      typedef(name2, cfg) {
-        const result = new Definition(createTypedef, name2, cfg);
-        this.define(name2, result);
+      typedef(name, cfg) {
+        const result = new Definition(createTypedef, name, cfg);
+        this.define(name, result);
       }
-      const(name2, cfg) {
-        const result = new Definition(createConst, name2, cfg);
-        this.define(name2, result);
+      const(name, cfg) {
+        const result = new Definition(createConst, name, cfg);
+        this.define(name, result);
       }
       void() {
         return Void;
@@ -3771,15 +3774,15 @@ var init_config = __esm({
       option(childType) {
         return new OptionReference(childType);
       }
-      define(name2, definition) {
-        if (this._destination[name2] === void 0) {
-          this._definitions[name2] = definition;
+      define(name, definition) {
+        if (this._destination[name] === void 0) {
+          this._definitions[name] = definition;
         } else {
-          throw new XdrDefinitionError(`${name2} is already defined`);
+          throw new XdrDefinitionError(`${name} is already defined`);
         }
       }
-      lookup(name2) {
-        return new SimpleReference(name2);
+      lookup(name) {
+        return new SimpleReference(name);
       }
       resolve() {
         for (const defn of Object.values(this._definitions)) {
@@ -8388,10 +8391,10 @@ var init_ed25519 = __esm({
       }
       return b === 1n ? M(x, md) : err("no inverse");
     };
-    callHash = (name2) => {
-      const fn = hashes[name2];
+    callHash = (name) => {
+      const fn = hashes[name];
       if (typeof fn !== "function")
-        err("hashes." + name2 + " not set");
+        err("hashes." + name + " not set");
       return fn;
     };
     checkDigest = (value) => abytes2(value, 64, "digest");
@@ -10422,7 +10425,7 @@ function clone(configObject) {
       }
       return arr.reverse();
     }
-    return function(str, baseIn, baseOut, sign3, callerIsToString) {
+    return function(str, baseIn, baseOut, sign4, callerIsToString) {
       var alphabet, d, e, k, r, x, xc, y, i = str.indexOf("."), dp = DECIMAL_PLACES, rm = ROUNDING_MODE;
       if (i >= 0) {
         k = POW_PRECISION;
@@ -10448,7 +10451,7 @@ function clone(configObject) {
       } else {
         x.c = xc;
         x.e = e;
-        x.s = sign3;
+        x.s = sign4;
         x = div(x, y, dp, rm, baseOut);
         xc = x.c;
         r = x.r;
@@ -11385,9 +11388,9 @@ function compare(x, y) {
   for (i = 0; i < j; i++) if (xc[i] != yc[i]) return xc[i] > yc[i] ^ a ? 1 : -1;
   return k == l ? 0 : k > l ^ a ? 1 : -1;
 }
-function intCheck(n, min, max, name2) {
+function intCheck(n, min, max, name) {
   if (n < min || n > max || n !== mathfloor(n)) {
-    throw Error(bignumberError + (name2 || "Argument") + (typeof n == "number" ? n < min || n > max ? " out of range: " : " not an integer: " : " not a primitive number: ") + String(n));
+    throw Error(bignumberError + (name || "Argument") + (typeof n == "number" ? n < min || n > max ? " out of range: " : " not an integer: " : " not a primitive number: ") + String(n));
   }
   return n;
 }
@@ -12448,21 +12451,21 @@ function setSourceAccount(opAttributes, opts) {
     }
   }
 }
-function checkUnsignedIntValue(name2, value, isValidFunction = null) {
+function checkUnsignedIntValue(name, value, isValidFunction = null) {
   if (typeof value === "undefined") {
     return void 0;
   }
   const numValue = typeof value === "string" ? value.trim() === "" ? NaN : Number(value) : value;
   if (typeof numValue !== "number" || !Number.isFinite(numValue) || numValue % 1 !== 0) {
-    throw new Error(`${name2} value is invalid`);
+    throw new Error(`${name} value is invalid`);
   }
   if (numValue < 0) {
-    throw new Error(`${name2} value must be unsigned`);
+    throw new Error(`${name} value must be unsigned`);
   }
-  if (!isValidFunction || isValidFunction(numValue, name2)) {
+  if (!isValidFunction || isValidFunction(numValue, name)) {
     return numValue;
   }
-  throw new Error(`${name2} value is invalid`);
+  throw new Error(`${name} value is invalid`);
 }
 function toXDRAmount(value) {
   const amount = new BigNumber2(value).times(ONE);
@@ -13087,11 +13090,11 @@ var init_payment = __esm({
 });
 
 // ../node_modules/@stellar/stellar-sdk/lib/esm/base/operations/set_options.js
-function weightCheckFunction(value, name2) {
+function weightCheckFunction(value, name) {
   if (value >= 0 && value <= 255) {
     return true;
   }
-  throw new Error(`${name2} value must be between 0 and 255`);
+  throw new Error(`${name} value must be between 0 and 255`);
 }
 function setOptions(opts) {
   let inflationDest = null;
@@ -15583,11 +15586,11 @@ var init_contract = __esm({
        * @see Operation.createStellarAssetContract
        * @see Operation.uploadContractWasm
        */
-      call(method, ...params2) {
+      call(method, ...params) {
         return Operation.invokeContractFunction({
           contract: this.address().toString(),
           function: method,
-          args: params2
+          args: params
         });
       }
       /**
@@ -17301,6 +17304,818 @@ var init_transaction_builder = __esm({
   }
 });
 
+// ../node_modules/feaxios/dist/index.mjs
+async function prepareAxiosResponse(options, res) {
+  const response = { config: options };
+  response.status = res.status;
+  response.statusText = res.statusText;
+  response.headers = res.headers;
+  if (options.responseType === "stream") {
+    response.data = res.body;
+    return response;
+  }
+  return res[options.responseType || "text"]().then((data) => {
+    if (options.transformResponse) {
+      Array.isArray(options.transformResponse) ? options.transformResponse.map(
+        (fn) => data = fn.call(options, data, res?.headers, res?.status)
+      ) : data = options.transformResponse(data, res?.headers, res?.status);
+      response.data = data;
+    } else {
+      response.data = data;
+      response.data = JSON.parse(data);
+    }
+  }).catch(Object).then(() => response);
+}
+async function handleFetch(options, fetchOptions) {
+  let res = null;
+  if ("any" in AbortSignal) {
+    const signals = [];
+    if (options.timeout) {
+      signals.push(AbortSignal.timeout(options.timeout));
+    }
+    if (options.signal) {
+      signals.push(options.signal);
+    }
+    if (signals.length > 0) {
+      fetchOptions.signal = AbortSignal.any(signals);
+    }
+  } else {
+    if (options.timeout) {
+      fetchOptions.signal = AbortSignal.timeout(options.timeout);
+    }
+  }
+  try {
+    res = await fetch(options.url, fetchOptions);
+    const ok = options.validateStatus ? options.validateStatus(res.status) : res.ok;
+    if (!ok) {
+      return Promise.reject(
+        new AxiosError(
+          `Request failed with status code ${res?.status}`,
+          [AxiosError.ERR_BAD_REQUEST, AxiosError.ERR_BAD_RESPONSE][Math.floor(res?.status / 100) - 4],
+          options,
+          new Request(options.url, fetchOptions),
+          await prepareAxiosResponse(options, res)
+        )
+      );
+    }
+    return await prepareAxiosResponse(options, res);
+  } catch (error) {
+    if (error.name === "AbortError" || error.name === "TimeoutError") {
+      const isTimeoutError = error.name === "TimeoutError";
+      return Promise.reject(
+        isTimeoutError ? new AxiosError(
+          options.timeoutErrorMessage || `timeout of ${options.timeout} ms exceeded`,
+          AxiosError.ECONNABORTED,
+          options,
+          request
+        ) : new CanceledError(null, options)
+      );
+    }
+    return Promise.reject(
+      new AxiosError(
+        error.message,
+        void 0,
+        options,
+        request,
+        void 0
+      )
+    );
+  }
+}
+function buildURL(options) {
+  let url = options.url || "";
+  if (options.baseURL && options.url) {
+    url = options.url.replace(/^(?!.*\/\/)\/?/, `${options.baseURL}/`);
+  }
+  if (options.params && Object.keys(options.params).length > 0 && options.url) {
+    url += (~options.url.indexOf("?") ? "&" : "?") + (options.paramsSerializer ? options.paramsSerializer(options.params) : new URLSearchParams(options.params));
+  }
+  return url;
+}
+function mergeAxiosOptions(input, defaults) {
+  const merged = {
+    ...defaults,
+    ...input
+  };
+  if (defaults?.params && input?.params) {
+    merged.params = {
+      ...defaults?.params,
+      ...input?.params
+    };
+  }
+  if (defaults?.headers && input?.headers) {
+    merged.headers = new Headers(defaults.headers || {});
+    const headers = new Headers(input.headers || {});
+    headers.forEach((value, key) => {
+      merged.headers.set(key, value);
+    });
+  }
+  return merged;
+}
+function mergeFetchOptions(input, defaults) {
+  const merged = {
+    ...defaults,
+    ...input
+  };
+  if (defaults?.headers && input?.headers) {
+    merged.headers = new Headers(defaults.headers || {});
+    const headers = new Headers(input.headers || {});
+    headers.forEach((value, key) => {
+      merged.headers.set(key, value);
+    });
+  }
+  return merged;
+}
+function defaultTransformer(data, headers) {
+  const contentType = headers.get("content-type");
+  if (!contentType) {
+    if (typeof data === "string") {
+      headers.set("content-type", "text/plain");
+    } else if (data instanceof URLSearchParams) {
+      headers.set("content-type", "application/x-www-form-urlencoded");
+    } else if (data instanceof Blob || data instanceof ArrayBuffer || ArrayBuffer.isView(data)) {
+      headers.set("content-type", "application/octet-stream");
+    } else if (typeof data === "object" && typeof data.append !== "function" && typeof data.text !== "function") {
+      data = JSON.stringify(data);
+      headers.set("content-type", "application/json");
+    }
+  } else {
+    if (contentType === "application/x-www-form-urlencoded" && !(data instanceof URLSearchParams)) {
+      data = new URLSearchParams(data);
+    } else if (contentType === "application/json" && typeof data === "object") {
+      data = JSON.stringify(data);
+    }
+  }
+  return data;
+}
+async function request(configOrUrl, config4, defaults, method, interceptors, data) {
+  if (typeof configOrUrl === "string") {
+    config4 = config4 || {};
+    config4.url = configOrUrl;
+  } else
+    config4 = configOrUrl || {};
+  const options = mergeAxiosOptions(config4, defaults || {});
+  options.fetchOptions = options.fetchOptions || {};
+  options.timeout = options.timeout || 0;
+  options.headers = new Headers(options.headers || {});
+  options.transformRequest = options.transformRequest ?? defaultTransformer;
+  data = data || options.data;
+  if (options.transformRequest && data) {
+    Array.isArray(options.transformRequest) ? options.transformRequest.map(
+      (fn) => data = fn.call(options, data, options.headers)
+    ) : data = options.transformRequest(data, options.headers);
+  }
+  options.url = buildURL(options);
+  options.method = method || options.method || "get";
+  if (interceptors && interceptors.request.handlers.length > 0) {
+    const chain = interceptors.request.handlers.filter(
+      (interceptor) => !interceptor?.runWhen || typeof interceptor.runWhen === "function" && interceptor.runWhen(options)
+    ).flatMap((interceptor) => [interceptor.fulfilled, interceptor.rejected]);
+    let result = options;
+    for (let i = 0, len = chain.length; i < len; i += 2) {
+      const onFulfilled = chain[i];
+      const onRejected = chain[i + 1];
+      try {
+        if (onFulfilled)
+          result = onFulfilled(result);
+      } catch (error) {
+        if (onRejected)
+          onRejected?.(error);
+        break;
+      }
+    }
+  }
+  const init = mergeFetchOptions(
+    {
+      method: options.method?.toUpperCase(),
+      body: data,
+      headers: options.headers,
+      credentials: options.withCredentials ? "include" : void 0,
+      signal: options.signal
+    },
+    options.fetchOptions
+  );
+  let resp = handleFetch(options, init);
+  if (interceptors && interceptors.response.handlers.length > 0) {
+    const chain = interceptors.response.handlers.flatMap((interceptor) => [
+      interceptor.fulfilled,
+      interceptor.rejected
+    ]);
+    for (let i = 0, len = chain.length; i < len; i += 2) {
+      resp = resp.then(chain[i], chain[i + 1]);
+    }
+  }
+  return resp;
+}
+function createAxiosInstance(defaults) {
+  defaults = defaults || {};
+  const interceptors = {
+    request: new AxiosInterceptorManager(),
+    response: new AxiosInterceptorManager()
+  };
+  const axios2 = (url, config4) => request(url, config4, defaults, void 0, interceptors);
+  axios2.defaults = defaults;
+  axios2.interceptors = interceptors;
+  axios2.getUri = (config4) => {
+    const merged = mergeAxiosOptions(config4 || {}, defaults);
+    return buildURL(merged);
+  };
+  axios2.request = (config4) => request(config4, void 0, defaults, void 0, interceptors);
+  ["get", "delete", "head", "options"].forEach((method) => {
+    axios2[method] = (url, config4) => request(url, config4, defaults, method, interceptors);
+  });
+  ["post", "put", "patch"].forEach((method) => {
+    axios2[method] = (url, data, config4) => request(url, config4, defaults, method, interceptors, data);
+  });
+  ["postForm", "putForm", "patchForm"].forEach((method) => {
+    axios2[method] = (url, data, config4) => {
+      config4 = config4 || {};
+      config4.headers = new Headers(config4.headers || {});
+      config4.headers.set("content-type", "application/x-www-form-urlencoded");
+      return request(
+        url,
+        config4,
+        defaults,
+        method.replace("Form", ""),
+        interceptors,
+        data
+      );
+    };
+  });
+  return axios2;
+}
+var AxiosInterceptorManager, AxiosError, CanceledError, axios, src_default;
+var init_dist = __esm({
+  "../node_modules/feaxios/dist/index.mjs"() {
+    init_shim();
+    AxiosInterceptorManager = class {
+      handlers = [];
+      constructor() {
+        this.handlers = [];
+      }
+      use = (onFulfilled, onRejected, options) => {
+        this.handlers.push({
+          fulfilled: onFulfilled,
+          rejected: onRejected,
+          runWhen: options?.runWhen
+        });
+        return this.handlers.length - 1;
+      };
+      eject = (id) => {
+        if (this.handlers[id]) {
+          this.handlers[id] = null;
+        }
+      };
+      clear = () => {
+        this.handlers = [];
+      };
+    };
+    AxiosError = class extends Error {
+      config;
+      code;
+      request;
+      response;
+      status;
+      isAxiosError;
+      constructor(message, code, config4, request2, response) {
+        super(message);
+        if (Error.captureStackTrace) {
+          Error.captureStackTrace(this, this.constructor);
+        } else {
+          this.stack = new Error().stack;
+        }
+        this.name = "AxiosError";
+        this.code = code;
+        this.config = config4;
+        this.request = request2;
+        this.response = response;
+        this.isAxiosError = true;
+      }
+      static ERR_BAD_OPTION_VALUE = "ERR_BAD_OPTION_VALUE";
+      static ERR_BAD_OPTION = "ERR_BAD_OPTION";
+      static ERR_NETWORK = "ERR_NETWORK";
+      static ERR_BAD_RESPONSE = "ERR_BAD_RESPONSE";
+      static ERR_BAD_REQUEST = "ERR_BAD_REQUEST";
+      static ERR_INVALID_URL = "ERR_INVALID_URL";
+      static ERR_CANCELED = "ERR_CANCELED";
+      static ECONNABORTED = "ECONNABORTED";
+      static ETIMEDOUT = "ETIMEDOUT";
+    };
+    CanceledError = class extends AxiosError {
+      constructor(message, config4, request2) {
+        super(
+          !message ? "canceled" : message,
+          AxiosError.ERR_CANCELED,
+          config4,
+          request2
+        );
+        this.name = "CanceledError";
+      }
+    };
+    axios = createAxiosInstance();
+    axios.create = (defaults) => createAxiosInstance(defaults);
+    src_default = axios;
+  }
+});
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/http-client/types.js
+var CancelToken;
+var init_types = __esm({
+  "../node_modules/@stellar/stellar-sdk/lib/esm/http-client/types.js"() {
+    init_shim();
+    CancelToken = class {
+      promise;
+      reason;
+      throwIfRequested() {
+        if (this.reason) {
+          throw new Error(this.reason);
+        }
+      }
+      constructor(executor) {
+        let resolvePromise;
+        this.promise = new Promise((resolve) => {
+          resolvePromise = resolve;
+        });
+        executor((reason) => {
+          this.reason = reason;
+          resolvePromise();
+        });
+      }
+    };
+  }
+});
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/http-client/fetch-client.js
+function makeCanceledError(reason) {
+  const err2 = new Error(reason || "Request canceled");
+  err2[CANCELED_MARKER] = true;
+  return err2;
+}
+function getFormConfig(config4) {
+  const formConfig = config4 || {};
+  formConfig.headers = new Headers(formConfig.headers || {});
+  formConfig.headers.set("Content-Type", "application/x-www-form-urlencoded");
+  return formConfig;
+}
+function mergeWithDefaults(defaults, config4) {
+  if (!config4) return { ...defaults };
+  const merged = { ...defaults, ...config4 };
+  if (defaults?.headers !== void 0 || config4.headers !== void 0) {
+    const headers = new Headers(defaults?.headers || {});
+    new Headers(config4.headers || {}).forEach((v, k) => {
+      headers.set(k, v);
+    });
+    merged.headers = headers;
+  }
+  if (defaults?.params !== void 0 || config4.params !== void 0) {
+    merged.params = { ...defaults?.params || {}, ...config4.params || {} };
+  }
+  return merged;
+}
+function buildBoundedUrl(config4) {
+  let url = config4.url || "";
+  if (config4.baseURL && url && !/^https?:\/\//i.test(url)) {
+    url = url.replace(/^\/?/, `${config4.baseURL.replace(/\/$/, "")}/`);
+  }
+  if (config4.params && Object.keys(config4.params).length > 0) {
+    const qs = new URLSearchParams(
+      config4.params
+    ).toString();
+    url += (url.includes("?") ? "&" : "?") + qs;
+  }
+  return url;
+}
+function encodeRequestBody(data, headers) {
+  if (data === void 0 || data === null) return void 0;
+  if (typeof data === "string") return data;
+  if (data instanceof URLSearchParams) {
+    if (!headers.has("content-type")) {
+      headers.set("content-type", "application/x-www-form-urlencoded");
+    }
+    return data;
+  }
+  if (data instanceof Blob || data instanceof ArrayBuffer || ArrayBuffer.isView(data)) {
+    if (!headers.has("content-type")) {
+      headers.set("content-type", "application/octet-stream");
+    }
+    return data;
+  }
+  if (typeof FormData !== "undefined" && data instanceof FormData) {
+    return data;
+  }
+  if (!headers.has("content-type")) {
+    headers.set("content-type", "application/json");
+  }
+  return JSON.stringify(data);
+}
+async function readBodyBounded(response, maxContentLength) {
+  if (maxContentLength !== void 0) {
+    const headerLen = response.headers.get("content-length");
+    if (headerLen && Number(headerLen) > maxContentLength) {
+      throw new Error(`maxContentLength size of ${maxContentLength} exceeded`);
+    }
+  }
+  if (!response.body) return new Uint8Array(0);
+  const reader = response.body.getReader();
+  const chunks = [];
+  let total = 0;
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    if (value) {
+      total += value.byteLength;
+      if (maxContentLength !== void 0 && total > maxContentLength) {
+        await reader.cancel();
+        throw new Error(
+          `maxContentLength size of ${maxContentLength} exceeded`
+        );
+      }
+      chunks.push(value);
+    }
+  }
+  const out2 = new Uint8Array(total);
+  let offset = 0;
+  for (const c of chunks) {
+    out2.set(c, offset);
+    offset += c.byteLength;
+  }
+  return out2;
+}
+function createTimeoutSignal(ms) {
+  if (typeof AbortSignal !== "undefined" && typeof AbortSignal.timeout === "function") {
+    return AbortSignal.timeout(ms);
+  }
+  const controller = new AbortController();
+  setTimeout(() => {
+    const err2 = new Error("Timeout");
+    err2.name = "TimeoutError";
+    controller.abort(err2);
+  }, ms);
+  return controller.signal;
+}
+function composeSignals(signals) {
+  if (signals.length === 0) return void 0;
+  if (signals.length === 1) return signals[0];
+  if (typeof AbortSignal !== "undefined" && typeof AbortSignal.any === "function") {
+    return AbortSignal.any(signals);
+  }
+  const controller = new AbortController();
+  for (const s of signals) {
+    if (s.aborted) {
+      controller.abort(s.reason);
+      break;
+    }
+    s.addEventListener("abort", () => controller.abort(s.reason), {
+      once: true
+    });
+  }
+  return controller.signal;
+}
+function canInspectManualRedirects() {
+  return typeof process !== "undefined" && !!process.versions && !!process.versions.node;
+}
+function applyRedirectSemantics(init, status) {
+  if (status === 307 || status === 308) return init;
+  const next = { ...init, method: "GET", body: void 0 };
+  const headers = new Headers(init.headers || {});
+  headers.delete("content-type");
+  headers.delete("content-length");
+  headers.delete("transfer-encoding");
+  next.headers = headers;
+  return next;
+}
+function stripCrossOriginAuth(init, fromUrl, toUrl) {
+  let sameOrigin;
+  try {
+    sameOrigin = new URL(fromUrl).origin === new URL(toUrl).origin;
+  } catch {
+    sameOrigin = false;
+  }
+  if (sameOrigin) return init;
+  const headers = new Headers(init.headers || {});
+  headers.delete("authorization");
+  headers.delete("proxy-authorization");
+  headers.delete("cookie");
+  return { ...init, headers };
+}
+function buildHttpError(response, config4, data) {
+  const err2 = new Error(
+    `Request failed with status code ${response.status}`
+  );
+  err2.response = {
+    status: response.status,
+    statusText: response.statusText,
+    headers: response.headers,
+    data,
+    config: config4
+  };
+  return err2;
+}
+async function boundedFetchAdapter(config4) {
+  const { maxRedirects, maxContentLength, timeout } = config4;
+  const signals = [];
+  if (timeout && timeout > 0) {
+    signals.push(createTimeoutSignal(timeout));
+  }
+  const signal = composeSignals(signals);
+  const managedRedirects = maxRedirects !== void 0;
+  const canManage = canInspectManualRedirects();
+  let redirect;
+  if (!managedRedirects) {
+    redirect = "follow";
+  } else if (canManage) {
+    redirect = "manual";
+  } else if (maxRedirects === 0) {
+    redirect = "error";
+  } else {
+    redirect = "follow";
+  }
+  const headers = new Headers(config4.headers || {});
+  const body = encodeRequestBody(config4.data, headers);
+  let currentInit = {
+    ...config4.fetchOptions,
+    method: (config4.method || "get").toUpperCase(),
+    headers,
+    body,
+    redirect,
+    ...signal ? { signal } : {}
+  };
+  let currentUrl = buildBoundedUrl(config4);
+  let redirectsRemaining = maxRedirects ?? 0;
+  let response;
+  while (true) {
+    try {
+      response = await fetch(currentUrl, currentInit);
+    } catch (err2) {
+      if (err2?.name === "TimeoutError") {
+        throw new Error(`timeout of ${config4.timeout}ms exceeded`);
+      }
+      throw err2;
+    }
+    const isManualRedirectResponse = redirect === "manual" && response.status >= 300 && response.status < 400;
+    if (!isManualRedirectResponse) break;
+    if (redirectsRemaining <= 0) {
+      if (maxRedirects === 0) throw buildHttpError(response, config4);
+      throw new Error("Maximum number of redirects exceeded");
+    }
+    const location2 = response.headers.get("location");
+    if (!location2) break;
+    const nextUrl = new URL(location2, currentUrl).toString();
+    currentInit = applyRedirectSemantics(currentInit, response.status);
+    currentInit = stripCrossOriginAuth(currentInit, currentUrl, nextUrl);
+    currentUrl = nextUrl;
+    redirectsRemaining -= 1;
+  }
+  if (!response.ok) {
+    let errBody;
+    try {
+      const errBytes = await readBodyBounded(response, maxContentLength);
+      const errText = new TextDecoder().decode(errBytes);
+      try {
+        errBody = JSON.parse(errText);
+      } catch {
+        errBody = errText;
+      }
+    } catch (readErr) {
+      throw readErr;
+    }
+    throw buildHttpError(response, config4, errBody);
+  }
+  const bytes = await readBodyBounded(response, maxContentLength);
+  const text = new TextDecoder().decode(bytes);
+  let data = text;
+  try {
+    data = JSON.parse(text);
+  } catch {
+  }
+  return {
+    data,
+    headers: response.headers,
+    config: config4,
+    status: response.status,
+    statusText: response.statusText
+  };
+}
+function createFetchClient(fetchConfig = {}) {
+  const defaults = {
+    ...fetchConfig,
+    headers: fetchConfig.headers || {}
+  };
+  const axiosStatic = src_default.default ?? src_default;
+  const instance = axiosStatic.create(defaults);
+  const requestInterceptors = new InterceptorManager();
+  const responseInterceptors = new InterceptorManager();
+  const httpClient = {
+    interceptors: {
+      request: requestInterceptors,
+      response: responseInterceptors
+    },
+    defaults: {
+      ...defaults,
+      adapter: (config4) => {
+        if (config4.maxRedirects !== void 0 || config4.maxContentLength !== void 0) {
+          return boundedFetchAdapter(config4);
+        }
+        return instance.request(config4);
+      }
+    },
+    create(config4) {
+      return createFetchClient({ ...this.defaults, ...config4 });
+    },
+    makeRequest(config4) {
+      return new Promise((resolve, reject) => {
+        function processRequest(finalConfig, res, rej) {
+          const adapter = finalConfig.adapter || this.defaults.adapter;
+          if (!adapter) {
+            throw new Error("No adapter available");
+          }
+          let responsePromise = adapter(finalConfig).then((axiosResponse) => {
+            const httpClientResponse = {
+              data: axiosResponse.data,
+              headers: axiosResponse.headers,
+              config: axiosResponse.config,
+              status: axiosResponse.status,
+              statusText: axiosResponse.statusText
+            };
+            return httpClientResponse;
+          });
+          if (responseInterceptors.handlers.length > 0) {
+            const chain = responseInterceptors.handlers.filter(
+              (interceptor) => interceptor !== null
+            ).flatMap((interceptor) => [
+              interceptor.fulfilled,
+              interceptor.rejected
+            ]);
+            for (let i = 0, len = chain.length; i < len; i += 2) {
+              responsePromise = responsePromise.then(
+                (response) => {
+                  const fulfilledInterceptor = chain[i];
+                  if (typeof fulfilledInterceptor === "function") {
+                    return fulfilledInterceptor(response);
+                  }
+                  return response;
+                },
+                (error) => {
+                  const rejectedInterceptor = chain[i + 1];
+                  if (typeof rejectedInterceptor === "function") {
+                    return rejectedInterceptor(error);
+                  }
+                  throw error;
+                }
+              ).then((interceptedResponse) => interceptedResponse);
+            }
+          }
+          responsePromise.then(res).catch(rej);
+        }
+        const abortController = new AbortController();
+        config4.signal = abortController.signal;
+        if (config4.cancelToken) {
+          const { cancelToken } = config4;
+          cancelToken.promise.then(() => {
+            abortController.abort();
+            reject(makeCanceledError(cancelToken.reason));
+          });
+        }
+        const modifiedConfig = config4;
+        if (requestInterceptors.handlers.length > 0) {
+          const chain = requestInterceptors.handlers.filter(
+            (interceptor) => interceptor !== null
+          ).flatMap((interceptor) => [
+            interceptor.fulfilled,
+            interceptor.rejected
+          ]);
+          let configPromise = Promise.resolve(modifiedConfig);
+          for (let i = 0, len = chain.length; i < len; i += 2) {
+            configPromise = configPromise.then(
+              chain[i],
+              chain[i + 1]
+            );
+          }
+          configPromise.then((resolvedConfig) => {
+            processRequest.call(this, resolvedConfig, resolve, reject);
+          }).catch(reject);
+          return;
+        }
+        processRequest.call(this, modifiedConfig, resolve, reject);
+      });
+    },
+    get(url, config4) {
+      return this.makeRequest({
+        ...mergeWithDefaults(this.defaults, config4),
+        url,
+        method: "get"
+      });
+    },
+    delete(url, config4) {
+      return this.makeRequest({
+        ...mergeWithDefaults(this.defaults, config4),
+        url,
+        method: "delete"
+      });
+    },
+    head(url, config4) {
+      return this.makeRequest({
+        ...mergeWithDefaults(this.defaults, config4),
+        url,
+        method: "head"
+      });
+    },
+    options(url, config4) {
+      return this.makeRequest({
+        ...mergeWithDefaults(this.defaults, config4),
+        url,
+        method: "options"
+      });
+    },
+    post(url, data, config4) {
+      return this.makeRequest({
+        ...mergeWithDefaults(this.defaults, config4),
+        url,
+        method: "post",
+        data
+      });
+    },
+    put(url, data, config4) {
+      return this.makeRequest({
+        ...mergeWithDefaults(this.defaults, config4),
+        url,
+        method: "put",
+        data
+      });
+    },
+    patch(url, data, config4) {
+      return this.makeRequest({
+        ...mergeWithDefaults(this.defaults, config4),
+        url,
+        method: "patch",
+        data
+      });
+    },
+    postForm(url, data, config4) {
+      const formConfig = getFormConfig(config4);
+      return this.makeRequest({
+        ...mergeWithDefaults(this.defaults, formConfig),
+        url,
+        method: "post",
+        data
+      });
+    },
+    putForm(url, data, config4) {
+      const formConfig = getFormConfig(config4);
+      return this.makeRequest({
+        ...mergeWithDefaults(this.defaults, formConfig),
+        url,
+        method: "put",
+        data
+      });
+    },
+    patchForm(url, data, config4) {
+      const formConfig = getFormConfig(config4);
+      return this.makeRequest({
+        ...mergeWithDefaults(this.defaults, formConfig),
+        url,
+        method: "patch",
+        data
+      });
+    },
+    CancelToken,
+    isCancel: (value) => value instanceof Error && value[CANCELED_MARKER] === true
+  };
+  return httpClient;
+}
+var CANCELED_MARKER, InterceptorManager, fetchClient;
+var init_fetch_client = __esm({
+  "../node_modules/@stellar/stellar-sdk/lib/esm/http-client/fetch-client.js"() {
+    init_shim();
+    init_dist();
+    init_types();
+    CANCELED_MARKER = /* @__PURE__ */ Symbol.for("@stellar/stellar-sdk.canceled");
+    InterceptorManager = class {
+      handlers = [];
+      use(fulfilled, rejected) {
+        this.handlers.push({
+          fulfilled,
+          rejected
+        });
+        return this.handlers.length - 1;
+      }
+      eject(id) {
+        if (this.handlers[id]) {
+          this.handlers[id] = null;
+        }
+      }
+      forEach(fn) {
+        this.handlers.forEach((h2) => {
+          if (h2 !== null) {
+            fn(h2);
+          }
+        });
+      }
+    };
+    fetchClient = createFetchClient();
+  }
+});
+
 // public/hexa.mjs
 init_shim();
 
@@ -17331,18 +18146,2925 @@ function reset(opts) {
 
 // public/lib/vault.js
 init_shim();
-
-// public/lib/util.js
-init_shim();
-
-// public/lib/api.js
-init_shim();
+var dirname;
+var fs;
+var wst;
+var vault = {
+  // {{{1
+  get: (key) => {
+    let v;
+    try {
+      v = fs ? fs.readFileSync(dirname + "/" + key) : localStorage.getItem(key);
+      return JSON.parse(v);
+    } catch (err2) {
+      if (err2.code == "ENOENT") {
+        return false;
+      }
+      v = v.toString();
+      if (v.endsWith('"DONE""DONE""DONE"')) {
+        return true;
+      }
+      console.log("vault.get key", key, "v", v);
+      return false;
+    }
+  },
+  init: (fsArg = null) => {
+    fs = fsArg;
+    if (fs) {
+      dirname = process.env.VAULT ?? process.env.PWD + "/vault";
+    }
+    return vault;
+  },
+  put: (key, value, options) => {
+    console.log("vault.put key", key, "value", value, "options", options);
+    if (fs) {
+      fs.mkdirSync(dirname, { recursive: true });
+      fs.writeFileSync(dirname + "/" + key, JSON.stringify(value), options);
+    } else {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+  },
+  remove: (key) => fs ? fs.unlinkSync(dirname + "/" + key) : (
+    // {{{2
+    void 0
+  ),
+  rename: (oldkey, newkey) => fs ? fs.renameSync(dirname + "/" + oldkey, dirname + "/" + newkey) : (
+    // {{{2
+    void 0
+  ),
+  watch: (key, cb) => fs && fs.watch(dirname + (key ? "/" + key : ""), cb) || // {{{2
+  watchSameTab(key, cb)
+  // }}}2
+};
+function watchSameTab(key, cb) {
+  if (!wst) {
+    wst = { setItem: Storage.prototype.setItem };
+    Storage.prototype.setItem = function(key2, value) {
+      wst.setItem.apply(this, arguments);
+      window.dispatchEvent(new CustomEvent("local-storage-change", {
+        detail: { key: key2, newValue: value }
+      }));
+    };
+    window.addEventListener("local-storage-change", (event) => {
+      cb(null, event.detail.key);
+    });
+  }
+  return { close: (_) => console.log("watchSameTab DONE") };
+}
+var vault_default = vault;
 
 // ../node_modules/@stellar/stellar-sdk/lib/esm/index.js
 init_shim();
-var import_buffer35 = __toESM(require_buffer(), 1);
-init_transaction_builder();
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/errors/network.js
+init_shim();
+var NetworkError = class extends Error {
+  /** Response details, received from the Horizon server. */
+  response;
+  constructor(message, response) {
+    super(message);
+    this.response = response;
+  }
+  /**
+   * Returns the error response sent by the Horizon server.
+   * @returns Response details, received from the Horizon server.
+   */
+  getResponse() {
+    return this.response;
+  }
+};
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/errors/not_found.js
+init_shim();
+var NotFoundError = class extends NetworkError {
+};
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/errors/bad_request.js
+init_shim();
+var BadRequestError = class extends NetworkError {
+};
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/errors/bad_response.js
+init_shim();
+var BadResponseError = class extends NetworkError {
+};
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/errors/transaction_failed.js
+init_shim();
+init_int();
 init_hyper();
+init_unsigned_int();
+init_unsigned_hyper();
+init_xdr_type();
+var import_buffer35 = __toESM(require_buffer(), 1);
+init_curr_generated();
+var import_base322 = __toESM(require_base32(), 1);
+init_scval();
+var TransactionFailedError = class extends BadResponseError {
+  /**
+   * Returns the transaction- and operation-level result codes reported by
+   * Horizon, e.g. `{ transaction: "tx_failed", operations: ["op_underfunded"] }`.
+   *
+   * Horizon omits `operations` when the transaction failed a
+   * transaction-level check (e.g. `tx_bad_seq`) and no operations were
+   * evaluated; this accessor normalizes that to an empty array.
+   *
+   * @returns The `result_codes` object from the response's `extras`.
+   */
+  getResultCodes() {
+    const { transaction: transaction2, operations = [] } = this.extras().result_codes;
+    return { transaction: transaction2, operations };
+  }
+  /**
+   * Decodes and returns the {@link xdr.TransactionResult} from the response's
+   * `extras.result_xdr`, providing structured access to per-operation results.
+   *
+   * @returns The decoded transaction result, or `null` if the response did not
+   *   include a `result_xdr`.
+   * @throws If the server returned a `result_xdr` that is not valid base64-encoded
+   *   {@link xdr.TransactionResult} XDR.
+   */
+  getTransactionResult() {
+    const resultXdr = this.extras().result_xdr;
+    if (!resultXdr) {
+      return null;
+    }
+    return types.TransactionResult.fromXDR(resultXdr, "base64");
+  }
+  extras() {
+    return this.response.data.extras;
+  }
+};
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/errors/account_requires_memo.js
+init_shim();
+var AccountRequiresMemoError = class extends Error {
+  accountId;
+  operationIndex;
+  constructor(message, accountId, operationIndex) {
+    super(message);
+    this.accountId = accountId;
+    this.operationIndex = operationIndex;
+  }
+};
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/config.js
+init_shim();
+var defaultConfig = {
+  allowHttp: false,
+  timeout: 0
+};
+var config3 = { ...defaultConfig };
+var Config = class {
+  /**
+   * Sets `allowHttp` flag globally. When set to `true`, connections to insecure
+   * http protocol servers will be allowed. Must be set to `false` in
+   * production.
+   * @defaultValue false
+   */
+  static setAllowHttp(value) {
+    config3.allowHttp = value;
+  }
+  /**
+   * Sets `timeout` flag globally. When set to anything besides 0, the request
+   * will timeout after specified time (ms).
+   * @defaultValue 0
+   */
+  static setTimeout(value) {
+    config3.timeout = value;
+  }
+  /**
+   * Returns the configured `allowHttp` flag.
+   * @returns The allowHttp value.
+   */
+  static isAllowHttp() {
+    return config3.allowHttp;
+  }
+  /**
+   * Returns the configured `timeout` flag.
+   * @returns The timeout value.
+   */
+  static getTimeout() {
+    return config3.timeout;
+  }
+  /**
+   * Sets all global config flags to default values.
+   */
+  static setDefault() {
+    config3 = { ...defaultConfig };
+  }
+};
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/errors/wrap_http_error.js
+init_shim();
+function wrapHttpError(error, wrap) {
+  const response = error?.response ?? error;
+  if (response && typeof response.status === "number") {
+    const wrapped = wrap({
+      data: response.data,
+      status: response.status,
+      statusText: response.statusText
+    });
+    if (error instanceof Error) {
+      wrapped.cause = error;
+    }
+    return wrapped;
+  }
+  return error instanceof Error ? error : new Error(String(error));
+}
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/horizon/index.js
+var horizon_exports = {};
+__export(horizon_exports, {
+  AccountResponse: () => AccountResponse,
+  HorizonApi: () => HorizonApi,
+  SERVER_TIME_MAP: () => SERVER_TIME_MAP,
+  Server: () => HorizonServer,
+  ServerApi: () => ServerApi,
+  getCurrentServerTime: () => getCurrentServerTime
+});
+init_shim();
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/horizon/horizon_api.js
+init_shim();
+var HorizonApi;
+((HorizonApi2) => {
+  ((LiquidityPoolType2) => {
+    LiquidityPoolType2["constantProduct"] = "constant_product";
+  })(HorizonApi2.LiquidityPoolType || (HorizonApi2.LiquidityPoolType = {}));
+  ((OperationResponseType2) => {
+    OperationResponseType2["createAccount"] = "create_account";
+    OperationResponseType2["payment"] = "payment";
+    OperationResponseType2["pathPayment"] = "path_payment_strict_receive";
+    OperationResponseType2["createPassiveOffer"] = "create_passive_sell_offer";
+    OperationResponseType2["manageOffer"] = "manage_sell_offer";
+    OperationResponseType2["setOptions"] = "set_options";
+    OperationResponseType2["changeTrust"] = "change_trust";
+    OperationResponseType2["allowTrust"] = "allow_trust";
+    OperationResponseType2["accountMerge"] = "account_merge";
+    OperationResponseType2["inflation"] = "inflation";
+    OperationResponseType2["manageData"] = "manage_data";
+    OperationResponseType2["bumpSequence"] = "bump_sequence";
+    OperationResponseType2["manageBuyOffer"] = "manage_buy_offer";
+    OperationResponseType2["pathPaymentStrictSend"] = "path_payment_strict_send";
+    OperationResponseType2["createClaimableBalance"] = "create_claimable_balance";
+    OperationResponseType2["claimClaimableBalance"] = "claim_claimable_balance";
+    OperationResponseType2["beginSponsoringFutureReserves"] = "begin_sponsoring_future_reserves";
+    OperationResponseType2["endSponsoringFutureReserves"] = "end_sponsoring_future_reserves";
+    OperationResponseType2["revokeSponsorship"] = "revoke_sponsorship";
+    OperationResponseType2["clawback"] = "clawback";
+    OperationResponseType2["clawbackClaimableBalance"] = "clawback_claimable_balance";
+    OperationResponseType2["setTrustLineFlags"] = "set_trust_line_flags";
+    OperationResponseType2["liquidityPoolDeposit"] = "liquidity_pool_deposit";
+    OperationResponseType2["liquidityPoolWithdraw"] = "liquidity_pool_withdraw";
+    OperationResponseType2["invokeHostFunction"] = "invoke_host_function";
+    OperationResponseType2["bumpFootprintExpiration"] = "bump_footprint_expiration";
+    OperationResponseType2["restoreFootprint"] = "restore_footprint";
+  })(HorizonApi2.OperationResponseType || (HorizonApi2.OperationResponseType = {}));
+  ((OperationResponseTypeI2) => {
+    OperationResponseTypeI2[OperationResponseTypeI2["createAccount"] = 0] = "createAccount";
+    OperationResponseTypeI2[OperationResponseTypeI2["payment"] = 1] = "payment";
+    OperationResponseTypeI2[OperationResponseTypeI2["pathPayment"] = 2] = "pathPayment";
+    OperationResponseTypeI2[OperationResponseTypeI2["createPassiveOffer"] = 3] = "createPassiveOffer";
+    OperationResponseTypeI2[OperationResponseTypeI2["manageOffer"] = 4] = "manageOffer";
+    OperationResponseTypeI2[OperationResponseTypeI2["setOptions"] = 5] = "setOptions";
+    OperationResponseTypeI2[OperationResponseTypeI2["changeTrust"] = 6] = "changeTrust";
+    OperationResponseTypeI2[OperationResponseTypeI2["allowTrust"] = 7] = "allowTrust";
+    OperationResponseTypeI2[OperationResponseTypeI2["accountMerge"] = 8] = "accountMerge";
+    OperationResponseTypeI2[OperationResponseTypeI2["inflation"] = 9] = "inflation";
+    OperationResponseTypeI2[OperationResponseTypeI2["manageData"] = 10] = "manageData";
+    OperationResponseTypeI2[OperationResponseTypeI2["bumpSequence"] = 11] = "bumpSequence";
+    OperationResponseTypeI2[OperationResponseTypeI2["manageBuyOffer"] = 12] = "manageBuyOffer";
+    OperationResponseTypeI2[OperationResponseTypeI2["pathPaymentStrictSend"] = 13] = "pathPaymentStrictSend";
+    OperationResponseTypeI2[OperationResponseTypeI2["createClaimableBalance"] = 14] = "createClaimableBalance";
+    OperationResponseTypeI2[OperationResponseTypeI2["claimClaimableBalance"] = 15] = "claimClaimableBalance";
+    OperationResponseTypeI2[OperationResponseTypeI2["beginSponsoringFutureReserves"] = 16] = "beginSponsoringFutureReserves";
+    OperationResponseTypeI2[OperationResponseTypeI2["endSponsoringFutureReserves"] = 17] = "endSponsoringFutureReserves";
+    OperationResponseTypeI2[OperationResponseTypeI2["revokeSponsorship"] = 18] = "revokeSponsorship";
+    OperationResponseTypeI2[OperationResponseTypeI2["clawback"] = 19] = "clawback";
+    OperationResponseTypeI2[OperationResponseTypeI2["clawbackClaimableBalance"] = 20] = "clawbackClaimableBalance";
+    OperationResponseTypeI2[OperationResponseTypeI2["setTrustLineFlags"] = 21] = "setTrustLineFlags";
+    OperationResponseTypeI2[OperationResponseTypeI2["liquidityPoolDeposit"] = 22] = "liquidityPoolDeposit";
+    OperationResponseTypeI2[OperationResponseTypeI2["liquidityPoolWithdraw"] = 23] = "liquidityPoolWithdraw";
+    OperationResponseTypeI2[OperationResponseTypeI2["invokeHostFunction"] = 24] = "invokeHostFunction";
+    OperationResponseTypeI2[OperationResponseTypeI2["bumpFootprintExpiration"] = 25] = "bumpFootprintExpiration";
+    OperationResponseTypeI2[OperationResponseTypeI2["restoreFootprint"] = 26] = "restoreFootprint";
+  })(HorizonApi2.OperationResponseTypeI || (HorizonApi2.OperationResponseTypeI = {}));
+  ((TransactionFailedResultCodes2) => {
+    TransactionFailedResultCodes2["TX_FAILED"] = "tx_failed";
+    TransactionFailedResultCodes2["TX_BAD_SEQ"] = "tx_bad_seq";
+    TransactionFailedResultCodes2["TX_BAD_AUTH"] = "tx_bad_auth";
+    TransactionFailedResultCodes2["TX_BAD_AUTH_EXTRA"] = "tx_bad_auth_extra";
+    TransactionFailedResultCodes2["TX_FEE_BUMP_INNER_SUCCESS"] = "tx_fee_bump_inner_success";
+    TransactionFailedResultCodes2["TX_FEE_BUMP_INNER_FAILED"] = "tx_fee_bump_inner_failed";
+    TransactionFailedResultCodes2["TX_NOT_SUPPORTED"] = "tx_not_supported";
+    TransactionFailedResultCodes2["TX_SUCCESS"] = "tx_success";
+    TransactionFailedResultCodes2["TX_TOO_EARLY"] = "tx_too_early";
+    TransactionFailedResultCodes2["TX_TOO_LATE"] = "tx_too_late";
+    TransactionFailedResultCodes2["TX_MISSING_OPERATION"] = "tx_missing_operation";
+    TransactionFailedResultCodes2["TX_INSUFFICIENT_BALANCE"] = "tx_insufficient_balance";
+    TransactionFailedResultCodes2["TX_NO_SOURCE_ACCOUNT"] = "tx_no_source_account";
+    TransactionFailedResultCodes2["TX_INSUFFICIENT_FEE"] = "tx_insufficient_fee";
+    TransactionFailedResultCodes2["TX_INTERNAL_ERROR"] = "tx_internal_error";
+    TransactionFailedResultCodes2["TX_BAD_SPONSORSHIP"] = "tx_bad_sponsorship";
+    TransactionFailedResultCodes2["TX_BAD_MIN_SEQ_AGE_OR_GAP"] = "tx_bad_min_seq_age_or_gap";
+    TransactionFailedResultCodes2["TX_MALFORMED"] = "tx_malformed";
+    TransactionFailedResultCodes2["TX_SOROBAN_INVALID"] = "tx_soroban_invalid";
+    TransactionFailedResultCodes2["TX_FROZEN_KEY_ACCESSED"] = "tx_frozen_key_accessed";
+  })(HorizonApi2.TransactionFailedResultCodes || (HorizonApi2.TransactionFailedResultCodes = {}));
+})(HorizonApi || (HorizonApi = {}));
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/horizon/server_api.js
+init_shim();
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/horizon/types/effects.js
+init_shim();
+var EffectType = /* @__PURE__ */ ((EffectType2) => {
+  EffectType2[EffectType2["account_created"] = 0] = "account_created";
+  EffectType2[EffectType2["account_removed"] = 1] = "account_removed";
+  EffectType2[EffectType2["account_credited"] = 2] = "account_credited";
+  EffectType2[EffectType2["account_debited"] = 3] = "account_debited";
+  EffectType2[EffectType2["account_thresholds_updated"] = 4] = "account_thresholds_updated";
+  EffectType2[EffectType2["account_home_domain_updated"] = 5] = "account_home_domain_updated";
+  EffectType2[EffectType2["account_flags_updated"] = 6] = "account_flags_updated";
+  EffectType2[EffectType2["account_inflation_destination_updated"] = 7] = "account_inflation_destination_updated";
+  EffectType2[EffectType2["signer_created"] = 10] = "signer_created";
+  EffectType2[EffectType2["signer_removed"] = 11] = "signer_removed";
+  EffectType2[EffectType2["signer_updated"] = 12] = "signer_updated";
+  EffectType2[EffectType2["trustline_created"] = 20] = "trustline_created";
+  EffectType2[EffectType2["trustline_removed"] = 21] = "trustline_removed";
+  EffectType2[EffectType2["trustline_updated"] = 22] = "trustline_updated";
+  EffectType2[EffectType2["trustline_authorized"] = 23] = "trustline_authorized";
+  EffectType2[EffectType2["trustline_deauthorized"] = 24] = "trustline_deauthorized";
+  EffectType2[EffectType2["trustline_authorized_to_maintain_liabilities"] = 25] = "trustline_authorized_to_maintain_liabilities";
+  EffectType2[EffectType2["trustline_flags_updated"] = 26] = "trustline_flags_updated";
+  EffectType2[EffectType2["offer_created"] = 30] = "offer_created";
+  EffectType2[EffectType2["offer_removed"] = 31] = "offer_removed";
+  EffectType2[EffectType2["offer_updated"] = 32] = "offer_updated";
+  EffectType2[EffectType2["trade"] = 33] = "trade";
+  EffectType2[EffectType2["data_created"] = 40] = "data_created";
+  EffectType2[EffectType2["data_removed"] = 41] = "data_removed";
+  EffectType2[EffectType2["data_updated"] = 42] = "data_updated";
+  EffectType2[EffectType2["sequence_bumped"] = 43] = "sequence_bumped";
+  EffectType2[EffectType2["claimable_balance_created"] = 50] = "claimable_balance_created";
+  EffectType2[EffectType2["claimable_balance_claimant_created"] = 51] = "claimable_balance_claimant_created";
+  EffectType2[EffectType2["claimable_balance_claimed"] = 52] = "claimable_balance_claimed";
+  EffectType2[EffectType2["account_sponsorship_created"] = 60] = "account_sponsorship_created";
+  EffectType2[EffectType2["account_sponsorship_updated"] = 61] = "account_sponsorship_updated";
+  EffectType2[EffectType2["account_sponsorship_removed"] = 62] = "account_sponsorship_removed";
+  EffectType2[EffectType2["trustline_sponsorship_created"] = 63] = "trustline_sponsorship_created";
+  EffectType2[EffectType2["trustline_sponsorship_updated"] = 64] = "trustline_sponsorship_updated";
+  EffectType2[EffectType2["trustline_sponsorship_removed"] = 65] = "trustline_sponsorship_removed";
+  EffectType2[EffectType2["data_sponsorship_created"] = 66] = "data_sponsorship_created";
+  EffectType2[EffectType2["data_sponsorship_updated"] = 67] = "data_sponsorship_updated";
+  EffectType2[EffectType2["data_sponsorship_removed"] = 68] = "data_sponsorship_removed";
+  EffectType2[EffectType2["claimable_balance_sponsorship_created"] = 69] = "claimable_balance_sponsorship_created";
+  EffectType2[EffectType2["claimable_balance_sponsorship_updated"] = 70] = "claimable_balance_sponsorship_updated";
+  EffectType2[EffectType2["claimable_balance_sponsorship_removed"] = 71] = "claimable_balance_sponsorship_removed";
+  EffectType2[EffectType2["signer_sponsorship_created"] = 72] = "signer_sponsorship_created";
+  EffectType2[EffectType2["signer_sponsorship_updated"] = 73] = "signer_sponsorship_updated";
+  EffectType2[EffectType2["signer_sponsorship_removed"] = 74] = "signer_sponsorship_removed";
+  EffectType2[EffectType2["claimable_balance_clawed_back"] = 80] = "claimable_balance_clawed_back";
+  EffectType2[EffectType2["liquidity_pool_deposited"] = 90] = "liquidity_pool_deposited";
+  EffectType2[EffectType2["liquidity_pool_withdrew"] = 91] = "liquidity_pool_withdrew";
+  EffectType2[EffectType2["liquidity_pool_trade"] = 92] = "liquidity_pool_trade";
+  EffectType2[EffectType2["liquidity_pool_created"] = 93] = "liquidity_pool_created";
+  EffectType2[EffectType2["liquidity_pool_removed"] = 94] = "liquidity_pool_removed";
+  EffectType2[EffectType2["liquidity_pool_revoked"] = 95] = "liquidity_pool_revoked";
+  EffectType2[EffectType2["contract_credited"] = 96] = "contract_credited";
+  EffectType2[EffectType2["contract_debited"] = 97] = "contract_debited";
+  return EffectType2;
+})(EffectType || {});
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/horizon/server_api.js
+var ServerApi;
+((ServerApi2) => {
+  ServerApi2.EffectType = EffectType;
+  ((TradeType2) => {
+    TradeType2["all"] = "all";
+    TradeType2["liquidityPools"] = "liquidity_pool";
+    TradeType2["orderbook"] = "orderbook";
+  })(ServerApi2.TradeType || (ServerApi2.TradeType = {}));
+  HorizonApi.OperationResponseType;
+  HorizonApi.OperationResponseTypeI;
+})(ServerApi || (ServerApi = {}));
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/horizon/account_response.js
+init_shim();
+init_account();
+var AccountResponse = class {
+  id;
+  paging_token;
+  account_id;
+  sequence;
+  sequence_ledger;
+  sequence_time;
+  subentry_count;
+  home_domain;
+  inflation_destination;
+  last_modified_ledger;
+  last_modified_time;
+  thresholds;
+  flags;
+  balances;
+  signers;
+  num_sponsoring;
+  num_sponsored;
+  sponsor;
+  data;
+  data_attr;
+  effects;
+  offers;
+  operations;
+  payments;
+  trades;
+  transactions;
+  _baseAccount;
+  constructor(response) {
+    this._baseAccount = new Account(response.account_id, response.sequence);
+    this.effects = response.effects;
+    this.offers = response.offers;
+    this.operations = response.operations;
+    this.payments = response.payments;
+    this.trades = response.trades;
+    this.data = response.data;
+    this.transactions = response.transactions;
+    this.id = response.id;
+    this.paging_token = response.paging_token;
+    this.account_id = response.account_id;
+    this.sequence = response.sequence;
+    this.sequence_ledger = response.sequence_ledger;
+    this.sequence_time = response.sequence_time;
+    this.subentry_count = response.subentry_count;
+    this.home_domain = response.home_domain;
+    this.inflation_destination = response.inflation_destination;
+    this.last_modified_ledger = response.last_modified_ledger;
+    this.last_modified_time = response.last_modified_time;
+    this.thresholds = response.thresholds;
+    this.flags = response.flags;
+    this.balances = response.balances;
+    this.signers = response.signers;
+    this.data_attr = response.data_attr;
+    this.sponsor = response.sponsor;
+    this.num_sponsoring = response.num_sponsoring;
+    this.num_sponsored = response.num_sponsored;
+  }
+  /**
+   * Get Stellar account public key ex. `GB3KJPLFUYN5VL6R3GU3EGCGVCKFDSD7BEDX42HWG5BWFKB3KQGJJRMA`
+   * @returns accountId
+   */
+  accountId() {
+    return this._baseAccount.accountId();
+  }
+  /**
+   * Get the current sequence number
+   * @returns sequenceNumber
+   */
+  sequenceNumber() {
+    return this._baseAccount.sequenceNumber();
+  }
+  /**
+   * Increments sequence number in this object by one.
+   * @returns    */
+  incrementSequenceNumber() {
+    this._baseAccount.incrementSequenceNumber();
+    this.sequence = this._baseAccount.sequenceNumber();
+  }
+};
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/horizon/server.js
+init_shim();
+init_bignumber2();
+init_int();
+init_hyper();
+init_unsigned_int();
+init_unsigned_hyper();
+init_xdr_type();
+var import_buffer36 = __toESM(require_buffer(), 1);
+init_curr_generated();
+init_asset();
+init_strkey();
+init_fee_bump_transaction();
+init_scval();
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/horizon/call_builder.js
+init_shim();
+
+// ../node_modules/eventsource/dist/index.js
+init_shim();
+
+// ../node_modules/eventsource-parser/dist/index.js
+init_shim();
+var ParseError = class extends Error {
+  constructor(message, options) {
+    super(message), this.name = "ParseError", this.type = options.type, this.field = options.field, this.value = options.value, this.line = options.line;
+  }
+};
+var LF = 10;
+var CR = 13;
+var SPACE = 32;
+function noop(_arg) {
+}
+function createParser(config4) {
+  if (typeof config4 == "function")
+    throw new TypeError(
+      "`config` must be an object, got a function instead. Did you mean `createParser({onEvent: fn})`?"
+    );
+  const { onEvent = noop, onError = noop, onRetry = noop, onComment, maxBufferSize } = config4, pendingFragments = [];
+  let pendingFragmentsLength = 0, isFirstChunk = true, id, data = "", dataLines = 0, eventType, terminated = false;
+  function feed(chunk) {
+    if (terminated)
+      throw new Error(
+        "Cannot feed parser: it was terminated after exceeding the configured max buffer size. Call `reset()` to resume parsing."
+      );
+    if (isFirstChunk && (isFirstChunk = false, chunk.charCodeAt(0) === 239 && chunk.charCodeAt(1) === 187 && chunk.charCodeAt(2) === 191 && (chunk = chunk.slice(3))), pendingFragments.length === 0) {
+      const trailing2 = processLines(chunk);
+      trailing2 !== "" && (pendingFragments.push(trailing2), pendingFragmentsLength = trailing2.length), checkBufferSize();
+      return;
+    }
+    if (chunk.indexOf(`
+`) === -1 && chunk.indexOf("\r") === -1) {
+      pendingFragments.push(chunk), pendingFragmentsLength += chunk.length, checkBufferSize();
+      return;
+    }
+    pendingFragments.push(chunk);
+    const input = pendingFragments.join("");
+    pendingFragments.length = 0, pendingFragmentsLength = 0;
+    const trailing = processLines(input);
+    trailing !== "" && (pendingFragments.push(trailing), pendingFragmentsLength = trailing.length), checkBufferSize();
+  }
+  function checkBufferSize() {
+    maxBufferSize !== void 0 && (pendingFragmentsLength + data.length <= maxBufferSize || (terminated = true, pendingFragments.length = 0, pendingFragmentsLength = 0, id = void 0, data = "", dataLines = 0, eventType = void 0, onError(
+      new ParseError(`Buffered data exceeded max buffer size of ${maxBufferSize} characters`, {
+        type: "max-buffer-size-exceeded"
+      })
+    )));
+  }
+  function processLines(chunk) {
+    let searchIndex = 0;
+    if (chunk.indexOf("\r") === -1) {
+      let lfIndex = chunk.indexOf(`
+`, searchIndex);
+      for (; lfIndex !== -1; ) {
+        if (searchIndex === lfIndex) {
+          dataLines > 0 && onEvent({ id, event: eventType, data }), id = void 0, data = "", dataLines = 0, eventType = void 0, searchIndex = lfIndex + 1, lfIndex = chunk.indexOf(`
+`, searchIndex);
+          continue;
+        }
+        const firstCharCode = chunk.charCodeAt(searchIndex);
+        if (isDataPrefix(chunk, searchIndex, firstCharCode)) {
+          const valueStart = chunk.charCodeAt(searchIndex + 5) === SPACE ? searchIndex + 6 : searchIndex + 5, value = chunk.slice(valueStart, lfIndex);
+          if (dataLines === 0 && chunk.charCodeAt(lfIndex + 1) === LF) {
+            onEvent({ id, event: eventType, data: value }), id = void 0, data = "", eventType = void 0, searchIndex = lfIndex + 2, lfIndex = chunk.indexOf(`
+`, searchIndex);
+            continue;
+          }
+          data = dataLines === 0 ? value : `${data}
+${value}`, dataLines++;
+        } else isEventPrefix(chunk, searchIndex, firstCharCode) ? eventType = chunk.slice(
+          chunk.charCodeAt(searchIndex + 6) === SPACE ? searchIndex + 7 : searchIndex + 6,
+          lfIndex
+        ) || void 0 : parseLine(chunk, searchIndex, lfIndex);
+        searchIndex = lfIndex + 1, lfIndex = chunk.indexOf(`
+`, searchIndex);
+      }
+      return chunk.slice(searchIndex);
+    }
+    for (; searchIndex < chunk.length; ) {
+      const crIndex = chunk.indexOf("\r", searchIndex), lfIndex = chunk.indexOf(`
+`, searchIndex);
+      let lineEnd = -1;
+      if (crIndex !== -1 && lfIndex !== -1 ? lineEnd = crIndex < lfIndex ? crIndex : lfIndex : crIndex !== -1 ? crIndex === chunk.length - 1 ? lineEnd = -1 : lineEnd = crIndex : lfIndex !== -1 && (lineEnd = lfIndex), lineEnd === -1)
+        break;
+      parseLine(chunk, searchIndex, lineEnd), searchIndex = lineEnd + 1, chunk.charCodeAt(searchIndex - 1) === CR && chunk.charCodeAt(searchIndex) === LF && searchIndex++;
+    }
+    return chunk.slice(searchIndex);
+  }
+  function parseLine(chunk, start, end) {
+    if (start === end) {
+      dispatchEvent();
+      return;
+    }
+    const firstCharCode = chunk.charCodeAt(start);
+    if (isDataPrefix(chunk, start, firstCharCode)) {
+      const valueStart = chunk.charCodeAt(start + 5) === SPACE ? start + 6 : start + 5, value2 = chunk.slice(valueStart, end);
+      data = dataLines === 0 ? value2 : `${data}
+${value2}`, dataLines++;
+      return;
+    }
+    if (isEventPrefix(chunk, start, firstCharCode)) {
+      eventType = chunk.slice(chunk.charCodeAt(start + 6) === SPACE ? start + 7 : start + 6, end) || void 0;
+      return;
+    }
+    if (firstCharCode === 105 && chunk.charCodeAt(start + 1) === 100 && chunk.charCodeAt(start + 2) === 58) {
+      const value2 = chunk.slice(chunk.charCodeAt(start + 3) === SPACE ? start + 4 : start + 3, end);
+      value2.includes("\0") || (id = value2);
+      return;
+    }
+    if (firstCharCode === 58) {
+      if (onComment) {
+        const line2 = chunk.slice(start, end);
+        onComment(line2.slice(chunk.charCodeAt(start + 1) === SPACE ? 2 : 1));
+      }
+      return;
+    }
+    const line = chunk.slice(start, end), fieldSeparatorIndex = line.indexOf(":");
+    if (fieldSeparatorIndex === -1) {
+      processField(line, "", line);
+      return;
+    }
+    const field = line.slice(0, fieldSeparatorIndex), offset = line.charCodeAt(fieldSeparatorIndex + 1) === SPACE ? 2 : 1, value = line.slice(fieldSeparatorIndex + offset);
+    processField(field, value, line);
+  }
+  function processField(field, value, line) {
+    switch (field) {
+      case "event":
+        eventType = value || void 0;
+        break;
+      case "data":
+        data = dataLines === 0 ? value : `${data}
+${value}`, dataLines++;
+        break;
+      case "id":
+        value.includes("\0") || (id = value);
+        break;
+      case "retry":
+        /^\d+$/.test(value) ? onRetry(parseInt(value, 10)) : onError(
+          new ParseError(`Invalid \`retry\` value: "${value}"`, {
+            type: "invalid-retry",
+            value,
+            line
+          })
+        );
+        break;
+      default:
+        onError(
+          new ParseError(
+            `Unknown field "${field.length > 20 ? `${field.slice(0, 20)}\u2026` : field}"`,
+            { type: "unknown-field", field, value, line }
+          )
+        );
+        break;
+    }
+  }
+  function dispatchEvent() {
+    dataLines > 0 && onEvent({
+      id,
+      event: eventType,
+      data
+    }), id = void 0, data = "", dataLines = 0, eventType = void 0;
+  }
+  function reset2(options = {}) {
+    if (options.consume && pendingFragments.length > 0) {
+      const incompleteLine = pendingFragments.join("");
+      parseLine(incompleteLine, 0, incompleteLine.length);
+    }
+    isFirstChunk = true, id = void 0, data = "", dataLines = 0, eventType = void 0, pendingFragments.length = 0, pendingFragmentsLength = 0, terminated = false;
+  }
+  return { feed, reset: reset2 };
+}
+function isDataPrefix(chunk, i, firstCharCode) {
+  return firstCharCode === 100 && chunk.charCodeAt(i + 1) === 97 && chunk.charCodeAt(i + 2) === 116 && chunk.charCodeAt(i + 3) === 97 && chunk.charCodeAt(i + 4) === 58;
+}
+function isEventPrefix(chunk, i, firstCharCode) {
+  return firstCharCode === 101 && chunk.charCodeAt(i + 1) === 118 && chunk.charCodeAt(i + 2) === 101 && chunk.charCodeAt(i + 3) === 110 && chunk.charCodeAt(i + 4) === 116 && chunk.charCodeAt(i + 5) === 58;
+}
+
+// ../node_modules/eventsource/dist/index.js
+var ErrorEvent = class extends Event {
+  /**
+   * Constructs a new `ErrorEvent` instance. This is typically not called directly,
+   * but rather emitted by the `EventSource` object when an error occurs.
+   *
+   * @param type - The type of the event (should be "error")
+   * @param errorEventInitDict - Optional properties to include in the error event
+   */
+  constructor(type, errorEventInitDict) {
+    var _a2, _b;
+    super(type), this.code = (_a2 = errorEventInitDict == null ? void 0 : errorEventInitDict.code) != null ? _a2 : void 0, this.message = (_b = errorEventInitDict == null ? void 0 : errorEventInitDict.message) != null ? _b : void 0;
+  }
+  /**
+   * Node.js "hides" the `message` and `code` properties of the `ErrorEvent` instance,
+   * when it is `console.log`'ed. This makes it harder to debug errors. To ease debugging,
+   * we explicitly include the properties in the `inspect` method.
+   *
+   * This is automatically called by Node.js when you `console.log` an instance of this class.
+   *
+   * @param _depth - The current depth
+   * @param options - The options passed to `util.inspect`
+   * @param inspect - The inspect function to use (prevents having to import it from `util`)
+   * @returns A string representation of the error
+   */
+  [/* @__PURE__ */ Symbol.for("nodejs.util.inspect.custom")](_depth, options, inspect) {
+    return inspect(inspectableError(this), options);
+  }
+  /**
+   * Deno "hides" the `message` and `code` properties of the `ErrorEvent` instance,
+   * when it is `console.log`'ed. This makes it harder to debug errors. To ease debugging,
+   * we explicitly include the properties in the `inspect` method.
+   *
+   * This is automatically called by Deno when you `console.log` an instance of this class.
+   *
+   * @param inspect - The inspect function to use (prevents having to import it from `util`)
+   * @param options - The options passed to `Deno.inspect`
+   * @returns A string representation of the error
+   */
+  [/* @__PURE__ */ Symbol.for("Deno.customInspect")](inspect, options) {
+    return inspect(inspectableError(this), options);
+  }
+};
+function syntaxError(message) {
+  const DomException = globalThis.DOMException;
+  return typeof DomException == "function" ? new DomException(message, "SyntaxError") : new SyntaxError(message);
+}
+function flattenError(err2) {
+  return err2 instanceof Error ? "errors" in err2 && Array.isArray(err2.errors) ? err2.errors.map(flattenError).join(", ") : "cause" in err2 && err2.cause instanceof Error ? `${err2}: ${flattenError(err2.cause)}` : err2.message : `${err2}`;
+}
+function inspectableError(err2) {
+  return {
+    type: err2.type,
+    message: err2.message,
+    code: err2.code,
+    defaultPrevented: err2.defaultPrevented,
+    cancelable: err2.cancelable,
+    timeStamp: err2.timeStamp
+  };
+}
+var __typeError = (msg) => {
+  throw TypeError(msg);
+};
+var __accessCheck = (obj, member, msg) => member.has(obj) || __typeError("Cannot " + msg);
+var __privateGet = (obj, member, getter) => (__accessCheck(obj, member, "read from private field"), getter ? getter.call(obj) : member.get(obj));
+var __privateAdd = (obj, member, value) => member.has(obj) ? __typeError("Cannot add the same private member more than once") : member instanceof WeakSet ? member.add(obj) : member.set(obj, value);
+var __privateSet = (obj, member, value, setter) => (__accessCheck(obj, member, "write to private field"), member.set(obj, value), value);
+var __privateMethod = (obj, member, method) => (__accessCheck(obj, member, "access private method"), method);
+var _readyState;
+var _url;
+var _redirectUrl;
+var _withCredentials;
+var _fetch;
+var _reconnectInterval;
+var _reconnectTimer;
+var _lastEventId;
+var _controller;
+var _parser;
+var _onError;
+var _onMessage;
+var _onOpen;
+var _EventSource_instances;
+var connect_fn;
+var _onFetchResponse;
+var _onFetchError;
+var getRequestOptions_fn;
+var _onEvent;
+var _onRetryChange;
+var failConnection_fn;
+var scheduleReconnect_fn;
+var _reconnect;
+var EventSource = class extends EventTarget {
+  constructor(url, eventSourceInitDict) {
+    var _a2, _b;
+    super(), __privateAdd(this, _EventSource_instances), this.CONNECTING = 0, this.OPEN = 1, this.CLOSED = 2, __privateAdd(this, _readyState), __privateAdd(this, _url), __privateAdd(this, _redirectUrl), __privateAdd(this, _withCredentials), __privateAdd(this, _fetch), __privateAdd(this, _reconnectInterval), __privateAdd(this, _reconnectTimer), __privateAdd(this, _lastEventId, null), __privateAdd(this, _controller), __privateAdd(this, _parser), __privateAdd(this, _onError, null), __privateAdd(this, _onMessage, null), __privateAdd(this, _onOpen, null), __privateAdd(this, _onFetchResponse, async (response) => {
+      var _a22;
+      __privateGet(this, _parser).reset();
+      const { body, redirected, status, headers } = response;
+      if (status === 204) {
+        __privateMethod(this, _EventSource_instances, failConnection_fn).call(this, "Server sent HTTP 204, not reconnecting", 204), this.close();
+        return;
+      }
+      if (redirected ? __privateSet(this, _redirectUrl, new URL(response.url)) : __privateSet(this, _redirectUrl, void 0), status !== 200) {
+        __privateMethod(this, _EventSource_instances, failConnection_fn).call(this, `Non-200 status code (${status})`, status);
+        return;
+      }
+      if (!(headers.get("content-type") || "").startsWith("text/event-stream")) {
+        __privateMethod(this, _EventSource_instances, failConnection_fn).call(this, 'Invalid content type, expected "text/event-stream"', status);
+        return;
+      }
+      if (__privateGet(this, _readyState) === this.CLOSED)
+        return;
+      __privateSet(this, _readyState, this.OPEN);
+      const openEvent = new Event("open");
+      if ((_a22 = __privateGet(this, _onOpen)) == null || _a22.call(this, openEvent), this.dispatchEvent(openEvent), typeof body != "object" || !body || !("getReader" in body)) {
+        __privateMethod(this, _EventSource_instances, failConnection_fn).call(this, "Invalid response body, expected a web ReadableStream", status), this.close();
+        return;
+      }
+      const decoder = new TextDecoder(), reader = body.getReader();
+      let open = true;
+      do {
+        const { done, value } = await reader.read();
+        value && __privateGet(this, _parser).feed(decoder.decode(value, { stream: !done })), done && (open = false, __privateGet(this, _parser).reset(), __privateMethod(this, _EventSource_instances, scheduleReconnect_fn).call(this));
+      } while (open);
+    }), __privateAdd(this, _onFetchError, (err2) => {
+      __privateSet(this, _controller, void 0), !(err2.name === "AbortError" || err2.type === "aborted") && __privateMethod(this, _EventSource_instances, scheduleReconnect_fn).call(this, flattenError(err2));
+    }), __privateAdd(this, _onEvent, (event) => {
+      typeof event.id == "string" && __privateSet(this, _lastEventId, event.id);
+      const messageEvent = new MessageEvent(event.event || "message", {
+        data: event.data,
+        origin: __privateGet(this, _redirectUrl) ? __privateGet(this, _redirectUrl).origin : __privateGet(this, _url).origin,
+        lastEventId: event.id || ""
+      });
+      __privateGet(this, _onMessage) && (!event.event || event.event === "message") && __privateGet(this, _onMessage).call(this, messageEvent), this.dispatchEvent(messageEvent);
+    }), __privateAdd(this, _onRetryChange, (value) => {
+      __privateSet(this, _reconnectInterval, value);
+    }), __privateAdd(this, _reconnect, () => {
+      __privateSet(this, _reconnectTimer, void 0), __privateGet(this, _readyState) === this.CONNECTING && __privateMethod(this, _EventSource_instances, connect_fn).call(this);
+    });
+    try {
+      if (url instanceof URL)
+        __privateSet(this, _url, url);
+      else if (typeof url == "string")
+        __privateSet(this, _url, new URL(url, getBaseURL()));
+      else
+        throw new Error("Invalid URL");
+    } catch {
+      throw syntaxError("An invalid or illegal string was specified");
+    }
+    __privateSet(this, _parser, createParser({
+      onEvent: __privateGet(this, _onEvent),
+      onRetry: __privateGet(this, _onRetryChange)
+    })), __privateSet(this, _readyState, this.CONNECTING), __privateSet(this, _reconnectInterval, 3e3), __privateSet(this, _fetch, (_a2 = eventSourceInitDict == null ? void 0 : eventSourceInitDict.fetch) != null ? _a2 : globalThis.fetch), __privateSet(this, _withCredentials, (_b = eventSourceInitDict == null ? void 0 : eventSourceInitDict.withCredentials) != null ? _b : false), __privateMethod(this, _EventSource_instances, connect_fn).call(this);
+  }
+  /**
+   * Returns the state of this EventSource object's connection. It can have the values described below.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/API/EventSource/readyState)
+   *
+   * Note: typed as `number` instead of `0 | 1 | 2` for compatibility with the `EventSource` interface,
+   * defined in the TypeScript `dom` library.
+   *
+   * @public
+   */
+  get readyState() {
+    return __privateGet(this, _readyState);
+  }
+  /**
+   * Returns the URL providing the event stream.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/API/EventSource/url)
+   *
+   * @public
+   */
+  get url() {
+    return __privateGet(this, _url).href;
+  }
+  /**
+   * Returns true if the credentials mode for connection requests to the URL providing the event stream is set to "include", and false otherwise.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/API/EventSource/withCredentials)
+   */
+  get withCredentials() {
+    return __privateGet(this, _withCredentials);
+  }
+  /** [MDN Reference](https://developer.mozilla.org/docs/Web/API/EventSource/error_event) */
+  get onerror() {
+    return __privateGet(this, _onError);
+  }
+  set onerror(value) {
+    __privateSet(this, _onError, value);
+  }
+  /** [MDN Reference](https://developer.mozilla.org/docs/Web/API/EventSource/message_event) */
+  get onmessage() {
+    return __privateGet(this, _onMessage);
+  }
+  set onmessage(value) {
+    __privateSet(this, _onMessage, value);
+  }
+  /** [MDN Reference](https://developer.mozilla.org/docs/Web/API/EventSource/open_event) */
+  get onopen() {
+    return __privateGet(this, _onOpen);
+  }
+  set onopen(value) {
+    __privateSet(this, _onOpen, value);
+  }
+  addEventListener(type, listener, options) {
+    const listen = listener;
+    super.addEventListener(type, listen, options);
+  }
+  removeEventListener(type, listener, options) {
+    const listen = listener;
+    super.removeEventListener(type, listen, options);
+  }
+  /**
+   * Aborts any instances of the fetch algorithm started for this EventSource object, and sets the readyState attribute to CLOSED.
+   *
+   * [MDN Reference](https://developer.mozilla.org/docs/Web/API/EventSource/close)
+   *
+   * @public
+   */
+  close() {
+    __privateGet(this, _reconnectTimer) && clearTimeout(__privateGet(this, _reconnectTimer)), __privateGet(this, _readyState) !== this.CLOSED && (__privateGet(this, _controller) && __privateGet(this, _controller).abort(), __privateSet(this, _readyState, this.CLOSED), __privateSet(this, _controller, void 0));
+  }
+};
+_readyState = /* @__PURE__ */ new WeakMap(), _url = /* @__PURE__ */ new WeakMap(), _redirectUrl = /* @__PURE__ */ new WeakMap(), _withCredentials = /* @__PURE__ */ new WeakMap(), _fetch = /* @__PURE__ */ new WeakMap(), _reconnectInterval = /* @__PURE__ */ new WeakMap(), _reconnectTimer = /* @__PURE__ */ new WeakMap(), _lastEventId = /* @__PURE__ */ new WeakMap(), _controller = /* @__PURE__ */ new WeakMap(), _parser = /* @__PURE__ */ new WeakMap(), _onError = /* @__PURE__ */ new WeakMap(), _onMessage = /* @__PURE__ */ new WeakMap(), _onOpen = /* @__PURE__ */ new WeakMap(), _EventSource_instances = /* @__PURE__ */ new WeakSet(), /**
+* Connect to the given URL and start receiving events
+*
+* @internal
+*/
+connect_fn = function() {
+  __privateSet(this, _readyState, this.CONNECTING), __privateSet(this, _controller, new AbortController()), __privateGet(this, _fetch)(__privateGet(this, _url), __privateMethod(this, _EventSource_instances, getRequestOptions_fn).call(this)).then(__privateGet(this, _onFetchResponse)).catch(__privateGet(this, _onFetchError));
+}, _onFetchResponse = /* @__PURE__ */ new WeakMap(), _onFetchError = /* @__PURE__ */ new WeakMap(), /**
+* Get request options for the `fetch()` request
+*
+* @returns The request options
+* @internal
+*/
+getRequestOptions_fn = function() {
+  var _a2;
+  const init = {
+    // [spec] Let `corsAttributeState` be `Anonymous`…
+    // [spec] …will have their mode set to "cors"…
+    mode: "cors",
+    redirect: "follow",
+    headers: { Accept: "text/event-stream", ...__privateGet(this, _lastEventId) ? { "Last-Event-ID": __privateGet(this, _lastEventId) } : void 0 },
+    cache: "no-store",
+    signal: (_a2 = __privateGet(this, _controller)) == null ? void 0 : _a2.signal
+  };
+  return "window" in globalThis && (init.credentials = this.withCredentials ? "include" : "same-origin"), init;
+}, _onEvent = /* @__PURE__ */ new WeakMap(), _onRetryChange = /* @__PURE__ */ new WeakMap(), /**
+* Handles the process referred to in the EventSource specification as "failing a connection".
+*
+* @param error - The error causing the connection to fail
+* @param code - The HTTP status code, if available
+* @internal
+*/
+failConnection_fn = function(message, code) {
+  var _a2;
+  __privateGet(this, _readyState) !== this.CLOSED && __privateSet(this, _readyState, this.CLOSED);
+  const errorEvent = new ErrorEvent("error", { code, message });
+  (_a2 = __privateGet(this, _onError)) == null || _a2.call(this, errorEvent), this.dispatchEvent(errorEvent);
+}, /**
+* Schedules a reconnection attempt against the EventSource endpoint.
+*
+* @param message - The error causing the connection to fail
+* @param code - The HTTP status code, if available
+* @internal
+*/
+scheduleReconnect_fn = function(message, code) {
+  var _a2;
+  if (__privateGet(this, _readyState) === this.CLOSED)
+    return;
+  __privateSet(this, _readyState, this.CONNECTING);
+  const errorEvent = new ErrorEvent("error", { code, message });
+  (_a2 = __privateGet(this, _onError)) == null || _a2.call(this, errorEvent), this.dispatchEvent(errorEvent), __privateSet(this, _reconnectTimer, setTimeout(__privateGet(this, _reconnect), __privateGet(this, _reconnectInterval)));
+}, _reconnect = /* @__PURE__ */ new WeakMap(), /**
+* ReadyState representing an EventSource currently trying to connect
+*
+* @public
+*/
+EventSource.CONNECTING = 0, /**
+* ReadyState representing an EventSource connection that is open (eg connected)
+*
+* @public
+*/
+EventSource.OPEN = 1, /**
+* ReadyState representing an EventSource connection that is closed (eg disconnected)
+*
+* @public
+*/
+EventSource.CLOSED = 2;
+Object.defineProperty(EventSource, /* @__PURE__ */ Symbol.for("eventsource.supports-fetch-override"), {
+  value: true,
+  writable: false,
+  configurable: false,
+  enumerable: false
+});
+function getBaseURL() {
+  const doc = "document" in globalThis ? globalThis.document : void 0;
+  return doc && typeof doc == "object" && "baseURI" in doc && typeof doc.baseURI == "string" ? doc.baseURI : void 0;
+}
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/horizon/horizon_axios_client.js
+init_shim();
+init_fetch_client();
+var version = "16.2.0";
+var SERVER_TIME_MAP = {};
+function toSeconds(ms) {
+  return Math.floor(ms / 1e3);
+}
+function createHttpClient(headers) {
+  const httpClient = createFetchClient({
+    headers: {
+      ...headers,
+      "X-Client-Name": "js-stellar-sdk",
+      "X-Client-Version": version
+    }
+  });
+  httpClient.interceptors.response.use((response) => {
+    const responeUrl = response.config.url;
+    if (!responeUrl) {
+      return response;
+    }
+    const url = new URL(responeUrl);
+    const port = url.port;
+    const hostname = port ? `${url.hostname}:${port}` : url.hostname;
+    let serverTime = 0;
+    if (response.headers instanceof Headers) {
+      const dateHeader = response.headers.get("date");
+      if (dateHeader) {
+        serverTime = toSeconds(Date.parse(dateHeader));
+      }
+    } else if (typeof response.headers === "object" && "date" in response.headers) {
+      const responseHeader = response.headers;
+      if (typeof responseHeader.date === "string") {
+        serverTime = toSeconds(Date.parse(responseHeader.date));
+      }
+    }
+    const localTimeRecorded = toSeconds((/* @__PURE__ */ new Date()).getTime());
+    if (!Number.isNaN(serverTime)) {
+      SERVER_TIME_MAP[hostname] = {
+        serverTime,
+        localTimeRecorded
+      };
+    }
+    return response;
+  });
+  return httpClient;
+}
+function getCurrentServerTime(hostname) {
+  const entry = SERVER_TIME_MAP[hostname];
+  if (!entry || !entry.localTimeRecorded || !entry.serverTime) {
+    return null;
+  }
+  const { serverTime, localTimeRecorded } = entry;
+  const currentTime = toSeconds((/* @__PURE__ */ new Date()).getTime());
+  if (currentTime - localTimeRecorded > 60 * 5) {
+    return null;
+  }
+  return currentTime - localTimeRecorded + serverTime;
+}
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/utils/url.js
+init_shim();
+function stringifyTemplateValue(value) {
+  return Array.isArray(value) ? value.join(",") : value.toString();
+}
+function expandUriTemplate(template, variables, baseUrl) {
+  const queryNames = [];
+  const withoutQueryTemplate = template.replace(
+    /\{\?([^}]+)\}/g,
+    (_match, names) => {
+      queryNames.push(...names.split(","));
+      return "";
+    }
+  );
+  const expanded = withoutQueryTemplate.replace(
+    /\{([^?][^}]*)\}/g,
+    (_match, name) => {
+      const value = variables[name];
+      return typeof value === "undefined" ? "" : encodeURIComponent(stringifyTemplateValue(value));
+    }
+  );
+  const url = new URL(expanded, baseUrl);
+  queryNames.forEach((name) => {
+    const value = variables[name];
+    if (typeof value !== "undefined") {
+      url.searchParams.set(name, stringifyTemplateValue(value));
+    }
+  });
+  return url.toString();
+}
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/horizon/call_builder.js
+var JOINABLE = ["transaction"];
+var CallBuilder = class {
+  url;
+  filter;
+  originalSegments;
+  neighborRoot;
+  httpClient;
+  constructor(serverUrl, httpClient, neighborRoot = "") {
+    this.url = new URL(serverUrl);
+    this.filter = [];
+    this.originalSegments = this.url.pathname.split("/").filter((s) => s.length > 0);
+    this.neighborRoot = neighborRoot;
+    this.httpClient = httpClient;
+  }
+  setPath(...segments) {
+    const endpointSegments = segments.flatMap(
+      (segment) => segment.split("/").filter((s) => s.length > 0)
+    );
+    this.url.pathname = this.originalSegments.concat(endpointSegments).join("/");
+  }
+  /**
+   * Triggers a HTTP request using this builder's current configuration.
+   * @returns a Promise that resolves to the server's response.
+   */
+  call() {
+    this.checkFilter();
+    return this._sendNormalRequest(this.url).then(
+      (r) => this._parseResponse(r)
+    );
+  }
+  //// TODO: Migrate to async, BUT that's a change in behavior and tests "rejects two filters" will fail.
+  //// It's because async will check within promise, which makes more sense when using awaits instead of Promises.
+  // public async call(): Promise<T> {
+  //   this.checkFilter();
+  //   const r = await this._sendNormalRequest(this.url);
+  //   return this._parseResponse(r);
+  // }
+  //// /* actually equals */
+  //// public call(): Promise<T> {
+  ////   return Promise.resolve().then(() => {
+  ////     this.checkFilter();
+  ////     return this._sendNormalRequest(this.url)
+  ////   }).then((r) => {
+  ////     this._parseResponse(r)
+  ////   });
+  //// }
+  /**
+   * Creates an EventSource that listens for incoming messages from the server. To stop listening for new
+   * events call the function returned by this method.
+   * @see [Horizon Response Format](https://developers.stellar.org/api/introduction/response-format/)
+   * @see [MDN EventSource](https://developer.mozilla.org/en-US/docs/Web/API/EventSource)
+   * @param options - (optional) EventSource options.
+   *   - `onmessage` (optional): Callback function to handle incoming messages.
+   *   - `onerror` (optional): Callback function to handle errors.
+   *   - `reconnectTimeout` (optional): Custom stream connection timeout in ms, default is 15 seconds.
+   * @returns Close function. Run to close the connection and stop listening for new events.
+   */
+  stream(options = {}) {
+    this.checkFilter();
+    const streamUrl = new URL(this.url);
+    streamUrl.searchParams.set("X-Client-Name", "js-stellar-sdk");
+    streamUrl.searchParams.set("X-Client-Version", version);
+    const { headers } = this.httpClient.defaults;
+    if (headers) {
+      const headerNames = ["X-App-Name", "X-App-Version"];
+      headerNames.forEach((name) => {
+        let value;
+        if (headers instanceof Headers) {
+          value = headers.get(name) ?? void 0;
+        } else if (Array.isArray(headers)) {
+          const entry = headers.find(([key]) => key === name);
+          value = entry?.[1];
+        } else {
+          value = headers[name];
+        }
+        if (value) {
+          streamUrl.searchParams.set(name, value);
+        }
+      });
+    }
+    let es;
+    let timeout;
+    const createTimeout = () => {
+      timeout = setTimeout(
+        () => {
+          es?.close();
+          es = createEventSource();
+        },
+        options.reconnectTimeout || 15 * 1e3
+      );
+    };
+    const createEventSource = () => {
+      try {
+        es = new EventSource(streamUrl.toString());
+      } catch (err2) {
+        if (options.onerror) {
+          options.onerror(err2);
+        }
+      }
+      createTimeout();
+      if (!es) {
+        return es;
+      }
+      let closed = false;
+      const onClose = () => {
+        if (closed) {
+          return;
+        }
+        clearTimeout(timeout);
+        es.close();
+        createEventSource();
+        closed = true;
+      };
+      const onMessage = (message) => {
+        if (message.type === "close") {
+          onClose();
+          return;
+        }
+        const result = message.data ? this._parseRecord(JSON.parse(message.data)) : message;
+        if (result.paging_token) {
+          streamUrl.searchParams.set("cursor", result.paging_token);
+        }
+        clearTimeout(timeout);
+        createTimeout();
+        if (typeof options.onmessage !== "undefined") {
+          options.onmessage(result);
+        }
+      };
+      const onError = (error) => {
+        if (options.onerror) {
+          options.onerror(error);
+        }
+      };
+      if (es.addEventListener) {
+        es.addEventListener("message", onMessage.bind(this));
+        es.addEventListener("error", onError.bind(this));
+        es.addEventListener("close", onClose.bind(this));
+      } else {
+        es.onmessage = onMessage.bind(this);
+        es.onerror = onError.bind(this);
+      }
+      return es;
+    };
+    createEventSource();
+    return () => {
+      clearTimeout(timeout);
+      es?.close();
+    };
+  }
+  /**
+   * Sets `cursor` parameter for the current call. Returns the CallBuilder object on which this method has been called.
+   * @see [Paging](https://developers.stellar.org/api/introduction/pagination/)
+   * @param cursor - A cursor is a value that points to a specific location in a collection of resources.
+   * @returns current CallBuilder instance
+   */
+  cursor(cursor) {
+    this.url.searchParams.set("cursor", cursor);
+    return this;
+  }
+  /**
+   * Sets `limit` parameter for the current call. Returns the CallBuilder object on which this method has been called.
+   * @see [Paging](https://developers.stellar.org/api/introduction/pagination/)
+   * @param recordsNumber - Number of records the server should return.
+   * @returns current CallBuilder instance
+   */
+  limit(recordsNumber) {
+    this.url.searchParams.set("limit", recordsNumber.toString());
+    return this;
+  }
+  /**
+   * Sets `order` parameter for the current call. Returns the CallBuilder object on which this method has been called.
+   * @param direction - Sort direction
+   * @returns current CallBuilder instance
+   */
+  order(direction) {
+    this.url.searchParams.set("order", direction);
+    return this;
+  }
+  /**
+   * Sets `join` parameter for the current call. The `join` parameter
+   * includes the requested resource in the response. Currently, the
+   * only valid value for the parameter is `transactions` and is only
+   * supported on the operations and payments endpoints. The response
+   * will include a `transaction` field for each operation in the
+   * response.
+   *
+   * @param include - join Records to be included in the response.
+   * @returns current CallBuilder instance.
+   */
+  join(include) {
+    this.url.searchParams.set("join", include);
+    return this;
+  }
+  /**
+   * A helper method to craft queries to "neighbor" endpoints.
+   *
+   *  For example, we have an `/effects` suffix endpoint on many different
+   *  "root" endpoints, such as `/transactions/:id` and `/accounts/:id`. So,
+   *  it's helpful to be able to conveniently create queries to the
+   *  `/accounts/:id/effects` endpoint:
+   *
+   *    `this.forEndpoint("accounts", accountId)`.
+   *
+   * @param endpoint - neighbor endpoint in question, like /operations
+   * @param param - filter parameter, like an operation ID
+   *
+   * @returns this CallBuilder instance
+   */
+  forEndpoint(endpoint, param) {
+    if (this.neighborRoot === "") {
+      throw new Error("Invalid usage: neighborRoot not set in constructor");
+    }
+    this.filter.push([endpoint, param, this.neighborRoot]);
+    return this;
+  }
+  /**
+   * @hidden
+   * @returns    */
+  checkFilter() {
+    if (this.filter.length >= 2) {
+      throw new BadRequestError("Too many filters specified", this.filter);
+    }
+    if (this.filter.length === 1) {
+      const newSegment = this.originalSegments.concat(this.filter[0]);
+      this.url.pathname = newSegment.join("/");
+    }
+  }
+  /**
+   * Convert a link object to a function that fetches that link.
+   * @hidden
+   * @param link - A link object
+   *   - `href`: the URI of the link
+   *   - `templated` (optional): Whether the link is templated
+   * @returns A function that requests the link
+   */
+  _requestFnForLink(link) {
+    return async (opts = {}) => {
+      let uri;
+      if (link.templated) {
+        uri = new URL(expandUriTemplate(link.href, opts), this.url);
+      } else {
+        uri = new URL(link.href, this.url);
+      }
+      const r = await this._sendNormalRequest(uri);
+      return this._parseResponse(r);
+    };
+  }
+  /**
+   * Given the json response, find and convert each link into a function that
+   * calls that link.
+   * @hidden
+   * @param json - JSON response
+   * @returns JSON response with string links replaced with functions
+   */
+  _parseRecord(json) {
+    if (!json._links) {
+      return json;
+    }
+    Object.keys(json._links).forEach((key) => {
+      const n = json._links[key];
+      let included = false;
+      if (typeof json[key] !== "undefined") {
+        json[`${key}_attr`] = json[key];
+        included = true;
+      }
+      if (included && JOINABLE.indexOf(key) >= 0) {
+        const record = this._parseRecord(json[key]);
+        json[key] = async () => record;
+      } else {
+        json[key] = this._requestFnForLink(n);
+      }
+    });
+    return json;
+  }
+  async _sendNormalRequest(initialUrl) {
+    const url = new URL(initialUrl);
+    url.protocol = this.url.protocol;
+    url.host = this.url.host;
+    return this.httpClient.get(url.toString()).then((response) => response.data).catch(this._handleNetworkError);
+  }
+  /**
+   * @hidden
+   * @param json - Response object
+   * @returns Extended response
+   */
+  _parseResponse(json) {
+    if (json._embedded && json._embedded.records) {
+      return this._toCollectionPage(json);
+    }
+    return this._parseRecord(json);
+  }
+  /**
+   * @hidden
+   * @param json - Response object
+   * @returns Extended response object
+   */
+  _toCollectionPage(json) {
+    for (let i = 0; i < json._embedded.records.length; i += 1) {
+      json._embedded.records[i] = this._parseRecord(json._embedded.records[i]);
+    }
+    return {
+      records: json._embedded.records,
+      next: async () => {
+        const r = await this._sendNormalRequest(
+          new URL(json._links.next.href, this.url)
+        );
+        return this._toCollectionPage(r);
+      },
+      prev: async () => {
+        const r = await this._sendNormalRequest(
+          new URL(json._links.prev.href, this.url)
+        );
+        return this._toCollectionPage(r);
+      }
+    };
+  }
+  /**
+   * @hidden
+   * @param error - Network error object
+   * @returns Promise that rejects with a human-readable error
+   */
+  async _handleNetworkError(error) {
+    if (error.response && error.response.status) {
+      switch (error.response.status) {
+        case 404:
+          return Promise.reject(
+            new NotFoundError(
+              error.response.statusText ?? "Not Found",
+              error.response.data
+            )
+          );
+        default:
+          return Promise.reject(
+            new NetworkError(
+              error.response.statusText ?? "Unknown",
+              error.response.data
+            )
+          );
+      }
+    } else {
+      return Promise.reject(new Error(error.message));
+    }
+  }
+};
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/horizon/account_call_builder.js
+init_shim();
+var AccountCallBuilder = class extends CallBuilder {
+  constructor(serverUrl, httpClient) {
+    super(serverUrl, httpClient);
+    this.setPath("accounts");
+  }
+  /**
+   * Returns information and links relating to a single account.
+   * The balances section in the returned JSON will also list all the trust lines this account has set up.
+   *
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/retrieve-an-account | Account Details}
+   * @param id - For example: `GDGQVOKHW4VEJRU2TETD6DBRKEO5ERCNF353LW5WBFW3JJWQ2BRQ6KDD`
+   * @returns a new CallBuilder instance for the /accounts/:id endpoint
+   */
+  accountId(id) {
+    const builder = new CallBuilder(
+      new URL(this.url),
+      this.httpClient
+    );
+    builder.filter.push([id]);
+    return builder;
+  }
+  /**
+   * This endpoint filters accounts by signer account.
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/list-all-accounts | Accounts}
+   * @param id - For example: `GDGQVOKHW4VEJRU2TETD6DBRKEO5ERCNF353LW5WBFW3JJWQ2BRQ6KDD`
+   * @returns current AccountCallBuilder instance
+   */
+  forSigner(id) {
+    this.url.searchParams.set("signer", id);
+    return this;
+  }
+  /**
+   * This endpoint filters all accounts who are trustees to an asset.
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/list-all-accounts | Accounts}
+   * @see Asset
+   * @param asset - For example: `new Asset('USD','GDGQVOKHW4VEJRU2TETD6DBRKEO5ERCNF353LW5WBFW3JJWQ2BRQ6KDD')`
+   * @returns current AccountCallBuilder instance
+   */
+  forAsset(asset2) {
+    this.url.searchParams.set("asset", `${asset2}`);
+    return this;
+  }
+  /**
+   * This endpoint filters accounts where the given account is sponsoring the account or any of its sub-entries..
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/list-all-accounts | Accounts}
+   * @param id - For example: `GDGQVOKHW4VEJRU2TETD6DBRKEO5ERCNF353LW5WBFW3JJWQ2BRQ6KDD`
+   * @returns current AccountCallBuilder instance
+   */
+  sponsor(id) {
+    this.url.searchParams.set("sponsor", id);
+    return this;
+  }
+  /**
+   * This endpoint filters accounts holding a trustline to the given liquidity pool.
+   *
+   * @param id - The ID of the liquidity pool. For example: `dd7b1ab831c273310ddbec6f97870aa83c2fbd78ce22aded37ecbf4f3380fac7`.
+   * @returns current AccountCallBuilder instance
+   */
+  forLiquidityPool(id) {
+    this.url.searchParams.set("liquidity_pool", id);
+    return this;
+  }
+};
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/horizon/assets_call_builder.js
+init_shim();
+var AssetsCallBuilder = class extends CallBuilder {
+  constructor(serverUrl, httpClient) {
+    super(serverUrl, httpClient);
+    this.setPath("assets");
+  }
+  /**
+   * This endpoint filters all assets by the asset code.
+   * @param value - For example: `USD`
+   * @returns current AssetCallBuilder instance
+   */
+  forCode(value) {
+    this.url.searchParams.set("asset_code", value);
+    return this;
+  }
+  /**
+   * This endpoint filters all assets by the asset issuer.
+   * @param value - For example: `GDGQVOKHW4VEJRU2TETD6DBRKEO5ERCNF353LW5WBFW3JJWQ2BRQ6KDD`
+   * @returns current AssetCallBuilder instance
+   */
+  forIssuer(value) {
+    this.url.searchParams.set("asset_issuer", value);
+    return this;
+  }
+};
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/horizon/claimable_balances_call_builder.js
+init_shim();
+var ClaimableBalanceCallBuilder = class extends CallBuilder {
+  constructor(serverUrl, httpClient) {
+    super(serverUrl, httpClient);
+    this.setPath("claimable_balances");
+  }
+  /**
+   * The claimable balance details endpoint provides information on a single claimable balance.
+   *
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/retrieve-a-claimable-balance | Claimable Balance Details}
+   * @param claimableBalanceId - Claimable balance ID
+   * @returns `CallBuilder<ServerApi.ClaimableBalanceRecord>` OperationCallBuilder instance
+   */
+  claimableBalance(claimableBalanceId) {
+    const builder = new CallBuilder(
+      new URL(this.url),
+      this.httpClient
+    );
+    builder.filter.push([claimableBalanceId]);
+    return builder;
+  }
+  /**
+   * Returns all claimable balances which are sponsored by the given account ID.
+   *
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/list-all-claimable-balances | Claimable Balances}
+   * @param sponsor - For example: `GDGQVOKHW4VEJRU2TETD6DBRKEO5ERCNF353LW5WBFW3JJWQ2BRQ6KDD`
+   * @returns current ClaimableBalanceCallBuilder instance
+   */
+  sponsor(sponsor) {
+    this.url.searchParams.set("sponsor", sponsor);
+    return this;
+  }
+  /**
+   * Returns all claimable balances which can be claimed by the given account ID.
+   *
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/list-all-claimable-balances | Claimable Balances}
+   * @param claimant - For example: `GDGQVOKHW4VEJRU2TETD6DBRKEO5ERCNF353LW5WBFW3JJWQ2BRQ6KDD`
+   * @returns current ClaimableBalanceCallBuilder instance
+   */
+  claimant(claimant) {
+    this.url.searchParams.set("claimant", claimant);
+    return this;
+  }
+  /**
+   * Returns all claimable balances which provide a balance for the given asset.
+   *
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/list-all-claimable-balances | Claimable Balances}
+   * @param asset - The Asset held by the claimable balance
+   * @returns current ClaimableBalanceCallBuilder instance
+   */
+  asset(asset2) {
+    this.url.searchParams.set("asset", asset2.toString());
+    return this;
+  }
+};
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/horizon/effect_call_builder.js
+init_shim();
+var EffectCallBuilder = class extends CallBuilder {
+  constructor(serverUrl, httpClient) {
+    super(serverUrl, httpClient, "effects");
+    this.setPath("effects");
+  }
+  /**
+   * This endpoint represents all effects that changed a given account. It will return relevant effects from the creation of the account to the current ledger.
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/get-effects-by-account-id | Effects for Account}
+   * @param accountId - For example: `GDGQVOKHW4VEJRU2TETD6DBRKEO5ERCNF353LW5WBFW3JJWQ2BRQ6KDD`
+   * @returns this EffectCallBuilder instance
+   */
+  forAccount(accountId) {
+    return this.forEndpoint("accounts", accountId);
+  }
+  /**
+   * Effects are the specific ways that the ledger was changed by any operation.
+   *
+   * This endpoint represents all effects that occurred in the given ledger.
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/retrieve-a-ledgers-effects | Effects for Ledger}
+   * @param sequence - Ledger sequence
+   * @returns this EffectCallBuilder instance
+   */
+  forLedger(sequence) {
+    return this.forEndpoint("ledgers", sequence.toString());
+  }
+  /**
+   * This endpoint represents all effects that occurred as a result of a given transaction.
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/retrieve-a-transactions-effects | Effects for Transaction}
+   * @param transactionId - Transaction ID
+   * @returns this EffectCallBuilder instance
+   */
+  forTransaction(transactionId) {
+    return this.forEndpoint("transactions", transactionId);
+  }
+  /**
+   * This endpoint represents all effects that occurred as a result of a given operation.
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/retrieve-an-operations-effects | Effects for Operation}
+   * @param operationId - Operation ID
+   * @returns this EffectCallBuilder instance
+   */
+  forOperation(operationId) {
+    return this.forEndpoint("operations", operationId);
+  }
+  /**
+   * This endpoint represents all effects involving a particular liquidity pool.
+   *
+   * @param poolId - liquidity pool ID
+   * @returns this EffectCallBuilder instance
+   */
+  forLiquidityPool(poolId) {
+    return this.forEndpoint("liquidity_pools", poolId);
+  }
+};
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/horizon/friendbot_builder.js
+init_shim();
+var FriendbotBuilder = class extends CallBuilder {
+  constructor(serverUrl, httpClient, address) {
+    super(serverUrl, httpClient);
+    this.setPath("friendbot");
+    this.url.searchParams.set("addr", address);
+  }
+};
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/horizon/ledger_call_builder.js
+init_shim();
+var LedgerCallBuilder = class extends CallBuilder {
+  constructor(serverUrl, httpClient) {
+    super(serverUrl, httpClient);
+    this.setPath("ledgers");
+  }
+  /**
+   * Provides information on a single ledger.
+   * @param sequence - Ledger sequence
+   * @returns current LedgerCallBuilder instance
+   */
+  ledger(sequence) {
+    this.filter.push(["ledgers", sequence.toString()]);
+    return this;
+  }
+};
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/horizon/liquidity_pool_call_builder.js
+init_shim();
+var LiquidityPoolCallBuilder = class extends CallBuilder {
+  constructor(serverUrl, httpClient) {
+    super(serverUrl, httpClient);
+    this.setPath("liquidity_pools");
+  }
+  /**
+   * Filters out pools whose reserves don't exactly match these assets.
+   *
+   * @see Asset
+   * @returns current LiquidityPoolCallBuilder instance
+   */
+  forAssets(...assets) {
+    const assetList = assets.map((asset2) => asset2.toString()).join(",");
+    this.url.searchParams.set("reserves", assetList);
+    return this;
+  }
+  /**
+   * Retrieves all pools an account is participating in.
+   *
+   * @param id - the participant account to filter by
+   * @returns current LiquidityPoolCallBuilder instance
+   */
+  forAccount(id) {
+    this.url.searchParams.set("account", id);
+    return this;
+  }
+  /**
+   * Retrieves a specific liquidity pool by ID.
+   *
+   * @param id - the hash/ID of the liquidity pool
+   * @returns a new CallBuilder instance for the /liquidity_pools/:id endpoint
+   */
+  liquidityPoolId(id) {
+    if (!id.match(/[a-fA-F0-9]{64}/)) {
+      throw new TypeError(`${id} does not look like a liquidity pool ID`);
+    }
+    const builder = new CallBuilder(
+      new URL(this.url),
+      this.httpClient
+    );
+    builder.filter.push([id.toLowerCase()]);
+    return builder;
+  }
+};
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/horizon/offer_call_builder.js
+init_shim();
+var OfferCallBuilder = class extends CallBuilder {
+  constructor(serverUrl, httpClient) {
+    super(serverUrl, httpClient, "offers");
+    this.setPath("offers");
+  }
+  /**
+   * The offer details endpoint provides information on a single offer. The offer ID provided in the id
+   * argument specifies which offer to load.
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/offers/single/ | Offer Details}
+   * @param offerId - Offer ID
+   * @returns `CallBuilder<ServerApi.OfferRecord>` OperationCallBuilder instance
+   */
+  offer(offerId) {
+    const builder = new CallBuilder(
+      new URL(this.url),
+      this.httpClient
+    );
+    builder.filter.push([offerId]);
+    return builder;
+  }
+  /**
+   * Returns all offers where the given account is involved.
+   *
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/accounts/offers/ | Offers}
+   * @param id - For example: `GDGQVOKHW4VEJRU2TETD6DBRKEO5ERCNF353LW5WBFW3JJWQ2BRQ6KDD`
+   * @returns current OfferCallBuilder instance
+   */
+  forAccount(id) {
+    return this.forEndpoint("accounts", id);
+  }
+  /**
+   * Returns all offers buying an asset.
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/offers/list/ | Offers}
+   * @see Asset
+   * @param asset - For example: `new Asset('USD','GDGQVOKHW4VEJRU2TETD6DBRKEO5ERCNF353LW5WBFW3JJWQ2BRQ6KDD')`
+   * @returns current OfferCallBuilder instance
+   */
+  buying(asset2) {
+    const issuer = asset2.getIssuer();
+    if (!asset2.isNative() && issuer !== void 0) {
+      this.url.searchParams.set("buying_asset_type", asset2.getAssetType());
+      this.url.searchParams.set("buying_asset_code", asset2.getCode());
+      this.url.searchParams.set("buying_asset_issuer", issuer);
+    } else {
+      this.url.searchParams.set("buying_asset_type", "native");
+    }
+    return this;
+  }
+  /**
+   * Returns all offers selling an asset.
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/offers/list/ | Offers}
+   * @see Asset
+   * @param asset - For example: `new Asset('EUR','GDGQVOKHW4VEJRU2TETD6DBRKEO5ERCNF353LW5WBFW3JJWQ2BRQ6KDD')`
+   * @returns current OfferCallBuilder instance
+   */
+  selling(asset2) {
+    const issuer = asset2.getIssuer();
+    if (!asset2.isNative() && issuer !== void 0) {
+      this.url.searchParams.set("selling_asset_type", asset2.getAssetType());
+      this.url.searchParams.set("selling_asset_code", asset2.getCode());
+      this.url.searchParams.set("selling_asset_issuer", issuer);
+    } else {
+      this.url.searchParams.set("selling_asset_type", "native");
+    }
+    return this;
+  }
+  /**
+   * This endpoint filters offers where the given account is sponsoring the offer entry.
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/get-all-offers | Offers}
+   * @param id - For example: `GDGQVOKHW4VEJRU2TETD6DBRKEO5ERCNF353LW5WBFW3JJWQ2BRQ6KDD`
+   * @returns current OfferCallBuilder instance
+   */
+  sponsor(id) {
+    this.url.searchParams.set("sponsor", id);
+    return this;
+  }
+  /**
+   * This endpoint filters offers where the given account is the seller.
+   *
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/get-all-offers | Offers}
+   * @param seller - For example: `GDGQVOKHW4VEJRU2TETD6DBRKEO5ERCNF353LW5WBFW3JJWQ2BRQ6KDD`
+   * @returns current OfferCallBuilder instance
+   */
+  seller(seller) {
+    this.url.searchParams.set("seller", seller);
+    return this;
+  }
+};
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/horizon/operation_call_builder.js
+init_shim();
+var OperationCallBuilder = class extends CallBuilder {
+  constructor(serverUrl, httpClient) {
+    super(serverUrl, httpClient, "operations");
+    this.setPath("operations");
+  }
+  /**
+   * The operation details endpoint provides information on a single operation. The operation ID provided in the id
+   * argument specifies which operation to load.
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/retrieve-an-operation | Operation Details}
+   * @param operationId - Operation ID
+   * @returns this OperationCallBuilder instance
+   */
+  operation(operationId) {
+    const builder = new CallBuilder(
+      new URL(this.url),
+      this.httpClient
+    );
+    builder.filter.push([operationId]);
+    return builder;
+  }
+  /**
+   * This endpoint represents all operations that were included in valid transactions that affected a particular account.
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/get-operations-by-account-id | Operations for Account}
+   * @param accountId - For example: `GDGQVOKHW4VEJRU2TETD6DBRKEO5ERCNF353LW5WBFW3JJWQ2BRQ6KDD`
+   * @returns this OperationCallBuilder instance
+   */
+  forAccount(accountId) {
+    return this.forEndpoint("accounts", accountId);
+  }
+  /**
+   * This endpoint represents all operations that reference a given claimable_balance.
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/cb-retrieve-related-operations | Operations for Claimable Balance}
+   * @param claimableBalanceId - Claimable Balance ID
+   * @returns this OperationCallBuilder instance
+   */
+  forClaimableBalance(claimableBalanceId) {
+    return this.forEndpoint("claimable_balances", claimableBalanceId);
+  }
+  /**
+   * This endpoint returns all operations that occurred in a given ledger.
+   *
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/retrieve-a-ledgers-operations | Operations for Ledger}
+   * @param sequence - Ledger sequence
+   * @returns this OperationCallBuilder instance
+   */
+  forLedger(sequence) {
+    return this.forEndpoint("ledgers", sequence.toString());
+  }
+  /**
+   * This endpoint represents all operations that are part of a given transaction.
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/retrieve-a-transactions-operations | Operations for Transaction}
+   * @param transactionId - Transaction ID
+   * @returns this OperationCallBuilder instance
+   */
+  forTransaction(transactionId) {
+    return this.forEndpoint("transactions", transactionId);
+  }
+  /**
+   * This endpoint represents all operations involving a particular liquidity pool.
+   *
+   * @param poolId - liquidity pool ID
+   * @returns this OperationCallBuilder instance
+   */
+  forLiquidityPool(poolId) {
+    return this.forEndpoint("liquidity_pools", poolId);
+  }
+  /**
+   * Adds a parameter defining whether to include failed transactions.
+   *   By default, only operations of successful transactions are returned.
+   *
+   * @param value - Set to `true` to include operations of failed transactions.
+   * @returns this OperationCallBuilder instance
+   */
+  includeFailed(value) {
+    this.url.searchParams.set("include_failed", value.toString());
+    return this;
+  }
+};
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/horizon/orderbook_call_builder.js
+init_shim();
+var OrderbookCallBuilder = class extends CallBuilder {
+  constructor(serverUrl, httpClient, selling, buying) {
+    super(serverUrl, httpClient);
+    this.setPath("order_book");
+    const sellingIssuer = selling.getIssuer();
+    if (!selling.isNative() && sellingIssuer !== void 0) {
+      this.url.searchParams.set("selling_asset_type", selling.getAssetType());
+      this.url.searchParams.set("selling_asset_code", selling.getCode());
+      this.url.searchParams.set("selling_asset_issuer", sellingIssuer);
+    } else {
+      this.url.searchParams.set("selling_asset_type", "native");
+    }
+    const buyingIssuer = buying.getIssuer();
+    if (!buying.isNative() && buyingIssuer !== void 0) {
+      this.url.searchParams.set("buying_asset_type", buying.getAssetType());
+      this.url.searchParams.set("buying_asset_code", buying.getCode());
+      this.url.searchParams.set("buying_asset_issuer", buyingIssuer);
+    } else {
+      this.url.searchParams.set("buying_asset_type", "native");
+    }
+  }
+};
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/horizon/payment_call_builder.js
+init_shim();
+var PaymentCallBuilder = class extends CallBuilder {
+  constructor(serverUrl, httpClient) {
+    super(serverUrl, httpClient, "payments");
+    this.setPath("payments");
+  }
+  /**
+   * This endpoint responds with a collection of Payment operations where the given account was either the sender or receiver.
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/horizon/resources/get-payments-by-account-id | Payments for Account}
+   * @param accountId - For example: `GDGQVOKHW4VEJRU2TETD6DBRKEO5ERCNF353LW5WBFW3JJWQ2BRQ6KDD`
+   * @returns this PaymentCallBuilder instance
+   */
+  forAccount(accountId) {
+    return this.forEndpoint("accounts", accountId);
+  }
+  /**
+   * This endpoint represents all payment operations that are part of a valid transactions in a given ledger.
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/horizon/resources/retrieve-a-ledgers-payments | Payments for Ledger}
+   * @param sequence - Ledger sequence
+   * @returns this PaymentCallBuilder instance
+   */
+  forLedger(sequence) {
+    return this.forEndpoint("ledgers", sequence.toString());
+  }
+  /**
+   * This endpoint represents all payment operations that are part of a given transaction.
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/transactions/payments/ | Payments for Transaction}
+   * @param transactionId - Transaction ID
+   * @returns this PaymentCallBuilder instance
+   */
+  forTransaction(transactionId) {
+    return this.forEndpoint("transactions", transactionId);
+  }
+  /**
+   * Adds a parameter defining whether to include failed transactions.
+   *   By default, only operations of successful transactions are returned.
+   *
+   * @param value - Set to `true` to include operations of failed transactions.
+   * @returns this PaymentCallBuilder instance
+   */
+  includeFailed(value) {
+    this.url.searchParams.set("include_failed", value.toString());
+    return this;
+  }
+};
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/horizon/strict_receive_path_call_builder.js
+init_shim();
+var StrictReceivePathCallBuilder = class extends CallBuilder {
+  constructor(serverUrl, httpClient, source, destinationAsset, destinationAmount) {
+    super(serverUrl, httpClient);
+    this.setPath("paths/strict-receive");
+    if (typeof source === "string") {
+      this.url.searchParams.set("source_account", source);
+    } else {
+      const assets = source.map((asset2) => {
+        if (asset2.isNative()) {
+          return "native";
+        }
+        return `${asset2.getCode()}:${asset2.getIssuer()}`;
+      }).join(",");
+      this.url.searchParams.set("source_assets", assets);
+    }
+    this.url.searchParams.set("destination_amount", destinationAmount);
+    const issuer = destinationAsset.getIssuer();
+    if (!destinationAsset.isNative() && issuer !== void 0) {
+      this.url.searchParams.set(
+        "destination_asset_type",
+        destinationAsset.getAssetType()
+      );
+      this.url.searchParams.set(
+        "destination_asset_code",
+        destinationAsset.getCode()
+      );
+      this.url.searchParams.set("destination_asset_issuer", issuer);
+    } else {
+      this.url.searchParams.set("destination_asset_type", "native");
+    }
+  }
+};
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/horizon/strict_send_path_call_builder.js
+init_shim();
+var StrictSendPathCallBuilder = class extends CallBuilder {
+  constructor(serverUrl, httpClient, sourceAsset, sourceAmount, destination) {
+    super(serverUrl, httpClient);
+    this.setPath("paths/strict-send");
+    const sourceIssuer = sourceAsset.getIssuer();
+    if (sourceAsset.isNative()) {
+      this.url.searchParams.set("source_asset_type", "native");
+    } else if (sourceIssuer !== void 0) {
+      this.url.searchParams.set(
+        "source_asset_type",
+        sourceAsset.getAssetType()
+      );
+      this.url.searchParams.set("source_asset_code", sourceAsset.getCode());
+      this.url.searchParams.set("source_asset_issuer", sourceIssuer);
+    }
+    this.url.searchParams.set("source_amount", sourceAmount);
+    if (typeof destination === "string") {
+      this.url.searchParams.set("destination_account", destination);
+    } else {
+      const assets = destination.map((asset2) => {
+        if (asset2.isNative()) {
+          return "native";
+        }
+        return `${asset2.getCode()}:${asset2.getIssuer()}`;
+      }).join(",");
+      this.url.searchParams.set("destination_assets", assets);
+    }
+  }
+};
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/horizon/trade_aggregation_call_builder.js
+init_shim();
+var allowedResolutions = [
+  6e4,
+  3e5,
+  9e5,
+  36e5,
+  864e5,
+  6048e5
+];
+var TradeAggregationCallBuilder = class extends CallBuilder {
+  constructor(serverUrl, httpClient, base, counter, start_time, end_time, resolution, offset) {
+    super(serverUrl, httpClient);
+    this.setPath("trade_aggregations");
+    const baseIssuer = base.getIssuer();
+    if (!base.isNative() && baseIssuer !== void 0) {
+      this.url.searchParams.set("base_asset_type", base.getAssetType());
+      this.url.searchParams.set("base_asset_code", base.getCode());
+      this.url.searchParams.set("base_asset_issuer", baseIssuer);
+    } else {
+      this.url.searchParams.set("base_asset_type", "native");
+    }
+    const counterIssuer = counter.getIssuer();
+    if (!counter.isNative() && counterIssuer !== void 0) {
+      this.url.searchParams.set("counter_asset_type", counter.getAssetType());
+      this.url.searchParams.set("counter_asset_code", counter.getCode());
+      this.url.searchParams.set("counter_asset_issuer", counterIssuer);
+    } else {
+      this.url.searchParams.set("counter_asset_type", "native");
+    }
+    if (typeof start_time !== "number" || typeof end_time !== "number") {
+      throw new BadRequestError("Invalid time bounds", [start_time, end_time]);
+    } else {
+      this.url.searchParams.set("start_time", start_time.toString());
+      this.url.searchParams.set("end_time", end_time.toString());
+    }
+    if (!this.isValidResolution(resolution)) {
+      throw new BadRequestError("Invalid resolution", resolution);
+    } else {
+      this.url.searchParams.set("resolution", resolution.toString());
+    }
+    if (!this.isValidOffset(offset, resolution)) {
+      throw new BadRequestError("Invalid offset", offset);
+    } else {
+      this.url.searchParams.set("offset", offset.toString());
+    }
+  }
+  /**
+   * @hidden
+   * @param resolution - Trade data resolution in milliseconds
+   * @returns true if the resolution is allowed
+   */
+  isValidResolution(resolution) {
+    return allowedResolutions.some((allowed) => allowed === resolution);
+  }
+  /**
+   * @hidden
+   * @param offset - Time offset in milliseconds
+   * @param resolution - Trade data resolution in milliseconds
+   * @returns true if the offset is valid
+   */
+  isValidOffset(offset, resolution) {
+    const hour = 36e5;
+    return !(offset > resolution || offset >= 24 * hour || offset % hour !== 0);
+  }
+};
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/horizon/trades_call_builder.js
+init_shim();
+var TradesCallBuilder = class extends CallBuilder {
+  constructor(serverUrl, httpClient) {
+    super(serverUrl, httpClient, "trades");
+    this.setPath("trades");
+  }
+  /**
+   * Filter trades for a specific asset pair (orderbook)
+   * @param base - asset
+   * @param counter - asset
+   * @returns current TradesCallBuilder instance
+   */
+  forAssetPair(base, counter) {
+    const baseIssuer = base.getIssuer();
+    if (!base.isNative() && baseIssuer !== void 0) {
+      this.url.searchParams.set("base_asset_type", base.getAssetType());
+      this.url.searchParams.set("base_asset_code", base.getCode());
+      this.url.searchParams.set("base_asset_issuer", baseIssuer);
+    } else {
+      this.url.searchParams.set("base_asset_type", "native");
+    }
+    const counterIssuer = counter.getIssuer();
+    if (!counter.isNative() && counterIssuer !== void 0) {
+      this.url.searchParams.set("counter_asset_type", counter.getAssetType());
+      this.url.searchParams.set("counter_asset_code", counter.getCode());
+      this.url.searchParams.set("counter_asset_issuer", counterIssuer);
+    } else {
+      this.url.searchParams.set("counter_asset_type", "native");
+    }
+    return this;
+  }
+  /**
+   * Filter trades for a specific offer
+   * @param offerId - ID of the offer
+   * @returns current TradesCallBuilder instance
+   */
+  forOffer(offerId) {
+    this.url.searchParams.set("offer_id", offerId);
+    return this;
+  }
+  /**
+   * Filter trades by a specific type.
+   * @param tradeType - the trade type to filter by.
+   * @returns current TradesCallBuilder instance.
+   */
+  forType(tradeType) {
+    this.url.searchParams.set("trade_type", tradeType);
+    return this;
+  }
+  /**
+   * Filter trades for a specific account
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/get-trades-by-account-id | Trades for Account}
+   * @param accountId - For example: `GBYTR4MC5JAX4ALGUBJD7EIKZVM7CUGWKXIUJMRSMK573XH2O7VAK3SR`
+   * @returns current TradesCallBuilder instance
+   */
+  forAccount(accountId) {
+    return this.forEndpoint("accounts", accountId);
+  }
+  /**
+   * Filter trades for a specific liquidity pool
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/retrieve-related-trades | Trades for Liquidity Pool}
+   * @param liquidityPoolId - For example: `3b476aff8a406a6ec3b61d5c038009cef85f2ddfaf616822dc4fec92845149b4`
+   * @returns current TradesCallBuilder instance
+   */
+  forLiquidityPool(liquidityPoolId) {
+    return this.forEndpoint("liquidity_pools", liquidityPoolId);
+  }
+};
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/horizon/transaction_call_builder.js
+init_shim();
+var TransactionCallBuilder = class extends CallBuilder {
+  constructor(serverUrl, httpClient) {
+    super(serverUrl, httpClient, "transactions");
+    this.setPath("transactions");
+  }
+  /**
+   * The transaction details endpoint provides information on a single transaction. The transaction hash provided in the hash argument specifies which transaction to load.
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/retrieve-a-transaction | Transaction Details}
+   * @param transactionId - Transaction ID
+   * @returns a CallBuilder instance
+   */
+  transaction(transactionId) {
+    const builder = new CallBuilder(
+      new URL(this.url),
+      this.httpClient
+    );
+    builder.filter.push([transactionId]);
+    return builder;
+  }
+  /**
+   * This endpoint represents all transactions that affected a given account.
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/get-transactions-by-account-id | Transactions for Account}
+   * @param accountId - For example: `GDGQVOKHW4VEJRU2TETD6DBRKEO5ERCNF353LW5WBFW3JJWQ2BRQ6KDD`
+   * @returns current TransactionCallBuilder instance
+   */
+  forAccount(accountId) {
+    return this.forEndpoint("accounts", accountId);
+  }
+  /**
+   * This endpoint represents all transactions that reference a given claimable_balance.
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/cb-retrieve-related-transactions | Transactions for Claimable Balance}
+   * @param claimableBalanceId - Claimable Balance ID
+   * @returns this TransactionCallBuilder instance
+   */
+  forClaimableBalance(claimableBalanceId) {
+    return this.forEndpoint("claimable_balances", claimableBalanceId);
+  }
+  /**
+   * This endpoint represents all transactions in a given ledger.
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/retrieve-a-ledgers-transactions | Transactions for Ledger}
+   * @param sequence - Ledger sequence
+   * @returns current TransactionCallBuilder instance
+   */
+  forLedger(sequence) {
+    return this.forEndpoint("ledgers", sequence.toString());
+  }
+  /**
+   * This endpoint represents all transactions involving a particular liquidity pool.
+   *
+   * @param poolId - liquidity pool ID
+   * @returns this TransactionCallBuilder instance
+   */
+  forLiquidityPool(poolId) {
+    return this.forEndpoint("liquidity_pools", poolId);
+  }
+  /**
+   * Adds a parameter defining whether to include failed transactions. By default only successful transactions are
+   * returned.
+   * @param value - Set to `true` to include failed transactions.
+   * @returns current TransactionCallBuilder instance
+   */
+  includeFailed(value) {
+    this.url.searchParams.set("include_failed", value.toString());
+    return this;
+  }
+};
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/horizon/server.js
+var SUBMIT_TRANSACTION_TIMEOUT = 60 * 1e3;
+var STROOPS_IN_LUMEN = 1e7;
+var ACCOUNT_REQUIRES_MEMO = "MQ==";
+function getAmountInLumens(amt) {
+  return new BigNumber2(amt).div(STROOPS_IN_LUMEN).toString();
+}
+function toSubmissionError(error) {
+  return wrapHttpError(error, (details) => {
+    const message = `Transaction submission failed. Server responded: ${details.status} ${details.statusText}`;
+    return details.data?.extras?.result_codes ? new TransactionFailedError(message, details) : new BadResponseError(message, details);
+  });
+}
+var HorizonServer = class {
+  /**
+   * Horizon Server URL (ex. `https://horizon-testnet.stellar.org`)
+   *
+   * TODO: Solve `this.serverURL`.
+   */
+  serverURL;
+  /**
+   * HTTP client instance for making requests to Horizon.
+   * Exposes interceptors, defaults, and other configuration options.
+   *
+   * @example
+   * ```ts
+   * // Add authentication header
+   * server.httpClient.defaults.headers['Authorization'] = 'Bearer token';
+   *
+   * // Add request interceptor
+   * server.httpClient.interceptors.request.use((config) => {
+   *   console.log('Request:', config.url);
+   *   return config;
+   * });
+   * ```
+   */
+  httpClient;
+  constructor(serverURL, opts = {}) {
+    this.serverURL = new URL(serverURL);
+    const allowHttp = typeof opts.allowHttp === "undefined" ? Config.isAllowHttp() : opts.allowHttp;
+    const customHeaders = {};
+    if (opts.appName) {
+      customHeaders["X-App-Name"] = opts.appName;
+    }
+    if (opts.appVersion) {
+      customHeaders["X-App-Version"] = opts.appVersion;
+    }
+    if (opts.authToken) {
+      customHeaders["X-Auth-Token"] = opts.authToken;
+    }
+    if (opts.headers) {
+      Object.assign(customHeaders, opts.headers);
+    }
+    this.httpClient = createHttpClient(customHeaders);
+    if (this.serverURL.protocol !== "https:" && !allowHttp) {
+      throw new Error("Cannot connect to insecure horizon server");
+    }
+  }
+  /**
+   * Get timebounds for N seconds from now, when you're creating a transaction
+   * with {@link TransactionBuilder}.
+   *
+   * By default, {@link TransactionBuilder} uses the current local time, but
+   * your machine's local time could be different from Horizon's. This gives you
+   * more assurance that your timebounds will reflect what you want.
+   *
+   * Note that this will generate your timebounds when you **init the transaction**,
+   * not when you build or submit the transaction! So give yourself enough time to get
+   * the transaction built and signed before submitting.
+   *
+   * @example
+   * ```ts
+   * const transaction = new StellarSdk.TransactionBuilder(accountId, {
+   *   fee: await StellarSdk.Server.fetchBaseFee(),
+   *   timebounds: await StellarSdk.Server.fetchTimebounds(100)
+   * })
+   *   .addOperation(operation)
+   *   // normally we would need to call setTimeout here, but setting timebounds
+   *   // earlier does the trick!
+   *   .build();
+   * ```
+   *
+   * @param seconds - Number of seconds past the current time to wait.
+   * @param _isRetry - (optional) True if this is a retry. Only set this internally!
+   * This is to avoid a scenario where Horizon is horking up the wrong date.
+   * @returns Promise that resolves a `Timebounds` object
+   * (with the shape `{ minTime: 0, maxTime: N }`) that you can set the `timebounds` option to.
+   */
+  async fetchTimebounds(seconds, _isRetry = false) {
+    const serverPort = this.serverURL.port;
+    const serverKey = serverPort ? `${this.serverURL.hostname}:${serverPort}` : this.serverURL.hostname;
+    const currentTime = getCurrentServerTime(serverKey);
+    if (currentTime) {
+      return {
+        minTime: 0,
+        maxTime: currentTime + seconds
+      };
+    }
+    if (_isRetry) {
+      return {
+        minTime: 0,
+        maxTime: Math.floor((/* @__PURE__ */ new Date()).getTime() / 1e3) + seconds
+      };
+    }
+    await this.httpClient.get(this.serverURL.toString());
+    return this.fetchTimebounds(seconds, true);
+  }
+  /**
+   * Fetch the base fee. Since this hits the server, if the server call fails,
+   * you might get an error. You should be prepared to use a default value if
+   * that happens!
+   * @returns Promise that resolves to the base fee.
+   */
+  async fetchBaseFee() {
+    const response = await this.feeStats();
+    return parseInt(response.last_ledger_base_fee, 10) || 100;
+  }
+  /**
+   * Fetch the fee stats endpoint.
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/aggregations/fee-stats | Fee Stats}
+   * @returns Promise that resolves to the fee stats returned by Horizon.
+   */
+  async feeStats() {
+    const cb = new CallBuilder(
+      this.serverURL,
+      this.httpClient
+    );
+    cb.filter.push(["fee_stats"]);
+    return cb.call();
+  }
+  /**
+   * Fetch the Horizon server's root endpoint.
+   * @returns Promise that resolves to the root endpoint returned by Horizon.
+   */
+  async root() {
+    const cb = new CallBuilder(
+      this.serverURL,
+      this.httpClient
+    );
+    return cb.call();
+  }
+  /**
+   * Submits a transaction to the network.
+   *
+   * By default this function calls {@link Horizon.Server.checkMemoRequired}, you can
+   * skip this check by setting the option `skipMemoRequiredCheck` to `true`.
+   *
+   * If you submit any number of `manageOffer` operations, this will add an
+   * attribute to the response that will help you analyze what happened with
+   * your offers.
+   *
+   * For example, you'll want to examine `offerResults` to add affordances like
+   * these to your app:
+   * - If `wasImmediatelyFilled` is true, then no offer was created. So if you
+   *   normally watch the `Server.offers` endpoint for offer updates, you
+   *   instead need to check `Server.trades` to find the result of this filled
+   *   offer.
+   * - If `wasImmediatelyDeleted` is true, then the offer you submitted was
+   *   deleted without reaching the orderbook or being matched (possibly because
+   *   your amounts were rounded down to zero). So treat the just-submitted
+   *   offer request as if it never happened.
+   * - If `wasPartiallyFilled` is true, you can tell the user that
+   *   `amountBought` or `amountSold` have already been transferred.
+   *
+   * @example
+   * ```ts
+   * const res = {
+   *   ...response,
+   *   offerResults: [
+   *     {
+   *       // Exact ordered list of offers that executed, with the exception
+   *       // that the last one may not have executed entirely.
+   *       offersClaimed: [
+   *         sellerId: String,
+   *         offerId: String,
+   *         assetSold: {
+   *           type: 'native|credit_alphanum4|credit_alphanum12',
+   *
+   *           // these are only present if the asset is not native
+   *           assetCode: String,
+   *           issuer: String,
+   *         },
+   *
+   *         // same shape as assetSold
+   *         assetBought: {}
+   *       ],
+   *
+   *       // What effect your manageOffer op had
+   *       effect: "manageOfferCreated|manageOfferUpdated|manageOfferDeleted",
+   *
+   *       // Whether your offer immediately got matched and filled
+   *       wasImmediatelyFilled: Boolean,
+   *
+   *       // Whether your offer immediately got deleted, if for example the order was too small
+   *       wasImmediatelyDeleted: Boolean,
+   *
+   *       // Whether the offer was partially, but not completely, filled
+   *       wasPartiallyFilled: Boolean,
+   *
+   *       // The full requested amount of the offer is open for matching
+   *       isFullyOpen: Boolean,
+   *
+   *       // The total amount of tokens bought / sold during transaction execution
+   *       amountBought: Number,
+   *       amountSold: Number,
+   *
+   *       // if the offer was created, updated, or partially filled, this is
+   *       // the outstanding offer
+   *       currentOffer: {
+   *         offerId: String,
+   *         amount: String,
+   *         price: {
+   *           n: String,
+   *           d: String,
+   *         },
+   *
+   *         selling: {
+   *           type: 'native|credit_alphanum4|credit_alphanum12',
+   *
+   *           // these are only present if the asset is not native
+   *           assetCode: String,
+   *           issuer: String,
+   *         },
+   *
+   *         // same as `selling`
+   *         buying: {},
+   *       },
+   *
+   *       // the index of this particular operation in the op stack
+   *       operationIndex: Number
+   *     }
+   *   ]
+   * }
+   * ```
+   *
+   * @see {@link https://developers.stellar.org/docs/data/horizon/api-reference/resources/submit-a-transaction | Submit a Transaction}
+   * @param transaction - The transaction to submit.
+   * @param opts - (optional) Options object
+   *   - `skipMemoRequiredCheck` (optional): Allow skipping memo
+   * required check, default: `false`. See
+   * [SEP0029](https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0029.md).
+   * @returns Promise that resolves with the response from Horizon. Rejects
+   * with a {@link TransactionFailedError} when Horizon reports transaction
+   * result codes, a {@link BadResponseError} for any other HTTP error
+   * response (the underlying client error is preserved as `cause` on both),
+   * or the original error for network-level failures.
+   */
+  async submitTransaction(transaction2, opts = {
+    skipMemoRequiredCheck: false
+  }) {
+    if (!opts.skipMemoRequiredCheck) {
+      await this.checkMemoRequired(transaction2);
+    }
+    const tx = encodeURIComponent(
+      transaction2.toEnvelope().toXDR().toString("base64")
+    );
+    const url = new URL(this.serverURL);
+    url.pathname = url.pathname.split("/").concat(["transactions"]).filter((value) => value.length > 0).join("/");
+    return this.httpClient.post(url.toString(), `tx=${tx}`, {
+      timeout: SUBMIT_TRANSACTION_TIMEOUT,
+      headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    }).then((response) => {
+      if (!response.data.result_xdr) {
+        return response.data;
+      }
+      const responseXDR = types.TransactionResult.fromXDR(
+        response.data.result_xdr,
+        "base64"
+      );
+      const results = responseXDR.result().value();
+      let offerResults;
+      let hasManageOffer;
+      if (results.length) {
+        offerResults = results.map((result, i) => {
+          if (result.value().switch().name !== "manageBuyOffer" && result.value().switch().name !== "manageSellOffer") {
+            return null;
+          }
+          hasManageOffer = true;
+          let amountBought = new BigNumber2(0);
+          let amountSold = new BigNumber2(0);
+          const offerSuccess = result.value().value().success();
+          const offersClaimed = offerSuccess.offersClaimed().map((offerClaimedAtom) => {
+            const offerClaimed = offerClaimedAtom.value();
+            let sellerId = "";
+            switch (offerClaimedAtom.switch()) {
+              case types.ClaimAtomType.claimAtomTypeV0():
+                sellerId = StrKey.encodeEd25519PublicKey(
+                  offerClaimed.sellerEd25519()
+                );
+                break;
+              case types.ClaimAtomType.claimAtomTypeOrderBook():
+                sellerId = StrKey.encodeEd25519PublicKey(
+                  offerClaimed.sellerId().ed25519()
+                );
+                break;
+              // It shouldn't be possible for a claimed offer to have type
+              // claimAtomTypeLiquidityPool:
+              //
+              // https://github.com/stellar/stellar-core/blob/c5f6349b240818f716617ca6e0f08d295a6fad9a/src/transactions/TransactionUtils.cpp#L1284
+              //
+              // However, you can never be too careful.
+              default:
+                throw new Error(
+                  `Invalid offer result type: ${offerClaimedAtom.switch()}`
+                );
+            }
+            const claimedOfferAmountBought = new BigNumber2(
+              // amountBought is a js-xdr hyper
+              offerClaimed.amountBought().toString()
+            );
+            const claimedOfferAmountSold = new BigNumber2(
+              // amountBought is a js-xdr hyper
+              offerClaimed.amountSold().toString()
+            );
+            amountBought = amountBought.plus(claimedOfferAmountSold);
+            amountSold = amountSold.plus(claimedOfferAmountBought);
+            const sold = Asset.fromOperation(offerClaimed.assetSold());
+            const bought = Asset.fromOperation(
+              offerClaimed.assetBought()
+            );
+            const assetSold = {
+              type: sold.getAssetType(),
+              assetCode: sold.getCode(),
+              issuer: sold.getIssuer()
+            };
+            const assetBought = {
+              type: bought.getAssetType(),
+              assetCode: bought.getCode(),
+              issuer: bought.getIssuer()
+            };
+            return {
+              sellerId,
+              offerId: offerClaimed.offerId().toString(),
+              assetSold,
+              amountSold: getAmountInLumens(claimedOfferAmountSold),
+              assetBought,
+              amountBought: getAmountInLumens(claimedOfferAmountBought)
+            };
+          });
+          const effect = offerSuccess.offer().switch().name;
+          let currentOffer;
+          if (typeof offerSuccess.offer().value === "function" && offerSuccess.offer().value()) {
+            const offerXDR = offerSuccess.offer().value();
+            currentOffer = {
+              offerId: offerXDR.offerId().toString(),
+              selling: {},
+              buying: {},
+              amount: getAmountInLumens(offerXDR.amount().toString()),
+              price: {
+                n: offerXDR.price().n(),
+                d: offerXDR.price().d()
+              }
+            };
+            const selling = Asset.fromOperation(offerXDR.selling());
+            currentOffer.selling = {
+              type: selling.getAssetType(),
+              assetCode: selling.getCode(),
+              issuer: selling.getIssuer()
+            };
+            const buying = Asset.fromOperation(offerXDR.buying());
+            currentOffer.buying = {
+              type: buying.getAssetType(),
+              assetCode: buying.getCode(),
+              issuer: buying.getIssuer()
+            };
+          }
+          return {
+            offersClaimed,
+            effect,
+            operationIndex: i,
+            currentOffer,
+            // this value is in stroops so divide it out
+            amountBought: getAmountInLumens(amountBought),
+            amountSold: getAmountInLumens(amountSold),
+            isFullyOpen: !offersClaimed.length && effect !== "manageOfferDeleted",
+            wasPartiallyFilled: !!offersClaimed.length && effect !== "manageOfferDeleted",
+            wasImmediatelyFilled: !!offersClaimed.length && effect === "manageOfferDeleted",
+            wasImmediatelyDeleted: !offersClaimed.length && effect === "manageOfferDeleted"
+          };
+        }).filter((result) => !!result);
+      }
+      return {
+        ...response.data,
+        offerResults: hasManageOffer ? offerResults : void 0
+      };
+    }).catch((error) => Promise.reject(toSubmissionError(error)));
+  }
+  /**
+   * Submits an asynchronous transaction to the network. Unlike the synchronous version, which blocks
+   * and waits for the transaction to be ingested in Horizon, this endpoint relays the response from
+   * core directly back to the user.
+   *
+   * By default, this function calls {@link HorizonServer.checkMemoRequired}, you can
+   * skip this check by setting the option `skipMemoRequiredCheck` to `true`.
+   *
+   * @see [Submit-Async-Transaction](https://developers.stellar.org/docs/data/horizon/api-reference/resources/submit-async-transaction)
+   * @param transaction - The transaction to submit.
+   * @param opts - (optional) Options object
+   *   - `skipMemoRequiredCheck` (optional): Allow skipping memo
+   * required check, default: `false`. See
+   * [SEP0029](https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0029.md).
+   * @returns Promise that resolves with the response from Horizon. Rejects
+   * with a {@link TransactionFailedError} when Horizon reports transaction
+   * result codes, a {@link BadResponseError} for any other HTTP error
+   * response (the underlying client error is preserved as `cause` on both),
+   * or the original error for network-level failures.
+   */
+  async submitAsyncTransaction(transaction2, opts = {
+    skipMemoRequiredCheck: false
+  }) {
+    if (!opts.skipMemoRequiredCheck) {
+      await this.checkMemoRequired(transaction2);
+    }
+    const tx = encodeURIComponent(
+      transaction2.toEnvelope().toXDR().toString("base64")
+    );
+    const url = new URL(this.serverURL);
+    url.pathname = url.pathname.split("/").concat(["transactions_async"]).filter((value) => value.length > 0).join("/");
+    return this.httpClient.post(url.toString(), `tx=${tx}`, {
+      headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    }).then((response) => response.data).catch((error) => Promise.reject(toSubmissionError(error)));
+  }
+  /**
+   * @returns New {@link AccountCallBuilder} object configured by a current Horizon server configuration.
+   */
+  accounts() {
+    return new AccountCallBuilder(this.serverURL, this.httpClient);
+  }
+  /**
+   * @returns New {@link ClaimableBalanceCallBuilder} object configured by a current Horizon server configuration.
+   */
+  claimableBalances() {
+    return new ClaimableBalanceCallBuilder(this.serverURL, this.httpClient);
+  }
+  /**
+   * @returns New {@link LedgerCallBuilder} object configured by a current Horizon server configuration.
+   */
+  ledgers() {
+    return new LedgerCallBuilder(this.serverURL, this.httpClient);
+  }
+  /**
+   * @returns New {@link TransactionCallBuilder} object configured by a current Horizon server configuration.
+   */
+  transactions() {
+    return new TransactionCallBuilder(this.serverURL, this.httpClient);
+  }
+  /**
+   * People on the Stellar network can make offers to buy or sell assets. This endpoint represents all the offers on the DEX.
+   *
+   * You can query all offers for account using the function `.accountId`.
+   *
+   * @example
+   * ```ts
+   * server.offers()
+   *   .forAccount(accountId).call()
+   *   .then(function(offers) {
+   *     console.log(offers);
+   *   });
+   * ```
+   *
+   * @returns New {@link OfferCallBuilder} object
+   */
+  offers() {
+    return new OfferCallBuilder(this.serverURL, this.httpClient);
+  }
+  /**
+   * @param selling - Asset being sold
+   * @param buying - Asset being bought
+   * @returns New {@link OrderbookCallBuilder} object configured by a current Horizon server configuration.
+   */
+  orderbook(selling, buying) {
+    return new OrderbookCallBuilder(
+      this.serverURL,
+      this.httpClient,
+      selling,
+      buying
+    );
+  }
+  /**
+   * Returns
+   * @returns New {@link TradesCallBuilder} object configured by a current Horizon server configuration.
+   */
+  trades() {
+    return new TradesCallBuilder(this.serverURL, this.httpClient);
+  }
+  /**
+   * @returns New {@link OperationCallBuilder} object configured by a current Horizon server configuration.
+   */
+  operations() {
+    return new OperationCallBuilder(this.serverURL, this.httpClient);
+  }
+  /**
+   * @returns New {@link LiquidityPoolCallBuilder}
+   *     object configured to the current Horizon server settings.
+   */
+  liquidityPools() {
+    return new LiquidityPoolCallBuilder(this.serverURL, this.httpClient);
+  }
+  /**
+   * The Stellar Network allows payments to be made between assets through path
+   * payments. A strict receive path payment specifies a series of assets to
+   * route a payment through, from source asset (the asset debited from the
+   * payer) to destination asset (the asset credited to the payee).
+   *
+   * A strict receive path search is specified using:
+   *
+   * * The destination address.
+   * * The source address or source assets.
+   * * The asset and amount that the destination account should receive.
+   *
+   * As part of the search, horizon will load a list of assets available to the
+   * source address and will find any payment paths from those source assets to
+   * the desired destination asset. The search's amount parameter will be used
+   * to determine if there a given path can satisfy a payment of the desired
+   * amount.
+   *
+   * If a list of assets is passed as the source, horizon will find any payment
+   * paths from those source assets to the desired destination asset.
+   *
+   * @param source - The sender's account ID or a list of assets. Any returned path will use a source that the sender can hold.
+   * @param destinationAsset - The destination asset.
+   * @param destinationAmount - The amount, denominated in the destination asset, that any returned path should be able to satisfy.
+   * @returns New {@link StrictReceivePathCallBuilder} object configured with the current Horizon server configuration.
+   */
+  strictReceivePaths(source, destinationAsset, destinationAmount) {
+    return new StrictReceivePathCallBuilder(
+      this.serverURL,
+      this.httpClient,
+      source,
+      destinationAsset,
+      destinationAmount
+    );
+  }
+  /**
+   * The Stellar Network allows payments to be made between assets through path payments. A strict send path payment specifies a
+   * series of assets to route a payment through, from source asset (the asset debited from the payer) to destination
+   * asset (the asset credited to the payee).
+   *
+   * A strict send path search is specified using:
+   *
+   * The asset and amount that is being sent.
+   * The destination account or the destination assets.
+   *
+   * @param sourceAsset - The asset to be sent.
+   * @param sourceAmount - The amount, denominated in the source asset, that any returned path should be able to satisfy.
+   * @param destination - The destination account or the destination assets.
+   * @returns New {@link StrictSendPathCallBuilder} object configured with the current Horizon server configuration.
+   */
+  strictSendPaths(sourceAsset, sourceAmount, destination) {
+    return new StrictSendPathCallBuilder(
+      this.serverURL,
+      this.httpClient,
+      sourceAsset,
+      sourceAmount,
+      destination
+    );
+  }
+  /**
+   * @returns New {@link PaymentCallBuilder} instance configured with the current
+   * Horizon server configuration.
+   */
+  payments() {
+    return new PaymentCallBuilder(this.serverURL, this.httpClient);
+  }
+  /**
+   * @returns New {@link EffectCallBuilder} instance configured with the current
+   * Horizon server configuration
+   */
+  effects() {
+    return new EffectCallBuilder(this.serverURL, this.httpClient);
+  }
+  /**
+   * @param address - The Stellar ID that you want Friendbot to send lumens to
+   * @returns New {@link FriendbotBuilder} instance configured with the current
+   * Horizon server configuration
+   */
+  friendbot(address) {
+    return new FriendbotBuilder(this.serverURL, this.httpClient, address);
+  }
+  /**
+   * Get a new {@link AssetsCallBuilder} instance configured with the current
+   * Horizon server configuration.
+   * @returns New AssetsCallBuilder instance
+   */
+  assets() {
+    return new AssetsCallBuilder(this.serverURL, this.httpClient);
+  }
+  /**
+   * Fetches an account's most current state in the ledger, then creates and
+   * returns an {@link AccountResponse} object.
+   *
+   * @param accountId - The account to load.
+   *
+   * @returns Returns a promise to the {@link AccountResponse} object
+   * with populated sequence number.
+   */
+  async loadAccount(accountId) {
+    const res = await this.accounts().accountId(accountId).call();
+    return new AccountResponse(res);
+  }
+  /**
+   *
+   * @param base - base asset
+   * @param counter - counter asset
+   * @param start_time - lower time boundary represented as millis since epoch
+   * @param end_time - upper time boundary represented as millis since epoch
+   * @param resolution - segment duration as millis since epoch. *Supported values are 5 minutes (300000), 15 minutes (900000), 1 hour (3600000), 1 day (86400000) and 1 week (604800000).
+   * @param offset - segments can be offset using this parameter. Expressed in milliseconds. *Can only be used if the resolution is greater than 1 hour. Value must be in whole hours, less than the provided resolution, and less than 24 hours.
+   * Returns new {@link TradeAggregationCallBuilder} object configured with the current Horizon server configuration.
+   * @returns New TradeAggregationCallBuilder instance
+   */
+  tradeAggregation(base, counter, start_time, end_time, resolution, offset) {
+    return new TradeAggregationCallBuilder(
+      this.serverURL,
+      this.httpClient,
+      base,
+      counter,
+      start_time,
+      end_time,
+      resolution,
+      offset
+    );
+  }
+  /**
+   * Check if any of the destination accounts requires a memo.
+   *
+   * This function implements a memo required check as defined in
+   * [SEP-29](https://stellar.org/protocol/sep-29). It will load each account
+   * which is the destination and check if it has the data field
+   * `config.memo_required` set to `"MQ=="`.
+   *
+   * Each account is checked sequentially instead of loading multiple accounts
+   * at the same time from Horizon.
+   *
+   * @see {@link https://stellar.org/protocol/sep-29 | SEP-29: Account Memo Requirements}
+   * @param transaction - The transaction to check.
+   * @returns - If any of the destination account
+   * requires a memo, the promise will throw {@link AccountRequiresMemoError}.
+   * @throws    */
+  async checkMemoRequired(transaction2) {
+    if (transaction2 instanceof FeeBumpTransaction) {
+      transaction2 = transaction2.innerTransaction;
+    }
+    if (transaction2.memo.type !== "none") {
+      return;
+    }
+    const destinations = /* @__PURE__ */ new Set();
+    for (let i = 0; i < transaction2.operations.length; i += 1) {
+      const operation = transaction2.operations[i];
+      switch (operation.type) {
+        case "payment":
+        case "pathPaymentStrictReceive":
+        case "pathPaymentStrictSend":
+        case "accountMerge":
+          break;
+        default:
+          continue;
+      }
+      const destination = operation.destination;
+      if (destinations.has(destination)) {
+        continue;
+      }
+      destinations.add(destination);
+      if (destination.startsWith("M")) {
+        continue;
+      }
+      try {
+        const account2 = await this.loadAccount(destination);
+        if (account2.data_attr["config.memo_required"] === ACCOUNT_REQUIRES_MEMO) {
+          throw new AccountRequiresMemoError(
+            "account requires memo",
+            destination,
+            i
+          );
+        }
+      } catch (e) {
+        if (e instanceof AccountRequiresMemoError) {
+          throw e;
+        }
+        if (!(e instanceof NotFoundError)) {
+          throw e;
+        }
+        continue;
+      }
+    }
+  }
+};
+
+// ../node_modules/@stellar/stellar-sdk/lib/esm/index.js
+var import_buffer37 = __toESM(require_buffer(), 1);
+init_asset();
+init_operation();
+init_transaction_builder();
+init_claimant();
+init_hyper();
+init_keypair();
+init_memo();
 
 // ../node_modules/@stellar/stellar-sdk/lib/esm/base/network.js
 init_shim();
@@ -17360,30 +21082,7 @@ init_strkey();
 init_unsigned_hyper();
 init_scval();
 
-// public/lib/api.js
-function txDesc(tx) {
-  if (tx?.memo_type == "return") {
-    let txId = tx.id;
-    tx = TransactionBuilder.fromXDR(tx.envelope_xdr, Networks.TESTNET);
-    let ops = tx._operations;
-    let op = ops.find((op2) => op2.type == "payment" && op2.asset.code == "ClawableHexa");
-    return {
-      amount: op.amount,
-      destination: op.destination,
-      txId
-    };
-  }
-  console.trace();
-  return { message: "txDesc tx UNEXPECTED", tx };
-}
-
-// public/lib/util.js
-function Context(stateInitial2, tag = null) {
-  this.state = stateInitial2;
-  this.tag = tag;
-}
-
-// public/src/demoit/demouser.js
+// ../lib/util.mjs
 init_shim();
 
 // public/lib/sdk.mjs
@@ -17391,128 +21090,712 @@ init_shim();
 
 // public/lib/server.js
 init_shim();
+var sdk;
+var server = {
+  // handlers {{{1
+  get(...args) {
+    switch (args[1]) {
+      case "loadAccount": {
+        let f = args[1] in args[0] ? Reflect.get(...args) : known(...args);
+        return function(...parms) {
+          return f.apply(this === args[2] ? args[0] : this, parms);
+        };
+      }
+      default: {
+        return Reflect.get(...args);
+      }
+    }
+  },
+  opts4loadAccount: {
+    // {{{2
+    get(...args) {
+      return args[1] in args[0] ? Reflect.get(...args) : known_opts4loadAccount(...args);
+    }
+  }
+  // }}}2
+};
+function injectAccount(opts) {
+  let creator;
+  let account2 = sdk.server.opts4loadAccount.account;
+  account2.name = sdk.server.opts4loadAccount.name;
+  let key = opts.name + ".keys";
+  let found = sdk.vault.get(key);
+  if (found) {
+    account2.keypair = Keypair.fromSecret(found[0]);
+    return account2.resolve(found[1]);
+  }
+  if (sdk?.transaction?.opts4createAccount?.creator?.account) {
+    creator = sdk.transaction.opts4createAccount.creator;
+    account2.keypair = Keypair.random();
+    account2.startingBalance = "1000.0";
+    return sdk.transaction.createAccount({ account: account2, creator });
+  }
+  sdk.out("injectAccount - creating/getting creator...");
+  opts.creator.then((_creator) => {
+    creator = _creator;
+    let CREATOR_PK = creator.keypair.publicKey();
+    sdk.out(`- loading creator.account ${CREATOR_PK} ...`);
+    return sdk.server.server.loadAccount(CREATOR_PK);
+  }).then((creatorAccount) => {
+    creator.account = creatorAccount;
+    account2.keypair = Keypair.random();
+    account2.startingBalance = "10.0";
+    return sdk.transaction.createAccount({ account: account2, creator });
+  });
+}
+function known(target, prop) {
+  target[prop] = loadAccount;
+  return target[prop];
+}
+function known_opts4loadAccount(target, prop) {
+  switch (prop) {
+    case "account": {
+      target[prop] = Promise.withResolvers();
+      injectAccount(sdk.server.opts4loadAccount);
+      return target[prop];
+    }
+    case "creator": {
+      if (sdk.networkPassphrase !== Networks.TESTNET) {
+        throw Error("You MUST supply creator");
+      }
+      let opts = sdk.server.opts4loadAccount.opts4creator;
+      target[prop] = { keypair: opts.keypair };
+      if (opts.found) {
+        return Promise.resolve(target[prop]);
+      }
+      let pk = opts.keypair.publicKey(), sk = opts.keypair.secret();
+      let url = `https://friendbot.stellar.org?addr=${encodeURIComponent(pk)}`;
+      return fetch(url).then((response) => response.json()).then((_) => (sdk.vault.put("Creator.keys", [sk, pk]), target[prop])).catch((e) => e);
+    }
+    case "opts4creator": {
+      let found = sdk.vault.get("Creator.keys");
+      return target[prop] = {
+        found,
+        keypair: found ? Keypair.fromSecret(found[0]) : Keypair.random()
+      };
+    }
+  }
+}
+function loadAccount(opts) {
+  sdk = this.sdk;
+  this.opts4loadAccount = new Proxy(opts, server.opts4loadAccount);
+  return this.opts4loadAccount.account.promise.then((accountId) => {
+    sdk.out("loadAccount accountId " + accountId + " - loading...");
+    return this.server.loadAccount(accountId);
+  });
+}
+var server_default = server;
 
 // public/lib/transaction.js
 init_shim();
 
-// ../jf/public/lib/sdk.js
+// public/lib/api.js
 init_shim();
-var algorithm = { name: "Ed25519" };
-var base64ToUint8 = (str) => Uint8Array.from(atob(str), (c) => c.charCodeAt(0));
-var uint8ToBase64 = (arr) => Buffer3.from(arr).toString("base64");
-var b64_2s = (b64) => base64ToUint8(b64).toString().split(",").reduce((s, c) => s + String.fromCodePoint(c), "");
-var JWT = class {
-  // {{{1
-  constructor(sub) {
-    this.header = { alg: algorithm.name, typ: "JWT" };
-    this.payload = { sub };
-  }
-  setAudience(aud) {
-    this.payload.aud = aud;
-    return this;
-  }
-  setIssuer(iss, sk) {
-    this.sk = sk;
-    this.payload.iss = iss;
-    return this;
-  }
-  sign() {
-    let header64 = uint8ToBase64(JSON.stringify(this.header));
-    let payload64 = uint8ToBase64(JSON.stringify(this.payload));
-    return crypto.subtle.importKey(
-      "jwk",
-      JSON.parse(this.sk),
-      algorithm.name,
-      true,
-      ["sign"]
-    ).then(
-      (sk) => crypto.subtle.sign(
-        algorithm.name,
-        sk,
-        new TextEncoder().encode(payload64)
-      )
-    ).then((signature) => Promise.resolve(
-      `${header64}.${payload64}.${uint8ToBase64(new Uint8Array(signature))}`
-    )).catch((e) => console.error(e));
+var HEX_DISPUTE = "0.0000099";
+function asset(opts, code = "HEXA") {
+  return typeof opts.asset == "string" ? new Asset(opts.asset, opts.issuerKeys[1]) : opts.asset[code];
+}
+
+// public/lib/transaction.js
+var sdk2;
+var transaction = {
+  // handlers {{{1
+  get(...args) {
+    switch (args[1]) {
+      case "breakDeal":
+      case "changeTrust":
+      case "closeDeal":
+      case "createAccount":
+      case "dealTakeOffer":
+      case "dealTakeRequest":
+      case "disputeBrokenDeal":
+      case "fund":
+      case "makeBuyOffer":
+      case "makeClaimableBalance":
+      case "makeSellOffer": {
+        let f = args[1] in args[0] ? Reflect.get(...args) : known2(...args);
+        return function(...parms) {
+          return f.apply(this === args[2] ? args[0] : this, parms);
+        };
+      }
+      default: {
+        return Reflect.get(...args);
+      }
+    }
+  },
+  opts4changeTrust: {
+    // {{{2
+    get(...args) {
+      return args[1] in args[0] ? Reflect.get(...args) : known_opts4changeTrust(...args);
+    }
+    // }}}3
+  },
+  opts4createAccount: {
+    // {{{2
+    get(...args) {
+      return args[1] in args[0] ? Reflect.get(...args) : known_opts4createAccount(...args);
+    }
+    // }}}3
+  },
+  opts4fund: {
+    // {{{2
+    get(...args) {
+      return args[1] in args[0] ? Reflect.get(...args) : known_opts4fund(...args);
+    }
+    // }}}3
   }
   // }}}2
 };
-function verifyPayload(message) {
-  try {
-    message = message.slice(1, -1);
-    let [header64, payload64, sig64] = message.split(".");
-    let payload = JSON.parse(b64_2s(payload64));
-    if (typeof payload.iss == "string") {
-      payload.iss = JSON.parse(payload.iss);
+function breakDeal(opts) {
+  if (opts.signXDR) {
+    return true;
+  }
+  let HEXA = new Asset("HEXA", opts.issuer.id), amount = opts.amount;
+  let asset2 = new Asset("ClawableHexa", opts.issuer.id);
+  let breaker = opts.account;
+  let destination = opts.account.id;
+  let kp = Keypair.fromSecret(opts.destKeys[0]);
+  let memo = Memo.hash(opts.dealTxId);
+  let networkPassphrase = opts.sdk.networkPassphrase;
+  let server2 = opts.sdk.server.server;
+  let source = opts.issuer.id;
+  let tx = new TransactionBuilder(
+    breaker,
+    // increasing the breaker's
+    {
+      //  sequence number
+      fee: BASE_FEE,
+      memo,
+      networkPassphrase
     }
-    return crypto.subtle.importKey(
-      "raw",
-      base64ToUint8(payload.iss.pk).buffer,
-      algorithm.name,
-      true,
-      ["verify"]
-    ).then(
-      (pk) => crypto.subtle.verify(
-        algorithm.name,
-        pk,
-        base64ToUint8(sig64),
-        new TextEncoder().encode(payload64)
-      )
-    ).then((verified) => Promise.resolve(verified ? payload : null));
-  } catch (err2) {
-    console.error(err2);
+  );
+  let ops = [
+    // {{{2
+    Operation.beginSponsoringFutureReserves({ sponsoredId: source }),
+    Operation.clawback({ asset: asset2, amount, from: opts.from, source }),
+    Operation.payment({ amount, asset: HEXA, destination, source }),
+    Operation.endSponsoringFutureReserves({ source })
+  ];
+  for (let op of ops) {
+    tx = tx.addOperation(op);
   }
+  tx = tx.setTimeout(30).build();
+  tx.sign(kp);
+  return opts.sign(tx.toXDR(), "breakDeal").then((txXdr) => (
+    // {{{2
+    server2.submitTransaction(TransactionBuilder.fromXDR(txXdr, networkPassphrase))
+  )).then((r) => opts.nolog || opts.log(r)).catch((e) => {
+    console.error("breakDeal.local ERROR", e?.response?.data ?? e);
+    throw e;
+  });
 }
-
-// ../lib/util.mjs
-init_shim();
-
-// public/demo/Ann.js
-init_shim();
-var stateInitial = {
-  // {{{1
-  handle: handle_stateInitial
-};
-var stateCynAnnDeal = {
-  // {{{1
-  handle: handle_stateCynAnnDeal
-};
-Object.assign(stateInitial, Promise.withResolvers());
-Object.assign(stateCynAnnDeal, Promise.withResolvers());
-var context = new Context(stateInitial, "Ann");
-function handle_stateCynAnnDeal(eotx) {
-  if (eotx.txId && eotx.txId === stateCynAnnDeal.txId) {
-    context.opts.log("Ann handle_stateCynAnnDeal eotx " + JSON.stringify(eotx) + " clawable " + stateCynAnnDeal.amount);
-    delete stateCynAnnDeal.txId;
-    context.opts.sdk.transaction.breakDeal(context.opts).then((_) => stateCynAnnDeal.resolve());
-  } else if (!stateCynAnnDeal.amount) {
-    let desc = txDesc(eotx);
-    context.opts.log("Ann handle_stateCynAnnDeal desc " + JSON.stringify(desc));
-    context.opts.amount = stateCynAnnDeal.amount = desc.amount;
-    context.opts.dealTxId = stateCynAnnDeal.txId = desc.txId;
-    context.opts.from = desc.destination;
-    return stateCynAnnDeal.promise;
+function changeTrust2(opts, loadAccount2 = true) {
+  sdk2 ??= this.sdk;
+  this.opts4changeTrust ??= new Proxy(opts, transaction.opts4changeTrust);
+  let defaults = this.opts4changeTrust.defaults;
+  let account2 = opts.recipient, kp = Keypair.fromSecret(opts.recipientKeys[0]);
+  let f = (account3) => {
+    let tx = new TransactionBuilder(account3, { fee: BASE_FEE }).setNetworkPassphrase(sdk2.networkPassphrase);
+    for (let a of defaults.assets) {
+      tx.addOperation(Operation.changeTrust({
+        asset: new Asset(a[0], opts.issuer.id),
+        limit: a[1]
+      }));
+    }
+    tx = tx.setTimeout(60).build();
+    tx.sign(kp);
+    let actor = opts?.name ?? opts?.account?.name;
+    sdk2.out("changeTrust " + defaults.assets.length + " assets for " + actor + " " + opts.recipient.id + " " + account3.last_modified_time + "...");
+    return submit(tx, "changeTrust", actor);
+  };
+  if (loadAccount2) {
+    return loop(kp, f);
   }
+  return f(account2);
 }
-function handle_stateInitial(e) {
-  if (!e) {
+function closeDeal(opts) {
+  if (opts.signXDR) {
+    return true;
+  }
+  let HEXA = new Asset("HEXA", opts.issuer.id), amount = opts.amount;
+  let asset2 = new Asset("ClawableHexa", opts.issuer.id);
+  let destination = opts.account.id;
+  let kp = Keypair.fromSecret(opts.destKeys[0]);
+  let memo = Memo.hash(opts.dealTxId);
+  let networkPassphrase = opts.sdk.networkPassphrase;
+  let payee = opts.account;
+  let server2 = opts.sdk.server.server;
+  let source = opts.issuer.id;
+  let tx = new TransactionBuilder(
+    payee,
+    // increasing the payee's
+    {
+      //  sequence number
+      fee: BASE_FEE,
+      memo,
+      networkPassphrase
+    }
+  );
+  let ops = [
+    // {{{2
+    Operation.payment({ amount, asset: asset2, destination: source }),
+    Operation.beginSponsoringFutureReserves({ sponsoredId: source }),
+    Operation.payment({ amount, asset: HEXA, destination, source }),
+    Operation.endSponsoringFutureReserves({ source })
+  ];
+  for (let op of ops) {
+    tx = tx.addOperation(op);
+  }
+  tx = tx.setTimeout(30).build();
+  tx.sign(kp);
+  return opts.sign(tx.toXDR(), "closeDeal").then((txXdr) => (
+    // {{{2
+    server2.submitTransaction(TransactionBuilder.fromXDR(txXdr, networkPassphrase))
+  )).then((r) => opts.nolog || opts.log(r)).catch((e) => {
+    console.error("breakDeal.local *** ERROR ***", e?.response?.data ?? e);
+    throw e;
+  });
+}
+function createAccount2(opts, loadAccount2 = true) {
+  sdk2 ??= this.sdk;
+  this.opts4createAccount = new Proxy(opts, transaction.opts4createAccount);
+  let account2 = opts.creator.account;
+  let actor = opts.account.name;
+  let defaults = this.opts4createAccount.defaults;
+  let destination = opts.account.keypair.publicKey();
+  let kp = opts.creator.keypair;
+  let startingBalance = opts.account.startingBalance;
+  let key = actor + ".keys";
+  let value = [opts.account.keypair.secret(), destination];
+  let f = (account3) => {
+    let tx = new TransactionBuilder(account3, { fee: BASE_FEE }).addOperation(Operation.createAccount({ destination, startingBalance })).addOperation(Operation.setOptions(defaults.opts)).setNetworkPassphrase(sdk2.networkPassphrase).setTimeout(60).build();
+    tx.sign(kp, opts.account.keypair);
+    sdk2.out("createAccount - creating account for " + actor + " " + destination + " " + account3.last_modified_time + "...");
+    return submit(tx, "createAccount", actor, 5, 100, null).then((r) => (sdk2.vault.put(key, value), opts.account.resolve(destination)));
+  };
+  if (loadAccount2) {
+    return loop(kp, f);
+  }
+  return f(account2);
+}
+function dealTakeOffer(opts) {
+  if (opts.signXDR) {
+    return true;
+  }
+  let amount = opts.e.amount;
+  let asset2 = new Asset("ClawableHexa", opts.issuer.id);
+  let balanceId = opts.e.balance_id;
+  let destination = opts.account.id;
+  let kp = Keypair.fromSecret(opts.destKeys[0]);
+  let maker = opts.account;
+  let sdk5 = opts.sdk;
+  let sign4 = opts.sign;
+  let source = opts.issuer.id;
+  let takeTxId = opts.e.txId;
+  let memo = Memo.return(takeTxId);
+  let tx = new TransactionBuilder(
+    maker,
+    // increasing the maker's
+    {
+      //  sequence number
+      fee: BASE_FEE,
+      memo,
+      networkPassphrase: sdk5.networkPassphrase
+    }
+  );
+  let ops = [
+    // {{{2
+    Operation.beginSponsoringFutureReserves({ sponsoredId: source }),
+    Operation.claimClaimableBalance({ balanceId, source }),
+    Operation.payment({ amount, asset: asset2, destination, source }),
+    Operation.endSponsoringFutureReserves({ source }),
+    Operation.claimClaimableBalance({ balanceId: opts.makerBalanceId })
+  ];
+  for (let op of ops) {
+    tx = tx.addOperation(op);
+  }
+  tx = tx.setTimeout(30).build();
+  tx.sign(kp);
+  return sign4(tx.toXDR(), "dealTakeOffer").then(
+    (txXdr) => (
+      // {{{2
+      sdk5.server.server.submitTransaction(TransactionBuilder.fromXDR(txXdr, sdk5.networkPassphrase))
+    )
+  ).catch((e) => {
+    console.error("dealTakeOffer.local *** ERROR ***", e?.response?.data ?? e);
+    throw e;
+  });
+}
+function dealTakeRequest(opts) {
+  if (opts.signXDR) {
+    return true;
+  }
+  let HEXA = new Asset("HEXA", opts.issuer.id), amount = opts.e.amount;
+  let asset2 = new Asset("ClawableHexa", opts.issuer.id), r_amount = opts.r_amount;
+  let balanceId = opts.e.balance_id, r_balanceId = opts.r_balanceId;
+  let destination = opts.e.txSrc;
+  let kp = Keypair.fromSecret(opts.destKeys[0]);
+  let maker = opts.account;
+  let sdk5 = opts.sdk;
+  let sign4 = opts.sign;
+  let source = opts.issuer.id;
+  let takeTxId = opts.e.txId;
+  let memo = Memo.return(takeTxId);
+  let tx = new TransactionBuilder(
+    maker,
+    // increasing the maker's
+    {
+      //  sequence number
+      fee: BASE_FEE,
+      memo,
+      networkPassphrase: sdk5.networkPassphrase
+    }
+  );
+  let ops = [
+    // {{{2
+    Operation.beginSponsoringFutureReserves({ sponsoredId: source }),
+    Operation.claimClaimableBalance({ balanceId, source }),
+    Operation.claimClaimableBalance({ balanceId: r_balanceId, source }),
+    Operation.payment({ amount, asset: HEXA, destination, source }),
+    Operation.payment({ amount: r_amount, asset: asset2, destination, source }),
+    Operation.endSponsoringFutureReserves({ source })
+  ];
+  for (let op of ops) {
+    tx = tx.addOperation(op);
+  }
+  tx = tx.setTimeout(30).build();
+  tx.sign(kp);
+  return sign4(tx.toXDR(), "dealTakeRequest").then(
+    (txXdr) => (
+      // {{{2
+      sdk5.server.server.submitTransaction(TransactionBuilder.fromXDR(txXdr, sdk5.networkPassphrase))
+    )
+  ).catch((e) => {
+    console.error("dealTakeRequest.local *** ERROR ***", e?.response?.data ?? e);
+    throw e;
+  });
+}
+function disputeBrokenDeal(opts) {
+  let HEXA = new Asset("HEXA", opts.issuer.id);
+  let kp = Keypair.fromSecret(opts.destKeys[0]);
+  let plaintiff = opts.account;
+  let claimants = [
+    new Claimant(
+      opts.issuer.id,
+      opts.validity == "0" ? Claimant.predicateUnconditional() : Claimant.predicateBeforeRelativeTime(opts.validity)
+    ),
+    new Claimant(
+      plaintiff.id,
+      // plaintiff can reclaim anytime
+      Claimant.predicateUnconditional()
+    )
+  ];
+  let amount = HEX_DISPUTE;
+  return makeClaimableBalance.call(
+    opts.sdk,
+    claimants,
+    plaintiff,
+    kp,
+    HEXA,
+    amount,
+    [],
+    Memo.hash(opts.breakDealTxId)
+  );
+}
+function fund(opts = null, loadAccount2 = true) {
+  if (opts === null) {
+    return Promise.resolve();
+  }
+  sdk2 ??= this.sdk;
+  if (opts.signXDR) {
+    return true;
+  }
+  let account2 = opts.account ? opts.account : opts.issuer;
+  let source = opts.issuerKeys[1];
+  let a = asset(opts);
+  let destination = opts.destKeys[1];
+  let amount = opts.amount;
+  let kp = Keypair.fromSecret(opts.account ? opts.destKeys[0] : opts.issuerKeys[0]);
+  let sign4 = opts.sign;
+  let tf = { asset: a, source, trustor: destination, flags: { authorized: true } };
+  let f = (account3) => {
+    if (opts.clawback === false) {
+      tf.flags.clawbackEnabled = false;
+    }
+    let tx = new TransactionBuilder(account3, { fee: BASE_FEE }).setNetworkPassphrase(sdk2.networkPassphrase).addOperation(Operation.payment({ asset: a, destination, amount, source })).addOperation(Operation.setTrustLineFlags(tf));
+    tx = tx.setTimeout(60).build();
+    tx.sign(kp);
+    let actor = opts?.name ?? opts?.account?.name;
+    sdk2.out("fund " + actor + " " + opts.destKeys[1] + " clawback " + opts.clawback + " " + account3.last_modified_time + "...");
+    if (sign4) {
+      return sign4(tx.toXDR(), "fund").then((txXdr) => {
+        return submit(
+          TransactionBuilder.fromXDR(txXdr, sdk2.networkPassphrase),
+          "fund",
+          actor,
+          5,
+          100,
+          null
+        );
+      });
+    }
+    return submit(tx, "fund 2", actor, 5, 100, null);
+  };
+  if (loadAccount2) {
+    return loop(kp, f);
+  }
+  return f(account2);
+}
+function inject_default_opts4changeTrust(opts) {
+  const limit = "1000000";
+  return {
+    assets: [["ClawableHexa", limit], ["HEXA", limit], ["MA", limit]]
+  };
+}
+function inject_default_opts4createAccount(opts) {
+  return {
+    opts: {
+      // for Operation.setOptions
+      homeDomain: "hx.kloudoftrust.org",
+      setFlags: AuthClawbackEnabledFlag | AuthRevocableFlag,
+      source: opts.account.keypair.publicKey()
+    }
+  };
+}
+function known2(target, prop) {
+  let unknown = (_) => {
+    throw Error(`unknown prop ${prop}`);
+  };
+  target[prop] = prop == "breakDeal" ? breakDeal : prop == "changeTrust" ? changeTrust2 : prop == "closeDeal" ? closeDeal : prop == "createAccount" ? createAccount2 : prop == "dealTakeOffer" ? dealTakeOffer : prop == "dealTakeRequest" ? dealTakeRequest : prop == "disputeBrokenDeal" ? disputeBrokenDeal : prop == "fund" ? fund : prop == "makeBuyOffer" ? makeBuyOffer : prop == "makeClaimableBalance" ? makeClaimableBalance : prop == "makeSellOffer" ? makeSellOffer : unknown;
+  return target[prop];
+}
+function known_opts4changeTrust(target, prop) {
+  return target[prop] = inject_default_opts4changeTrust(target);
+}
+function known_opts4createAccount(target, prop) {
+  return target[prop] = inject_default_opts4createAccount(target);
+}
+function loop(kp, f, left = 9, log = console.error) {
+  let pk = kp.publicKey();
+  return sdk2.server.server.loadAccount(pk).then((account2) => f(account2)).catch((e) => {
+    log && log(
+      "loop",
+      pk,
+      "*** ERROR ***",
+      e?.response?.data?.extras?.result_codes ?? e?.response?.data ?? e,
+      "left",
+      left
+    );
+    if (left < 1) {
+      throw e;
+    }
+    if (e?.response?.data?.extras?.result_codes?.transaction == "tx_bad_seq") {
+      return loop(kp, f, --left);
+    }
+    throw e;
+  });
+}
+function makeBuyOffer(kp, account2, selling, buying, buyAmount, price, offerId = 0, loadAccount2 = true) {
+  sdk2 ??= this;
+  let f = (account3) => {
+    let tx = new TransactionBuilder(
+      account3,
+      // increasing account's
+      {
+        //  sequence number
+        fee: BASE_FEE,
+        networkPassphrase: sdk2.networkPassphrase
+      }
+    ).addOperation(Operation.manageBuyOffer({
+      selling,
+      buying,
+      buyAmount,
+      price,
+      offerId
+    })).setTimeout(60).build();
+    let result = (tx2) => {
+      return Promise.resolve(`tx.successful ${tx2.successful}`);
+    };
+    tx.sign(kp);
+    let actor = kp.publicKey();
+    sdk2.out("makeBuyOffer " + actor + " " + selling + " " + buying + " " + buyAmount + " " + price + " " + offerId + "...");
+    return submit(tx, "makeBuyOffer", actor);
+  };
+  if (loadAccount2) {
+    return loop(kp, f);
+  }
+  return f(account2);
+}
+function makeClaimableBalance(claimants, maker, kp, asset2, amount, ops = [], memo = null, loadAccount2 = true) {
+  sdk2 ??= this;
+  let f = (account2) => {
+    let tx = new TransactionBuilder(
+      maker,
+      // increasing the maker's
+      {
+        //  sequence number
+        fee: BASE_FEE,
+        memo,
+        networkPassphrase: sdk2.networkPassphrase
+      }
+    ).addOperation(Operation.createClaimableBalance({ claimants, asset: asset2, amount }));
+    ops.forEach((op) => tx.addOperation(op));
+    tx = tx.setTimeout(30).build();
+    tx.sign(kp);
+    let actor = kp.publicKey();
+    return submit(tx, "makeBuyOffer", actor);
+  };
+  if (loadAccount2) {
+    return loop(kp, f);
+  }
+  return f(account);
+}
+function makeSellOffer(kp, account2, selling, buying, amount, price, offerId = 0) {
+  sdk2 ??= this;
+  let tx = new TransactionBuilder(
+    account2,
+    // increasing account's
+    {
+      //  sequence number
+      fee: BASE_FEE,
+      networkPassphrase: sdk2.networkPassphrase
+    }
+  ).addOperation(Operation.manageSellOffer({
+    selling,
+    buying,
+    amount,
+    price,
+    offerId
+  })).setTimeout(30).build();
+  let result = (tx2) => {
+    return Promise.resolve(`tx.successful ${tx2.successful}`);
+  };
+  tx.sign(kp);
+  return sdk2.server.server.submitTransaction(tx).then((tx2) => result(tx2)).catch((e) => {
+    console.error("makeSellOffer *** ERROR ***", e?.response.data ?? e);
+    console.trace(account2.id, selling, buying, amount, price);
+    throw new Error("UNEXPECTED");
+  });
+}
+function submit(tx, fn, actor, left = 5, delayMs = 5e3, log = console.error) {
+  return sdk2.server.server.submitTransaction(tx).catch((e) => {
+    log && log(
+      "submit",
+      fn,
+      "for",
+      actor,
+      "*** ERROR ***",
+      e?.response?.data?.extras?.result_codes ?? e?.response?.data ?? e,
+      "left",
+      left
+    );
+    if (left < 1 || !(e?.response.status === 504)) {
+      throw e;
+    }
+    const txHash = tx.hash().toString("hex");
+    return new Promise((resolve) => setTimeout(resolve, delayMs)).then((_) => {
+      log && log("submit", fn, "for", actor, "on-chain?..");
+      return sdk2.server.server.transactions().transaction(txHash).call();
+    }).then((txCheck) => {
+      log && log("submit", fn, "for", actor, "txCheck", txCheck);
+      return txCheck;
+    }).catch((e2) => {
+      if (!(e2?.response.status === 404)) {
+        throw e2;
+      }
+      log && log("submit", fn, "for", actor, "NOT FOUND on-chain, re-submitting...");
+      return submit(tx, fn, actor, --left, delayMs, log);
+    });
+  });
+}
+var transaction_default = transaction;
+
+// public/lib/sdk.mjs
+var map = {};
+var sdk3;
+var handler = {
+  // {{{1
+  sdk: {
+    get(...args) {
+      return args[1] in args[0] ? Reflect.get(...args) : known_sdk(...args);
+    },
+    server: server_default,
+    transaction: transaction_default
+  }
+};
+function addStream(opts, tag, types2, id, now = false) {
+  let { streams } = opts;
+  if (streams.find((s) => s.tag == tag && s.id == id)) {
+    opts.out("addStream DUPLICATE tag " + tag + " types " + types2 + " id " + id);
     return;
   }
-  if (e.txMemo == "Request 0" && !stateInitial.txId) {
-    context.opts.log("Ann handle_stateInitial e " + JSON.stringify(e));
-    stateInitial.txId = e.txId;
-    context.opts.r_amount = e.amount;
-    context.opts.r_balanceId = e.balance_id;
+  map[id] ??= [];
+  if (map[id].find((e) => e.opts === opts)) {
+    opts.out("addStream DUPLICATE opts " + opts);
+    return;
   }
-  if (stateInitial.txId == e.txMemo && !stateInitial.deal) {
-    context.opts.log("Ann handle_stateInitial e " + JSON.stringify(e));
-    context.opts.e = e;
-    let dealTakeRequest = context.opts.sdk.transaction.dealTakeRequest;
-    return (stateInitial.deal = dealTakeRequest(context.opts)).then((deal) => {
-      context.state = stateCynAnnDeal;
-      stateInitial.resolve(deal);
-    });
+  map[id].push({ opts, types: types2 });
+  let effects4account = sdk3.server.server.effects().forAccount(id);
+  if (now) {
+    effects4account = effects4account.cursor("now");
   }
+  let close = effects4account.stream({
+    onerror: (e) => {
+      console.error("addStream tag", tag, e);
+      close();
+      throw e;
+    },
+    onmessage: (e) => map[id].forEach((v) => {
+      let pair = v.types.find((p) => p[0] == e.type);
+      if (pair) {
+        pair[1].call(v.opts, e);
+      } else {
+      }
+    })
+  });
+  streams.push({ close, id, tag });
+}
+function balance(account2, asset_code = null) {
+  if (!asset_code) {
+    return account2.balances.find((e) => e.asset_type == "native").balance;
+  }
+  return account2.balances.find((e) => e.asset_code == asset_code).balance;
+}
+function hXsdk(opts = {}) {
+  let networkPassphrase = Networks.TESTNET;
+  if (process?.env?.Networks_PUBLIC) {
+    if (process.env.Networks_PUBLIC == "hX") {
+      networkPassphrase = Networks.PUBLIC;
+    } else {
+      throw Error(`Invalid process.env.Networks_PUBLIC ${process.env.Networks_PUBLIC}`);
+    }
+  }
+  let target = Object.assign({ addStream, balance, networkPassphrase, sign: sign3 }, opts);
+  return sdk3 = new Proxy(target, handler.sdk);
+}
+function known_sdk(target, prop) {
+  switch (prop) {
+    case "server": {
+      let url = target.networkPassphrase == Networks.PUBLIC ? "https://horizon.stellar.org" : target.networkPassphrase == Networks.TESTNET ? "https://horizon-testnet.stellar.org" : null;
+      target[prop] = new Proxy(
+        { sdk: sdk3, server: new horizon_exports.Server(url) },
+        handler.sdk.server
+      );
+      return target[prop];
+    }
+    case "transaction": {
+      target[prop] = new Proxy({ sdk: sdk3 }, handler.sdk.transaction);
+      return target[prop];
+    }
+  }
+}
+function sign3(kp, xdr, tag) {
+  if (!sdk3.transaction[tag]({ signXDR: true, kp, xdr })) {
+    return Promise.reject(new Error(`sign tag ${tag} NOT authorized`));
+  }
+  let tx = TransactionBuilder.fromXDR(xdr, sdk3.networkPassphrase);
+  tx.sign(kp);
+  return Promise.resolve(tx.toXDR());
 }
 
 // public/hexa.mjs
@@ -17521,94 +21804,34 @@ var out = (m) => typeof m == "string" ? put(
   // {{{1
   `<div style='text-align: right; color: ${color}'>${m}</div>`
 ) : put(m.message?.replaceAll("\n", "<br/>").replaceAll(" ", "&nbsp"));
-var Demo = {
-  // {{{1
-  Running: {
-    // {{{2
-    handle: (context2, event) => {
-      if (!event) {
-        setupJC(Demo, context2);
-        return Demo.channel.receive().then(
-          (s) => new JWT(s).setIssuer(Demo.client.iss, Demo.client.sk).setAudience(Demo.aud).sign()
-        ).then((jwt) => Demo.job.context.ws.send(jwt));
-      }
-      verifyPayload(event.message).then((payload) => {
-        handlePayload(payload) && out({ message: payload.sub });
-      });
-    }
-  },
-  onclose: (data) => {
-    let context2 = Demo.job.context;
-    Demo.job.resolve(`- ${context2.attachment.iss.name}: Demo DONE`);
-  },
-  onerror: null,
-  // is never called
-  onmessage: (data) => {
-    let context2 = Demo.job.context;
-    context2.state.handle(context2, data);
-  },
-  prefix: (context2) => `- ${context2.attachment.iss.name}: mocking Demo job<br/>`,
-  prrSetup: Promise.withResolvers(),
-  prrStart: Promise.withResolvers(),
-  prrStop: Promise.withResolvers()
-  // }}}2
-};
-var IssuerSign = {
-  // {{{1
-  Running: {
-    // {{{2
-    handle: (context2, event) => {
-      if (!event) {
-        setupJC(IssuerSign, context2);
-        return IssuerSign.channel.receive().then(
-          (s) => new JWT(s).setIssuer(IssuerSign.client.iss, IssuerSign.client.sk).setAudience(IssuerSign.aud).sign()
-        ).then((jwt) => IssuerSign.job.context.ws.send(jwt));
-      }
-      verifyPayload(event.message).then((payload) => {
-        if (payload.sub.startsWith("signed ")) {
-          IssuerSign.prr.resolve(payload.sub.slice(7));
-          return;
-        }
-        out({ message: payload.sub });
-      });
-    }
-  },
-  onclose: (data) => {
-    let context2 = IssuerSign.job.context;
-    IssuerSign.job.resolve(`- ${context2.attachment.iss.name}: IssuerSign DONE`);
-  },
-  onerror: null,
-  // is never called
-  onmessage: (data) => {
-    let context2 = IssuerSign.job.context;
-    context2.state.handle(context2, data);
-  },
-  prefix: (context2) => `<br/>- ${context2.attachment.iss.name}: mocking IssuerSign job<br/>`,
-  prrSetup: Promise.withResolvers()
-  // }}}2
-};
-var params = new URLSearchParams(location.search);
-var name = params.get("demouser") ?? crypto.randomUUID();
-window.process = { env: {
-  Networks_PUBLIC: null
-  // or 'hX' to use public network
-} };
 reset({
   // {{{1
   content: document.getElementById("content1"),
-  handleCtrlC: stopIssuerSign
+  handleCtrlC
 });
 put(`Delivered ${location} on ${Date()} to YOUR_IP_ADDRESS`, "<hr/>");
+window.process = { env: {
+  Networks_PUBLIC: "hX"
+} };
+var sdk4 = hXsdk({ out, vault: vault_default });
 document.getElementById("userSK").addEventListener("paste", (event) => {
   prepareAndSignStellarTx(event.clipboardData.getData("text"));
 });
 function prepareAndSignStellarTx(userSK) {
   if (StrKey.isValidEd25519SecretSeed(userSK)) {
     put("You pasted valid secret key.");
+  } else {
+    throw ERROR("You pasted INVALID secret key.");
   }
+  let userPK = Keypair.fromSecret(userSK).publicKey();
+  let recipientKeys = [userSK, userPK];
+  let issuer = { id: "GC7BFT2ZXIQAU2GAYNODPVJV4OBFECV5L3NKO4RV5SHXFUR24M3BZNPY" };
+  return sdk4.server.server.loadAccount(userPK).then((recipient) => {
+    return sdk4.transaction.changeTrust({ issuer, recipient, recipientKeys });
+  }).then((tx) => out(tx.created_at + ": DONE."));
 }
-function stopIssuerSign() {
-  out("stopIssuerSign: stopping job IssuerSign...");
+function handleCtrlC() {
+  out("handleCtrlC stub");
 }
 window.addEventListener("beforeunload", (event) => {
   event.preventDefault();

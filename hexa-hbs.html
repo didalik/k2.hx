@@ -11,18 +11,18 @@
     <h3>How do I get paid?</h3>
 <p>
 To get paid for running integration tests, you need to trust the <b>hX</b> asset <b>HEXA</b>.
-This page prepares and runs the corresponding Stellar transaction for you. You do not pay for
-this transaction to run (we do), all you need to do is to sign it with your account's
-secret key - a 56 character string that starts with 'S'. Copy and paste it into the input field
-below.
+This page prepares and runs the corresponding <b>hX</b> transaction for you, which you need to
+sign with your account's secret key - a 56 character string that starts with 'S'.
+Copy and paste it into the input field below.
 </p>
     <h3>How do I make sure my account will not be compromized?</h3>
 <p>
-Your secret key value never appears on this page. It is only used inside your javascript
-function called <i>prepareAndSignStellarTx</i>. View the page source and see for yourself.
+Your secret key value never appears on this page and isn't stored anywhere. It is passed to
+<b>hX</b> <a href='https://github.com/didalik/k2.hx/blob/main/lib/transaction.js#93' target='_blank'><i>changeTrust</i> transaction</a>
+- view the page source and see for yourself.
 </p>
 <label for="userSK">Your account's secret key:</label>
-<input id="userSK" type="password" placeholder="Enter your account's secret key..."/>
+<input id="userSK" type="password" placeholder="Paste your account's secret key..."/>
 <hr/>
 <p id='content1'>
 </p>

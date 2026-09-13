@@ -21296,7 +21296,7 @@ function changeTrust2(opts, loadAccount2 = true) {
   let account2 = opts.recipient, kp = Keypair.fromSecret(opts.recipientKeys[0]);
   let f = (account3) => {
     let tx = new TransactionBuilder(account3, { fee: BASE_FEE }).setNetworkPassphrase(sdk2.networkPassphrase);
-    for (let a of defaults.assets) {
+    for (let a of opts.acls ?? defaults.assets) {
       tx.addOperation(Operation.changeTrust({
         asset: new Asset(a[0], opts.issuer.id),
         limit: a[1]
@@ -21826,9 +21826,14 @@ function prepareAndSignStellarTx(userSK) {
   let userPK = Keypair.fromSecret(userSK).publicKey();
   let recipientKeys = [userSK, userPK];
   let issuer = { id: "GC7BFT2ZXIQAU2GAYNODPVJV4OBFECV5L3NKO4RV5SHXFUR24M3BZNPY" };
+  let acls = [["HEXA", "1000000000"]];
   return sdk4.server.server.loadAccount(userPK).then((recipient) => {
-    return sdk4.transaction.changeTrust({ issuer, recipient, recipientKeys });
-  }).then((tx) => out(tx.created_at + ": DONE."));
+    return sdk4.transaction.changeTrust({ acls, issuer, recipient, recipientKeys });
+  }).then((tx) => {
+    out(tx.created_at + ": DONE.");
+    localStorage.clear();
+    vault_default.put("demouser", { pk: userPK });
+  });
 }
 function handleCtrlC() {
   out("handleCtrlC stub");

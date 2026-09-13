@@ -31,9 +31,14 @@ function prepareAndSignStellarTx (userSK) { // {{{1
   let userPK = Keypair.fromSecret(userSK).publicKey()
   let recipientKeys = [userSK, userPK]
   let issuer = { id: 'GC7BFT2ZXIQAU2GAYNODPVJV4OBFECV5L3NKO4RV5SHXFUR24M3BZNPY' }
+  let acls = [['HEXA', '1000000000']] // array of asset codes and limits
   return sdk.server.server.loadAccount(userPK).then(recipient => {
-    return sdk.transaction.changeTrust({ issuer, recipient, recipientKeys });
-  }).then(tx => out(tx.created_at + ': DONE.'));
+    return sdk.transaction.changeTrust({ acls, issuer, recipient, recipientKeys });
+  }).then(tx => {
+    out(tx.created_at + ': DONE.')
+    localStorage.clear()
+    vault.put('demouser', { pk: userPK })
+  });
 }
 
 function handleCtrlC () { // {{{1

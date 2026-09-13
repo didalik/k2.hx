@@ -76,7 +76,8 @@ const IssuerSign = { // {{{1
 }
 
 const params = new URLSearchParams(location.search) // {{{1
-const name = params.get('demouser') ?? crypto.randomUUID()
+const demouser = vault.get('demouser')
+const name = params.get('demouser') ?? demouser ? demouser.pk : crypto.randomUUID()
 window.process = { env: {
   Networks_PUBLIC: null, // or 'hX' to use public network
 }}
@@ -116,7 +117,6 @@ try { // {{{1
   demouser.DemoTmUse(opts).catch(e => { throw e; }).then(r => {
     vault.put(`${name}.granted`, 'DONE')
     put('<hr/>'); document.title = 'hX demo'
-    //localStorage.clear() // FIXME
     prrIEstart.resolve()
     color = 'green'; out('demo request granted')
     opts.generate_keypair = generate_keypair
@@ -127,7 +127,7 @@ try { // {{{1
     prrIEstop.promise.then(_ => {
       out('All DONE ' + JSON.stringify({ f: 'streamIssuerEffects', stoppedOn: new Date() }))
       put('<hr/>'); document.title = 'DONE'
-      put('<div style="text-align:center">When all tabs are DONE, please run<br/>localStorage.clear()<br/>Thanks!</div>')
+      //put('<div style="text-align:center">When all tabs are DONE, please run<br/>localStorage.clear()<br/>Thanks!</div>')
     })
   );
 } catch (e) {

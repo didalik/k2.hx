@@ -21305,7 +21305,8 @@ function changeTrust2(opts, loadAccount2 = true) {
     tx = tx.setTimeout(60).build();
     tx.sign(kp);
     let actor = opts?.name ?? opts?.account?.name;
-    sdk2.out("changeTrust " + defaults.assets.length + " assets for " + actor + " " + opts.recipient.id + " " + account3.last_modified_time + "...");
+    let length = opts.acls ? opts.acls.length : defaults.assets.length;
+    sdk2.out("changeTrust " + length + " assets for " + actor + " " + opts.recipient.id + " " + account3.last_modified_time + "...");
     return submit(tx, "changeTrust", actor);
   };
   if (loadAccount2) {

@@ -18147,14 +18147,14 @@ function reset(opts) {
 // public/lib/vault.js
 init_shim();
 var dirname;
-var fs;
+var fs2;
 var wst;
 var vault = {
   // {{{1
   get: (key) => {
     let v;
     try {
-      v = fs ? fs.readFileSync(dirname + "/" + key) : localStorage.getItem(key);
+      v = fs2 ? fs2.readFileSync(dirname + "/" + key) : localStorage.getItem(key);
       return JSON.parse(v);
     } catch (err2) {
       if (err2.code == "ENOENT") {
@@ -18169,30 +18169,30 @@ var vault = {
     }
   },
   init: (fsArg = null) => {
-    fs = fsArg;
-    if (fs) {
+    fs2 = fsArg;
+    if (fs2) {
       dirname = process.env.VAULT ?? process.env.PWD + "/vault";
     }
     return vault;
   },
   put: (key, value, options) => {
     console.log("vault.put key", key, "value", value, "options", options);
-    if (fs) {
-      fs.mkdirSync(dirname, { recursive: true });
-      fs.writeFileSync(dirname + "/" + key, JSON.stringify(value), options);
+    if (fs2) {
+      fs2.mkdirSync(dirname, { recursive: true });
+      fs2.writeFileSync(dirname + "/" + key, JSON.stringify(value), options);
     } else {
       localStorage.setItem(key, JSON.stringify(value));
     }
   },
-  remove: (key) => fs ? fs.unlinkSync(dirname + "/" + key) : (
+  remove: (key) => fs2 ? fs2.unlinkSync(dirname + "/" + key) : (
     // {{{2
     void 0
   ),
-  rename: (oldkey, newkey) => fs ? fs.renameSync(dirname + "/" + oldkey, dirname + "/" + newkey) : (
+  rename: (oldkey, newkey) => fs2 ? fs2.renameSync(dirname + "/" + oldkey, dirname + "/" + newkey) : (
     // {{{2
     void 0
   ),
-  watch: (key, cb) => fs && fs.watch(dirname + (key ? "/" + key : ""), cb) || // {{{2
+  watch: (key, cb) => fs2 && fs2.watch(dirname + (key ? "/" + key : ""), cb) || // {{{2
   watchSameTab(key, cb)
   // }}}2
 };

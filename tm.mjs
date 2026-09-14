@@ -3,7 +3,8 @@ import vault from './lib/vault.js'
 import { issuerEffect, setupActor, stopMonitor, } from './lib/util.js'
 import demouser from './src/demoit/demouser.js'
 import { Asset } from '@stellar/stellar-sdk'
-import { Jobs, JWT, generate_keypair, verifyPayload, } from '../../jf/public/lib/sdk.js'
+import { generate_keypair, } from '../../jf/public/lib/sdk.js'
+import { runJobs, } from '../../jf/public/lib/job.ts'
 import { Channel, } from '../../lib/util.mjs'
 import { hXsdk, } from './lib/sdk.mjs'
 import { rs4d, } from './demo/Ann.js'
@@ -13,71 +14,35 @@ let color = 'blue'; const out = m => typeof m == 'string' ? put( // {{{1
 ) : put(m.message?.replaceAll('\n', '<br/>').replaceAll(' ', '&nbsp'))
 
 const Demo = { // {{{1
-  Running: { // {{{2
-    handle: (context, event) => { // no event on first call
-      if (!event) {
-        setupJC(Demo, context)
-        return Demo.channel.receive().then(s =>
-          new JWT(s).setIssuer(Demo.client.iss, Demo.client.sk).
-          setAudience(Demo.aud).sign()
-        ).then(jwt => Demo.job.context.ws.send(jwt));
-      }
-      verifyPayload(event.message).then(payload => {
-        handlePayload(payload) && out({ message: payload.sub })
-      })
-    },
-  },
-  onclose: data => { // {{{2
-    let context = Demo.job.context
-    Demo.job.resolve(`- ${context.attachment.iss.name}: Demo DONE`)
-  },
-  onerror: null, // is never called
-  onmessage:  data => {
-    let context = Demo.job.context
-    context.state.handle(context, data)
-  },
-  prefix: context => `- ${context.attachment.iss.name}: mocking Demo job<br/>`,
+  aud: 'demo',
+  label: 'Demo',
+  onEvent: event => { // {{{2
+    if (event.type === 'matched') { startOutbox(Demo); return; }
+    if (event.type !== 'message') return;
+    handlePayload(event.payload) && out({ message: event.payload.sub })
+  }, // }}}2
   prrSetup: Promise.withResolvers(),
   prrStart: Promise.withResolvers(), prrStop: Promise.withResolvers(),
-  // }}}2
 }
 
 const IssuerSign = { // {{{1
-  Running: { // {{{2
-    handle: (context, event) => { // no event on first call
-      if (!event) {
-        setupJC(IssuerSign, context)
-        return IssuerSign.channel.receive().then(s =>
-          new JWT(s).setIssuer(IssuerSign.client.iss, IssuerSign.client.sk).
-          setAudience(IssuerSign.aud).sign()
-        ).then(jwt => IssuerSign.job.context.ws.send(jwt));
-      }
-      verifyPayload(event.message).then(payload => {
-        if (payload.sub.startsWith('signed ')) {
-          IssuerSign.prr.resolve(payload.sub.slice(7))
-          return;
-        }
-        out({ message: payload.sub })
-      })
-    },
-  },
-  onclose: data => { // {{{2
-    let context = IssuerSign.job.context
-    IssuerSign.job.resolve(`- ${context.attachment.iss.name}: IssuerSign DONE`)
-  },
-  onerror: null, // is never called
-  onmessage:  data => {
-    let context = IssuerSign.job.context
-    context.state.handle(context, data)
-  },
-  prefix: context => `<br/>- ${context.attachment.iss.name}: mocking IssuerSign job<br/>`, 
+  aud: 'issuer/sign',
+  label: 'IssuerSign',
+  onEvent: event => { // {{{2
+    if (event.type === 'matched') { startOutbox(IssuerSign); return; }
+    if (event.type !== 'message') return;
+    if (event.payload.sub.startsWith('signed ')) {
+      IssuerSign.prr.resolve(event.payload.sub.slice(7))
+      return;
+    }
+    out({ message: event.payload.sub })
+  }, // }}}2
   prrSetup: Promise.withResolvers(),
-  // }}}2
 }
 
 const params = new URLSearchParams(location.search) // {{{1
-const demouser = vault.get('demouser')
-const name = params.get('demouser') ?? demouser ? demouser.pk : crypto.randomUUID()
+const demouserInfo = vault.get('demouser')
+const name = params.get('demouser') ?? demouserInfo ? demouserInfo.pk : crypto.randomUUID()
 window.process = { env: {
   Networks_PUBLIC: null, // or 'hX' to use public network
 }}
@@ -121,7 +86,7 @@ try { // {{{1
     color = 'green'; out('demo request granted')
     opts.generate_keypair = generate_keypair
     opts.requests = jobRequests
-    opts.Jobs = Jobs
+    opts.Jobs = runJobs
     return demouser.runJobs(opts);
   }).then(r => console.log('jobs Demo and IssuerSign DONE, r', r)).then(_ => 
     prrIEstop.promise.then(_ => {
@@ -172,8 +137,7 @@ function runDemo () { // {{{1
       //nolog: true,
       sign: (...args) => {
         IssuerSign.prr = Promise.withResolvers()
-        IssuerSign.channel.send(JSON.stringify(args)+'\n')
-        IssuerSign.Running.handle(IssuerSign.job.context)
+        IssuerSign.outbox.send(JSON.stringify(args)+'\n')
         return IssuerSign.prr.promise;
       },
       vault
@@ -186,29 +150,26 @@ function runDemo () { // {{{1
   });
 }
 
-function setupJC (job, context) { // setup job channel {{{1
-  if (job.channel) {
+function startOutbox (offer) { // job() has matched us; start feeding its outbox {{{1
+  if (offer.outbox) {
     return;
   }
-  job.channel = new Channel()
-  job.client = context.attachment
-  job.channel.send(`setupJC ${name} setting up ${context.opts.aud}...\n`)
-  if (job === Demo) {
+  offer.outbox = new Channel()
+  offer.outbox.send(`setupJC ${name} setting up ${offer.aud}...\n`)
+  if (offer === Demo) {
     setTimeout(_ => { // close upstream to start remote job demo
-      Demo.channel.send('context.job.stdin.end()')
-      Demo.Running.handle(Demo.job.context)
+      Demo.outbox.send('context.job.stdin.end()')
       //Demo.prrStop.resolve() // stop demo
     }, 1000)
   }
-  job.prrSetup.resolve()
-  //console.log('setupJC context', context, 'job', job)
+  offer.prrSetup.resolve()
+  //console.log('startOutbox offer', offer)
 
 }
 
 function stopIssuerSign () { // {{{1
   out('stopIssuerSign: stopping job IssuerSign...')
-  IssuerSign.channel.send('context.job.stdin.end()')
-  IssuerSign.Running.handle(IssuerSign.job.context)
+  IssuerSign.outbox.send('context.job.stdin.end()')
 
   //stopMonitor(null, optsIE); prrIEstop.resolve()
   return stopMonitor(null, optsIE).then(r => prrIEstop.resolve(r));

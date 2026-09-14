@@ -106,7 +106,8 @@ function handlePayload (payload) { // {{{1
   switch (payload.sub) {
     case 'sdk.addStream "Issuer\'s effects" DONE\n':
       prrRIEon.resolve(); return true;
-    case 'demo EXIT CODE 0':
+    //case 'demo EXIT CODE 0':
+    case 'stopMonitor - "Issuer\'s effects" closed.\n':
       stopIssuerSign(); return true;
     default:
       return true;
